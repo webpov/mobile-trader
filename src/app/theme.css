@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Gajraj+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.tx-altfont-1 {     font-family: 'Raleway', sans-serif !important}
+
+.tx-altfont-3 { font-family: 'Gajraj One', cursive !important}
+.tx-altfont-4 {     font-family: 'Marko One', serif !important}
+.tx-altfont-5 {     font-family: 'Lobster', serif !important}
+
+.neu-concave {
+    background: linear-gradient(145deg, #000000, #0f0f0f77);
+    box-shadow:  10px 10px 20px #000000,
+                -10px -10px 20px #0a0a0a;
+}
+.neu-convex {
+    background: linear-gradient(-45deg, #000000, #0f0f0f77);
+    box-shadow:  10px 10px 20px #000000,
+                -10px -10px 20px #0a0a0a;
+}
+
+.blink_me {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
