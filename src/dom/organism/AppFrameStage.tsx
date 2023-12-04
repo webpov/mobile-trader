@@ -92,8 +92,7 @@ export default function AppFrameStage({}:any) {
           >
             <ModelGameStage config={chartConfig} state={{
               ltfClosingList, ltfList, isChartLoading,
-            }} >            
-            </ModelGameStage>
+            }} children={<></>} />
           </div>
         </div>
         {!fuelPoints && 
