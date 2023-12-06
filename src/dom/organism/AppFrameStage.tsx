@@ -57,7 +57,7 @@ export default function AppFrameStage({}:any) {
 
 
     {isLocalStorageModalOpen &&
-      <div className="pos-fixed top-0 z-300 w-100vw h-100vh bg-glass-10 bg-b-50 flex-col tx-white">
+      <div className="pos-fixed top-0 z-400 w-100vw h-100vh bg-glass-10 bg-b-50 flex-col tx-white">
         
         <button className="pos-abs top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
             onClick={()=>{window.location.reload()}}
@@ -93,7 +93,7 @@ export default function AppFrameStage({}:any) {
       <h1 className=" flex-1 mb-0 pb-0 pl-100 block"><SymbolNameHeader label={focusSymbol || "N/A"} /></h1>
     </div>
     <div className='flex-row flex-align-stretch  w-100 Q_xs_lg z-10 tx-white'>
-      <h2 className="mb-0 pb-0"><SymbolNameHeader label={focusSymbol || "N/A"} /></h2>
+      <h2 className="mb-0 pb-0  bg-w-10 px-6 box-shadow-i-9 pt-2 bord-r-25 pb-3"><SymbolNameHeader label={focusSymbol || "N/A"} /></h2>
     </div>
     <div className='flex-row flex-align-stretch tx-white w-90 z-10'>
       <div className='Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
@@ -150,7 +150,7 @@ export default function AppFrameStage({}:any) {
             </button>
           </div>
         }
-        <div className="pos-abs " style={{bottom:"-25px", left:"10%"}}>
+        <div className="pos-abs z-300" style={{bottom:"-25px", left:"10%"}}>
           <details className="">
             <summary className="flex opaci-chov--50 pos-abs bottom-0">
               <button className=" bg-b-90 py-1 bord-r-50 tx-mdl noclick">
@@ -281,9 +281,14 @@ export default function AppFrameStage({}:any) {
       </div>
     </div>
 
+    <div className="flex Q_xs_sm gap-3  w-90 tx-white">
+      <hr className=" opaci-20 flex-1" />
+      <div className="opaci-25">o</div>
+      <hr className=" opaci-20 flex-1" />
+    </div>
 
-    <div className="flex-wrap w-100 my-8  gap-4 z-100">
-      <div className='Q_xs_sm w-30 mb-100 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start tx-white'>
+    <div className="flex-wrap w-100 mt-8  gap-4 z-100">
+      <div className='Q_xs_sm  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
         <div className="pb-4 tx-lg tx-center">URL <br /> Grid</div>
         <div className="flex-col w-90 tx-lg">
           <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
@@ -292,8 +297,8 @@ export default function AppFrameStage({}:any) {
         </div>
       </div>
 
-      <div className='Q_xs_sm w-40 pos-rel block px-4  bord-r-25 tx-center tx-white mb-100 z-200'>
-        <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex pt-4 flex-col flex-justify-start'>
+      <div className='Q_xs_sm w-40  pos-rel block px-4  bord-r-25 tx-center tx-white mb-8 z-200'>
+        <div className=' tx-center border-white-50 pa-2 pb-6  bg-glass-50 h-100 bord-r-25 neu-convex flex-col flex-justify-start'>
           <div className="pb-4 flex-center gap-3 pt-8">
             <div className="tx-lgx Q _md_x">Favorites</div> 
             {/* <div className="Q_xs_md">Fav</div>  */}
@@ -318,6 +323,21 @@ export default function AppFrameStage({}:any) {
         </div>
       </div>
     </div>
+
+    
+    <div className="flex Q_xs_sm gap-3  w-90 tx-white">
+      <hr className=" opaci-20 flex-1" />
+      <div className="opaci-25">o</div>
+      <hr className=" opaci-20 flex-1" />
+    </div>
+
+    
+    <div className='mb-100 mt-8 pb-100  Q_xs_sm w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
+        <div className="pb-4">Daily Log</div>
+        <div className="flex-col w-90">
+          <DailyLog state={{LS_notes:lsData.LS_notes}} calls={{s__LS_notes: lsData.s__LS_notes}} />
+        </div>
+      </div>
 
     </>)
 }
