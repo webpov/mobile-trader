@@ -136,6 +136,7 @@ export default function ModelGameStage({config, state, children}:{config:any,sta
 const RelativeBoundaryLines = ({state}:any) => {
   const $floorLine:any = useRef()
   const $topLine:any = useRef()
+  const [refreshCounter, s__refreshCounter] = useState(0) 
 
   const selectedFav:any = useMemo(()=>{
     if (!state.favs) return null
@@ -178,7 +179,12 @@ const RelativeBoundaryLines = ({state}:any) => {
     // console.log("localizedHeight", localizedFloorHeight, localizedRoofHeight)
     $floorLine.current.position.y = localizedFloorHeight
     $topLine.current.position.y = localizedRoofHeight
-  },[state.summaryDetails, selectedFav, $topLine.current, $floorLine.current, state.yRange])
+  },[state.summaryDetails, selectedFav, $topLine, $floorLine, state.yRange, refreshCounter])
+
+  useEffect(()=>{
+    s__refreshCounter(refreshCounter+1)
+  },[])
+  
 
 
   return (<>
@@ -187,7 +193,7 @@ const RelativeBoundaryLines = ({state}:any) => {
       <meshStandardMaterial color="white" emissive={"#777"}/>
     </Box>
     <Box args={[5,0.01,0.03]} position={[-2,0,0]} ref={$floorLine}>
-      <meshStandardMaterial emissive="#ff00ff" />
+      <meshStandardMaterial emissive="#0099ff" />
     </Box>
 
 
@@ -197,7 +203,7 @@ const RelativeBoundaryLines = ({state}:any) => {
       <meshStandardMaterial color="white" emissive={"#777"}/>
     </Box>
     <Box args={[5,0.01,0.03]} position={[-2,0,0]} ref={$topLine}>
-      <meshStandardMaterial emissive="#ff99ff" />
+      <meshStandardMaterial emissive="#ffaa00" />
     </Box>
 
   </>)
