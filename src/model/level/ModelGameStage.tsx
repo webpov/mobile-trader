@@ -54,7 +54,7 @@ export default function ModelGameStage({config, state, children}:{config:any,sta
       
       
       <Canvas style={{maxWidth:"100vw",height:"60vh"}} shadows 
-        camera={{fov:10,position:[0,isSmallDevice?40:25,isSmallDevice?40:25]}}
+        camera={{fov:10,position:[0,isSmallDevice?30:25,isSmallDevice?30:25]}}
         gl={{ preserveDrawingBuffer: true, }}
         // onCreated={(state)=>{ state.gl.setClearColor("#101319"); state.scene.fog = new Fog("#101319",8,16) }}
       >

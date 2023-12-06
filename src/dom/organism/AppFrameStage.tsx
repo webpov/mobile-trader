@@ -97,7 +97,7 @@ export default function AppFrameStage({}:any) {
     </div>
     <div className='flex-row flex-align-stretch tx-white w-90 z-10'>
       <div className='Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
-        <div className="pb-4">URL Grid</div>
+        <div className="pb-4 tx-center">URL Grid</div>
         <div className="flex-col w-90">
           <TradeHistory state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
             calls={{addTileToUrl}}
@@ -278,9 +278,9 @@ export default function AppFrameStage({}:any) {
     </div>
 
 
-    <div className="flex-wrap w-100 my-8  gap-6">
-      <div className='Q_xs_sm w-25 mb-100 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start tx-white'>
-        <div className="pb-4 tx-lg">URL Grid</div>
+    <div className="flex-wrap w-100 my-8  gap-4 z-100">
+      <div className='Q_xs_sm w-30 mb-100 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start tx-white'>
+        <div className="pb-4 tx-lg tx-center">URL <br /> Grid</div>
         <div className="flex-col w-90 tx-lg">
           <TradeHistory state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
             calls={{addTileToUrl}}
@@ -290,8 +290,8 @@ export default function AppFrameStage({}:any) {
 
       <div className='Q_xs_sm w-40 pos-rel block px-4  bord-r-25 tx-center tx-white mb-100 z-200'>
         <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex pt-4 flex-col flex-justify-start'>
-          <div className="pb-4 flex-center gap-3">
-            <div className="tx-lx Q _md_x">Favorites</div> 
+          <div className="pb-4 flex-center gap-3 pt-8">
+            <div className="tx-lgx Q _md_x">Favorites</div> 
             {/* <div className="Q_xs_md">Fav</div>  */}
             {!!fuelPoints && <div>
               <div className="blink_me pa-1 _ddg bord-r-50 "></div>
@@ -306,7 +306,7 @@ export default function AppFrameStage({}:any) {
               calls={{s__LS_favs: lsData.s__LS_favs}} 
             />
           </div>
-          <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+          <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50  tx-lgx"
             onClick={()=>{triggerOpenModal()}}
           >
             ⚙️
