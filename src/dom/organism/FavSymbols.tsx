@@ -27,7 +27,7 @@ export function FavSymbols({ state, calls }: any) {
     return (<></>);
   }
   return (<>
-    <div className=" w-200px  flex-col gap-1">
+    <div className=" w-300px  flex-col gap-1">
       {!!state.LS_favs.length &&
         <button className={`tx-white ${"tx-mdl"} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mb-2`}
           onClick={triggerExportAsUrl}
@@ -43,6 +43,12 @@ export function FavSymbols({ state, calls }: any) {
             <div className="tx-bold-9  flex flex-justify-between">
               <div className="tx-lg tx-altfont-1">{index + 1}</div>
               <div>{item.token0}</div>
+              <div>{!!item.floor && <>
+                {item.floor}
+              </>}</div>
+              <div>{!!item.roof && <>
+                {item.roof}
+              </>}</div>
             </div>
           </button>
         </div>);

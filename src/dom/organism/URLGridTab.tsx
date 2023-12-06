@@ -4,7 +4,7 @@ import { StandardTokens } from "../../../script/constant/klines";
 import { PANEL_KEY_LIST } from "../../../script/util/hook/useUrlParamCatcher";
 
 
-export function TradeHistory({ state, calls }: any) {
+export function URLGridTab({ state, calls }: any) {
   const triggerAddTileToUrl = (e:any) => {
     const newSymbol:any = prompt("Enter symbol","ETH"+state.baseToken)?.toUpperCase()
     // console.log("newSymbol", newSymbol)

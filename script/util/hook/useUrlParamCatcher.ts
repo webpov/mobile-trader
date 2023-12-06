@@ -65,6 +65,7 @@ export function useUrlParamCatcher() {
         if (searchParams.has(panelKeysArray[index])) {
             const parsedUrlParam = JSON.parse(`${searchParams.get(panelKeysArray[index])}`)
             if (!!parsedUrlParam.symbol) {
+              console.log("parsedUrlParam", parsedUrlParam)
               panelListResult[ panelKeysArray[index]] = parsedUrlParam
             }
         } else {
@@ -210,13 +211,13 @@ const keysArray = useMemo(()=>{
       switch (element[0]) {
         case 'a':
           refArray = {...panelListTop}
-          builtObj[element] = panelListTop[element]
         break;
         case 'b':
           refArray = {...panelListMidTop}
-          builtObj[element] = panelListMidTop[element]
         break;
       }
+      // console.log("refArray", refArray)
+      builtObj[element] = refArray[element]
       const token0 = (
         refArray[element].symbol.includes(reftoken)
           ? refArray[element].symbol.replace(reftoken,"")
@@ -235,7 +236,11 @@ const keysArray = useMemo(()=>{
 
     const newParams = new URLSearchParams(searchParams.toString())
 
-    const cellObj = {symbol:tileCode}
+    const cellObj:any = {symbol:tileCode}
+    const promtFloor = prompt("Enter floor price", "1")
+    if (!!promtFloor) { cellObj.floor = promtFloor }
+    const promtRoof = prompt("Enter roof price", "10")
+    if (!!promtRoof) { cellObj.roof = promtRoof }
     newParams.set(posCode, JSON.stringify(cellObj))
 
     const newParamsString = newParams.toString();

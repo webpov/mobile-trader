@@ -4,7 +4,7 @@ import ModelGameStage from "@/model/level/ModelGameStage"
 import { useUrlParamCatcher } from "@/../script/util/hook/useUrlParamCatcher"
 import useChartConfig from "../../../script/util/hook/useChartConfig"
 import useLocalStorageCatcher from "../../../script/util/hook/useLocalStorageCatcher"
-import { TradeHistory } from "./TradeHistory"
+import { URLGridTab } from "./URLGridTab"
 import { FavoritesTab } from "./FavoritesTab"
 import { DailyLog } from "./DailyLog"
 import { SymbolNameHeader } from "./SymbolNameHeader"
@@ -99,7 +99,7 @@ export default function AppFrameStage({}:any) {
       <div className='Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
         <div className="pb-4 tx-center">URL Grid</div>
         <div className="flex-col w-90">
-          <TradeHistory state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
+          <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
             calls={{addTileToUrl}}
           />
         </div>
@@ -126,7 +126,11 @@ export default function AppFrameStage({}:any) {
           >
             <ModelGameStage config={chartConfig} state={{
               ltfClosingList, ltfList, isChartLoading,
+              favs: lsData.LS_favs,
               
+              selectedSymbolYTDSummary,
+              selectedSymbolLTFSummary,
+
               htfList,
               htfClosingList,
               ytdObj, focusSymbol,
@@ -218,9 +222,9 @@ export default function AppFrameStage({}:any) {
     </div>
     <div className=' flex-1 flex flex-align-start mt-6 tx-white w-90 z-10'>
       
-    <div className='Q_sm_x w-10 block  Q_lg_x  bord-r-25 tx-center '>
-        <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 neu-convex opaci-chov--50 border-white tx-altfont-1'>
-          🎮 <div className="Q_md_x">Games</div> 
+    <div className='Q_sm_x w-10 block mt-6 Q_md_x  bord-r-25 tx-center '>
+        <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 pb-5 neu-convex opaci-chov--50 border-white tx-altfont-1'>
+          🎮 <div className="Q_lg_x">Games</div> 
         </button>
       </div>
       <div className='flex-1 flex-col mt-8 pb-8'>
@@ -282,7 +286,7 @@ export default function AppFrameStage({}:any) {
       <div className='Q_xs_sm w-30 mb-100 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start tx-white'>
         <div className="pb-4 tx-lg tx-center">URL <br /> Grid</div>
         <div className="flex-col w-90 tx-lg">
-          <TradeHistory state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
+          <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
             calls={{addTileToUrl}}
           />
         </div>

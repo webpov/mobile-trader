@@ -1,7 +1,7 @@
 "use client"
 import { Box, GizmoHelper, GizmoViewcube, MapControls, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { ReactNode, useEffect, useMemo, useState } from "react"
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -107,6 +107,9 @@ export default function ModelGameStage({config, state, children}:{config:any,sta
                 />
               </group>
               }
+
+
+
               {!state.isChartLoading && 
                 <group position={[2,-2.9 ,0]}>
                   <BoxCandleKLine cubeSize={.02} closingContextPrices={lastOfHTF} 
@@ -114,6 +117,12 @@ export default function ModelGameStage({config, state, children}:{config:any,sta
                     chopStart={500-CHOP_AMOUNT}
                     fullArray={state.htfList} 
                   />
+                  <RelativeBoundaryLines state={{
+                    symbol: state.focusSymbol,
+                    yRange:[0,1.8],
+                  favs: state.favs,
+                  summaryDetails: state.selectedSymbolYTDSummary,
+                  }} />
                 </group>
                 }
           </group>    
@@ -121,4 +130,75 @@ export default function ModelGameStage({config, state, children}:{config:any,sta
       </Canvas>
     </div>
   )
+}
+
+
+const RelativeBoundaryLines = ({state}:any) => {
+  const $floorLine:any = useRef()
+  const $topLine:any = useRef()
+
+  const selectedFav:any = useMemo(()=>{
+    if (!state.favs) return null
+    if (!state.favs.length) return null
+    const selectedSymbolData = state.favs.filter((item:any)=>{
+      return item.symbol == state.symbol
+    })
+    console.log("state.favs", state.favs)
+    return selectedSymbolData[0]
+  },[state.favs, state.symbol, ])
+    const relativeYHeight = useMemo(()=>{
+    console.log("summaryDetails", state.summaryDetails)
+    if (!state.summaryDetails) return 0
+    console.log("if (!state.summaryDetails) return 0")
+    if (!state.yRange) return 0
+    console.log("if (!state.yRange) return 0")
+    if (!state.yRange.length) return 0
+    console.log("if (!state.yRange.length) return 0")
+    if (!selectedFav) return 0
+    console.log("if (!selectedFav) return 0")
+    if (!$floorLine.current) return 0
+    if (!$topLine.current) return 0
+    // console.log("if (!$floorLine.current) return 0")
+
+
+    const worldRelativeHeight = state.yRange[1]
+    console.log("state.symbol worldRelativeHeight", worldRelativeHeight, state.symbol)
+    console.log("summaryDetails", state.summaryDetails)
+
+    const priceAbsHeight = state.summaryDetails.maxValue - state.summaryDetails.minValue
+    console.log("priceAbsHeight", priceAbsHeight, selectedFav)
+    const absMinValue = selectedFav.floor - state.summaryDetails.minValue
+    let absMaxValue = selectedFav.roof - state.summaryDetails.minValue
+    console.log("if (absMaxValue < 0)", (absMaxValue < 0))
+    if (absMaxValue < 0) { absMaxValue = - (absMaxValue - priceAbsHeight)}
+    console.log("absMinValue", absMinValue, absMaxValue, selectedFav.floor , state.summaryDetails.minValue)
+    const localizedFloorHeight = absMinValue * worldRelativeHeight / priceAbsHeight
+    const localizedRoofHeight = absMaxValue * worldRelativeHeight / priceAbsHeight
+    
+    // console.log("localizedHeight", localizedFloorHeight, localizedRoofHeight)
+    $floorLine.current.position.y = localizedFloorHeight
+    $topLine.current.position.y = localizedRoofHeight
+  },[state.summaryDetails, selectedFav, $topLine.current, $floorLine.current, state.yRange])
+
+
+  return (<>
+  {/* GUIDE */}
+    <Box args={[5,0.02,0.02]} position={[-3,0,0]} >
+      <meshStandardMaterial color="white" emissive={"#777"}/>
+    </Box>
+    <Box args={[5,0.01,0.03]} position={[-2,0,0]} ref={$floorLine}>
+      <meshStandardMaterial emissive="#ff00ff" />
+    </Box>
+
+
+
+    
+    <Box args={[5,0.02,0.02]} position={[-3,state.yRange ? state.yRange[1] : 0,0]} >
+      <meshStandardMaterial color="white" emissive={"#777"}/>
+    </Box>
+    <Box args={[5,0.01,0.03]} position={[-2,0,0]} ref={$topLine}>
+      <meshStandardMaterial emissive="#ff99ff" />
+    </Box>
+
+  </>)
 }
