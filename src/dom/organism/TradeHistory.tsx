@@ -7,18 +7,21 @@ import { PANEL_KEY_LIST } from "../../../script/util/hook/useUrlParamCatcher";
 export function TradeHistory({ state, calls }: any) {
   const triggerAddTileToUrl = (e:any) => {
     const newSymbol:any = prompt("Enter symbol","ETH"+state.baseToken)?.toUpperCase()
+    // console.log("newSymbol", newSymbol)
     if (!newSymbol) { return }
-
+    // console.log("newSymbol", newSymbol)
     const pairsArray = StandardTokens.map((item)=>(item+state.baseToken))
     // console.log("newSymbol: "+ newSymbol, pairsArray)
-    if (!pairsArray.includes(newSymbol)) { return }
+    if (!pairsArray.includes(newSymbol)) { return alert("Symbol not found") }
 
+    console.log("state.urlStateKeys", state.urlStateKeys)
     let firstAvailablePanel = PANEL_KEY_LIST.find((aPanelKey:string)=>(
       (!state.urlStateKeys.includes(aPanelKey)) 
         // firstAvailablePanel = aPanelKey
       
     ))
-    // console.log("first panel is ", firstAvailablePanel)
+
+    console.log("first panel is ", firstAvailablePanel)
 
     // alert("newSymbol: "+ newSymbol)
     calls.addTileToUrl(newSymbol, firstAvailablePanel)
@@ -53,15 +56,20 @@ export function TradeHistory({ state, calls }: any) {
           </div>
         </div>);
       })}
-      {state.urlStateKeys.length && <div className="pos-abs bottom-0 pb-2 flex-center gap-1">
+      {state.urlStateKeys.length && <div className="pos-abs bottom-0 pb-2 flex-center Q_xs_lg_flex-col gap-1 ">
           <a className=" opaci-chov--50" href="/">
             <button className="tx-white bg-b-10 bord-r-10 px-2 pointer">
               Clear
             </button>
           </a>
-          <button onClick={triggerAddTileToUrl} className=" opaci-chov--50 tx-white bg-b-10 bord-r-10 px-2">
-            Add
-          </button>
+          <div className="flex-center gap-1">
+            <button onClick={triggerAddTileToUrl} className=" opaci-chov--50 tx-white bg-b-10 bord-r-25 px-2 py-1">
+              +
+            </button>
+            <button onClick={()=>{window.location.reload()}} className=" opaci-chov--50 tx-white bg-b-10 bord-r-5 px-1  border-white-50">
+              Re
+            </button>
+          </div>
           
         </div>
       }

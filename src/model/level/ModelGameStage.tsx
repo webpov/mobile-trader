@@ -24,10 +24,14 @@ export default function ModelGameStage({config, state, children}:{config:any,sta
 
 
   const CHOP_AMOUNT = 250
-  const lastOf = useMemo(()=>{
+  const lastOfLTF = useMemo(()=>{
     
     return [...state.ltfClosingList].slice(-CHOP_AMOUNT) 
   },[state.ltfClosingList])
+  const lastOfHTF = useMemo(()=>{
+    
+    return [...state.htfClosingList].slice(-CHOP_AMOUNT) 
+  },[state.htfClosingList])
 
 
   const semiFixedViewConfig = {
@@ -46,6 +50,8 @@ export default function ModelGameStage({config, state, children}:{config:any,sta
 
   return (
     <div className="flex-col tx-altfont-4 bg-b-10 box-shadow-i-9-b">
+
+      
       
       <Canvas style={{maxWidth:"100vw",height:"60vh"}} shadows 
         camera={{fov:10,position:[0,isSmallDevice?40:25,isSmallDevice?40:25]}}
@@ -89,19 +95,27 @@ export default function ModelGameStage({config, state, children}:{config:any,sta
         <group rotation={[-Math.PI/4,0,0]}>
           <group position={[0,0,0]} >
             {/* <Box > <meshStandardMaterial color="white" /> </Box> */}
-            <group position={[0,-3, 0]} > <WormHoleModel /> </group>
+            <group position={[0,-2, 0]} > <WormHoleModel /> </group>
 
               
             {!state.isChartLoading && 
-              <group position={[2,-2 ,0]}>
-                <BoxCandleKLine cubeSize={.025} closingContextPrices={lastOf} 
-                  yRange={[0,4]}
+              <group position={[2,-0.7 ,0]}>
+                <BoxCandleKLine cubeSize={.025} closingContextPrices={lastOfLTF} 
+                  yRange={[0,3.6]}
                   chopStart={500-CHOP_AMOUNT}
                   fullArray={state.ltfList} 
                 />
               </group>
               }
-              
+              {!state.isChartLoading && 
+                <group position={[2,-2.9 ,0]}>
+                  <BoxCandleKLine cubeSize={.02} closingContextPrices={lastOfHTF} 
+                    yRange={[0,1.8]}
+                    chopStart={500-CHOP_AMOUNT}
+                    fullArray={state.htfList} 
+                  />
+                </group>
+                }
           </group>    
         </group>
       </Canvas>

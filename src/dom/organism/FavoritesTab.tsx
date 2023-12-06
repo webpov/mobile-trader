@@ -46,7 +46,7 @@ export function FavoritesTab({ state, calls }: any) {
 
         const liveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen
         const liveChangePercent = (liveDiff) / state.pricesObj[item.symbol] * 100
-        return (<div key={index} className=" w-100">
+        return (<><div key={`${index}---`} className="Q_xs_md py-1 w-100"></div><div key={index} className=" w-100">
           <div className=" opaci-chov--50 pos-rel bord-r-10 pa-3 flex flex-justify-between "
             style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11" }}
           >
@@ -58,9 +58,9 @@ export function FavoritesTab({ state, calls }: any) {
             </div>
             
             {!!state.pricesObj && <>
-              <div className="tx-mdl tx-roman flex-center gap-1">
+              <div className="tx-mdl tx-roman flex-center gap-1 flex-1">
                 <div className="opaci-20 Q_lg_x"> $ </div>
-                {state.pricesObj[item.symbol]}
+                <div className="tx-center">{state.pricesObj[item.symbol]}</div>
               </div>
             </>}
             {/* {!!state.ytdObj && <>
@@ -70,7 +70,13 @@ export function FavoritesTab({ state, calls }: any) {
               </div>
             </>} */}
             {!!state.ytdObj && <>
-              <div className={`tx-lg box-shadow-9-b pa-1 bord-r-10 bg-w-10 tx-sans flex-center gap-1
+              <div className={`Q_md_x tx-lg box-shadow-9-b pa-1 bord-r-10 bg-w-10 tx-sans flex-center gap-1
+                ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>
+                {parseInt(`${liveChangePercent*100}`)/100}
+                {/* <div className="opaci-20"> % </div> */}
+              </div>
+              <div className={`Q_xs_md tx-smd box-shadow-9-b pa-1 bord-r-10 bg-b-90 tx-sans flex-center gap-1
+                pos-abs right-0 translate-x-50
                 ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>
                 {parseInt(`${liveChangePercent*100}`)/100}
                 {/* <div className="opaci-20"> % </div> */}
@@ -82,7 +88,7 @@ export function FavoritesTab({ state, calls }: any) {
               </div>
             </>}
           </div>
-        </div>);
+        </div></>);
       })}
     </div>
   </>);

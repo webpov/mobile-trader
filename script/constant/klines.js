@@ -3,6 +3,7 @@ export const StandardTokens = [
   "ETH",
   "LINK",
   "RUNE",
+  "RNDR",
   "MATIC",
   "AAVE",
   "SOL",

@@ -32,7 +32,7 @@ export function useUrlParamCatcher() {
   const router = useRouter()
 
   const reftoken = searchParams.get('reftoken') || "USDT"
-  const symbol = searchParams.get('symbol') || "BTC"+reftoken
+  // const symbol = searchParams.get('symbol') || "BTC"+reftoken
   const ltf = searchParams.get('symbol') || "1m"
   const htf = searchParams.get('symbol') || "1d"
 
@@ -74,24 +74,18 @@ export function useUrlParamCatcher() {
     return panelListResult
   }
   const panelListTop = useMemo(()=>{
-      const panelKeys = ["a0","a1","a2", "a3"]
-      try {
-          
-          const panelListResult:any = getPanelListFromUrlByKeys(panelKeys)
-          // console.log("panelListResultpanelListResult", panelListResult)
-      
-          return panelListResult
-      
+    const panelKeys = ["a0","a1","a2", "a3"]
+    try {
+        const panelListResult:any = getPanelListFromUrlByKeys(panelKeys)
+        return panelListResult
       } catch (error) {
       return {}
-      }
+    }
   },[panel_a0, panel_a1, panel_a2, panel_a3])
   const panelListTopKeys:any = useMemo(()=>{
-
     const returnVal = (
       Object.keys(panelListTop).filter((item:any)=>(JSON.stringify(panelListTop[item]) !== "{}"))
     )
-    // console.log("returnVal", returnVal)
       return returnVal
   },[panelListTop])
 
@@ -100,11 +94,21 @@ export function useUrlParamCatcher() {
  
 
   const panelListMidTop = useMemo(()=>{
+    const panelKeys = ["b0","b1","b2", "b3"]
+    try {
+        const panelListResult:any = getPanelListFromUrlByKeys(panelKeys)
+        return panelListResult
+      } catch (error) {
+      return {}
+    }
 
   },[panel_b0, panel_b1, panel_b2, panel_b3])
   const panelListMidTopKeys:any = useMemo(()=>{
-    return []
-  },[panelListTop])
+    const returnVal = (
+      Object.keys(panelListMidTop).filter((item:any)=>(JSON.stringify(panelListMidTop[item]) !== "{}"))
+    )
+      return returnVal
+  },[panelListMidTop])
 
 
 
@@ -198,15 +202,25 @@ const keysArray = useMemo(()=>{
     const builtObj:any = {}
     for (let index = 0; index < keysArray.length; index++) {
       const element = keysArray[index];
+      // if (!panelListTop[element]) {
+      //   console.log("panelListToppanelListTop", element, panelListTop)
+      //   continue
+      // }
+      let refArray:any = {}
       switch (element[0]) {
         case 'a':
-          builtObj[element] = panelListTop[keysArray[index]]
+          refArray = {...panelListTop}
+          builtObj[element] = panelListTop[element]
+        break;
+        case 'b':
+          refArray = {...panelListMidTop}
+          builtObj[element] = panelListMidTop[element]
         break;
       }
       const token0 = (
-        panelListTop[keysArray[index]].symbol.includes(reftoken)
-          ? panelListTop[keysArray[index]].symbol.replace(reftoken,"")
-          : panelListTop[keysArray[index]].symbol
+        refArray[element].symbol.includes(reftoken)
+          ? refArray[element].symbol.replace(reftoken,"")
+          : refArray[element].symbol
       )
       builtObj[element].token0 = token0
     }
@@ -215,7 +229,7 @@ const keysArray = useMemo(()=>{
 
 
   const pathname = usePathname()
-  const symbolToken0 = symbol.includes(reftoken) ? symbol.replace(reftoken,"") : symbol
+  // const symbolToken0 = symbol.includes(reftoken) ? symbol.replace(reftoken,"") : symbol
   const addTile = (tileCode:string, posCode:string)=>{
     // console.log("tileCode:string, posCode", tileCode, posCode)
 
@@ -236,9 +250,9 @@ const keysArray = useMemo(()=>{
 
   return {
     addTile,
-    symbolToken0,
+    // symbolToken0,
     reftoken,
-    symbol,
+    // symbol,
     ltf,
     htf,
     keysArray,

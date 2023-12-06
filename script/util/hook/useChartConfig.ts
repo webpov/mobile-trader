@@ -8,9 +8,9 @@ export default function useChartConfig({urlp,state,calls}:any) {
   
 
 
-    useEffect(() => {
-        console.log("state.urlp", urlp)
-    }, [urlp]);
+    // useEffect(() => {
+    //     console.log("state.urlp", urlp)
+    // }, [urlp]);
 
     return {
         isGizmoVisible, s__isGizmoVisible,

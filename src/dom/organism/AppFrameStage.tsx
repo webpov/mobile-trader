@@ -25,25 +25,39 @@ export default function AppFrameStage({}:any) {
   const {
       fuelPoints, s__fuelPoints,
       ytdObj, s__ytdObj,
+      focusSymbol, s__focusSymbol,
       pricesObj, s__pricesObj,
       isChartLoading, s__isChartLoading,
       ltfList, s__ltfList,
       ltfClosingList, s__ltfClosingList,
       htfList, s__htfList,
       htfClosingList, s__htfClosingList,
+      selectedSymbolYTDSummary,
+      selectedSymbolLTFSummary,
       // fullmidtermList, s__fullmidtermList,
   } = useSyncedKLines({state:{
+    gridData: urlp.gridData,
+    urlArray: urlp.keysArray,
     favs: lsData.LS_favs,
-    symbol:urlp.symbol,
+    // symbol:urlp.symbol,
     ltf:urlp.ltf,
     htf:urlp.htf,
   }})
+
+  const triggerOpenModal = () => {
+    
+    let theDom:any = document.getElementById("main_scrollable_content")
+    if (!theDom) { return }
+    theDom.className += " noverflow h-max-100vh"
+    s__isLocalStorageModalOpen(true)
+
+  }
   
   return (<>
 
 
     {isLocalStorageModalOpen &&
-      <div className="pos-abs z-100 w-100vw h-100vh bg-glass-10 bg-b-50 flex-col tx-white">
+      <div className="pos-fixed top-0 z-300 w-100vw h-100vh bg-glass-10 bg-b-50 flex-col tx-white">
         
         <button className="pos-abs top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
             onClick={()=>{window.location.reload()}}
@@ -51,7 +65,12 @@ export default function AppFrameStage({}:any) {
             WebPOV
           </button>
         <button className="pos-abs top-0 right-0 pa-3 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
-            onClick={()=>{s__isLocalStorageModalOpen(false)}}
+            onClick={()=>{
+              let theDom:any = document.getElementById("main_scrollable_content")
+              if (!theDom) { return }
+              theDom.className = theDom?.className.replace("noverflow h-max-100vh","")
+              s__isLocalStorageModalOpen(false)
+            }}
           >
             X
           </button>
@@ -71,27 +90,46 @@ export default function AppFrameStage({}:any) {
     </div>
     <div className='flex-row  tx-white  Q_lg_x  w-90 z-10'>
       <div className='Q_lg_x w-10'></div>
-      <h1 className=" flex-1 mb-0 pb-0 pl-100 block"><SymbolNameHeader label={urlp.symbolToken0} /></h1>
+      <h1 className=" flex-1 mb-0 pb-0 pl-100 block"><SymbolNameHeader label={focusSymbol || "N/A"} /></h1>
     </div>
     <div className='flex-row flex-align-stretch  w-100 Q_xs_lg z-10 tx-white'>
-      <h2 className="mb-0 pb-0"><SymbolNameHeader label={urlp.symbolToken0} /></h2>
+      <h2 className="mb-0 pb-0"><SymbolNameHeader label={focusSymbol || "N/A"} /></h2>
     </div>
     <div className='flex-row flex-align-stretch tx-white w-90 z-10'>
       <div className='Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
-        <div className="pb-4">Watch List</div>
+        <div className="pb-4">URL Grid</div>
         <div className="flex-col w-90">
           <TradeHistory state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
             calls={{addTileToUrl}}
           />
         </div>
       </div>
-      <div className=' flex-1 mt-4 flex-center pos-rel'>
+      <div className='tx-roman flex-1 mt-4 flex-center pos-rel'>
+        {!!focusSymbol && !!selectedSymbolYTDSummary && selectedSymbolLTFSummary && <>
+          
+          <div className=" pa-3 pos-abs top-50p left-0 z-200 bg-b-50 bord-r-25 ma-3">
+            <div>{JSON.stringify(selectedSymbolLTFSummary.minValue)}</div>
+          </div>
+          <div className=" pa-3 pos-abs bottom-0 left-0 z-200 bg-b-50 bord-r-25 ma-3">
+          <div>{JSON.stringify(selectedSymbolYTDSummary.minValue)}</div>
+          </div>
+          <div className=" pa-3 pos-abs top-0 right-0 z-200 bg-b-50 bord-r-25 ma-3 mt-8">
+            <div>{JSON.stringify(selectedSymbolLTFSummary.maxValue)}</div>
+          </div>
+          <div className=" pa-3 pos-abs top-50p mt-100 right-0 z-200 bg-b-50 bord-r-25 ma-3">
+            <div>{JSON.stringify(selectedSymbolYTDSummary.maxValue)}</div>
+          </div>
+        </>}
         <div className="w-90   bord-r-25 " >
           <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  '
             style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
           >
             <ModelGameStage config={chartConfig} state={{
               ltfClosingList, ltfList, isChartLoading,
+              
+              htfList,
+              htfClosingList,
+              ytdObj, focusSymbol,
             }}>
               <div>
                 
@@ -171,7 +209,7 @@ export default function AppFrameStage({}:any) {
             />
           </div>
           <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
-            onClick={()=>{s__isLocalStorageModalOpen(!isLocalStorageModalOpen)}}
+            onClick={()=>{triggerOpenModal()}}
           >
             ⚙️
           </button>
@@ -179,46 +217,103 @@ export default function AppFrameStage({}:any) {
       </div>
     </div>
     <div className=' flex-1 flex flex-align-start mt-6 tx-white w-90 z-10'>
-      <div className='Q_lg_x w-10  block bg-glass-20 bord-r-25 tx-center  neu-concave'>
+      
+    <div className='Q_sm_x w-10 block  Q_lg_x  bord-r-25 tx-center '>
+        <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 neu-convex opaci-chov--50 border-white tx-altfont-1'>
+          🎮 <div className="Q_md_x">Games</div> 
+        </button>
+      </div>
+      <div className='flex-1 flex-col mt-8 pb-8'>
+        <div className="flex-wrap gap-3  ">
+          <div className="flex-center">
+            <button className="opaci-chov--50 neu-convex tx-white tx-lx  pa-3 px-2 bord-r-l-25 border-green tx-altfont-1">
+              BUY
+            </button>
+            <button className="opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-green">
+              ⚙️
+            </button>
+          </div>
+          <div className="flex-center">
+            <button className="opaci-chov--50 neu-convex tx-white tx-lx  pa-3 px-2 bord-r-l-25 border-red tx-altfont-1">
+              SELL
+            </button>
+            <button className="opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-red">
+              ⚙️
+            </button>
+          </div>
+          <button className="opaci-chov--50 neu-convex tx-white tx-lg  pa-3 py-5 bord-r-25 border-blue tx-bold-8 tx-altfont-1 underline">
+            Refresh
+          </button>
+        </div>
+      </div>
+      <div className='Q_xl_x w-25 mt-8  flex-col block bg-glass-50  tx-center  '>
+        <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
+          Live Orders
+        </div>
+        <div className="pa-8">
+          <div className="tx-lx opaci-10">Not Found</div>
+        </div>
+      </div>
+      
+      <div className='Q_md_x w-20 mt-8 block bg-glass-20 bord-r-25 tx-center  neu-concave'>
         <details className="w-100  ">
           <summary className="flex py-4 opaci-chov--50">
             <div className="px-8">Account</div>
           </summary>
           <div>
-            <h6>Test</h6>
+            <h6>Sync</h6>
           </div>
         </details>
       </div>
+
       
-      <div className='flex-1 flex-wrap gap-3 mt-8 pb-8'>
-        <div className="flex-center">
-          <button className="opaci-chov--50 neu-convex tx-white tx-lx  pa-3 px-2 bord-r-l-25 border-green tx-altfont-1">
-            BUY
-          </button>
-          <button className="opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-green">
-            ⚙️
-          </button>
-        </div>
-        <div className="flex-center">
-          <button className="opaci-chov--50 neu-convex tx-white tx-lx  pa-3 px-2 bord-r-l-25 border-red tx-altfont-1">
-            SELL
-          </button>
-          <button className="opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-red">
-            ⚙️
-          </button>
-        </div>
-        <button className="opaci-chov--50 neu-convex tx-white tx-lg  pa-3 py-5 bord-r-25 border-blue tx-bold-8 tx-altfont-1 underline">
-          Refresh
+    <div className='Q_sm mt-8 w-10 block flex-col gap-3 bord-r-25 tx-center '>
+    <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-10 py-4 neu-convex opaci-chov--50 border-white tx-altfont-1'>
+          Acc <div className="Q_md_x">Acc</div> 
         </button>
-      </div>
-      <div className='Q_xl_x w-20 mt-4 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center py-4 neu-convex'>
-        Live Orders
-      </div>
-      <div className='Q_sm_x w-10 block mt-4 px-4  bord-r-25 tx-center '>
-        <button className='w-100 tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 neu-convex opaci-chov--50 border-white tx-altfont-1'>
+        <button className='w-100 pb-5 tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 neu-convex opaci-chov--50 border-white-50 tx-altfont-1'>
           🎮 <div className="Q_md_x">Games</div> 
         </button>
       </div>
     </div>
+
+
+    <div className="flex-wrap w-100 my-8  gap-6">
+      <div className='Q_xs_sm w-25 mb-100 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start tx-white'>
+        <div className="pb-4 tx-lg">URL Grid</div>
+        <div className="flex-col w-90 tx-lg">
+          <TradeHistory state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
+            calls={{addTileToUrl}}
+          />
+        </div>
+      </div>
+
+      <div className='Q_xs_sm w-40 pos-rel block px-4  bord-r-25 tx-center tx-white mb-100 z-200'>
+        <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex pt-4 flex-col flex-justify-start'>
+          <div className="pb-4 flex-center gap-3">
+            <div className="tx-lx Q _md_x">Favorites</div> 
+            {/* <div className="Q_xs_md">Fav</div>  */}
+            {!!fuelPoints && <div>
+              <div className="blink_me pa-1 _ddg bord-r-50 "></div>
+            </div>}
+          </div>
+          <div className="flex-col w-90">
+            <FavoritesTab state={{
+                LS_favs:lsData.LS_favs,urlStateKeys:urlp.keysArray, urlState: urlp.gridData,
+                ytdObj, fuelPoints,
+                pricesObj, 
+              }} 
+              calls={{s__LS_favs: lsData.s__LS_favs}} 
+            />
+          </div>
+          <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+            onClick={()=>{triggerOpenModal()}}
+          >
+            ⚙️
+          </button>
+        </div>
+      </div>
+    </div>
+
     </>)
 }

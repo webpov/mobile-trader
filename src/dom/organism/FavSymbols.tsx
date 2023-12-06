@@ -61,6 +61,8 @@ export function FavSymbols({ state, calls }: any) {
           Not Found
         </div>
       }
+
+      <hr className="w-50" />
     </div>
   </>);
 }
