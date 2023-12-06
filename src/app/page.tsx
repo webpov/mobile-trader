@@ -12,7 +12,9 @@ export default function Home() {
         background: "radial-gradient(#0a0a0a, #000)"
       }}
     >
-      {/* <CustomBackgroundImage /> */}
+      <div className=' pos-fixed w-100vw h-100vh top-0 left-0 opaci-20'>
+        <CustomBackgroundImage />
+      </div>
       <AppFrameStage />
     </main>
   )
