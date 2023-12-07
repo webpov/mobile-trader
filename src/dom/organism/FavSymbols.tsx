@@ -3,11 +3,13 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import crypto from "crypto";
 import { computeHash } from '@/../script/util/webhelp'
+import { useMap, MapOrEntries, useMediaQuery, useCopyToClipboard } from 'usehooks-ts';
 
 export function FavSymbols({ state, calls }: any) {
   const [hydrationSafeLoad, s__hydrationSafeLoad] = useState(0);
   const [livePassword, s__livePassword] = useState("");
   const pathname = usePathname()
+  const [clipbloardValue, clipbloard__do] = useCopyToClipboard()
 
 
     const triggerClearFavs =()=>{
@@ -23,6 +25,7 @@ export function FavSymbols({ state, calls }: any) {
     })
     let baseUrl = window.location.href.split("?")[0]
     returnString = `${baseUrl}?${returnString.substring(1)}`
+    clipbloard__do(returnString)
     prompt("Export as URL", returnString)
   }
 
