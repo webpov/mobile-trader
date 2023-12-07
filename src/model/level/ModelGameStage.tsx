@@ -9,8 +9,8 @@ import WormHoleModel from "@/model/parts/WormHoleModel";
 import { Fog } from "three";
 import { LoadingFullScreen } from "@/model/tools/LoadingFullScreen";
 import TiltShiftEffects from "@/model/tools/tiltshift";
-import useSyncedKLines from "../../../script/util/hook/useSyncedKLines";
-import { useUrlParamCatcher } from "../../../script/util/hook/useUrlParamCatcher";
+import useSyncedKLines from "@/../script/util/hook/useSyncedKLines";
+import { useUrlParamCatcher } from "@/../script/util/hook/useUrlParamCatcher";
 import { BoxCandleKLine } from '@/model/tools/charts/BoxCandleKLine'
 
 

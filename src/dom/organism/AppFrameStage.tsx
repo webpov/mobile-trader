@@ -2,18 +2,19 @@
 
 import ModelGameStage from "@/model/level/ModelGameStage"
 import { useUrlParamCatcher } from "@/../script/util/hook/useUrlParamCatcher"
-import useChartConfig from "../../../script/util/hook/useChartConfig"
-import useLocalStorageCatcher from "../../../script/util/hook/useLocalStorageCatcher"
+import useChartConfig from "@/../script/util/hook/useChartConfig"
+import useLocalStorageCatcher from "@/../script/util/hook/useLocalStorageCatcher"
 import { URLGridTab } from "./URLGridTab"
 import { FavoritesTab } from "./FavoritesTab"
 import { DailyLog } from "./DailyLog"
 import { SymbolNameHeader } from "./SymbolNameHeader"
 import { useState } from "react"
 import { FavSymbols } from "./FavSymbols"
-import useSyncedKLines from "../../../script/util/hook/useSyncedKLines"
+import useSyncedKLines from "@/../script/util/hook/useSyncedKLines"
 
 export default function AppFrameStage({}:any) {
   const lsData:any = useLocalStorageCatcher()
+  const {LS_publicSecretKeys, s__LS_publicSecretKeys, } = lsData
   const urlp = useUrlParamCatcher()
   const chartConfig = useChartConfig({})
   const [isLocalStorageModalOpen, s__isLocalStorageModalOpen] = useState(false)
@@ -57,28 +58,38 @@ export default function AppFrameStage({}:any) {
 
 
     {isLocalStorageModalOpen &&
-      <div className="pos-fixed top-0 z-400 w-100vw h-100vh bg-glass-10 bg-b-50 flex-col tx-white">
+      <div className="pos-fixed flex-center pt-8 top-0 z-400 w-100vw h-100vh bg-glass-20 bg-b-50  tx-white">
+        <div className='Q_sm_x w-10 '></div>
+        <div className='Q_lg_x w-10 '></div>
+        <div className='Q_xl_x w-10 '></div>
+        <div className="flex-col bg-b-50 bord-r-25 box-shadow-9-b flex-1">
         
-        <button className="pos-abs top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
-            onClick={()=>{window.location.reload()}}
-          >
-            WebPOV
-          </button>
-        <button className="pos-abs top-0 right-0 pa-3 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
-            onClick={()=>{
-              let theDom:any = document.getElementById("main_scrollable_content")
-              if (!theDom) { return }
-              theDom.className = theDom?.className.replace("noverflow h-max-100vh","")
-              s__isLocalStorageModalOpen(false)
-            }}
-          >
-            X
-          </button>
-        <div>
-          {lsData.LS_favs && <>
-            <FavSymbols state={{LS_favs:lsData.LS_favs}} calls={{s__LS_favs: lsData.s__LS_favs}} />
-          </>}
+          <button className="pos-abs top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
+              onClick={()=>{window.location.reload()}}
+            >
+              WebPOV
+            </button>
+          <button className="pos-abs top-0 right-0 pa-3 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
+              onClick={()=>{
+                let theDom:any = document.getElementById("main_scrollable_content")
+                if (!theDom) { return }
+                theDom.className = theDom?.className.replace("noverflow h-max-100vh","")
+                s__isLocalStorageModalOpen(false)
+              }}
+            >
+              X
+            </button>
+          {/* <div> */}
+            {lsData.LS_favs && <>
+              <FavSymbols state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys, }} 
+                calls={{s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys}}
+              />
+            </>}
+          {/* </div> */}
         </div>
+        <div className='Q_sm_x w-10 '></div>
+        <div className='Q_lg_x w-10'></div>
+        <div className='Q_xl_x w-10'></div>
       </div>
     }
   

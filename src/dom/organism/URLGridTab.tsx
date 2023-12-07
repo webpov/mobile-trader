@@ -1,7 +1,7 @@
 "use client";
 
-import { StandardTokens } from "../../../script/constant/klines";
-import { PANEL_KEY_LIST } from "../../../script/util/hook/useUrlParamCatcher";
+import { StandardTokens } from "@/../script/constant/klines";
+import { PANEL_KEY_LIST } from "@/../script/util/hook/useUrlParamCatcher";
 
 
 export function URLGridTab({ state, calls }: any) {
