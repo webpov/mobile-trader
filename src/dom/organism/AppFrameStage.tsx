@@ -206,7 +206,7 @@ export default function AppFrameStage({}:any) {
         </div>
       </div>
       <div className='Q_sm_x w-20 pos-rel block px-4  bord-r-25 tx-center'>
-        <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex pt-4 flex-col flex-justify-start'>
+        <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex  flex-col flex-justify-start'>
           <div className="pb-4 flex-center gap-3">
             <div className="Q_md_x">Favorites</div> 
             <div className="Q_xs_md">Fav</div> 
@@ -298,7 +298,7 @@ export default function AppFrameStage({}:any) {
       <hr className=" opaci-20 flex-1" />
     </div>
 
-    <div className="flex-wrap w-100 mt-8  gap-4 z-100">
+    <div className="flex-wrap w-100 mt-8  gap-2 z-100">
       <div className='Q_xs_sm  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
         <div className="pb-4 tx-lg tx-center">URL <br /> Grid</div>
         <div className="flex-col w-90 tx-lg">
@@ -310,7 +310,7 @@ export default function AppFrameStage({}:any) {
 
       <div className='Q_xs_sm w-40  pos-rel block px-4  bord-r-25 tx-center tx-white mb-8 z-200'>
         <div className=' tx-center border-white-50 pa-2 pb-6  bg-glass-50 h-100 bord-r-25 neu-convex flex-col flex-justify-start'>
-          <div className="pb-4 flex-center gap-3 pt-8">
+          <div className=" flex-center gap-3 py-4">
             <div className="tx-lgx Q _md_x">Favorites</div> 
             {/* <div className="Q_xs_md">Fav</div>  */}
             {!!fuelPoints && <div>
@@ -326,7 +326,7 @@ export default function AppFrameStage({}:any) {
               calls={{s__LS_favs: lsData.s__LS_favs}} 
             />
           </div>
-          <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50  tx-lgx"
+          <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 translate-y--50 tx-lgx"
             onClick={()=>{triggerOpenModal()}}
           >
             ⚙️
