@@ -217,10 +217,10 @@ export default function AppFrameStage({}:any) {
           <div className="flex-col w-90">
             <FavoritesTab state={{
                 LS_favs:lsData.LS_favs,urlStateKeys:urlp.keysArray, urlState: urlp.gridData,
-                ytdObj, fuelPoints,
+                ytdObj, fuelPoints, focusSymbol, isChartLoading,
                 pricesObj, 
               }} 
-              calls={{s__LS_favs: lsData.s__LS_favs}} 
+              calls={{s__LS_favs: lsData.s__LS_favs, s__focusSymbol, s__isChartLoading}} 
             />
           </div>
           <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
@@ -321,9 +321,9 @@ export default function AppFrameStage({}:any) {
             <FavoritesTab state={{
                 LS_favs:lsData.LS_favs,urlStateKeys:urlp.keysArray, urlState: urlp.gridData,
                 ytdObj, fuelPoints,
-                pricesObj, 
+                pricesObj, focusSymbol, isChartLoading,
               }} 
-              calls={{s__LS_favs: lsData.s__LS_favs}} 
+              calls={{s__LS_favs: lsData.s__LS_favs, s__focusSymbol, s__isChartLoading}} 
             />
           </div>
           <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 translate-y--50 tx-lgx"

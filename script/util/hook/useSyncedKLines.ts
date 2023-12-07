@@ -145,6 +145,7 @@ export default function useSyncedKLines({state,calls}:any) {
       
       // console.log("ydtSummaryObj", ydtSummaryObj)
       s__ytdObj(ydtSummaryObj)
+      s__isChartLoading(false)
       // console.log("ydtSummaryObjydtSummaryObj", ydtSummaryObj)
       // s__ydtSummaryObj(ydtSummaryObj)
     }
@@ -197,6 +198,8 @@ export default function useSyncedKLines({state,calls}:any) {
   useEffect(() => {
       if (fuelPoints == 0) {
         lowTimeframeUpdate()
+        if (!focusSymbol) { return }
+        getYTDSummary(focusSymbol)
         // initMid()
         
         return

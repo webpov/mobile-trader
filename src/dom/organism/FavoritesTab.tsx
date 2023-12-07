@@ -21,6 +21,13 @@ export function FavoritesTab({ state, calls }: any) {
   useEffect(() => {
     s__hydrationSafeLoad(hydrationSafeLoad + 1);
   }, []);
+
+  const triggerChangeSymbol = (aSymbol:string) => {
+    calls.s__isChartLoading(true)
+    calls.s__focusSymbol(aSymbol)
+  }
+
+  
   if (!hydrationSafeLoad) {
     return (<></>);
   }
@@ -48,7 +55,8 @@ export function FavoritesTab({ state, calls }: any) {
         const liveChangePercent = (liveDiff) / state.pricesObj[item.symbol] * 100
         return (<><div key={`${index}---`} className="Q_xs_md py-1 w-100"></div><div key={index} className=" w-100">
           <div className=" opaci-chov--50 pos-rel bord-r-10 pa-3 flex flex-justify-between "
-            style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11" }}
+            onClick={()=>{triggerChangeSymbol(item.symbol)}}
+            style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11", ...({border: state.focusSymbol == item.symbol ? "1px dotted white" : ""}) }}
           >
             <div className="tx-bold-9 tx-start Q_lg_x">
               {item.token0}
