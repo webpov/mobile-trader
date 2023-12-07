@@ -14,7 +14,7 @@ import { useUrlParamCatcher } from "@/../script/util/hook/useUrlParamCatcher";
 import { BoxCandleKLine } from '@/model/tools/charts/BoxCandleKLine'
 
 
-export default function ModelGameStage({config, state, children}:{config:any,state:any, children:ReactNode}) {
+export default function ModelGameStage({config, state, calls,  children}:{config:any,state:any, calls:any, children:ReactNode}) {
   const searchParams = useSearchParams()
   const urlp = useUrlParamCatcher()
   const isDOF = searchParams.has('dof')
@@ -67,6 +67,7 @@ export default function ModelGameStage({config, state, children}:{config:any,sta
         /> */}
         <MapControls 
           enableDamping={false}
+          enablePan={config.isChartMovable}
 
           {...(!config.isGizmoVisible ? semiFixedViewConfig : {})}
         />
@@ -133,7 +134,7 @@ export default function ModelGameStage({config, state, children}:{config:any,sta
 }
 
 
-const RelativeBoundaryLines = ({state}:any) => {
+const RelativeBoundaryLines = ({state, calls}:any) => {
   const $floorLine:any = useRef()
   const $topLine:any = useRef()
   const [refreshCounter, s__refreshCounter] = useState(0) 

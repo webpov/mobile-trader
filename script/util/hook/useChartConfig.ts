@@ -4,6 +4,8 @@ import { getCurrentPrices, getFuturesPricesList, getPricesList, getRelevantChart
 export default function useChartConfig({urlp,state,calls}:any) {
     const [isGizmoVisible, s__isGizmoVisible] = useState<any>(false)
     const [isTrendUp, s__isTrendUp] = useState<any>(true)
+    const [isOverlayLabeled, s__isOverlayLabeled] = useState<any>(true)
+    const [isChartMovable, s__isChartMovable] = useState<any>(false)
 
   
 
@@ -15,5 +17,7 @@ export default function useChartConfig({urlp,state,calls}:any) {
     return {
         isGizmoVisible, s__isGizmoVisible,
         isTrendUp, s__isTrendUp,
+        isOverlayLabeled, s__isOverlayLabeled,
+        isChartMovable, s__isChartMovable,
     }
 }

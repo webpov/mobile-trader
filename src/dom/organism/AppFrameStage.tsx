@@ -116,7 +116,7 @@ export default function AppFrameStage({}:any) {
         </div>
       </div>
       <div className='tx-roman flex-1 mt-4 flex-center pos-rel'>
-        {!!focusSymbol && !!selectedSymbolYTDSummary && selectedSymbolLTFSummary && <>
+        {!!focusSymbol && !!selectedSymbolYTDSummary && selectedSymbolLTFSummary && chartConfig.isOverlayLabeled && <>
           
           <div className="Q_xs_sm_px-1 pa-3 pos-abs top-50p left-0 z-200 bg-b-50 bord-r-25 ma-1">
             <div>{JSON.stringify(selectedSymbolLTFSummary.minValue)}</div>
@@ -145,7 +145,9 @@ export default function AppFrameStage({}:any) {
               htfList,
               htfClosingList,
               ytdObj, focusSymbol,
-            }}>
+            }}
+              calls={{}}
+            >
               <div>
                 
               </div>
@@ -181,6 +183,18 @@ export default function AppFrameStage({}:any) {
                 }}>
                   <div>Trend Up</div>
                   <div className={`${chartConfig.isTrendUp ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isTrendUp ? "True" : "False"}</div>
+                </button>
+                <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={()=>{
+                  chartConfig.s__isOverlayLabeled(!chartConfig.isOverlayLabeled)
+                }}>
+                  <div>Labels</div>
+                  <div className={`${chartConfig.isOverlayLabeled ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isOverlayLabeled ? "True" : "False"}</div>
+                </button>
+                <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={()=>{
+                  chartConfig.s__isChartMovable(!chartConfig.isChartMovable)
+                }}>
+                  <div>Movable Camera</div>
+                  <div className={`${chartConfig.isChartMovable ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isChartMovable ? "True" : "False"}</div>
                 </button>
 
                 
