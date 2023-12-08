@@ -99,7 +99,7 @@ export default function AppFrameStage({}:any) {
       </div>
     }
   
-    <div className='pos-abs w-100 flex-col noverflow h-100vh z-2 ' style={{width: '100vw',}}>
+    <div className='pos-fix top-0 w-100 flex-col noverflow h-100vh z-2 ' style={{width: '100vw',}}>
       <div className={`${chartConfig.isTrendUp ? "_ddg" : "_ddr"} h-50 w-100 bord-r-100p spin-60 blur opaci-10 `} 
         style={{filter:"blur(200px)"}}
       >
@@ -273,7 +273,7 @@ export default function AppFrameStage({}:any) {
       <div className='flex-1 flex-col mt-8 pb-8'>
         <BuySellButtons />
       </div>
-      <div className='Q_xl_x w-25 mt-8  flex-col block bg-glass-50  tx-center  '>
+      <div className='Q_xl_x w-25 mt-8  flex-col block   tx-center  '>
         <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
           Live Orders
         </div>
@@ -360,7 +360,7 @@ export default function AppFrameStage({}:any) {
     </div>
 
     
-    <div className='mb-100 mt-8 pb-100  Q_xs_sm w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
+    <div className='z-200 mb-100 mt-8 pb-100  Q_xs_sm w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
         <div className="pb-4">Daily Log</div>
         <div className="flex-col w-90">
           <DailyLog state={{LS_notes:lsData.LS_notes}} calls={{s__LS_notes: lsData.s__LS_notes}} />
