@@ -523,7 +523,7 @@
 .cursor {cursor: default}.pointer {cursor: pointer}
 .clickble {cursor: pointer}.grab {cursor: grab}.grabble {cursor: grab}
 .stopcursor {cursor: not-allowed !important}.waitcursor {cursor: wait}
-.nocursor {cursor: default}.nopointer {pointer-events: none}.noclick {pointer-events: none}
+.nocursor {cursor: default}.nopointer {pointer-events: none !important}.noclick {pointer-events: none}
 .noselect {-webkit-user-select: none; -moz-user-select: none;-ms-user-select: none; user-select: none}
 
 
