@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
+import { getUTCDateString } from "../../../script/util/webhelp";
 
 
 export function DailyLog({ state, calls }: any) {
@@ -8,8 +9,11 @@ export function DailyLog({ state, calls }: any) {
     const notePrompt = prompt("Add note", "");
     if (!notePrompt) { return; }
 
+    const theUnix = Date.now()
+    const theDate = getUTCDateString(theUnix)
     calls.s__LS_notes([...(state.LS_notes || []), {
-      unix: Date.now(),
+      unix: theUnix,
+      date: theDate,
       msg: notePrompt,
     }]);
   };
@@ -32,6 +36,7 @@ export function DailyLog({ state, calls }: any) {
   useEffect(() => {
     s__hydrationSafeLoad(hydrationSafeLoad + 1);
   }, []);
+  const YEAR_NUMBER = 2023
 
   const AddNoteButton = ({ fontSize = "tx-lg", isClearable = false }: any) => {
     return (
@@ -73,7 +78,9 @@ export function DailyLog({ state, calls }: any) {
           >
             <div className="tx-bold-9  flex flex-justify-between">
               <div className="tx-lg tx-altfont-1">{index + 1}</div>
-              <div>{item.unix}</div>
+              {/* <div>{item.unix}</div> */}
+              <div>{(`${item.msg}`).substring(0,15)}{item.msg.length > 14 ? "..." : ""}</div>
+              <div className="tx-lg tx-altfont-1">{item.date.replace(YEAR_NUMBER,"")}</div>
               {/* <div>qweqwe</div> */}
             </div>
           </button>
