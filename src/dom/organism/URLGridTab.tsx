@@ -14,14 +14,14 @@ export function URLGridTab({ state, calls }: any) {
     // console.log("newSymbol: "+ newSymbol, pairsArray)
     if (!pairsArray.includes(newSymbol)) { return alert("Symbol not found") }
 
-    console.log("state.urlStateKeys", state.urlStateKeys)
+    // console.log("state.urlStateKeys", state.urlStateKeys)
     let firstAvailablePanel = PANEL_KEY_LIST.find((aPanelKey:string)=>(
       (!state.urlStateKeys.includes(aPanelKey)) 
         // firstAvailablePanel = aPanelKey
       
     ))
 
-    console.log("first panel is ", firstAvailablePanel)
+    // console.log("first panel is ", firstAvailablePanel)
 
     // alert("newSymbol: "+ newSymbol)
     calls.addTileToUrl(newSymbol, firstAvailablePanel)

@@ -203,12 +203,12 @@ const RelativeBoundaryLines = ({state, calls}:any) => {
     // console.log("summaryDetails", state.summaryDetails)
 
     const priceAbsHeight = state.summaryDetails.maxValue - state.summaryDetails.minValue
-    console.log("priceAbsHeight", priceAbsHeight, selectedFav)
+    // console.log("priceAbsHeight", priceAbsHeight, selectedFav)
     const absMinValue = selectedFav.floor - state.summaryDetails.minValue
     let absMaxValue = selectedFav.roof - state.summaryDetails.minValue
-    console.log("if (absMaxValue < 0)", (absMaxValue < 0))
+    // console.log("if (absMaxValue < 0)", (absMaxValue < 0))
     if (absMaxValue < 0) { absMaxValue = - (absMaxValue - priceAbsHeight)}
-    console.log("absMinValue", absMinValue, absMaxValue, selectedFav.floor , state.summaryDetails.minValue)
+    // console.log("absMinValue", absMinValue, absMaxValue, selectedFav.floor , state.summaryDetails.minValue)
     const localizedFloorHeight = absMinValue * worldRelativeHeight / priceAbsHeight
     const localizedRoofHeight = absMaxValue * worldRelativeHeight / priceAbsHeight
     

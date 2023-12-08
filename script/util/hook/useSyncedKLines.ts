@@ -43,11 +43,11 @@ export default function useSyncedKLines({state,calls}:any) {
     let theFocusSymbol = ""
     
     const noFavs = (!_state.favs || (!!_state.favs && !_state.favs.length)) 
-    console.log("_state.favsstate.favs", _state.favs)
+    // console.log("_state.favsstate.favs", _state.favs)
     const noUrlPicks = !_state.urlArray?.length
-    console.log("_state.urlArray?.length", _state.gridData, _state.urlArray)
+    // console.log("_state.urlArray?.length", _state.gridData, _state.urlArray)
 
-    console.log("noFavs && !noUrlPicks", noFavs , noUrlPicks)
+    // console.log("noFavs && !noUrlPicks", noFavs , noUrlPicks)
     if (noUrlPicks && noFavs) {return}
 
     // has favs
@@ -57,7 +57,7 @@ export default function useSyncedKLines({state,calls}:any) {
     }
     // has url picks
     if (noFavs && !noUrlPicks) {
-      console.log("_state.gridData[_state.urlArray[0]]", _state.gridData[_state.urlArray[0]])
+      // console.log("_state.gridData[_state.urlArray[0]]", _state.gridData[_state.urlArray[0]])
       if (_state.gridData[_state.urlArray[0]]) {
         theFocusSymbol = (_state.gridData[_state.urlArray[0]].symbol)
       }        
@@ -135,7 +135,7 @@ export default function useSyncedKLines({state,calls}:any) {
       
       
       // const firstOne = selectedSymbol
-      console.log("selectedSymbolselectedSymbol", selectedSymbol)
+      // console.log("selectedSymbolselectedSymbol", selectedSymbol)
       const selectedSymbolData = currentYTDData.filter((item:any)=>{
         return item.symbol == selectedSymbol
       })
@@ -229,9 +229,9 @@ export default function useSyncedKLines({state,calls}:any) {
     const triggerGetLogs = async (aSymbol:string) => {
       let theChosenSymbol = aSymbol || focusSymbol
       s__isFetchingLogs(true)
-      console.log("focussymbol", theChosenSymbol)
+      // console.log("focussymbol", theChosenSymbol)
       const logsData = await getTradeLogs(theChosenSymbol)
-      console.log("logsData", logsData)
+      // console.log("logsData", logsData)
 
       
       let theList = logsData

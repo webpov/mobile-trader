@@ -10,7 +10,7 @@ export async function POST(request: any) {
   if (!hash || !keys) {
     return NextResponse.json({ message: "Unkown Error" },{ status: 400, })
   }
-  console.log("hash and keys", hash, keys)
+  // console.log("hash and keys", hash, keys)
   let dataToReturn = { hash, keys }
 
   // const supabase = getSupabaseClient()

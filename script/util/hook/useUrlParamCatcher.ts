@@ -65,7 +65,7 @@ export function useUrlParamCatcher() {
         if (searchParams.has(panelKeysArray[index])) {
             const parsedUrlParam = JSON.parse(`${searchParams.get(panelKeysArray[index])}`)
             if (!!parsedUrlParam.symbol) {
-              console.log("parsedUrlParam", parsedUrlParam)
+              // console.log("parsedUrlParam", parsedUrlParam)
               panelListResult[ panelKeysArray[index]] = parsedUrlParam
             }
         } else {
