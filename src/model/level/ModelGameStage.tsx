@@ -69,8 +69,10 @@ export default function ModelGameStage({config, state, calls,  children}:{config
           enableDamping={false}
           enablePan={config.isChartMovable}
           enableZoom={config.isChartMovable}
+          enableRotate={config.isChartMovable}
+          rotateSpeed={0.1}
 
-          {...(!config.isGizmoVisible ? semiFixedViewConfig : {})}
+          // {...(!config.isGizmoVisible ? semiFixedViewConfig : {})}
         />
         <ambientLight intensity={0.02} />
         <pointLight position={[2,-1.7,0]} intensity={2} distance={4} />
