@@ -26,7 +26,7 @@
 .translate-x--50 {transform: translateX(-50%)}.translate-x-50 {transform: translateX(50%)}
 .translate-x--75 {transform: translateX(-75%)}.translate-x-75 {transform: translateX(75%)}
 .translate-x--100 {transform: translateX(-100%)}.translate-x-100 {transform: translateX(100%)}
-.translate-y--25 {transform: translateY(-25%)}.translate-y-25 {transform: translateY(25%)}
+.nopointer25 {transform: translateY(-25%)}.translate-y-25 {transform: translateY(25%)}
 .translate-y--50 {transform: translateY(-50%)}.translate-y-50 {transform: translateY(50%)}
 .translate-y--75 {transform: translateY(-75%)}.translate-y-75 {transform: translateY(75%)}
 .translate-y--100 {transform: translateY(-100%)}.translate-y-100 {transform: translateY(100%)}

@@ -49,7 +49,7 @@ export default function ModelGameStage({config, state, calls,  children}:{config
   if (!mounted) return <LoadingFullScreen />;
 
   return (
-    <div className="flex-col tx-altfont-4 bg-b-10 box-shadow-i-9-b">
+    <div className={`flex-col tx-altfont-4 bg-b-10 box-shadow-i-9-b ${config.isChartMovable ? "" : "nopointer"}`}>
 
       
       
