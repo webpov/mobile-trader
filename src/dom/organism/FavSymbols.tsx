@@ -63,6 +63,11 @@ export function FavSymbols({ state, calls }: any) {
     calls.s__LS_publicSecretKeys(wHash)
   }
 
+  const triggerChangeSymbol = (aSymbol:string) => {
+    calls.s__isChartLoading(true)
+    calls.s__focusSymbol(aSymbol)
+  }
+
   if (!hydrationSafeLoad) {
     return (<></>);
   }
@@ -78,15 +83,21 @@ export function FavSymbols({ state, calls }: any) {
       {state.LS_favs.map((item: any, index: number) => {
         return (<div key={index} className=" w-100">
           <button className=" opaci-chov--50 bord-r-10 pa-3 w-100 noborder tx-white "
-            style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11" }}
+            style={{ 
+              background: "linear-gradient(45deg, #ffffff03, #ffffff11",
+              ...({border: state.focusSymbol == item.symbol ? "1px dotted white" : ""})
+            }}
+            onClick={()=>{triggerChangeSymbol(item.symbol)}}
+
           >
-            <div className="tx-bold-9  flex flex-justify-between">
-              <div className="tx-lg tx-altfont-1">{index + 1}</div>
-              <div>{item.token0}</div>
-              <div>{!!item.floor && <>
+            <div className="tx-bold-9  flex flex-justify-between gap-3">
+              <div className="tx-md tx-altfont-1">{index + 1}</div>
+              <div className="flex-1 tx-mdl tx-ls-2 tx-start" title={item.symbol}>{item.token0}</div>
+              <div className="tx-roman tx-mdl">{!!item.floor && <>
                 {item.floor}
               </>}</div>
-              <div>{!!item.roof && <>
+              <div>-</div>
+              <div className="tx-roman tx-mdl">{!!item.roof && <>
                 {item.roof}
               </>}</div>
             </div>

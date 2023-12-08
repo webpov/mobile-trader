@@ -53,7 +53,7 @@ export function FavoritesTab({ state, calls }: any) {
 
         const liveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen
         const liveChangePercent = (liveDiff) / state.pricesObj[item.symbol] * 100
-        return (<><div key={`${index}---`} className="Q_xs_md py-1 w-100"></div><div key={index} className=" w-100">
+        return (<><div key={`${index}---`} className="Q_xs_md py-2 pt-3 w-100"></div><div key={index} className=" w-100">
           <div className=" opaci-chov--50 pos-rel bord-r-10 pa-3 flex flex-justify-between "
             onClick={()=>{triggerChangeSymbol(item.symbol)}}
             style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11", ...({border: state.focusSymbol == item.symbol ? "1px dotted white" : ""}) }}
@@ -61,7 +61,7 @@ export function FavoritesTab({ state, calls }: any) {
             <div className="tx-bold-9 tx-start Q_lg_x">
               {item.token0}
             </div>
-            <div className="pos-abs top-0 tx-bold-9 tx-start Q_xs_lg bg-w-10 bord-r-10 px-3 py-1 translate-y--50">
+            <div className="pos-abs top-0 tx-bold-9 tx-start Q_xs_lg bg-w-10 bord-r-10 px-3 py-1 translate-y--75 tx-bold-8 tx-sans tx-ls-3">
               {item.token0}
             </div>
             

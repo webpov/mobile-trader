@@ -64,10 +64,11 @@ export default function AppFrameStage({}:any) {
         <div className='Q_xl_x w-10 '></div>
         <div className="flex-col bg-b-50 bord-r-25 box-shadow-9-b flex-1">
         
-          <button className="pos-abs top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
+          <button className="pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lx"
+              style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
               onClick={()=>{window.location.reload()}}
             >
-              WebPOV
+              WebPOV: Favorites
             </button>
           <button className="pos-abs top-0 right-0 pa-3 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
               onClick={()=>{
@@ -81,8 +82,8 @@ export default function AppFrameStage({}:any) {
             </button>
           {/* <div> */}
             {lsData.LS_favs && <>
-              <FavSymbols state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys, }} 
-                calls={{s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys}}
+              <FavSymbols state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys, focusSymbol, isChartLoading}} 
+                calls={{s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__focusSymbol, s__isChartLoading}}
               />
             </>}
           {/* </div> */}
@@ -103,10 +104,11 @@ export default function AppFrameStage({}:any) {
       <div className='Q_lg_x w-10'></div>
       <h1 className=" flex-1 mb-0 pb-0 pl-100 block"><SymbolNameHeader label={focusSymbol || "N/A"} /></h1>
     </div>
-    <div className='flex-row flex-align-stretch  w-100 Q_xs_lg z-10 tx-white'>
+    <div className='flex-row pos-rel flex-align-stretch  w-100 Q_xs_lg z-10 tx-white'>
       <h2 className="mb-0 pb-0  bg-w-10 px-6 box-shadow-i-9 pt-2 bord-r-25 pb-3"><SymbolNameHeader label={focusSymbol || "N/A"} /></h2>
     </div>
     <div className='flex-row flex-align-stretch tx-white w-90 z-10'>
+      
       <div className='Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
         <div className="pb-4 tx-center">URL Grid</div>
         <div className="flex-col w-90">
@@ -131,7 +133,7 @@ export default function AppFrameStage({}:any) {
             <div>{JSON.stringify(selectedSymbolYTDSummary.maxValue)}</div>
           </div>
         </>}
-        <div className="w-90   bord-r-25 " >
+        <div className="w-90  pos-rel bord-r-25 " >
           <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  '
             style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
           >
@@ -153,6 +155,12 @@ export default function AppFrameStage({}:any) {
               </div>
             </ModelGameStage>
           </div>
+          
+      <button className="pos-abs translate-y-50 border-white-50 Q_xs  bottom-0 right-0 pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+            onClick={()=>{triggerOpenModal()}}
+          >
+            ⭐
+          </button>
         </div>
         {!fuelPoints && 
           <div className="flex pointer pos-abs top-0 " style={{right:"10%"}}>
@@ -221,7 +229,9 @@ export default function AppFrameStage({}:any) {
       </div>
       <div className='Q_sm_x w-20 pos-rel block px-4  bord-r-25 tx-center'>
         <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex  flex-col flex-justify-start'>
-          <div className="pb-4 flex-center gap-3">
+          <div className="Q_md_x py-2"></div> 
+          <div className="Q_sm py-2"></div> 
+          <div className="py-4 flex-center gap-3">
             <div className="Q_md_x">Favorites</div> 
             <div className="Q_xs_md">Fav</div> 
             {!!fuelPoints && <div>
@@ -240,40 +250,22 @@ export default function AppFrameStage({}:any) {
           <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
             onClick={()=>{triggerOpenModal()}}
           >
-            ⚙️
+            ⭐
           </button>
         </div>
       </div>
     </div>
+    <div className="mt-6 Q_md_x"></div>
     <div className=' flex-1 flex flex-align-start mt-6 tx-white w-90 z-10'>
       
-    <div className='Q_sm_x w-10 block mt-6 Q_md_x  bord-r-25 tx-center '>
+      
+    <div className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
         <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 pb-5 neu-convex opaci-chov--50 border-white tx-altfont-1'>
           🎮 <div className="Q_lg_x">Games</div> 
         </button>
       </div>
       <div className='flex-1 flex-col mt-8 pb-8'>
-        <div className="flex-wrap gap-3  ">
-          <div className="flex-center">
-            <button className="opaci-chov--50 neu-convex tx-white tx-lx  pa-3 px-2 bord-r-l-25 border-green tx-altfont-1">
-              BUY
-            </button>
-            <button className="opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-green">
-              ⚙️
-            </button>
-          </div>
-          <div className="flex-center">
-            <button className="opaci-chov--50 neu-convex tx-white tx-lx  pa-3 px-2 bord-r-l-25 border-red tx-altfont-1">
-              SELL
-            </button>
-            <button className="opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-red">
-              ⚙️
-            </button>
-          </div>
-          <button className="opaci-chov--50 neu-convex tx-white tx-lg  pa-3 py-5 bord-r-25 border-blue tx-bold-8 tx-altfont-1 underline">
-            Refresh
-          </button>
-        </div>
+        <BuySellButtons />
       </div>
       <div className='Q_xl_x w-25 mt-8  flex-col block bg-glass-50  tx-center  '>
         <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
@@ -323,7 +315,12 @@ export default function AppFrameStage({}:any) {
       </div>
 
       <div className='Q_xs_sm w-40  pos-rel block px-4  bord-r-25 tx-center tx-white mb-8 z-200'>
-        <div className=' tx-center border-white-50 pa-2 pb-6  bg-glass-50 h-100 bord-r-25 neu-convex flex-col flex-justify-start'>
+        <div className=' tx-center  pa-2 pb-6  bg-glass-50 h-100 bord-r-25 neu-convex flex-col flex-justify-start'
+          style={{
+            boxShadow:"-2px -2px 4px -2px #ffffff44",
+
+          }}
+        >
           <div className=" flex-center gap-3 py-4">
             <div className="tx-lgx Q _md_x">Favorites</div> 
             {/* <div className="Q_xs_md">Fav</div>  */}
@@ -343,7 +340,7 @@ export default function AppFrameStage({}:any) {
           <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 translate-y--50 tx-lgx"
             onClick={()=>{triggerOpenModal()}}
           >
-            ⚙️
+            ⭐
           </button>
         </div>
       </div>
@@ -365,4 +362,30 @@ export default function AppFrameStage({}:any) {
       </div>
 
     </>)
+}
+
+const BuySellButtons = () => {
+  return (<>
+    <div className="flex-wrap gap-3  ">
+      <div className="flex-center">
+        <button className="opaci-chov--50 neu-convex tx-white tx-lx  pa-3 px-2 bord-r-l-25 border-green tx-altfont-1">
+          BUY
+        </button>
+        <button className="opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-green">
+          ⚙️
+        </button>
+      </div>
+      <div className="flex-center">
+        <button className="opaci-chov--50 neu-convex tx-white   pa-3 px-2 bord-r-l-25 border-red tx-altfont-1">
+          <div className="tx-lx">SELL</div>
+        </button>
+        <button className="opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-red">
+          ⚙️
+        </button>
+      </div>
+      <button className=" opaci-chov--50 neu-convex tx-white tx-lg  pa-3 py-5 bord-r-25 border-blue tx-bold-8 tx-altfont-1 underline">
+        Refresh
+      </button>
+    </div>
+  </>)
 }
