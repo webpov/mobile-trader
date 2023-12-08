@@ -35,6 +35,8 @@ export default function AppFrameStage({}:any) {
       htfClosingList, s__htfClosingList,
       selectedSymbolYTDSummary,
       selectedSymbolLTFSummary,
+      tradeLogsObj, s__tradeLogsObj, triggerGetLogs,
+      isFetchingLogs, s__isFetchingLogs,
       // fullmidtermList, s__fullmidtermList,
   } = useSyncedKLines({state:{
     gridData: urlp.gridData,
@@ -82,8 +84,11 @@ export default function AppFrameStage({}:any) {
             </button>
           {/* <div> */}
             {lsData.LS_favs && <>
-              <FavSymbols state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys, focusSymbol, isChartLoading}} 
-                calls={{s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__focusSymbol, s__isChartLoading}}
+              <FavSymbols state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys, focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,  }} 
+                calls={{
+                  s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
+                  s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs
+                }}
               />
             </>}
           {/* </div> */}
@@ -147,6 +152,7 @@ export default function AppFrameStage({}:any) {
               htfList,
               htfClosingList,
               ytdObj, focusSymbol,
+              tradeLogsObj, isFetchingLogs,
             }}
               calls={{}}
             >

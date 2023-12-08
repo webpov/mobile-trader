@@ -23,6 +23,7 @@ export function FavoritesTab({ state, calls }: any) {
   }, []);
 
   const triggerChangeSymbol = (aSymbol:string) => {
+    if (state.focusSymbol == aSymbol) { return }
     calls.s__isChartLoading(true)
     calls.s__focusSymbol(aSymbol)
   }

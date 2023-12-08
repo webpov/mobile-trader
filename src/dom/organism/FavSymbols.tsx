@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import crypto from "crypto";
 import { computeHash } from '@/../script/util/webhelp'
 import { useMap, MapOrEntries, useMediaQuery, useCopyToClipboard } from 'usehooks-ts';
+import { updatePublicSecretKey } from "../../../script/state/service/local";
 
 export function FavSymbols({ state, calls }: any) {
   const [hydrationSafeLoad, s__hydrationSafeLoad] = useState(0);
@@ -42,31 +43,44 @@ export function FavSymbols({ state, calls }: any) {
   }
 
   const trigger__publicSecretKeys= (e:any) => {
-    console.log("e", e.target.value)
+    // console.log("e", e.target.value)
     calls.s__LS_publicSecretKeys(e.target.value)
   }
   const trigger__livePassword= (e:any) => {
-    console.log("e", e.target.value)
+    // console.log("e", e.target.value)
     s__livePassword(e.target.value)
   }
-  const triggerSaveKeys= (e:any) => {
-    console.log("eeeeeeeeeeeeeeeeeeeeeeeee")
+  const triggerSaveKeys= async (e:any) => {
+    // console.log("eeeeeeeeeeeeeeeeeeeeeeeee")
     if (!state.LS_publicSecretKeys) { return }
-    console.log("hhhhhhhhhhhhhhhh")
+    // console.log("hhhhhhhhhhhhhhhh")
     if (!livePassword) { return }
-    console.log("uuuuuuuuuuuuu")
+    // console.log("uuuuuuuuuuuuu")
 
     const theHash = ""
     let wHash:string = computeHash(state.LS_publicSecretKeys, livePassword, crypto.createHash)
     s__livePassword("")
-    console.log("wHash", wHash)
+    // console.log("wHash", wHash)
     calls.s__LS_publicSecretKeys(wHash)
+    const keysRes = await updatePublicSecretKey(wHash, state.LS_publicSecretKeys)
   }
 
   const triggerChangeSymbol = (aSymbol:string) => {
     calls.s__isChartLoading(true)
     calls.s__focusSymbol(aSymbol)
   }
+  const isLogsFilled = (aSymbol:string) => {
+    if (!state.tradeLogsObj) { return null }
+
+    return !!state.tradeLogsObj[aSymbol]
+  }
+
+  const selectedTradeLogs = useMemo(()=>{
+    if (!state.tradeLogsObj) { return null }
+    if (!state.focusSymbol) { return null }
+
+    return state.tradeLogsObj[state.focusSymbol]
+  },[state.tradeLogsObj, state.focusSymbol])
 
   if (!hydrationSafeLoad) {
     return (<></>);
@@ -82,26 +96,55 @@ export function FavSymbols({ state, calls }: any) {
       }
       {state.LS_favs.map((item: any, index: number) => {
         return (<div key={index} className=" w-100">
-          <button className=" opaci-chov--50 bord-r-10 pa-3 w-100 noborder tx-white "
+          <div className="  flex-col flex-align-stretch  bord-r-10  w-100 noborder tx-white "
             style={{ 
               background: "linear-gradient(45deg, #ffffff03, #ffffff11",
-              ...({border: state.focusSymbol == item.symbol ? "1px dotted white" : ""})
+              
             }}
-            onClick={()=>{triggerChangeSymbol(item.symbol)}}
+            
 
           >
-            <div className="tx-bold-9  flex flex-justify-between gap-3">
-              <div className="tx-md tx-altfont-1">{index + 1}</div>
-              <div className="flex-1 tx-mdl tx-ls-2 tx-start" title={item.symbol}>{item.token0}</div>
-              <div className="tx-roman tx-mdl">{!!item.floor && <>
+            <div className="tx-bold-9 px-2 flex  flex-justify-between gap-3">
+                {!!isLogsFilled(item.symbol) &&  <>
+                  <button className="tx-center  tx-lgx tx-green noborder bg-trans "
+                    // onClick={()=>{calls.triggerGetLogs()}}
+                  >
+                    |
+                  </button>
+                </>}
+              {/* <div className="tx-md tx-altfont-1">{index + 1}</div> */}
+              <div className="flex-1 tx-mdl py-1 my-2 tx-ls-2 tx-start bg-w-10 bord-r-25 pl-4 opaci-chov--50 underline" title={item.symbol}
+                onClick={()=>{triggerChangeSymbol(item.symbol)}}
+                style={{
+                  ...(state.focusSymbol == item.symbol ? {borderLeft:"3px solid white", background: "linear-gradient(-90deg, #ffffff44, #ffffff11)"} : {})
+                }}
+              >
+                {item.token0}
+              </div>
+              <div className="tx-roman tx-mdl flex-col">{!!item.floor && <>
                 {item.floor}
               </>}</div>
-              <div>-</div>
-              <div className="tx-roman tx-mdl">{!!item.roof && <>
+              <div className="flex-col">-</div>
+              <div className="tx-roman tx-mdl flex-col">{!!item.roof && <>
                 {item.roof}
               </>}</div>
+              <div className="flex-col">
+                {!!state.isFetchingLogs && <>
+                  <button className={`tx-center  spin-${index+2}`}>
+                    ...
+                  </button>
+                </>}
+                {!state.isFetchingLogs && <>
+                  <button className={`bord-r-10 tx-center opaci-chov--50 ${!!isLogsFilled(item.symbol) ? "border-green" : ""}` }
+                    onClick={()=>{calls.triggerGetLogs(item.symbol)}}
+                  >
+                    Logs
+                  </button>
+                </>}
+                
+              </div>
             </div>
-          </button>
+          </div>
         </div>);
       })}
       {!!state.LS_favs.length &&

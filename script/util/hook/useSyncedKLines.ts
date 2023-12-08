@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { getBulkCandles, getCurrentPrices, getFuturesPricesList, getLongTermData, getPricesList, getRelevantChartData, getTickerPrices } from "../helper/kline";
+import { getTradeLogs } from "../../state/service/local";
+import { parseDateTimeString, parseDecimals } from "./useOrderHistory";
 
 export default function useSyncedKLines({state,calls}:any) {
     const [pricesObj, s__pricesObj] = useState<any>()
@@ -9,6 +11,7 @@ export default function useSyncedKLines({state,calls}:any) {
 
     
     const [ytdObj, s__ytdObj] = useState<any>()
+    const [tradeLogsObj, s__tradeLogsObj] = useState<any>()
 
     const [ltfList, s__ltfList] = useState<any>([])
     const [ltfClosingList, s__ltfClosingList] = useState<any>([])
@@ -17,6 +20,7 @@ export default function useSyncedKLines({state,calls}:any) {
 
     // const [fullmidtermList, s__fullmidtermList] = useState<any>([])
 
+  const [isFetchingLogs, s__isFetchingLogs] = useState(false)
   const [isChartLoading, s__isChartLoading] = useState(false)
   const [delayMsecs, s__delayMsecs] = useState(5000)
   const [startRotationTime, s__startRotationTime] = useState(0); 
@@ -222,7 +226,31 @@ export default function useSyncedKLines({state,calls}:any) {
     }, [focusSymbol, fuelPoints, startRotationTime, delayMsecs]);
 
 
+    const triggerGetLogs = async (aSymbol:string) => {
+      let theChosenSymbol = aSymbol || focusSymbol
+      s__isFetchingLogs(true)
+      console.log("focussymbol", theChosenSymbol)
+      const logsData = await getTradeLogs(theChosenSymbol)
+      console.log("logsData", logsData)
 
+      
+      let theList = logsData
+      theList = theList.map((anItem:any, index:any) => {
+        return {...anItem,...{
+            side: anItem.isBuyer ? "Buy" : "Sell",
+            price: parseDecimals(anItem.price),
+            qty: "$"+parseDecimals(parseFloat(anItem.price)*parseFloat(anItem.qty)),
+            time: parseDateTimeString(new Date(anItem.time/1)),
+        }}
+      }) // .reverse()
+      // s__orderLogs(theList)
+
+
+      s__tradeLogsObj((oldLogsObj:any)=>{
+        return {...oldLogsObj, [theChosenSymbol]: theList}
+      })
+      s__isFetchingLogs(false)
+    }
 
 
 
@@ -230,6 +258,8 @@ export default function useSyncedKLines({state,calls}:any) {
       fuelPoints, s__fuelPoints,
       pricesObj, s__pricesObj,
       ytdObj, s__ytdObj,
+      tradeLogsObj, s__tradeLogsObj, triggerGetLogs,
+      isFetchingLogs, s__isFetchingLogs,
       focusSymbol, s__focusSymbol,
 
       isChartLoading, s__isChartLoading,

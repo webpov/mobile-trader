@@ -12,6 +12,7 @@ import TiltShiftEffects from "@/model/tools/tiltshift";
 import useSyncedKLines from "@/../script/util/hook/useSyncedKLines";
 import { useUrlParamCatcher } from "@/../script/util/hook/useUrlParamCatcher";
 import { BoxCandleKLine } from '@/model/tools/charts/BoxCandleKLine'
+import HistoryLogs from "../tools/charts/HistoryLogs";
 
 
 export default function ModelGameStage({config, state, calls,  children}:{config:any,state:any, calls:any, children:ReactNode}) {
@@ -23,7 +24,7 @@ export default function ModelGameStage({config, state, calls,  children}:{config
   const [mounted, s__Mounted] = useState(false);
 
 
-  const CHOP_AMOUNT = 250
+  const CHOP_AMOUNT = 400
   const lastOfLTF = useMemo(()=>{
     
     return [...state.ltfClosingList].slice(-CHOP_AMOUNT) 
@@ -38,10 +39,25 @@ export default function ModelGameStage({config, state, calls,  children}:{config
     
     minAzimuthAngle:0,
     maxAzimuthAngle:0,
-    minPolarAngle:0.55,
+    minPolarAngle:0.5,
     maxPolarAngle:0.88,
   }
+  const htf_latestUnix = useMemo(()=>{
+    if (!state.htfList) return 1
+    if (!state.htfList[499]) return 1
+    return state.htfList[499][0]
+  },[state.htfList])
+  const htf_oldestUnix = useMemo(()=>{
+    if (!state.htfList) return 1
+    if (!state.htfList[CHOP_AMOUNT]) return 1
+    return state.htfList[CHOP_AMOUNT][0]
+  },[state.htfList])
+  const selectedTradeLogs = useMemo(()=>{
+    if (!state.tradeLogsObj) { return null }
+    if (!state.focusSymbol) { return null }
 
+    return state.tradeLogsObj[state.focusSymbol]
+  },[state.tradeLogsObj, state.focusSymbol])
   useEffect(() => {
       s__Mounted(true);
   }, []);
@@ -73,7 +89,7 @@ export default function ModelGameStage({config, state, calls,  children}:{config
           enableRotate={config.isChartMovable}
           rotateSpeed={0.1}
 
-          // {...(!config.isGizmoVisible ? semiFixedViewConfig : {})}
+          {...(config.isChartMovable ? semiFixedViewConfig : {})}
         />
         <ambientLight intensity={0.02} />
         <pointLight position={[2,-1.7,0]} intensity={2} distance={4} />
@@ -102,6 +118,8 @@ export default function ModelGameStage({config, state, calls,  children}:{config
             {/* <Box > <meshStandardMaterial color="white" /> </Box> */}
             <group position={[0,-2, 0]} > <WormHoleModel /> </group>
 
+
+
               
             {!state.isChartLoading && 
               <group position={[2,-0.7 ,0]}>
@@ -128,6 +146,19 @@ export default function ModelGameStage({config, state, calls,  children}:{config
                   favs: state.favs,
                   summaryDetails: state.selectedSymbolYTDSummary,
                   }} />
+
+                  {!!selectedTradeLogs && <>
+                    <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,1.7,1.97]}>
+                    <HistoryLogs
+
+                      calls={{refetchLogs:()=>{}}}
+                      state={{orderLogs: selectedTradeLogs, }}
+                      minValue={state.selectedSymbolYTDSummary.minValue}
+                      maxValue={state.selectedSymbolYTDSummary.maxValue}
+                      latestUnix={htf_latestUnix} oldestUnix={htf_oldestUnix}
+                    />
+                    </group>
+                  </>}
                 </group>
                 }
           </group>    
@@ -149,27 +180,27 @@ const RelativeBoundaryLines = ({state, calls}:any) => {
     const selectedSymbolData = state.favs.filter((item:any)=>{
       return item.symbol == state.symbol
     })
-    console.log("state.favs", state.favs)
+    // console.log("state.favs", state.favs)
     return selectedSymbolData[0]
   },[state.favs, state.symbol, ])
     const relativeYHeight = useMemo(()=>{
-    console.log("summaryDetails", state.summaryDetails)
+    // console.log("summaryDetails", state.summaryDetails)
     if (!state.summaryDetails) return 0
-    console.log("if (!state.summaryDetails) return 0")
+    // console.log("if (!state.summaryDetails) return 0")
     if (!state.yRange) return 0
-    console.log("if (!state.yRange) return 0")
+    // console.log("if (!state.yRange) return 0")
     if (!state.yRange.length) return 0
-    console.log("if (!state.yRange.length) return 0")
+    // console.log("if (!state.yRange.length) return 0")
     if (!selectedFav) return 0
-    console.log("if (!selectedFav) return 0")
+    // console.log("if (!selectedFav) return 0")
     if (!$floorLine.current) return 0
     if (!$topLine.current) return 0
     // console.log("if (!$floorLine.current) return 0")
 
 
     const worldRelativeHeight = state.yRange[1]
-    console.log("state.symbol worldRelativeHeight", worldRelativeHeight, state.symbol)
-    console.log("summaryDetails", state.summaryDetails)
+    // console.log("state.symbol worldRelativeHeight", worldRelativeHeight, state.symbol)
+    // console.log("summaryDetails", state.summaryDetails)
 
     const priceAbsHeight = state.summaryDetails.maxValue - state.summaryDetails.minValue
     console.log("priceAbsHeight", priceAbsHeight, selectedFav)
