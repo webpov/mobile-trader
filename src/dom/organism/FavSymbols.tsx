@@ -118,34 +118,36 @@ export function FavSymbols({ state, calls }: any) {
           Not Found
         </div>
       }
-      <details className="w-100  flex-col flex-justify-center flex-align-center pb-8">
+      <details className="w-100  flex-col flex-justify-center pos-rel flex-align-center pb-8 pos-rel">
         <summary className="flex-col opaci-chov--50">
           <hr className="w-90 mt-8" />
           <button className="flex-col bg-trans noborder tx-white tx-mdl py-3 noclick">
             Account Keys
           </button>
         </summary>
-        <div className="flex-wrap flex-justify-center gap-2 w-100 flex-align-center">
-          <div className="flex-center w-100">
-            <input className="bord-r-25 px-3 py-1 bg-w-10 w-100 tx-white tx-center"
-              onChange={trigger__publicSecretKeys}
-              value={state.LS_publicSecretKeys}
-              placeholder="Public:Secret" type="text" 
-            />
-          </div>
-          <div className="flex-center w-80">
-            <input className="bord-r-25 px-3 py-1 bg-w-10 w-100 tx-mdl tx-white tx-center"
-              onChange={trigger__livePassword}
-              value={livePassword}
-              placeholder="Password" type="text" 
-            />
-          </div>
-          <div className="w-100 flex-center">
-            <button className="tx-lg px-3 py-1 bord-r-10 mt-1 opaci-chov--50"
-              onClick={triggerSaveKeys}
-            >
-              Save
-            </button>
+        <div className="pos-abs z-500 bottom-50p">
+          <div className="flex-wrap flex-justify-center box-shadow-9-t mb-8 gap-2 w-100 flex-align-center    bg-b-90 bord-r-25 py-6 bg-glass-5">
+            <div className="flex-center w-100 ">
+              <input className="bord-r-25 px-3 py-1 bg-w-10 w-100 tx-white tx-center"
+                onChange={trigger__publicSecretKeys}
+                value={state.LS_publicSecretKeys}
+                placeholder="Public:Secret" type="text" 
+              />
+            </div>
+            <div className="flex-center w-80">
+              <input className="bord-r-25 px-3 py-1 bg-w-10 w-100 tx-mdl tx-white tx-center"
+                onChange={trigger__livePassword}
+                value={livePassword}
+                placeholder="Password" type="text" 
+              />
+            </div>
+            <div className="w-100 flex-center">
+              <button className="tx-lg px-3 py-1 bord-r-10 mt-1 opaci-chov--50"
+                onClick={triggerSaveKeys}
+              >
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </details>

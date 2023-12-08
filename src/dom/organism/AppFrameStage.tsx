@@ -64,13 +64,13 @@ export default function AppFrameStage({}:any) {
         <div className='Q_xl_x w-10 '></div>
         <div className="flex-col bg-b-50 bord-r-25 box-shadow-9-b flex-1">
         
-          <button className="pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lx"
+          <button className="pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lx"
               style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
               onClick={()=>{window.location.reload()}}
             >
-              WebPOV: Favorites
+              WebPOV: <small className="tx-mdl">Favorites</small>
             </button>
-          <button className="pos-abs top-0 right-0 pa-3 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
+          <button className="pos-abs top-0 right-0 pa-3 ma-2 ml-0 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
               onClick={()=>{
                 let theDom:any = document.getElementById("main_scrollable_content")
                 if (!theDom) { return }
