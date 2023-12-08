@@ -68,6 +68,7 @@ export default function ModelGameStage({config, state, calls,  children}:{config
         <MapControls 
           enableDamping={false}
           enablePan={config.isChartMovable}
+          enableZoom={config.isChartMovable}
 
           {...(!config.isGizmoVisible ? semiFixedViewConfig : {})}
         />
