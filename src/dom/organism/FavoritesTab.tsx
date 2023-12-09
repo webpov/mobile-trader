@@ -73,7 +73,7 @@ export function FavoritesTab({ state, calls }: any) {
                 
             
             {!!calls.isLogsFilled(item.symbol) &&  <>
-                  <div className="tx-center  tx-lgx tx-green noborder bg-trans "
+                  <div className="tx-center  tx-lgx tx-blue noborder bg-trans "
                     // onClick={()=>{calls.triggerGetLogs()}}
                   >
                     |

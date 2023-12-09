@@ -89,7 +89,12 @@ export default function ModelGameStage({config, state, calls,  children}:{config
           enableRotate={config.isChartMovable}
           rotateSpeed={0.1}
 
-          {...(config.isChartMovable ? semiFixedViewConfig : {})}
+          minAzimuthAngle={!config.isChartMovable ? 0 : 0}
+          maxAzimuthAngle={!config.isChartMovable ? 0 : 0}
+          minPolarAngle={!config.isChartMovable ? Math.PI/4 : 0.5}
+          maxPolarAngle={!config.isChartMovable ? Math.PI/4 : 0.88}
+
+          // {...(config.isChartMovable ? semiFixedViewConfig : {})}
         />
         <ambientLight intensity={0.02} />
         <pointLight position={[2,-1.7,0]} intensity={2} distance={4} />

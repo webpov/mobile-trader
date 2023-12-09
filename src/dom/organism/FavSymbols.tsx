@@ -102,7 +102,7 @@ export function FavSymbols({ state, calls }: any) {
           >
             <div className="tx-bold-9 px-2 flex  flex-justify-between gap-3">
                 {!!calls.isLogsFilled(item.symbol) &&  <>
-                  <button className="tx-center  tx-lgx tx-green noborder bg-trans "
+                  <button className="tx-center  tx-lgx tx-blue noborder bg-trans "
                     // onClick={()=>{calls.triggerGetLogs()}}
                   >
                     |
@@ -131,7 +131,7 @@ export function FavSymbols({ state, calls }: any) {
                   </button>
                 </>}
                 {!state.isFetchingLogs && <>
-                  <button className={`bord-r-10 tx-center opaci-chov--50 ${!!calls.isLogsFilled(item.symbol) ? "border-green" : ""}` }
+                  <button className={`bord-r-10 tx-center opaci-chov--50 ${!!calls.isLogsFilled(item.symbol) ? "border-blue" : ""}` }
                     onClick={()=>{calls.triggerGetLogs(item.symbol)}}
                   >
                     Logs
