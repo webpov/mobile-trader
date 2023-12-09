@@ -158,9 +158,13 @@ export function FavSymbols({ state, calls }: any) {
             Account Keys
           </button>
         </summary>
-        <div className="pos-abs z-500 bottom-50p">
-          <div className="flex-wrap flex-justify-center box-shadow-9-t mb-8 gap-2 w-100 flex-align-center    bg-b-90 bord-r-25 py-6 bg-glass-5">
-            <div className="flex-center w-100 ">
+        <div className="pos-abs z-500 bottom-50p w-100 "
+          
+        >
+          <div className="flex-wrap   flex-justify-center box-shadow-9-t mb-8 gap-2 w-100 flex-align-center    bg-b-90 bord-r-25 py-6 bg-glass-5"
+            style={{boxShadow:"-4px -4px 4px -1px  #ffffff22"}}
+          >
+            <div className="flex-center px-3 w-100 ">
               <input className="bord-r-25 px-3 py-1 bg-w-10 w-100 tx-white tx-center"
                 onChange={trigger__publicSecretKeys}
                 value={state.LS_publicSecretKeys}
