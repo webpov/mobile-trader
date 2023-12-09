@@ -119,7 +119,7 @@ export default function ModelGameStage({config, state, calls,  children}:{config
 
       
         <group rotation={[-Math.PI/4,0,0]}>
-          <group position={[0,0,0]} >
+          <group position={[-0.75,0,0]} >
             {/* <Box > <meshStandardMaterial color="white" /> </Box> */}
             <group position={[0,-2, 0]} > <WormHoleModel /> </group>
 
