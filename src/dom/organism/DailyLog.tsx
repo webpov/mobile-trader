@@ -78,7 +78,7 @@ export function DailyLog({ state, calls }: any) {
             <div className="tx-bold-9  flex flex-justify-between">
               {/* <div className="tx-lg tx-altfont-1">{index + 1}</div> */}
               {/* <div>{item.unix}</div> */}
-              <div className="flex-1 tx-start">{(`${item.msg}`).substring(0,20)}{item.msg.length > 20-1 ? "..." : ""}</div>
+              <div className="flex-1 tx-start">{(`${item.msg}`).substring(0,state.maxChars)}{item.msg.length > state.maxChars-1 ? "..." : ""}</div>
               <div className="tx-smd tx-altfont-1">{item.date.replace(YEAR_NUMBER,"")}</div>
               {/* <div>qweqwe</div> */}
             </div>

@@ -101,15 +101,16 @@ export default function AppFrameStage({}:any) {
       <h2 className="mb-0 pb-0  bg-w-10 px-6 box-shadow-i-9 pt-2 bord-r-25 pb-3"><SymbolNameHeader label={focusSymbol || "N/A"} /></h2>
     </div>
     <div className='flex-row flex-align-stretch tx-white w-90 z-10'>
-      
-      <div className='Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
-        <div className="pb-4 tx-center">URL Grid</div>
-        <div className="flex-col w-90">
-          <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
-            calls={{addTileToUrl}}
-          />
+      {!!chartConfig.isLeftSidebarVisible &&
+        <div className='Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
+          <div className="pb-4 tx-center">URL Grid</div>
+          <div className="flex-col w-90">
+            <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
+              calls={{addTileToUrl}}
+            />
+          </div>
         </div>
-      </div>
+      }
       <div className='tx-roman flex-1 mt-4 flex-center pos-rel'>
         {!!focusSymbol && !!selectedSymbolYTDSummary &&
           selectedSymbolLTFSummary && chartConfig.isOverlayLabeled && <>
@@ -162,12 +163,14 @@ export default function AppFrameStage({}:any) {
           
         </div>
       </div>
-      <div className='Q_xl_x w-20 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
-        <div className="pb-4">Daily Log</div>
-        <div className="flex-col w-90">
-          <DailyLog state={{LS_notes:lsData.LS_notes}} calls={{s__LS_notes: lsData.s__LS_notes}} />
+      {!!chartConfig.isNotesVisible &&
+        <div className='Q_xl_x w-20 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
+          <div className="pb-4">Daily Log</div>
+          <div className="flex-col w-90">
+            <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:20}} calls={{s__LS_notes: lsData.s__LS_notes}} />
+          </div>
         </div>
-      </div>
+      }
       <div className='Q_sm_x w-20 pos-rel block px-4  bord-r-25 tx-center'>
         <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex  flex-col flex-justify-start'>
           <div className="Q_md_x py-2"></div> 
@@ -199,12 +202,13 @@ export default function AppFrameStage({}:any) {
     <div className="mt-6 Q_md_x"></div>
     <div className=' flex-1 flex flex-align-start mt-6 tx-white w-90 z-10'>
       
-      
-    <div className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
-        <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 pb-5 neu-convex opaci-chov--50 border-white tx-altfont-1'>
-          🎮 <div className="Q_lg_x">Games</div> 
-        </button>
-      </div>
+      {chartConfig.isLeftSidebarVisible &&
+        <div className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
+          <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 pb-5 neu-convex opaci-chov--50 border-white tx-altfont-1'>
+            🎮 <div className="Q_lg_x">Games</div> 
+          </button>
+        </div>
+      }
       <div className='flex-1 flex-col mt-8 pb-8'>
         <BuySellButtons />
       </div>
@@ -283,12 +287,12 @@ export default function AppFrameStage({}:any) {
       </div>
     </div>
 
-    <ODivider className="Q_xs_md w-90 " />
+    <ODivider className="Q_xs_xl w-90 " />
     
-    <div className='z-200 mb-100 mt-8 pb-100  Q_xs_md w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
+    <div className='z-200 mb-100 mt-8 pb-100  Q_xs_xl w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
         <div className="pb-4">Daily Log</div>
         <div className="flex-col w-90">
-          <DailyLog state={{LS_notes:lsData.LS_notes}} calls={{s__LS_notes: lsData.s__LS_notes}} />
+          <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:32}} calls={{s__LS_notes: lsData.s__LS_notes}} />
         </div>
       </div>
 

@@ -80,7 +80,7 @@ export const getTickerPrices = async (symbols = ["BTCUSDT"]) => {
 };
 
 export const getPricesList = async (timeframe, requestToken, startUnixDate) => {
-    let t = timeframe || "1m"
+    let t = timeframe || "15m"
     let theToken = requestToken || "BTCUSDT"
   // let startUnixDate = getRandomUnixDate()
     // let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&startTime=${startUnixDate}&symbol=`
@@ -99,7 +99,7 @@ export const getPricesList = async (timeframe, requestToken, startUnixDate) => {
   }
   
 export const getFuturesPricesList = async (timeframe, requestToken, startTime) => {
-  const t = timeframe || "1m";
+  const t = timeframe || "15m";
   const theToken = requestToken || "BTCUSDT"; // Replace with the appropriate futures trading pair symbol.
 
   const urlBase = `https://fapi.binance.com/fapi/v1/klines?interval=${t}&symbol=${theToken}&startTime=${startTime || ''}`;

@@ -6,6 +6,8 @@ export default function useChartConfig({urlp,state,calls}:any) {
     const [isTrendUp, s__isTrendUp] = useState<any>(true)
     const [isOverlayLabeled, s__isOverlayLabeled] = useState<any>(true)
     const [isChartMovable, s__isChartMovable] = useState<any>(false)
+    const [isLeftSidebarVisible, s__isLeftSidebarVisible] = useState<any>(true)
+    const [isNotesVisible, s__isNotesVisible] = useState<any>(true)
 
   
 
@@ -19,5 +21,7 @@ export default function useChartConfig({urlp,state,calls}:any) {
         isTrendUp, s__isTrendUp,
         isOverlayLabeled, s__isOverlayLabeled,
         isChartMovable, s__isChartMovable,
+        isNotesVisible, s__isNotesVisible,
+        isLeftSidebarVisible, s__isLeftSidebarVisible,
     }
 }
