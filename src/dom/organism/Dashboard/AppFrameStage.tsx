@@ -4,13 +4,17 @@ import ModelGameStage from "@/model/level/ModelGameStage"
 import { useUrlParamCatcher } from "@/../script/util/hook/useUrlParamCatcher"
 import useChartConfig from "@/../script/util/hook/useChartConfig"
 import useLocalStorageCatcher from "@/../script/util/hook/useLocalStorageCatcher"
-import { URLGridTab } from "./URLGridTab"
-import { FavoritesTab } from "./FavoritesTab"
-import { DailyLog } from "./DailyLog"
-import { SymbolNameHeader } from "./SymbolNameHeader"
+import { URLGridTab } from "../URLGridTab"
+import { FavoritesTab } from "../FavoritesTab"
+import { DailyLog } from "../DailyLog"
+import { SymbolNameHeader } from "../SymbolNameHeader"
 import { useState } from "react"
-import { FavSymbols } from "./FavSymbols"
 import useSyncedKLines from "@/../script/util/hook/useSyncedKLines"
+import BuySellButtons from "./BuySellButtons"
+import { ChartWindowSubMenu } from "./ChartWindowSubMenu"
+import { ChartWindowOverlayLabels } from "./ChartWindowOverlayLabels"
+import { ODivider } from "@/dom/atom/ODivider"
+import { FavModalContent } from "./FavModal"
 
 export default function AppFrameStage({}:any) {
   const lsData:any = useLocalStorageCatcher()
@@ -65,39 +69,18 @@ export default function AppFrameStage({}:any) {
 
     {isLocalStorageModalOpen &&
       <div className="pos-fixed flex-center pt-8 top-0 z-400 w-100vw h-100vh bg-glass-20 bg-b-50  tx-white">
+        
         <div className='Q_sm_x w-10 '></div>
         <div className='Q_lg_x w-10 '></div>
         <div className='Q_xl_x w-10 '></div>
-        <div className="flex-col bg-b-50 bord-r-25 box-shadow-9-b flex-1">
-        
-          <button className="pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lx"
-              style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
-              onClick={()=>{window.location.reload()}}
-            >
-              WebPOV: <small className="tx-mdl">Favorites</small>
-            </button>
-          <button className="pos-abs top-0 right-0 pa-3 ma-2 ml-0 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
-              onClick={()=>{
-                let theDom:any = document.getElementById("main_scrollable_content")
-                if (!theDom) { return }
-                theDom.className = theDom?.className.replace("noverflow h-max-100vh","")
-                s__isLocalStorageModalOpen(false)
-              }}
-            >
-              X
-            </button>
-          {/* <div> */}
-            {lsData.LS_favs && <>
-              <FavSymbols state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys, focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,  }} 
-                calls={{
+        <FavModalContent  state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys, focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,  }} 
+                calls={{s__isLocalStorageModalOpen,
                   s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
                   s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, isLogsFilled,
 
                 }}
-              />
-            </>}
-          {/* </div> */}
-        </div>
+        /> 
+        
         <div className='Q_sm_x w-10 '></div>
         <div className='Q_lg_x w-10'></div>
         <div className='Q_xl_x w-10'></div>
@@ -128,20 +111,10 @@ export default function AppFrameStage({}:any) {
         </div>
       </div>
       <div className='tx-roman flex-1 mt-4 flex-center pos-rel'>
-        {!!focusSymbol && !!selectedSymbolYTDSummary && selectedSymbolLTFSummary && chartConfig.isOverlayLabeled && <>
+        {!!focusSymbol && !!selectedSymbolYTDSummary &&
+          selectedSymbolLTFSummary && chartConfig.isOverlayLabeled && <>
+          <ChartWindowOverlayLabels state={{selectedSymbolLTFSummary, selectedSymbolYTDSummary}} />
           
-          <div className="Q_xs_sm_px-1 pa-3 pos-abs top-50p left-0 z-200 bg-b-50 bord-r-25 ma-1">
-            <div>{JSON.stringify(selectedSymbolLTFSummary.minValue)}</div>
-          </div>
-          <div className="Q_xs_sm_px-1 pa-3 pos-abs bottom-0 left-0 z-200 bg-b-50 bord-r-25 mb-4 ma-1">
-          <div>{JSON.stringify(selectedSymbolYTDSummary.minValue)}</div>
-          </div>
-          <div className="Q_xs_sm_px-1 pa-3 pos-abs top-0 right-0 z-200 bg-b-50 bord-r-25 ma-1 mt-8">
-            <div>{JSON.stringify(selectedSymbolLTFSummary.maxValue)}</div>
-          </div>
-          <div className="Q_xs_sm_px-1 pa-3 pos-abs top-50p mt-8 translate-y-25 right-0 z-200 bg-b-50 bord-r-25 ma-1">
-            <div>{JSON.stringify(selectedSymbolYTDSummary.maxValue)}</div>
-          </div>
         </>}
         <div className="w-90  pos-rel bord-r-25 " >
           <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  '
@@ -183,53 +156,10 @@ export default function AppFrameStage({}:any) {
           </div>
         }
         <div className="pos-abs z-300" style={{bottom:"-25px", left:"10%"}}>
-          <details className="">
-            <summary className="flex opaci-chov--50 pos-abs bottom-0">
-              <button className=" bg-b-90 py-1 bord-r-50 tx-mdl noclick">
-                ⚙️
-              </button>
-            </summary>
-            <div className="pa-2 bg-b-90 bord-r-10 mb-8 bg-glass-10 box-shadow-9-b">
-              <div className="flex-col w-200px">
-                {/* <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={()=>{
-                  chartConfig.s__isGizmoVisible(!chartConfig.isGizmoVisible)
-                }}>
-                  <div>Use Gizmo</div>
-                  <div className={`${chartConfig.isGizmoVisible ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isGizmoVisible ? "True" : "False"}</div>
-                </button> */}
-                <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={()=>{
-                  chartConfig.s__isTrendUp(!chartConfig.isTrendUp)
-                }}>
-                  <div>Trend Up</div>
-                  <div className={`${chartConfig.isTrendUp ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isTrendUp ? "True" : "False"}</div>
-                </button>
-                <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={()=>{
-                  chartConfig.s__isOverlayLabeled(!chartConfig.isOverlayLabeled)
-                }}>
-                  <div>Labels</div>
-                  <div className={`${chartConfig.isOverlayLabeled ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isOverlayLabeled ? "True" : "False"}</div>
-                </button>
-                <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={()=>{
-                  chartConfig.s__isChartMovable(!chartConfig.isChartMovable)
-                }}>
-                  <div>Movable Camera</div>
-                  <div className={`${chartConfig.isChartMovable ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isChartMovable ? "True" : "False"}</div>
-                </button>
-
-                
-              {!!fuelPoints && 
-                <div className="flex pointer ">
-                  <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
-                    onClick={()=>s__fuelPoints(0)}
-                  >
-                    Stop
-                  </button>
-                </div>
-              }
-              
-              </div>
-            </div>
-          </details>
+          <ChartWindowSubMenu state={{fuelPoints}} calls={{s__fuelPoints}} 
+            chartConfig={chartConfig}
+          />
+          
         </div>
       </div>
       <div className='Q_xl_x w-20 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
@@ -300,7 +230,7 @@ export default function AppFrameStage({}:any) {
 
       
     <div className='Q_sm mt-8 w-10 block flex-col gap-3 bord-r-25 tx-center '>
-    <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-10 py-4 neu-convex opaci-chov--50 border-white tx-altfont-1'>
+      <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-10 py-4 neu-convex opaci-chov--50 border-white tx-altfont-1'>
           Acc <div className="Q_md_x">Acc</div> 
         </button>
         <button className='w-100 pb-5 tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 neu-convex opaci-chov--50 border-white-50 tx-altfont-1'>
@@ -309,11 +239,7 @@ export default function AppFrameStage({}:any) {
       </div>
     </div>
 
-    <div className="flex Q_xs_md gap-3  w-90 tx-white">
-      <hr className=" opaci-20 flex-1" />
-      <div className="opaci-25">o</div>
-      <hr className=" opaci-20 flex-1" />
-    </div>
+    <ODivider className="Q_xs_md w-90 mt-4" />
 
     <div className="flex-wrap w-100 mt-8  gap-2 z-100">
       <div className='Q_xs_md  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
@@ -357,13 +283,7 @@ export default function AppFrameStage({}:any) {
       </div>
     </div>
 
-    
-    <div className="flex Q_xs_md gap-3  w-90 tx-white">
-      <hr className=" opaci-20 flex-1" />
-      <div className="opaci-25">o</div>
-      <hr className=" opaci-20 flex-1" />
-    </div>
-
+    <ODivider className="Q_xs_md w-90 " />
     
     <div className='z-200 mb-100 mt-8 pb-100  Q_xs_md w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
         <div className="pb-4">Daily Log</div>
@@ -375,28 +295,3 @@ export default function AppFrameStage({}:any) {
     </>)
 }
 
-const BuySellButtons = () => {
-  return (<>
-    <div className="flex-wrap gap-3  ">
-      <div className="flex-center">
-        <button className="opaci-chov--50 neu-convex tx-white tx-lx  pa-3 px-2 bord-r-l-25 border-green tx-altfont-1">
-          BUY
-        </button>
-        <button className="opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-green">
-          ⚙️
-        </button>
-      </div>
-      <div className="flex-center">
-        <button className="opaci-chov--50 neu-convex tx-white   pa-3 px-2 bord-r-l-25 border-red tx-altfont-1">
-          <div className="tx-lx">SELL</div>
-        </button>
-        <button className="opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-red">
-          ⚙️
-        </button>
-      </div>
-      <button className=" opaci-chov--50 neu-convex tx-white tx-lg  pa-3 py-5 bord-r-25 border-blue tx-bold-8 tx-altfont-1 underline">
-        Refresh
-      </button>
-    </div>
-  </>)
-}

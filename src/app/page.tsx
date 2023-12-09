@@ -1,4 +1,4 @@
-import AppFrameStage from '@/dom/organism/AppFrameStage'
+import AppFrameStage from '@/dom/organism/Dashboard/AppFrameStage'
 import ModelGameStage from '@/model/level/ModelGameStage'
 import Image from 'next/image'
 import CustomBackgroundImage from '@/dom/molecule/CustomBackgroundImage'

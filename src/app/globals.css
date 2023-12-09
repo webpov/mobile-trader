@@ -228,10 +228,10 @@
 .tx-bold-9 {font-weight: 900}.tx-bold {font-weight: bold}
 /* COLOR */
 .tx-white {color: white}.tx-black {color: black}.tx-gray{color: gray}
-.tx-red {color: red}.tx-green {color: green}.tx-blue {color: blue}
-.tx-red-50 {color: #ff000077}.tx-green-50 {color: #00ff0077}.tx-blue-50 {color: #0000ff77}
-.tx-red-25 {color: #ff000044}.tx-green-25 {color: #00ff0044}.tx-blue-25 {color: #0000ff44}
-.tx-red-75 {color: #ff0000aa}.tx-green-75 {color: #00ff00aa}.tx-blue-75 {color: #0000ffaa}
+.tx-red {color: red}.tx-green {color: green}.tx-blue {color: cyan}
+.tx-red-50 {color: #ff000077}.tx-green-50 {color: #00ff0077}.tx-blue-50 {color: #0099ff77}
+.tx-red-25 {color: #ff000044}.tx-green-25 {color: #00ff0044}.tx-blue-25 {color: #0099ff44}
+.tx-red-75 {color: #ff0000aa}.tx-green-75 {color: #00ff00aa}.tx-blue-75 {color: #0099ffaa}
 /* ALIGN */
 .tx-center {text-align: center}.tx-end, .tx-right {text-align: right}.tx-start, .tx-left {text-align: left}
 /* LETTERSPACING */
@@ -428,8 +428,8 @@
 .border-lgrey-50 {border: 1px solid #aaaaaa}
 .border-green {border: 1px solid green}
 .border-green-50 {border: 1px solid #00ff0077}
-.border-blue {border: 1px solid blue}
-.border-blue-50 {border: 1px solid #0000ff77}
+.border-blue {border: 1px solid cyan}
+.border-blue-50 {border: 1px solid #0099ff77}
 
 /* SIDES */
 .border-red-t {border-top: 1px solid red}
