@@ -59,7 +59,15 @@ export function FavoritesTab({ state, calls }: any) {
             onClick={()=>{triggerChangeSymbol(item.symbol)}}
             style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11", ...({border: state.focusSymbol == item.symbol ? "1px dotted white" : ""}) }}
           >
-            <div className="tx-bold-9 tx-start Q_lg_x">
+            
+            {!!calls.isLogsFilled(item.symbol) &&  <>
+                  <button className="tx-center  tx-lgx tx-green noborder bg-trans "
+                    // onClick={()=>{calls.triggerGetLogs()}}
+                  >
+                    |
+                  </button>
+                </>}
+            <div className="tx-bold-9 tx-start Q_lg_x flex-col">
               {item.token0}
             </div>
             <div className="pos-abs top-0 tx-bold-9 tx-start Q_xs_lg bg-w-10 bord-r-10 px-3 py-1 translate-y--75 tx-bold-8 tx-sans tx-ls-3">

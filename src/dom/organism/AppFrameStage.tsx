@@ -55,7 +55,11 @@ export default function AppFrameStage({}:any) {
     s__isLocalStorageModalOpen(true)
 
   }
-  
+  const isLogsFilled = (aSymbol:string) => {
+    if (!tradeLogsObj) { return null }
+
+    return !!tradeLogsObj[aSymbol]
+  }
   return (<>
 
 
@@ -87,7 +91,8 @@ export default function AppFrameStage({}:any) {
               <FavSymbols state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys, focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,  }} 
                 calls={{
                   s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
-                  s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs
+                  s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, isLogsFilled,
+
                 }}
               />
             </>}
@@ -250,7 +255,7 @@ export default function AppFrameStage({}:any) {
                 ytdObj, fuelPoints, focusSymbol, isChartLoading,
                 pricesObj, 
               }} 
-              calls={{s__LS_favs: lsData.s__LS_favs, s__focusSymbol, s__isChartLoading}} 
+              calls={{s__LS_favs: lsData.s__LS_favs, s__focusSymbol, s__isChartLoading, isLogsFilled}} 
             />
           </div>
           <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
@@ -340,7 +345,7 @@ export default function AppFrameStage({}:any) {
                 ytdObj, fuelPoints,
                 pricesObj, focusSymbol, isChartLoading,
               }} 
-              calls={{s__LS_favs: lsData.s__LS_favs, s__focusSymbol, s__isChartLoading}} 
+              calls={{s__LS_favs: lsData.s__LS_favs, s__focusSymbol, s__isChartLoading, isLogsFilled}} 
             />
           </div>
           <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 translate-y--50 tx-lgx"

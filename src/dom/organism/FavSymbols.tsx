@@ -69,11 +69,7 @@ export function FavSymbols({ state, calls }: any) {
     calls.s__isChartLoading(true)
     calls.s__focusSymbol(aSymbol)
   }
-  const isLogsFilled = (aSymbol:string) => {
-    if (!state.tradeLogsObj) { return null }
-
-    return !!state.tradeLogsObj[aSymbol]
-  }
+  
 
   const selectedTradeLogs = useMemo(()=>{
     if (!state.tradeLogsObj) { return null }
@@ -105,7 +101,7 @@ export function FavSymbols({ state, calls }: any) {
 
           >
             <div className="tx-bold-9 px-2 flex  flex-justify-between gap-3">
-                {!!isLogsFilled(item.symbol) &&  <>
+                {!!calls.isLogsFilled(item.symbol) &&  <>
                   <button className="tx-center  tx-lgx tx-green noborder bg-trans "
                     // onClick={()=>{calls.triggerGetLogs()}}
                   >
@@ -135,7 +131,7 @@ export function FavSymbols({ state, calls }: any) {
                   </button>
                 </>}
                 {!state.isFetchingLogs && <>
-                  <button className={`bord-r-10 tx-center opaci-chov--50 ${!!isLogsFilled(item.symbol) ? "border-green" : ""}` }
+                  <button className={`bord-r-10 tx-center opaci-chov--50 ${!!calls.isLogsFilled(item.symbol) ? "border-green" : ""}` }
                     onClick={()=>{calls.triggerGetLogs(item.symbol)}}
                   >
                     Logs
