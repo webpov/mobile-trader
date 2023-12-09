@@ -309,14 +309,14 @@ export default function AppFrameStage({}:any) {
       </div>
     </div>
 
-    <div className="flex Q_xs_sm gap-3  w-90 tx-white">
+    <div className="flex Q_xs_md gap-3  w-90 tx-white">
       <hr className=" opaci-20 flex-1" />
       <div className="opaci-25">o</div>
       <hr className=" opaci-20 flex-1" />
     </div>
 
     <div className="flex-wrap w-100 mt-8  gap-2 z-100">
-      <div className='Q_xs_sm  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
+      <div className='Q_xs_md  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
         <div className="pb-4 tx-lg tx-center">URL <br /> Grid</div>
         <div className="flex-col w-90 tx-lg">
           <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
@@ -358,14 +358,14 @@ export default function AppFrameStage({}:any) {
     </div>
 
     
-    <div className="flex Q_xs_sm gap-3  w-90 tx-white">
+    <div className="flex Q_xs_md gap-3  w-90 tx-white">
       <hr className=" opaci-20 flex-1" />
       <div className="opaci-25">o</div>
       <hr className=" opaci-20 flex-1" />
     </div>
 
     
-    <div className='z-200 mb-100 mt-8 pb-100  Q_xs_sm w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
+    <div className='z-200 mb-100 mt-8 pb-100  Q_xs_md w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
         <div className="pb-4">Daily Log</div>
         <div className="flex-col w-90">
           <DailyLog state={{LS_notes:lsData.LS_notes}} calls={{s__LS_notes: lsData.s__LS_notes}} />

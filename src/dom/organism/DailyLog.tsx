@@ -77,10 +77,10 @@ export function DailyLog({ state, calls }: any) {
             style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11" }}
           >
             <div className="tx-bold-9  flex flex-justify-between">
-              <div className="tx-lg tx-altfont-1">{index + 1}</div>
+              {/* <div className="tx-lg tx-altfont-1">{index + 1}</div> */}
               {/* <div>{item.unix}</div> */}
-              <div>{(`${item.msg}`).substring(0,15)}{item.msg.length > 14 ? "..." : ""}</div>
-              <div className="tx-lg tx-altfont-1">{item.date.replace(YEAR_NUMBER,"")}</div>
+              <div className="flex-1 tx-start">{(`${item.msg}`).substring(0,20)}{item.msg.length > 20-1 ? "..." : ""}</div>
+              <div className="tx-smd tx-altfont-1">{item.date.replace(YEAR_NUMBER,"")}</div>
               {/* <div>qweqwe</div> */}
             </div>
           </button>
