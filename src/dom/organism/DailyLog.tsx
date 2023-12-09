@@ -27,7 +27,6 @@ export function DailyLog({ state, calls }: any) {
   const triggerNoteClick = (index: number) => {
     const noteMsg = state.LS_notes[index];
 
-    // console.log("noteMsg", noteMsg)
     alert("Note #" + index + " \n\n" + noteMsg.msg);
 
 

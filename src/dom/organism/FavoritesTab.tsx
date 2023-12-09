@@ -11,8 +11,6 @@ export function FavoritesTab({ state, calls }: any) {
     state.urlStateKeys.map((aKey:string)=>{
       returnObj.push({...state.urlState[aKey], posCode: aKey})
     })
-    // console.log("state.urlStateKeys", state.urlStateKeys)
-    // console.log("state.urlState", state.urlState)
 
     // const returnValues = Object.keys(state.urlState).map((item,index)=>({...item, posCode:}))
     calls.s__LS_favs(returnObj)

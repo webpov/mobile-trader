@@ -65,7 +65,6 @@ export function useUrlParamCatcher() {
         if (searchParams.has(panelKeysArray[index])) {
             const parsedUrlParam = JSON.parse(`${searchParams.get(panelKeysArray[index])}`)
             if (!!parsedUrlParam.symbol) {
-              // console.log("parsedUrlParam", parsedUrlParam)
               panelListResult[ panelKeysArray[index]] = parsedUrlParam
             }
         } else {
@@ -196,7 +195,6 @@ const keysArray = useMemo(()=>{
     ...panelListMidBottomKeys,
     ...panelListBottomKeys,
   ]
-  // console.log("returnVal", returnVal)
   return returnVal
 },[panelListTopKeys, panelListBottomKeys, panelListMidTopKeys, panelListMidBottomKeys, panelListMidKeys])
   const gridData = useMemo(()=>{
@@ -216,7 +214,6 @@ const keysArray = useMemo(()=>{
           refArray = {...panelListMidTop}
         break;
       }
-      // console.log("refArray", refArray)
       builtObj[element] = refArray[element]
       const token0 = (
         refArray[element].symbol.includes(reftoken)
@@ -232,7 +229,6 @@ const keysArray = useMemo(()=>{
   const pathname = usePathname()
   // const symbolToken0 = symbol.includes(reftoken) ? symbol.replace(reftoken,"") : symbol
   const addTile = (tileCode:string, posCode:string)=>{
-    // console.log("tileCode:string, posCode", tileCode, posCode)
 
     const newParams = new URLSearchParams(searchParams.toString())
 

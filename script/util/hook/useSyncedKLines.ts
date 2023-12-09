@@ -35,7 +35,6 @@ export default function useSyncedKLines({state,calls}:any) {
     // s__scopeStart(futTermPricesData.oldestUnix)
     // s__shorttermList(futTermPricesData.closingPrices)
     // s__futtermVolumeList(futTermPricesData.volumeList)
-    // console.log(sceneState.ltfList, futTermPricesData)
     s__isChartLoading(false)
   }
 
@@ -43,11 +42,8 @@ export default function useSyncedKLines({state,calls}:any) {
     let theFocusSymbol = ""
     
     const noFavs = (!_state.favs || (!!_state.favs && !_state.favs.length)) 
-    // console.log("_state.favsstate.favs", _state.favs)
     const noUrlPicks = !_state.urlArray?.length
-    // console.log("_state.urlArray?.length", _state.gridData, _state.urlArray)
 
-    // console.log("noFavs && !noUrlPicks", noFavs , noUrlPicks)
     if (noUrlPicks && noFavs) {return}
 
     // has favs
@@ -57,7 +53,6 @@ export default function useSyncedKLines({state,calls}:any) {
     }
     // has url picks
     if (noFavs && !noUrlPicks) {
-      // console.log("_state.gridData[_state.urlArray[0]]", _state.gridData[_state.urlArray[0]])
       if (_state.gridData[_state.urlArray[0]]) {
         theFocusSymbol = (_state.gridData[_state.urlArray[0]].symbol)
       }        
@@ -76,9 +71,7 @@ export default function useSyncedKLines({state,calls}:any) {
       const calculatedFocusSymbol:string = getFocusSymbol(state) || ""
       s__focusSymbol(calculatedFocusSymbol)
 
-      // console.log("state.symbol", state.favs)
       s__isChartLoading(true)
-      // console.log("asdasd")
       triggerGetLastPrice();
       getYTDSummary(calculatedFocusSymbol)
       lowTimeframeUpdate()
@@ -95,12 +88,10 @@ export default function useSyncedKLines({state,calls}:any) {
 
       let pricesObj:any = {}
       let tokenList = state.favs.map((item:any)=>(item.symbol))
-      // console.log("tokenList", tokenList)
       let currentData:any = await getTickerPrices(tokenList)
       currentData.map((item:any)=>{
         pricesObj[item.symbol] = item.spotPrice
       })
-      // console.log("pricesObjpricesObj", pricesObj)
       s__pricesObj(pricesObj)
       // if (!!ltfList && ltfList.length == 500) {
       //   const newArray = [...ltfList];
@@ -124,7 +115,6 @@ export default function useSyncedKLines({state,calls}:any) {
 
       let ydtSummaryObj:any = {}
       let tokenList = state.favs.map((item:any)=>(item.symbol))
-      // console.log("tokenList", tokenList)
       let currentYTDData:any = await getBulkCandles(tokenList, state.htf)
       currentYTDData.map((item:any)=>{
         ydtSummaryObj[item.symbol] = {
@@ -135,22 +125,16 @@ export default function useSyncedKLines({state,calls}:any) {
       
       
       // const firstOne = selectedSymbol
-      // console.log("selectedSymbolselectedSymbol", selectedSymbol)
       const selectedSymbolData = currentYTDData.filter((item:any)=>{
         return item.symbol == selectedSymbol
       })
-      // console.log("selectedSymbolData", selectedSymbolData[0])
-      // console.log("selectedSymbolData candles", selectedSymbolData[0]?.data)
-      // console.log("currentYTDData[selectedSymbol].candles", currentYTDData[selectedSymbol].candles)
       s__htfList(selectedSymbolData[0]?.data)
 
       let htfPricesData = getRelevantChartData(selectedSymbolData[0]?.data)
       s__htfClosingList(htfPricesData.closingPrices)
       
-      // console.log("ydtSummaryObj", ydtSummaryObj)
       s__ytdObj(ydtSummaryObj)
       s__isChartLoading(false)
-      // console.log("ydtSummaryObjydtSummaryObj", ydtSummaryObj)
       // s__ydtSummaryObj(ydtSummaryObj)
     }
 
@@ -160,7 +144,6 @@ export default function useSyncedKLines({state,calls}:any) {
 
 
       
-      // console.log("selectedSymbolselectedSymbol", focusSymbol)
       const selectedSymbolData = ytdObj[focusSymbol].candles
       let htfPricesData = getRelevantChartData(selectedSymbolData)
 
@@ -183,7 +166,6 @@ export default function useSyncedKLines({state,calls}:any) {
 
 
       
-      // console.log("selectedSymbolselectedSymbol", focusSymbol)
       let ltfPricesData = getRelevantChartData(ltfList)
 
       const minValue =  Math.min(...ltfPricesData.closingPrices)
@@ -229,9 +211,7 @@ export default function useSyncedKLines({state,calls}:any) {
     const triggerGetLogs = async (aSymbol:string) => {
       let theChosenSymbol = aSymbol || focusSymbol
       s__isFetchingLogs(true)
-      // console.log("focussymbol", theChosenSymbol)
       const logsData = await getTradeLogs(theChosenSymbol)
-      // console.log("logsData", logsData)
 
       
       let theList = logsData

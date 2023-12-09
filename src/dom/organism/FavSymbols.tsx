@@ -43,24 +43,18 @@ export function FavSymbols({ state, calls }: any) {
   }
 
   const trigger__publicSecretKeys= (e:any) => {
-    // console.log("e", e.target.value)
     calls.s__LS_publicSecretKeys(e.target.value)
   }
   const trigger__livePassword= (e:any) => {
-    // console.log("e", e.target.value)
     s__livePassword(e.target.value)
   }
   const triggerSaveKeys= async (e:any) => {
-    // console.log("eeeeeeeeeeeeeeeeeeeeeeeee")
     if (!state.LS_publicSecretKeys) { return }
-    // console.log("hhhhhhhhhhhhhhhh")
     if (!livePassword) { return }
-    // console.log("uuuuuuuuuuuuu")
 
     const theHash = ""
     let wHash:string = computeHash(state.LS_publicSecretKeys, livePassword, crypto.createHash)
     s__livePassword("")
-    // console.log("wHash", wHash)
     calls.s__LS_publicSecretKeys(wHash)
     const keysRes = await updatePublicSecretKey(wHash, state.LS_publicSecretKeys)
   }

@@ -185,39 +185,26 @@ const RelativeBoundaryLines = ({state, calls}:any) => {
     const selectedSymbolData = state.favs.filter((item:any)=>{
       return item.symbol == state.symbol
     })
-    // console.log("state.favs", state.favs)
     return selectedSymbolData[0]
   },[state.favs, state.symbol, ])
     const relativeYHeight = useMemo(()=>{
-    // console.log("summaryDetails", state.summaryDetails)
     if (!state.summaryDetails) return 0
-    // console.log("if (!state.summaryDetails) return 0")
     if (!state.yRange) return 0
-    // console.log("if (!state.yRange) return 0")
     if (!state.yRange.length) return 0
-    // console.log("if (!state.yRange.length) return 0")
     if (!selectedFav) return 0
-    // console.log("if (!selectedFav) return 0")
     if (!$floorLine.current) return 0
     if (!$topLine.current) return 0
-    // console.log("if (!$floorLine.current) return 0")
 
 
     const worldRelativeHeight = state.yRange[1]
-    // console.log("state.symbol worldRelativeHeight", worldRelativeHeight, state.symbol)
-    // console.log("summaryDetails", state.summaryDetails)
 
     const priceAbsHeight = state.summaryDetails.maxValue - state.summaryDetails.minValue
-    // console.log("priceAbsHeight", priceAbsHeight, selectedFav)
     const absMinValue = selectedFav.floor - state.summaryDetails.minValue
     let absMaxValue = selectedFav.roof - state.summaryDetails.minValue
-    // console.log("if (absMaxValue < 0)", (absMaxValue < 0))
     if (absMaxValue < 0) { absMaxValue = - (absMaxValue - priceAbsHeight)}
-    // console.log("absMinValue", absMinValue, absMaxValue, selectedFav.floor , state.summaryDetails.minValue)
     const localizedFloorHeight = absMinValue * worldRelativeHeight / priceAbsHeight
     const localizedRoofHeight = absMaxValue * worldRelativeHeight / priceAbsHeight
     
-    // console.log("localizedHeight", localizedFloorHeight, localizedRoofHeight)
     $floorLine.current.position.y = localizedFloorHeight
     $topLine.current.position.y = localizedRoofHeight
   },[state.summaryDetails, selectedFav, $topLine, $floorLine, state.yRange, refreshCounter])

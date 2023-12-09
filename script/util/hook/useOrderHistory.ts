@@ -83,7 +83,6 @@ export const useOrderHistory = (publicSecretHash:string) => {
     try {
 
       let theList = await theListRes.json()
-      // console.log("asdasdasd123", theList)
       theList = theList.map((anItem:any, index:any) => {
         return {...anItem,...{
             side: anItem.isBuyer ? "Buy" : "Sell",
@@ -92,7 +91,6 @@ export const useOrderHistory = (publicSecretHash:string) => {
             time: parseDateTimeString(new Date(anItem.time/1)),
         }}
       }).reverse()
-      // console.log("asdasdasd888", theList)
       s__orderLogs(theList)
 
     } catch (e:unknown) {

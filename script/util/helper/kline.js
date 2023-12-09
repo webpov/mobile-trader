@@ -130,15 +130,12 @@ export const getRelevantChartData = (priceList) => {
   let oldestUnix =  parseInt(priceList[0][0])
   const volumeList = priceList.map((item) => parseFloat(item[5])); // Extract volume data
 
-  // console.log("latestUnix, oldestUnix", latestUnix, oldestUnix)
 
   // s__liveUnix(latestUnix - 2)
   // s__diffUnix(oldestUnix - latestUnix)
   
-  // console.log("closingPrices", priceList)
   const closingPrices = priceList.map((item) => parseFloat(item[4]));
   // s__pricesList(closingPrices)
-  // console.log("closingPrices", closingPrices)
   return {
     latestUnix,
     oldestUnix,
@@ -163,15 +160,12 @@ export const getLongTermData = (priceList) => {
   let oldestUnix =  parseInt(priceList[0][0])
   // const volumeList = priceList.map((item) => parseFloat(item[5])); // Extract volume data
 
-  // console.log("latestUnix, oldestUnix", latestUnix, oldestUnix)
 
   // s__liveUnix(latestUnix - 2)
   // s__diffUnix(oldestUnix - latestUnix)
 
-  // console.log("closingPrices", priceList)
   const closingPrices = priceList.map((item) => parseFloat(item[4]));
   // s__pricesList(closingPrices)
-  // console.log("closingPrices", closingPrices)
 
   
   const lastOpen = priceList[theLastIndex][1]

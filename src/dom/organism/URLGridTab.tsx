@@ -7,21 +7,16 @@ import { PANEL_KEY_LIST } from "@/../script/util/hook/useUrlParamCatcher";
 export function URLGridTab({ state, calls }: any) {
   const triggerAddTileToUrl = (e:any) => {
     const newSymbol:any = prompt("Enter symbol","ETH"+state.baseToken)?.toUpperCase()
-    // console.log("newSymbol", newSymbol)
     if (!newSymbol) { return }
-    // console.log("newSymbol", newSymbol)
     const pairsArray = StandardTokens.map((item)=>(item+state.baseToken))
-    // console.log("newSymbol: "+ newSymbol, pairsArray)
     if (!pairsArray.includes(newSymbol)) { return alert("Symbol not found") }
 
-    // console.log("state.urlStateKeys", state.urlStateKeys)
     let firstAvailablePanel = PANEL_KEY_LIST.find((aPanelKey:string)=>(
       (!state.urlStateKeys.includes(aPanelKey)) 
         // firstAvailablePanel = aPanelKey
       
     ))
 
-    // console.log("first panel is ", firstAvailablePanel)
 
     // alert("newSymbol: "+ newSymbol)
     calls.addTileToUrl(newSymbol, firstAvailablePanel)

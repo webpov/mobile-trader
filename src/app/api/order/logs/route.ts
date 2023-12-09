@@ -29,7 +29,6 @@ export async function GET(req : NextRequest ) {
   if (!cookieObject || !cookieObject.value) {
     throw new Error('cookie key is undefined');
   }
-  // console.log("kekekekekkeekke", cookieObject)
   const binancekeys = cookieObject.value
   let apikeypublic: string = binancekeys.split(":")[0]
   let apikeysecret: string = binancekeys.split(":")[1]
