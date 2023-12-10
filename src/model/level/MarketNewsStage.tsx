@@ -100,10 +100,10 @@ export const MarketNewsStage = () => {
           }
         </group>
           
-        <Sphere args={[.75,16,8]} castShadow receiveShadow>
-          <meshStandardMaterial wireframe={true} emissive={"#333f33"} />
-        </Sphere>
+        <group rotation={[0,1,0]}>
+
           <WorldModelTextured />
+          </group>
         {/* <Torus rotation={[Math.PI/2,0,0]} args={[5.8,6,16,24]} scale={[1.5,1.5,0.75]}>
           <meshStandardMaterial wireframe={true} emissive={"#333f33"} />
         </Torus> */}
