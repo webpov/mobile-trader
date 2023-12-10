@@ -10,6 +10,7 @@ import { DailyLog } from "../DailyLog"
 import { SymbolNameHeader } from "../SymbolNameHeader"
 import { useState } from "react"
 import useSyncedKLines from "@/../script/util/hook/useSyncedKLines"
+import MobileTabsButtons from "./MobileTabsButtons"
 import BuySellButtons from "./BuySellButtons"
 import { ChartWindowSubMenu } from "./ChartWindowSubMenu"
 import { ChartWindowOverlayLabels } from "./ChartWindowOverlayLabels"
@@ -23,6 +24,7 @@ export default function AppFrameStage({}:any) {
   const urlp = useUrlParamCatcher()
   const chartConfig = useChartConfig({})
   const [isLocalStorageModalOpen, s__isLocalStorageModalOpen] = useState(false)
+  const [activeMobileTab, s__activeMobileTab] = useState("chart")
 
   const addTileToUrl = (tileCode:string, posCode:string) => {
     urlp.addTile(tileCode, posCode)
@@ -94,6 +96,7 @@ export default function AppFrameStage({}:any) {
       >
       </div>
     </div>
+        {activeMobileTab == "chart" && <>
     <div className='flex-row  tx-white  Q_lg_x  w-90 z-10'>
       <div className='Q_lg_x w-10'></div>
       <h1 className=" flex-1 mb-0 pb-0 pl-100 block"><SymbolNameHeader label={focusSymbol || "N/A"} /></h1>
@@ -101,6 +104,7 @@ export default function AppFrameStage({}:any) {
     <div className='flex-row pos-rel flex-align-stretch  w-100 Q_xs_lg z-10 tx-white'>
       <h2 className="mb-0 pb-0  bg-w-10 px-6 box-shadow-i-9 pt-2 bord-r-25 pb-3"><SymbolNameHeader label={focusSymbol || "N/A"} /></h2>
     </div>
+    </>}
     <div className='flex-row flex-align-stretch tx-white w-90 z-10'>
       {!!chartConfig.isLeftSidebarVisible &&
         <div className='Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
@@ -113,41 +117,42 @@ export default function AppFrameStage({}:any) {
         </div>
       }
       <div className='tx-roman flex flex-align-stretch flex-1 mt-4 flex-center pos-rel'>
+        {activeMobileTab == "chart" && <>
         {!!focusSymbol && !!selectedSymbolYTDSummary &&
           selectedSymbolLTFSummary && chartConfig.isOverlayLabeled && <>
           <ChartWindowOverlayLabels state={{selectedSymbolLTFSummary, selectedSymbolYTDSummary}} />
           
         </>}
-        <div className="w-90  pos-rel bord-r-25 h-100" style={{minHeight:"55vh"}}>
-          <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  h-100'
-            style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
-          >
-            <ModelGameStage config={chartConfig} state={{
-              ltfClosingList, ltfList, isChartLoading,
-              favs: lsData.LS_favs,
-              
-              selectedSymbolYTDSummary,
-              selectedSymbolLTFSummary,
-
-              htfList,
-              htfClosingList,
-              ytdObj, focusSymbol,
-              tradeLogsObj, isFetchingLogs,
-            }}
-              calls={{}}
+          <div className="w-90  pos-rel bord-r-25 h-100" style={{minHeight:"55vh"}}>
+            <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  h-100'
+              style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
             >
-              <div>
+              <ModelGameStage config={chartConfig} state={{
+                ltfClosingList, ltfList, isChartLoading,
+                favs: lsData.LS_favs,
                 
-              </div>
-            </ModelGameStage>
+                selectedSymbolYTDSummary,
+                selectedSymbolLTFSummary,
+
+                htfList,
+                htfClosingList,
+                ytdObj, focusSymbol,
+                tradeLogsObj, isFetchingLogs,
+              }}
+                calls={{}}
+              >
+                <div>
+                  
+                </div>
+              </ModelGameStage>
+            </div>
+            
+        <button className="pos-abs translate-y-50 border-white-50 Q_xs  bottom-0 right-0 pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+              onClick={()=>{triggerOpenModal()}}
+            >
+              ⭐
+            </button>
           </div>
-          
-      <button className="pos-abs translate-y-50 border-white-50 Q_xs  bottom-0 right-0 pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
-            onClick={()=>{triggerOpenModal()}}
-          >
-            ⭐
-          </button>
-        </div>
         {!fuelPoints && 
           <div className="flex pointer pos-abs top-0 " style={{right:"10%"}}>
             <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
@@ -163,6 +168,7 @@ export default function AppFrameStage({}:any) {
           />
           
         </div>
+        </>}
       </div>
         {!!chartConfig.isNotesVisible &&
           <div className="Q_xl_x w-20 flex-col gap-3">
@@ -222,7 +228,7 @@ export default function AppFrameStage({}:any) {
       </div>
     </div>
     <div className="mt-6 Q_md_x"></div>
-    <div className=' flex-1 flex flex-align-start mt-6 tx-white w-90 z-10'>
+    <div className='Q_sm_x flex-1 flex flex-align-start  tx-white w-90 z-10'>
       
       {chartConfig.isLeftSidebarVisible &&
         <div className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
@@ -231,7 +237,7 @@ export default function AppFrameStage({}:any) {
           </button>
         </div>
       }
-      <div className='flex-1 flex-col mt-8 pb-8'>
+      <div className='flex-1 flex-col mt-8 pb-8 Q_sm_x'>
         <BuySellButtons />
       </div>
       <div className='Q_xl_x w-25 mt-8  flex-col block   tx-center  '>
@@ -265,15 +271,23 @@ export default function AppFrameStage({}:any) {
       </div>
     </div>
 
-    <ODivider className="Q_xs_md w-90 my-4" />
+    {/* <ODivider className="Q_xs_md w-90 my-4" /> */}
 
     
+      {activeMobileTab == "market" &&
     <div className='Q_xs w-90 z-200  box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
         <div className="pb-4 tx-white tx-lg">Market Summary</div>
         <div className="flex-col w-90">
           <MarketNewsStage />
         </div>
       </div>
+}
+
+      
+      
+      
+      
+      {activeMobileTab == "favs" &&
 
     <div className="flex-wrap w-100 mt-8  gap-2 z-100">
       <div className='Q_xs_md  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
@@ -322,14 +336,21 @@ export default function AppFrameStage({}:any) {
         </div>
       </div>
     </div>
-
-    <ODivider className="Q_xs_xl w-90 mt-4" />
+}
+    {/* <ODivider className="Q_xs_xl w-90 mt-4" /> */}
     
-    <div className='z-200 mb-100 mt-8 pb-100  Q_xs_xl w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
-        <div className="pb-4">Daily Log</div>
+    {activeMobileTab == "notes" &&
+      <div className='z-200 mb-100 mt-8 pb-100  Q_xs_xl w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
+        <div className="pb-4 tx-white">Daily Log</div>
         <div className="flex-col w-90">
           <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:32}} calls={{s__LS_notes: lsData.s__LS_notes}} />
         </div>
+      </div>
+    }
+
+      
+      <div className='flex-1 flex-col mt-8 pb-8 Q_xs z-300 bg-glass-10 pos-fixed bottom-0'>
+        <MobileTabsButtons state={{activeMobileTab}}  calls={{s__activeMobileTab}} />
       </div>
 
     </>)

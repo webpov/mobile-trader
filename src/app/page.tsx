@@ -7,7 +7,7 @@ export default function Home() {
 
 
   return (
-    <main className={"flex-col w-100 tx-altfont-1 h-min-100vh  "} id="main_scrollable_content"
+    <main className={"flex-col w-100 tx-altfont-1 h-min-100vh flex-justify-start "} id="main_scrollable_content"
       style={{
         background: "radial-gradient(#222222, #070707)"
       }}
