@@ -118,7 +118,7 @@ export default function AppFrameStage({}:any) {
           <ChartWindowOverlayLabels state={{selectedSymbolLTFSummary, selectedSymbolYTDSummary}} />
           
         </>}
-        <div className="w-90  pos-rel bord-r-25 h-100" >
+        <div className="w-90  pos-rel bord-r-25 h-100" style={{minHeight:"55vh"}}>
           <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  h-100'
             style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
           >
