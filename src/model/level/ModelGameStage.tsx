@@ -67,11 +67,11 @@ export default function ModelGameStage({config, state, calls,  children}:{config
   if (!mounted) return <LoadingFullScreen />;
 
   return (
-    <div className={`flex-col tx-altfont-4 bg-b-10 box-shadow-i-9-b ${config.isChartMovable ? "" : "nopointer"}`}>
+    <div className={`flex-col h-100 tx-altfont-4 bg-b-10 box-shadow-i-9-b ${config.isChartMovable ? "" : "nopointer"}`}>
 
       
       
-      <Canvas style={{maxWidth:"100vw",height:"60vh"}} shadows 
+      <Canvas style={{maxWidth:"100vw",height:"100%"}} shadows 
         className={` ${config.isChartMovable ? "" : "nopointer"}`}
         camera={{fov:10,position:[0,isSmallDevice?30:25,isSmallDevice?30:25]}}
         gl={{ preserveDrawingBuffer: true, }}
@@ -161,7 +161,7 @@ export default function ModelGameStage({config, state, calls,  children}:{config
                   }} />
 
                   {!!selectedTradeLogs && <>
-                    <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,1.7,1.97]}>
+                    <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,1.7,9.8]}>  {/* 1.97 */}
                     <HistoryLogs
 
                       calls={{refetchLogs:()=>{}}}

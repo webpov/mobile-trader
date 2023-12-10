@@ -15,6 +15,7 @@ import { ChartWindowSubMenu } from "./ChartWindowSubMenu"
 import { ChartWindowOverlayLabels } from "./ChartWindowOverlayLabels"
 import { ODivider } from "@/dom/atom/ODivider"
 import { FavModalContent } from "./FavModal"
+import MarketNewsStage from "../../../model/level/MarketNewsStage"
 
 export default function AppFrameStage({}:any) {
   const lsData:any = useLocalStorageCatcher()
@@ -111,14 +112,14 @@ export default function AppFrameStage({}:any) {
           </div>
         </div>
       }
-      <div className='tx-roman flex-1 mt-4 flex-center pos-rel'>
+      <div className='tx-roman flex flex-align-stretch flex-1 mt-4 flex-center pos-rel'>
         {!!focusSymbol && !!selectedSymbolYTDSummary &&
           selectedSymbolLTFSummary && chartConfig.isOverlayLabeled && <>
           <ChartWindowOverlayLabels state={{selectedSymbolLTFSummary, selectedSymbolYTDSummary}} />
           
         </>}
-        <div className="w-90  pos-rel bord-r-25 " >
-          <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  '
+        <div className="w-90  pos-rel bord-r-25 h-100" >
+          <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  h-100'
             style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
           >
             <ModelGameStage config={chartConfig} state={{
@@ -163,39 +164,60 @@ export default function AppFrameStage({}:any) {
           
         </div>
       </div>
-      {!!chartConfig.isNotesVisible &&
-        <div className='Q_xl_x w-20 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
-          <div className="pb-4">Daily Log</div>
+        {!!chartConfig.isNotesVisible &&
+          <div className="Q_xl_x w-20 flex-col gap-3">
+            <div className='Q_xl_x w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+              <div className="pb-4">Market Summary</div>
+              <div className="flex-col w-90">
+                <MarketNewsStage />
+              </div>
+            </div>
+            <div className='Q_xl_x w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+              <div className="pb-4">Daily Log</div>
+              <div className="flex-col w-90">
+                <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:20}} calls={{s__LS_notes: lsData.s__LS_notes}} />
+              </div>
+            </div>
+          </div>
+        }
+      <div className='Q_sm_x px-4 w-20 gap-3 pos-rel block flex-col flex-justify-start tx-center'>
+          
+        <div className='Q_md_lg w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+          <div className="pb-4">Market Summary</div>
           <div className="flex-col w-90">
-            <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:20}} calls={{s__LS_notes: lsData.s__LS_notes}} />
+            <MarketNewsStage />
           </div>
         </div>
-      }
-      <div className='Q_sm_x w-20 pos-rel block px-4  bord-r-25 tx-center'>
-        <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex  flex-col flex-justify-start'>
-          <div className="Q_md_x py-2"></div> 
-          <div className="Q_sm py-2"></div> 
-          <div className="py-4 flex-center gap-3">
-            <div className="Q_md_x">Favorites</div> 
-            <div className="Q_xs_md">Fav</div> 
-            {!!fuelPoints && <div>
-              <div className="blink_me pa-1 _ddg bord-r-50 "></div>
-            </div>}
+        <div className='Q_sm_x w-100 h-100 pos-rel block px-4  bord-r-25 tx-center'>
+          <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex  flex-col flex-justify-start'>
+            <div className="Q_md_x py-2"></div> 
+            <div className="Q_sm py-2"></div> 
+            <div className="py-4 flex-center gap-3">
+              <div className="Q_md_x">Favorites</div> 
+              <div className="Q_xs_md">Fav</div> 
+              {!!fuelPoints && <div>
+                <div className="blink_me pa-1 _ddg bord-r-50 "></div>
+              </div>}
+            </div>
+            <div className="flex-col w-90 pb-4">
+              <FavoritesTab state={{
+                  LS_favs:lsData.LS_favs,urlStateKeys:urlp.keysArray, urlState: urlp.gridData,
+                  ytdObj, fuelPoints, focusSymbol, isChartLoading,
+                  pricesObj, 
+                }} 
+                calls={{s__LS_favs: lsData.s__LS_favs, s__focusSymbol, s__isChartLoading, isLogsFilled}} 
+              />
+            </div>
+
+            
+
+            <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+              onClick={()=>{triggerOpenModal()}}
+            >
+              ⭐
+            </button>
           </div>
-          <div className="flex-col w-90">
-            <FavoritesTab state={{
-                LS_favs:lsData.LS_favs,urlStateKeys:urlp.keysArray, urlState: urlp.gridData,
-                ytdObj, fuelPoints, focusSymbol, isChartLoading,
-                pricesObj, 
-              }} 
-              calls={{s__LS_favs: lsData.s__LS_favs, s__focusSymbol, s__isChartLoading, isLogsFilled}} 
-            />
-          </div>
-          <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
-            onClick={()=>{triggerOpenModal()}}
-          >
-            ⭐
-          </button>
+          
         </div>
       </div>
     </div>
@@ -243,7 +265,15 @@ export default function AppFrameStage({}:any) {
       </div>
     </div>
 
-    <ODivider className="Q_xs_md w-90 mt-4" />
+    <ODivider className="Q_xs_md w-90 my-4" />
+
+    
+    <div className='Q_xs w-90 z-200  box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+        <div className="pb-4 tx-white tx-lg">Market Summary</div>
+        <div className="flex-col w-90">
+          <MarketNewsStage />
+        </div>
+      </div>
 
     <div className="flex-wrap w-100 mt-8  gap-2 z-100">
       <div className='Q_xs_md  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
@@ -254,7 +284,13 @@ export default function AppFrameStage({}:any) {
           />
         </div>
       </div>
-
+      
+      <div className='Q_sm w-50 z-200 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+        <div className="pb-4">Market Summary</div>
+        <div className="flex-col w-90">
+          <MarketNewsStage />
+        </div>
+      </div>
       <div className='Q_xs_sm w-40  pos-rel block px-4  bord-r-25 tx-center tx-white mb-8 z-200'>
         <div className=' tx-center  pa-2 pb-6  bg-glass-50 h-100 bord-r-25 neu-convex flex-col flex-justify-start'
           style={{
@@ -287,7 +323,7 @@ export default function AppFrameStage({}:any) {
       </div>
     </div>
 
-    <ODivider className="Q_xs_xl w-90 " />
+    <ODivider className="Q_xs_xl w-90 mt-4" />
     
     <div className='z-200 mb-100 mt-8 pb-100  Q_xs_xl w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
         <div className="pb-4">Daily Log</div>
