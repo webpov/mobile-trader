@@ -3,11 +3,14 @@ import { Box, Cylinder, OrbitControls, Plane, Ring, RoundedBox, Sphere, useTextu
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ReactNode, useRef, Suspense, useEffect, useState, useMemo } from "react"
 
-export default function ToggleSwitch({calls, config={}, ...props}: any) {
+export default function ToggleSwitch({calls, state, config={}, ...props}: any) {
   const lastCylinderRef:any = useRef();
   const [currentState, s__currentState] = useState(false)
   const triggerToggleClick = (e:any) => {
     e.stopPropagation()
+    if (state.isClickBlocked) {
+      return
+    }
     if (!currentState && config.isConfirmationNeeded) {
       const promptRes = prompt("Confirm action? (y/n)","y")
       
@@ -45,7 +48,7 @@ export default function ToggleSwitch({calls, config={}, ...props}: any) {
 
       
       <Box args={[0.05,0.05,0.34]} position={[0,0,0]} castShadow receiveShadow
-      rotation={[currentState?.5:-0.5,0,0]}
+      rotation={[!currentState?.5:-0.5,0,0]}
         
       >
           <meshStandardMaterial color="#ffffff" />

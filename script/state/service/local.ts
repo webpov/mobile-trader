@@ -18,15 +18,14 @@ export const getTradeLogs = async (symbol:string) => {
     return
   }
   const parsedRes = await requestRes.json()
-    // if (!parsedRes.data) {
-    //   return
-    // }
-    // if (!parsedRes.data ) {
-    //   return
-    // }
-    // if (!!parsedRes.data && !!parsedRes.data.data && !parsedRes.data.data.length) {
-    //   return
-    // }
-  // alert("Success!")
-  return parsedRes //.data
+  return parsedRes
+}
+
+export const getFearNGreed = async () => {
+  const requestRes:any = await fetch('https://api.alternative.me/fng/')
+    if (requestRes.status > 300) {
+    return
+  }
+  const parsedRes = await requestRes.json()
+  return parsedRes
 }

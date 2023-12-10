@@ -69,22 +69,24 @@ export function DailyLog({ state, calls }: any) {
       <div className="pb-2 w-100">
         <AddNoteButton isClearable={true} fontSize="tx-sm" />
       </div>
-      {state.LS_notes.map((item: any, index: number) => {
-        return (<div key={index} className=" w-100">
-          <button className=" opaci-chov--50 bord-r-10 pa-3 w-100 noborder tx-white "
-            onClick={() => triggerNoteClick(index)}
-            style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11" }}
-          >
-            <div className="tx-bold-9  flex flex-justify-between">
-              {/* <div className="tx-lg tx-altfont-1">{index + 1}</div> */}
-              {/* <div>{item.unix}</div> */}
-              <div className="flex-1 tx-start">{(`${item.msg}`).substring(0,state.maxChars)}{item.msg.length > state.maxChars-1 ? "..." : ""}</div>
-              <div className="tx-smd tx-altfont-1">{item.date.replace(YEAR_NUMBER,"")}</div>
-              {/* <div>qweqwe</div> */}
-            </div>
-          </button>
-        </div>);
-      })}
+      <div className="w-100 h-max-150px bord-r-10  autoverflow-y flex-col-r flex-justify-start gap-1">
+        {state.LS_notes.map((item: any, index: number) => {
+          return (<div key={index} className=" w-100">
+            <button className=" opaci-chov--50 bord-r-10 pa-3 w-100 noborder tx-white "
+              onClick={() => triggerNoteClick(index)}
+              style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11" }}
+            >
+              <div className="tx-bold-9  flex flex-justify-between">
+                {/* <div className="tx-lg tx-altfont-1">{index + 1}</div> */}
+                {/* <div>{item.unix}</div> */}
+                <div className="flex-1 tx-start">{(`${item.msg}`).substring(0,state.maxChars)}{item.msg.length > state.maxChars-1 ? "..." : ""}</div>
+                <div className="tx-smd tx-altfont-1">{item.date.replace(YEAR_NUMBER,"")}</div>
+                {/* <div>qweqwe</div> */}
+              </div>
+            </button>
+          </div>);
+        })}
+      </div>
     </div>
   </>);
 }
