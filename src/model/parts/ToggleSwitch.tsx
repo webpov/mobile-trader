@@ -40,22 +40,23 @@ export default function ToggleSwitch({calls, config={}, ...props}: any) {
 
   return (<>
   <group {...props} /* onClick={triggerToggleClick} */ /* onWheel={triggerWheel} */
-  onPointerDown={triggerToggleClick}>
+  onClick={triggerToggleClick}>
+  {/* onPointerDown={triggerToggleClick}> */}
 
       
       <Box args={[0.05,0.05,0.34]} position={[0,0,0]} castShadow receiveShadow
       rotation={[currentState?.5:-0.5,0,0]}
         
       >
-          <meshStandardMaterial color="#eeeeee" />
+          <meshStandardMaterial color="#ffffff" />
       </Box>
       <Box args={[0.07,0.15,0.15]} position={[0,0,0]} receiveShadow castShadow
       >
-          <meshStandardMaterial color="#cccccc" />
+          <meshStandardMaterial color="#dddddd" />
       </Box>
-      <Box args={[0.26,0.4,0.1]} position={[0,0,0]} receiveShadow castShadow
+      <Box args={[0.2,0.3,0.1]} position={[0,0,0]} receiveShadow castShadow
       >
-          <meshStandardMaterial color="#bbbbbb" />
+          <meshStandardMaterial color="#cccccc" />
       </Box>
 
       {/* <spotLight castShadow intensity={currentState ? 1 : 0.2} args={[0xfffaf6, .2, 40]} position={[3, 3, -1]} /> */}
