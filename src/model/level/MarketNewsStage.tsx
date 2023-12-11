@@ -19,7 +19,7 @@ export const MarketNewsStage = () => {
   
   const [isLightVisible, s__isLightVisible] = useState(false);
   const [isClickBlocked, s__isClickBlocked] = useState(false);
-  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+  const isMediumDevice = useMediaQuery("only screen and (max-width : 992px)");
   useEffect(() => {
     s__Mounted(true);
 }, []);
@@ -90,16 +90,17 @@ export const MarketNewsStage = () => {
       
       <Canvas style={{width:"100%",height:"250px"}} shadows 
         className={` ${true ? "" : "nopointer"}`}
-        camera={{fov:20,position:[1,1,4.5]}}
+        camera={{fov:20,position:[1,1,isMediumDevice?4.5:3.5]}}
         gl={{ preserveDrawingBuffer: true, }}
         // onCreated={(state)=>{ state.gl.setClearColor("#101319"); state.scene.fog = new Fog("#101319",8,16) }}
       >
-        <OrbitControls  autoRotateSpeed={.05} autoRotate={true} rotateSpeed={0.15}
-          // enableDamping={false}
+        <OrbitControls  autoRotateSpeed={.05} autoRotate={true} 
+        rotateSpeed={0.5}
+          enableDamping={false}
           maxDistance={9}
           minDistance={2}
           // enablePan={false}
-          dampingFactor={.05} 
+          // dampingFactor={.05} 
           maxPolarAngle={Math.PI/2+0.7} minPolarAngle={Math.PI/2-0.7}
           // minAzimuthAngle={Math.PI/4}
           // maxAzimuthAngle={Math.PI/4*3}
@@ -136,11 +137,11 @@ export const MarketNewsStage = () => {
           }
 
         <group position={[0,-0.08,0]} rotation={[0,0,0]}>
-          <RoundedBox  position={[0,0,0.73]} castShadow receiveShadow scale={0.5} args={[1.2,0.8,0.1]}
+          <Box  position={[0,0,0.73]} castShadow receiveShadow scale={0.5} args={[1.2,0.85,0.1]}
             
           >
             <meshStandardMaterial color={"#dddddd"} />
-          </RoundedBox>
+          </Box>
           
           {!!theData && theData.MCAP_USD &&
             <Html position={[0, 0, .77]} rotation={[0, 0, 0]} transform occlude={true}
@@ -155,9 +156,9 @@ export const MarketNewsStage = () => {
         </group>
         
         <group position={[0,-0.08,0]} rotation={[0,(Math.PI/2)/2,0]}>
-          <RoundedBox scale={0.5} args={[1.2,0.8,0.1]} position={[0,0,0.73]} castShadow receiveShadow>
+          <Box scale={0.5} args={[1.2,0.8,0.1]} position={[0,0,0.73]} castShadow receiveShadow>
             <meshStandardMaterial color={"#dddddd"} />
-          </RoundedBox>
+          </Box>
           {!!theData && theData.CV_INDEX &&
             <Html position={[0, 0, .77]} rotation={[0, 0, 0]} transform occlude={true}
               distanceFactor={3}
@@ -171,9 +172,9 @@ export const MarketNewsStage = () => {
         </group>
         
         <group position={[0,-0.08,0]} rotation={[0,-(Math.PI/2)/2,0]}>
-          <RoundedBox scale={0.5} args={[1.2,0.8,0.1]} position={[0,0,0.73]} castShadow receiveShadow>
+          <Box scale={0.5} args={[1.2,0.8,0.1]} position={[0,0,0.73]} castShadow receiveShadow>
             <meshStandardMaterial color={"#dddddd"} />
-          </RoundedBox>
+          </Box>
           {!!theData && theData.CONSUMER_PRICE_INDEX &&
             <Html position={[0, 0, .77]} rotation={[0, 0, 0]} transform occlude={true}
               distanceFactor={3}
@@ -218,6 +219,28 @@ export const MarketNewsStage = () => {
 
           <WorldModelTextured />
           </group>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         {/* <Torus rotation={[Math.PI/2,0,0]} args={[5.8,6,16,24]} scale={[1.5,1.5,0.75]}>
           <meshStandardMaterial wireframe={true} emissive={"#333f33"} />
         </Torus> */}

@@ -22,11 +22,9 @@ export const WorldModelTextured = () => {
           <meshStandardMaterial wireframe={true} emissive={"#333f33"} />
         </Sphere>
 
-    <Sphere args={[0.7, 64, 64]}>
-      {/* <meshStandardMaterial  /> */}
+    {/* <Sphere args={[0.7, 64, 64]}>
       <meshStandardMaterial map={earth_jpg} displacementScale={.4} displacementMap={bump2} />
       
-      {/* <meshStandardMaterial color={"#172017"} /> */}
-    </Sphere>
+    </Sphere> */}
   </>);
 };

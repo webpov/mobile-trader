@@ -172,7 +172,9 @@ export default function AppFrameStage({}:any) {
       </div>
         {!!chartConfig.isNotesVisible &&
           <div className="Q_xl_x w-20 flex-col gap-3">
-            <div className='Q_xl_x w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+            <div className='Q_xl_x w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'
+              style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
+            >
               <div className="pb-4">Market Summary</div>
               <div className="flex-col w-90">
                 <MarketNewsStage />
@@ -188,7 +190,9 @@ export default function AppFrameStage({}:any) {
         }
       <div className='Q_sm_x px-4 w-20 gap-3 pos-rel block flex-col flex-justify-start tx-center'>
           
-        <div className='Q_md_lg w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+        <div className='Q_md_lg w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'
+          style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
+        >
           <div className="pb-4">Market Summary</div>
           <div className="flex-col w-90">
             <MarketNewsStage />
