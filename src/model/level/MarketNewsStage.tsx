@@ -9,6 +9,7 @@ import { WorldModelTextured } from "./WorldModelTextured";
 // import { Chainlink } from "dev3-sdk"
 import { Html } from "@react-three/drei";
 import { getFearNGreed, getTotalMarketCap } from "../../../script/state/service/local";
+import DynaText from "../core/DynaText";
 
 
 export const MarketNewsStage = () => {
@@ -67,6 +68,7 @@ export const MarketNewsStage = () => {
       const ttt = await getTotalMarketCap();
       console.log("ttt", ttt)
       s__theData((oldData:any)=>({...oldData,["MCAP_USD"]: (parseInt(`${ttt.data.quote.USD.total_market_cap/1000000000}`))}))
+      s__theData((oldData:any)=>({...oldData,["BTCD"]: (parseInt(`${ttt.data.btc_dominance}`))}))
       
   }
   // const getChainlinkMarketData = async () => {
@@ -147,14 +149,19 @@ export const MarketNewsStage = () => {
 
         
 {!!theData && !!theData.FNG &&
-            <Html position={[0, 0.85, 0.12]} rotation={[0, 0, 0]} transform occlude={true}
+<group position={[0, 0.86, 0.116]} rotation={[Math.PI/2,0,0]}>
+            {/* <Html  rotation={[0, 0, 0]} transform occlude={true}
               distanceFactor={3}
             >
               <div className="tx-mdl flex-center gap-1" style={{ color: "white",  textAlign: "center",background: "transparent" }}>
                 <div className="tx-xsm">Fear & Greed:</div>
                 <div>{theData.FNG}</div>
               </div>
-            </Html>
+            </Html> */}
+            <DynaText text={`Fear & Greed: ${theData.FNG}`}  color="#fff" emissive="#999"
+              font={0.11}
+            />
+            </group>
           }
 
         <group position={[0,-0.08,0]} rotation={[0,0,0]}>
@@ -165,14 +172,22 @@ export const MarketNewsStage = () => {
           </Box>
           
           {!!theData && theData.MCAP_USD &&
-            <Html position={[0, 0, .77]} rotation={[0, 0, 0]} transform occlude={true}
+            <group position={[0, 0, .77]} rotation={[Math.PI/2,0,0]}>
+              {/* MCAP_USD */}
+
+              <DynaText text={`MCAP: \n ${theData.MCAP_USD}`}  color="#fff" emissive="#999"
+              font={0.17}
+            />
+
+                {/* <Html rotation={[0, 0, 0]} transform occlude={true}
               distanceFactor={3}
             >
               <div className="tx-mdl flex-col" style={{ color: "white",  textAlign: "center",background: "transparent" }}>
                 <div className="tx-xsm">Total Cap.</div>
                 <div>{theData.MCAP_USD}</div>
               </div>
-            </Html>
+            </Html> */}
+            </group>
           }
         </group>
         
@@ -180,15 +195,23 @@ export const MarketNewsStage = () => {
           <Box scale={0.5} args={[1.2,0.8,0.1]} position={[0,0,0.73]} castShadow receiveShadow>
             <meshStandardMaterial color={"#dddddd"} />
           </Box>
-          {!!theData && theData.CV_INDEX &&
-            <Html position={[0, 0, .77]} rotation={[0, 0, 0]} transform occlude={true}
+          {!!theData && theData.BTCD &&
+            <group position={[0, 0, .77]} rotation={[Math.PI/2,0,0]}>
+              {/* BTCD */}
+
+
+              <DynaText text={`BTCD: \n ${theData.BTCD}`}  color="#fff" emissive="#999"
+              font={0.17}
+            />
+                {/* <Html rotation={[0, 0, 0]} transform occlude={true}
               distanceFactor={3}
             >
               <div className="tx-mdl flex-col" style={{ color: "white",  textAlign: "center",background: "transparent" }}>
                 <div className="tx-xsm">Volatility</div>
                 <div>{theData.CV_INDEX}</div>
               </div>
-            </Html>
+            </Html> */}
+            </group>
           }
         </group>
         
@@ -197,14 +220,19 @@ export const MarketNewsStage = () => {
             <meshStandardMaterial color={"#dddddd"} />
           </Box>
           {!!theData && theData.CONSUMER_PRICE_INDEX &&
-            <Html position={[0, 0, .77]} rotation={[0, 0, 0]} transform occlude={true}
+            <group position={[0, 0, .77]} >
+              {/* CONSUMER_PRICE_INDEX */}
+
+
+                {/* <Html rotation={[0, 0, 0]} transform occlude={true}
               distanceFactor={3}
             >
               <div className="tx-mdl flex-col" style={{ color: "white",  textAlign: "center",background: "transparent" }}>
                 <div className="tx-xsm">CPI</div>
                 <div>{theData.CONSUMER_PRICE_INDEX}</div>
               </div>
-            </Html>
+            </Html> */}
+            </group>
           }
         </group>
         
