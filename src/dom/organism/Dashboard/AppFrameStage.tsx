@@ -279,10 +279,10 @@ export default function AppFrameStage({}:any) {
 
     
       {activeMobileTab == "market" &&
-    <div className='Q_xs w-90 z-200  box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+    <div className='Q_xs w-90 z-200   box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
         <div className="pb-4 tx-white tx-lg">Market Summary</div>
-        <div className="flex-col w-90">
-          <MarketNewsStage />
+        <div className="flex-col w-90 h-min-50vh">
+          <MarketNewsStage state={{canvasHeight:"350px"}} />
         </div>
       </div>
 }

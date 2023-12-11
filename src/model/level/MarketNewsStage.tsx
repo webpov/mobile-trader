@@ -12,7 +12,7 @@ import { getFearNGreed, getTotalMarketCap } from "../../../script/state/service/
 import DynaText from "../core/DynaText";
 
 
-export const MarketNewsStage = () => {
+export const MarketNewsStage = ({state}:any) => {
   const [mounted, s__Mounted] = useState(false);
 
   const [theData, s__theData] = useState<any>({});
@@ -102,7 +102,7 @@ export const MarketNewsStage = () => {
   if (!mounted) return <LoadingFullScreen />;
 
   return (<>
-    <div className={`flex-col w-100 tx-altfont-4 bg-b-10 box-shadow-i-9-b ${true ? "" : "nopointer"}`}>
+    <div className={`flex-col w-100 h-100 tx-altfont-4 bg-b-10 box-shadow-i-9-b ${true ? "" : "nopointer"}`}>
 
       {isDataPopulated && isLightVisible && <>
         <div className="pos-abs top-0 right-0 tx-blue tx-lgx pa-2 pt-4">
@@ -111,8 +111,8 @@ export const MarketNewsStage = () => {
         </div>      
       </>}
       
-      <Canvas style={{width:"100%",height:"250px"}} shadows 
-        className={` ${true ? "" : "nopointer"}`}
+      <Canvas style={{width:"100%",height:state?.canvasHeight || "250px"}} shadows 
+        className={` ${true ? "" : "nopointer"} flex-col flex-align-stretch`}
         camera={{fov:20,position:[1,1,isMediumDevice?4.5:3.5]}}
         gl={{ preserveDrawingBuffer: true, }}
         // onCreated={(state)=>{ state.gl.setClearColor("#101319"); state.scene.fog = new Fog("#101319",8,16) }}
