@@ -6,9 +6,9 @@ import { Box, OrbitControls, RoundedBox, Sphere, Torus } from "@react-three/drei
 import { useMediaQuery } from "usehooks-ts";
 import ToggleSwitch from "../parts/ToggleSwitch";
 import { WorldModelTextured } from "./WorldModelTextured";
-import { Chainlink } from "dev3-sdk"
+// import { Chainlink } from "dev3-sdk"
 import { Html } from "@react-three/drei";
-import { getFearNGreed } from "../../../script/state/service/local";
+import { getFearNGreed, getTotalMarketCap } from "../../../script/state/service/local";
 
 
 export const MarketNewsStage = () => {
@@ -24,14 +24,25 @@ export const MarketNewsStage = () => {
     s__Mounted(true);
 }, []);
 
-  const triggerOnToggleClick = (aSide:string, newValue:boolean) => {
+  const triggerOnToggleClick = async (aSide:string, newValue:boolean) => {
     // if (isClickBlocked) { return }
     console.log("aside newv", aSide, newValue)
     if (aSide != "main") {
       return
     }
     if (!isLightVisible) {
-      getChainlinkMarketData()
+      // getChainlinkMarketData()
+      try {
+        getFearAndGreedAlternativeData()
+      } catch (error) {
+        console.log("error getFearAndGreedAlternativeData()")
+      }
+      
+      try {
+        getCoinmarketcapData()
+      } catch (error) {
+        console.log("error getCoinmarketcapData()")
+      }
       s__isLightVisible(true)
     }
     if (isLightVisible) {
@@ -43,34 +54,44 @@ export const MarketNewsStage = () => {
       s__isClickBlocked(false)
     },2500)
   }
-
-  const getChainlinkMarketData = async () => {
-    const ethSDK = Chainlink.instance("https://ethereum.publicnode.com", Chainlink.PriceFeeds.ETH)
-    console.log("ethSDK.getFromOracle", Chainlink.PriceFeeds.ETH);
-    ethSDK.getFromOracle(ethSDK.feeds.MCAP_USD).then((res:any) => {
-      const resInMillions = res.answer.toString().slice(0, -17)
-      // console.log("MCAP_USD.toString()", res.answer.toString().slice(0, -17));
-      s__theData((oldData:any)=>({...oldData,["MCAP_USD"]: resInMillions}))
-        // console.log("MCAP_USD.toString()", res.answer.toString(), (res.answer/1000));
-    });
-    ethSDK.getFromOracle(ethSDK.feeds.CV_INDEX).then((res:any) => {
-      const resInMillions = res.answer.toString().slice(0, -17)
-      console.log("resInMillionsresInMillions resInMillions", resInMillions);
-      s__theData((oldData:any)=>({...oldData,["CV_INDEX"]: resInMillions}))
-        // console.log("CV_INDEX.toString()", res.answer.toString(), (res.answer/1000));
-    });
-    ethSDK.getFromOracle(ethSDK.feeds.CONSUMER_PRICE_INDEX).then((res:any) => {
-      const resInMillions = res.answer.toString().slice(0, -17)
-      console.log("resInMillionsresInMillions resInMillions", resInMillions);
-      s__theData((oldData:any)=>({...oldData,["CONSUMER_PRICE_INDEX"]: resInMillions}))
-        // console.log("CONSUMER_PRICE_INDEX.toString()", res.answer.toString(), (res.answer/1000));
-    });
-
+  const getFearAndGreedAlternativeData = async() => {
+    
     const fearNGreed = await getFearNGreed()
     const innerFNG = fearNGreed.data[0]
     console.log("fearNGreed", innerFNG)
     s__theData((oldData:any)=>({...oldData,["FNG"]: innerFNG.value}))
   }
+  const getCoinmarketcapData = async() => {
+
+      // Replace 'YOUR_API_KEY' with your actual CoinMarketCap API key
+      const ttt = await getTotalMarketCap();
+      console.log("ttt", ttt)
+      s__theData((oldData:any)=>({...oldData,["MCAP_USD"]: (parseInt(`${ttt.data.quote.USD.total_market_cap/1000000000}`))}))
+      
+  }
+  // const getChainlinkMarketData = async () => {
+  //   const ethSDK = Chainlink.instance("https://ethereum.publicnode.com", Chainlink.PriceFeeds.ETH)
+  //   console.log("ethSDK.getFromOracle", Chainlink.PriceFeeds.ETH);
+  //   ethSDK.getFromOracle(ethSDK.feeds.MCAP_USD).then((res:any) => {
+  //     const resInMillions = res.answer.toString().slice(0, -17)
+  //     // console.log("MCAP_USD.toString()", res.answer.toString().slice(0, -17));
+  //     s__theData((oldData:any)=>({...oldData,["MCAP_USD"]: resInMillions}))
+  //       // console.log("MCAP_USD.toString()", res.answer.toString(), (res.answer/1000));
+  //   });
+  //   ethSDK.getFromOracle(ethSDK.feeds.CV_INDEX).then((res:any) => {
+  //     const resInMillions = res.answer.toString().slice(0, -17)
+  //     console.log("resInMillionsresInMillions resInMillions", resInMillions);
+  //     s__theData((oldData:any)=>({...oldData,["CV_INDEX"]: resInMillions}))
+  //       // console.log("CV_INDEX.toString()", res.answer.toString(), (res.answer/1000));
+  //   });
+  //   ethSDK.getFromOracle(ethSDK.feeds.CONSUMER_PRICE_INDEX).then((res:any) => {
+  //     const resInMillions = res.answer.toString().slice(0, -17)
+  //     console.log("resInMillionsresInMillions resInMillions", resInMillions);
+  //     s__theData((oldData:any)=>({...oldData,["CONSUMER_PRICE_INDEX"]: resInMillions}))
+  //       // console.log("CONSUMER_PRICE_INDEX.toString()", res.answer.toString(), (res.answer/1000));
+  //   });
+    
+  // }
 
   const isDataPopulated = useMemo(()=>{
     return JSON.stringify(theData) !== "{}"
