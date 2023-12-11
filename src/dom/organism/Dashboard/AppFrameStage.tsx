@@ -102,7 +102,14 @@ export default function AppFrameStage({}:any) {
       <h1 className=" flex-1 mb-0 pb-0 pl-100 block"><SymbolNameHeader label={focusSymbol || "N/A"} /></h1>
     </div>
     <div className='flex-row pos-rel flex-align-stretch  w-100 Q_xs_lg z-10 tx-white'>
-      <h2 className="mb-0 pb-0  bg-w-10 px-6 box-shadow-i-9 pt-2 bord-r-25 pb-3"><SymbolNameHeader label={focusSymbol || "N/A"} /></h2>
+      <div className="flex-col">
+        <h2 className="mb-0 pb-0 flex-center  bg-w-10 px-6 gap-2 box-shadow-i-9-b pt-2 bord-r-25 pb-3">
+          <SymbolNameHeader label={focusSymbol || "N/A"} />
+          <div>-</div>
+          {!!pricesObj && <div className=" tx-lg tx-roman">{(pricesObj[focusSymbol])}</div>}
+        </h2>
+        
+      </div>
     </div>
     </>}
     <div className='flex-row flex-align-stretch tx-white w-90 z-10'>
@@ -154,7 +161,7 @@ export default function AppFrameStage({}:any) {
             </button>
           </div>
         {!fuelPoints && 
-          <div className="flex pointer pos-abs top-0 " style={{right:"10%"}}>
+          <div className="flex pointer pos-abs top-0 translate-x-50 right-50p">
             <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
               onClick={()=>s__fuelPoints(1)}
             >
@@ -278,13 +285,22 @@ export default function AppFrameStage({}:any) {
     {/* <ODivider className="Q_xs_md w-90 my-4" /> */}
 
     
-      {activeMobileTab == "market" &&
+      {activeMobileTab == "market" && <>
+      {!!pricesObj && 
+        <div className="Q_xs pb-4 flex-center gap-1 tx-white">
+          <div className=" tx-lg tx-roman tx-altfont-1">{(focusSymbol)}</div>
+          <div>-</div>
+          <div className=" tx-lg tx-roman">{(pricesObj[focusSymbol])}</div>
+        </div>
+      } 
     <div className='Q_xs w-90 z-200   box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
         <div className="pb-4 tx-white tx-lg">Market Summary</div>
         <div className="flex-col w-90 h-min-50vh">
           <MarketNewsStage state={{canvasHeight:"350px"}} />
         </div>
       </div>
+
+      </>
 }
 
       

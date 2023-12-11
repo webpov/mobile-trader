@@ -137,7 +137,7 @@ export default function ModelGameStage({config, state, calls,  children}:{config
                   fullArray={state.ltfList} 
                 />
                           
-              <Box args={[7, 0.02, 0.02]} position={[-3, 1.7, 0]}>
+              <Box args={[7, 0.02, 0.02]} position={[-3, 2.35, 0]}>
                 <meshStandardMaterial color="white" emissive={"#555"} />
               </Box>
               </group>
