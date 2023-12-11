@@ -31,6 +31,10 @@ export const StandardTokens = [
   "CAKE",
   "CVS",
   "AR",
+  "INJ",
+  "TRB",
+  "SOL",
+  "JTO",
 ]
 export const ShortHardcodedKLines = [
     [

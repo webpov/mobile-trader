@@ -20,9 +20,12 @@ export function BoxCandleKLine({
   const [candleArray, s__candleArray] = useState([]);
   const [wickArray, s__wickArray] = useState([]);
 
+  const fixedArray = [...Array(500).keys()]
+
   useEffect(() => {
     if (!refCandleContainer.current) { return }
-    if (!fullArray.length) { return }
+    const fullArrayLength = fullArray.length
+    if (!fullArrayLength) { return }
 
     
     
@@ -39,6 +42,13 @@ export function BoxCandleKLine({
     for (let i = chopStart; i < count; i++) {
       new_colorArray[i] = Math.random() > 0.5 ? "#ff0000" : "#00ff00"
 
+      if (!fullArray[i]) {
+        new_colorArray[i] = "#777777"
+        new_posArray[i] = 0
+        new_candleArray[i] = 0.1
+        new_wickArray[i] = 0.3
+        continue
+      }
       const candleOpen = fullArray[i][4]
       const candleClose = fullArray[i][1]
       const lowlow = fullArray[i][3] - minValue
@@ -74,11 +84,13 @@ export function BoxCandleKLine({
   return (<>
     <group position={[0, 0, 0]}  visible={!!fullArray.length} ref={refCandleContainer}>
       {!!posArray.length && !!candleArray.length && !!fullArray.length && !!candleArray.length &&
-       fullArray.map((arrItem,index)=>{
+       fixedArray.map((arrItem,index)=>{
           
+          if (!posArray[index]) {return (<group key={index}></group>)}
           if (index < chopStart) {return (<group key={index}></group>)}
+          const forcedChopOffset = ((500-fullArray.length)*cubeSize)
           return (<group key={index}>
-            <group position={[index*cubeSize - (count * cubeSize) || 0,0,0]}>
+            <group position={[(index*cubeSize - (count * cubeSize) || 0)+forcedChopOffset,0,0]}>
               <group position={[0,0,0]}>
                 <Box args={[cubeSize,candleArray[index] || 0,cubeSize]} castShadow receiveShadow 
                   position={[0,posArray[index] || 0,0]}>
@@ -87,7 +99,7 @@ export function BoxCandleKLine({
                 </Box>
               </group>
             </group>
-            <group position={[(index*cubeSize - (count * cubeSize))  || 0,0,0]}>
+            <group position={[((index*cubeSize - (count * cubeSize))  || 0)+forcedChopOffset,0,0]}>
               <Box args={[cubeSize/3,candleArray[index]*2 || 0,cubeSize/3]} castShadow receiveShadow 
                 position={[0,posArray[index] || 0,0]}>
                   <meshStandardMaterial color={colorArray[index]} emissiveIntensity={0.25} emissive={colorArray[index]} />

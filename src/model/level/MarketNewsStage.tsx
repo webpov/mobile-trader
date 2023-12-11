@@ -245,7 +245,7 @@ export const MarketNewsStage = ({state}:any) => {
           
         <group rotation={[0,1,0]}>
 
-          <WorldModelTextured />
+          <WorldModelTextured state={{showWorld:isLightVisible}} />
           </group>
 
 

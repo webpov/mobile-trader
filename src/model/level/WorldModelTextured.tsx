@@ -4,10 +4,7 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
 
-export const WorldModelTextured = () => {
-  const earth_jpg = useTexture("./textures/earthmap1k.jpg");
-  const imgTexture3 = useTexture("./textures/earth3.png");
-  const bump2 = useTexture("./textures/bump2.jpg");
+export const WorldModelTextured = ({state}:any) => {
   const $cloudsWireframe:any = useRef()
 
   useFrame(()=>{
@@ -17,14 +14,22 @@ export const WorldModelTextured = () => {
   })
 
   return (<>
-  
-  <Sphere args={[.75,16,8]} castShadow receiveShadow ref={$cloudsWireframe}>
-          <meshStandardMaterial wireframe={true} emissive={"#333f33"} />
-        </Sphere>
+    <Sphere args={[.75,16,8]} castShadow receiveShadow ref={$cloudsWireframe}>
+      <meshStandardMaterial wireframe={true} emissive={"#333f33"} />
+    </Sphere>
+    {!!state && !!state.showWorld &&
+      <EarthTextured />
+    }
+  </>);
+};
 
-    {/* <Sphere args={[0.7, 64, 64]}>
+export const EarthTextured = ({state}:any) => {
+  const bump2 = useTexture("./textures/bump2.jpg");
+  const earth_jpg = useTexture("./textures/earthmap1k.jpg");
+  
+  return (<>
+    <Sphere args={[0.7, 64, 64]}>
       <meshStandardMaterial map={earth_jpg} displacementScale={.4} displacementMap={bump2} />
-      
-    </Sphere> */}
+    </Sphere>
   </>);
 };
