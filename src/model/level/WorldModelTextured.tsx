@@ -14,7 +14,7 @@ export const WorldModelTextured = ({state}:any) => {
   })
 
   return (<>
-    <Sphere args={[.75,16,8]} castShadow receiveShadow ref={$cloudsWireframe}>
+    <Sphere args={[.74,16,8]} castShadow receiveShadow ref={$cloudsWireframe}>
       <meshStandardMaterial wireframe={true} emissive={"#333f33"} />
     </Sphere>
     {!!state && !!state.showWorld &&
@@ -29,7 +29,7 @@ export const EarthTextured = ({state}:any) => {
   
   return (<>
     <Sphere args={[0.7, 64, 64]}>
-      <meshStandardMaterial map={earth_jpg} displacementScale={.4} displacementMap={bump2} />
+      <meshStandardMaterial map={earth_jpg} displacementScale={.32} displacementMap={bump2} />
     </Sphere>
   </>);
 };

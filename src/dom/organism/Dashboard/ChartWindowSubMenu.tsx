@@ -4,7 +4,7 @@ import { ODivider } from "@/dom/atom/ODivider";
 
 export const ChartWindowSubMenu = ({ chartConfig, state, calls }: any) => {
   return (<>
-    <details className="">
+  <details className="">
       <summary className="flex opaci-chov--50 pos-abs bottom-0">
         <button className=" bg-b-90 py-1 bord-r-50 tx-mdl noclick">
           ⚙️
