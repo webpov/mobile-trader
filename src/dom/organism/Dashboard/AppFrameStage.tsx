@@ -30,6 +30,15 @@ export default function AppFrameStage({}:any) {
     urlp.addTile(tileCode, posCode)
   }
 
+  const triggerCloneFromUrl = ()=>{
+    const returnObj:any = []
+    urlp.keysArray.map((aKey:string)=>{
+      returnObj.push({...urlp.gridData[aKey], posCode: aKey})
+    })
+
+    // const returnValues = Object.keys(state.urlState).map((item,index)=>({...item, posCode:}))
+    lsData.s__LS_favs(returnObj)
+  }
   const {
       fuelPoints, s__fuelPoints,
       ytdObj, s__ytdObj,
@@ -77,7 +86,7 @@ export default function AppFrameStage({}:any) {
         <div className='Q_lg_x w-10 '></div>
         <div className='Q_xl_x w-10 '></div>
         <FavModalContent  state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys, focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,  }} 
-                calls={{s__isLocalStorageModalOpen,
+                calls={{s__isLocalStorageModalOpen,triggerCloneFromUrl,
                   s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
                   s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, isLogsFilled,
 
@@ -188,7 +197,7 @@ export default function AppFrameStage({}:any) {
         </>}
       </div>
         {!!chartConfig.isNotesVisible &&
-          <div className="Q_xl_x w-20 flex-col gap-3">
+          <div className="Q_xl_x w-20 flex-col flex-justify-start gap-3">
             <div className='Q_xl_x w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'
               style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
             >
@@ -224,7 +233,10 @@ export default function AppFrameStage({}:any) {
                   ytdObj, fuelPoints, focusSymbol, isChartLoading,
                   pricesObj, 
                 }} 
-                calls={{s__LS_favs: lsData.s__LS_favs, s__focusSymbol, s__isChartLoading, isLogsFilled}} 
+                calls={{s__LS_favs: lsData.s__LS_favs,
+                  s__focusSymbol, s__isChartLoading, isLogsFilled,
+                  triggerCloneFromUrl,
+                }} 
               />
             </div>
 
@@ -317,9 +329,10 @@ export default function AppFrameStage({}:any) {
       
       
       
-      {activeMobileTab == "favs" &&
+      {activeMobileTab == "favs" && <>
 
-    <div className="flex-wrap w-100 mt-8  gap-2 z-100">
+    <div className="mt-6 Q_sm_x"></div>
+    <div className="flex-wrap w-100 mt-2 Q_xs_md mb-100 flex-align-start gap-2 z-100">
       <div className='Q_xs_md  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
         <div className="pb-4 tx-lg tx-center">URL <br /> Grid</div>
         <div className="flex-col w-90 tx-lg">
@@ -355,7 +368,10 @@ export default function AppFrameStage({}:any) {
                 ytdObj, fuelPoints,
                 pricesObj, focusSymbol, isChartLoading,
               }} 
-              calls={{s__LS_favs: lsData.s__LS_favs, s__focusSymbol, s__isChartLoading, isLogsFilled}} 
+              calls={{s__LS_favs: lsData.s__LS_favs,
+                s__focusSymbol, s__isChartLoading, isLogsFilled,
+                triggerCloneFromUrl,
+              }} 
             />
           </div>
           <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 translate-y--50 tx-lgx"
@@ -366,20 +382,21 @@ export default function AppFrameStage({}:any) {
         </div>
       </div>
     </div>
-}
+</>}
     {/* <ODivider className="Q_xs_xl w-90 mt-4" /> */}
     
-    {activeMobileTab == "notes" &&
-      <div className='z-200 mb-100 mt-8 pb-100  Q_xs_xl w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
+    {activeMobileTab == "notes" && <>
+      <div className="mt-8 Q_sm_x"></div>
+      <div className='z-200 mb-100  pb-100  Q_xs_xl w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
         <div className="pb-4 tx-white">Daily Log</div>
         <div className="flex-col w-90">
           <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:32}} calls={{s__LS_notes: lsData.s__LS_notes}} />
         </div>
       </div>
-    }
+    </>}
 
       
-      <div className='flex-1 flex-col mt-8 pb-8 Q_xs z-300 bg-glass-10 pos-fixed bottom-0'>
+      <div className='flex-1 flex-col mt-8 pb-6 Q_xs z-300  pos-fixed bottom-0 '>
         <MobileTabsButtons state={{activeMobileTab}}  calls={{s__activeMobileTab}} />
       </div>
 

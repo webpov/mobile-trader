@@ -6,15 +6,6 @@ import { useEffect, useState } from "react";
 export function FavoritesTab({ state, calls }: any) {
   const [hydrationSafeLoad, s__hydrationSafeLoad] = useState(0);
 
-  const triggerCloneFromUrl = ()=>{
-    const returnObj:any = []
-    state.urlStateKeys.map((aKey:string)=>{
-      returnObj.push({...state.urlState[aKey], posCode: aKey})
-    })
-
-    // const returnValues = Object.keys(state.urlState).map((item,index)=>({...item, posCode:}))
-    calls.s__LS_favs(returnObj)
-  }
 
   useEffect(() => {
     s__hydrationSafeLoad(hydrationSafeLoad + 1);
@@ -34,7 +25,7 @@ export function FavoritesTab({ state, calls }: any) {
     return (<>
       <div className="pt-8 tx-bold-8 opaci-10 tx-ls-2 tx-lg"> Not <br /> Found</div>
       {state.urlStateKeys && !!state.urlStateKeys.length && 
-        <button onClick={triggerCloneFromUrl}
+        <button onClick={calls.triggerCloneFromUrl}
           className="mt-8 border-white pa-1 px-2 opaci-chov--50 bg-w-10 tx-white noborder bord-r-10 tx-ls-2 tx-md tx-center"
         >
           Clone Url Config

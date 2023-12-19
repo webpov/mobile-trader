@@ -17,10 +17,10 @@ export const ChartWindowOverlayLabels = ({ state }: any) => {
 
 
 
-    <div className="Q_xs_sm_px-1 tx-shadow-5 bg-glass-10 px-3 py-2 pos-abs top-50p mt-8 translate-y-25 right-0 z-200 bg-w-10 bord-r-25 ma-1">
+    <div className="Q_xs_sm_px-1 tx-shadow-5 bg-glass-10 px-3 py-1 pos-abs top-50p mt-6 translate-y-25 right-0 z-200 bg-w-10 bord-r-25 ma-1">
       <div>{JSON.stringify(state.selectedSymbolYTDSummary.maxValue)}</div>
     </div>
-    <div className="Q_xs_sm_px-1 tx-shadow-5 bg-glass-10 px-3 py-2 pos-abs bottom-0 left-0 z-200 bg-w-10 bord-r-25 mb-4 ma-1">
+    <div className="Q_xs_sm_px-1 tx-shadow-5 bg-glass-10 px-3 py-1 pos-abs bottom-0 left-0 z-200 bg-w-10 bord-r-25 mb-4 ma-1">
       <div>{JSON.stringify(state.selectedSymbolYTDSummary.minValue)}</div>
     </div>
   </>);

@@ -144,6 +144,15 @@ export function FavSymbols({ state, calls }: any) {
           Clear
         </button>
       }
+      
+      {state.urlStateKeys && !!state.urlStateKeys.length && 
+        <button onClick={calls.triggerCloneFromUrl}
+          className="mt-8 border-white pa-1 px-2 opaci-chov--50 bg-w-10 tx-white noborder bord-r-10 tx-ls-2 tx-md tx-center"
+        >
+          Clone Url Config
+        </button>
+      }
+      
       {!state.LS_favs.length &&
         <div className={`tx-white ${"tx-lgx"} opaci-50 tx-lx bg-w-10 bord-r-25 pa-2 mt-2 tx-center`}
           // onClick={triggerClearFavs}

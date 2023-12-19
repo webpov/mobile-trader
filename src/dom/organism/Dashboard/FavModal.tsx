@@ -47,7 +47,7 @@ export function FavModalContent({ state, calls }: any) {
                 s__tradeLogsObj: calls.s__tradeLogsObj,
                 triggerGetLogs: calls.triggerGetLogs,
                 isLogsFilled: calls.isLogsFilled,
-
+                triggerCloneFromUrl: calls.triggerCloneFromUrl,
               }}
             />
           </>}
