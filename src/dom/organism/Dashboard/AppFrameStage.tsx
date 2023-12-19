@@ -15,7 +15,7 @@ import BuySellButtons from "./BuySellButtons"
 import { ChartWindowSubMenu } from "./ChartWindowSubMenu"
 import { ChartWindowOverlayLabels } from "./ChartWindowOverlayLabels"
 import { ODivider } from "@/dom/atom/ODivider"
-import { FavModalContent } from "./FavModal"
+import { FavModalContent } from "./FavModalContent"
 import MarketNewsStage from "../../../model/level/MarketNewsStage"
 
 export default function AppFrameStage({}:any) {
@@ -80,18 +80,23 @@ export default function AppFrameStage({}:any) {
 
 
     {isLocalStorageModalOpen &&
-      <div className="pos-fixed flex-center pt-8 top-0 z-400 w-100vw h-100vh bg-glass-20 bg-b-50  tx-white">
+      <div className="pos-fixed flex-align-start flex-justify-center pt-8 top-0 z-400 w-100vw h-100vh bg-glass-20 bg-b-50  tx-white">
         
         <div className='Q_sm_x w-10 '></div>
         <div className='Q_lg_x w-10 '></div>
         <div className='Q_xl_x w-10 '></div>
-        <FavModalContent  state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys, focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,  }} 
-                calls={{s__isLocalStorageModalOpen,triggerCloneFromUrl,
-                  s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
-                  s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, isLogsFilled,
-
-                }}
-        /> 
+        <div className="w-100 ">
+          <div className='Q_xs mt-8 pt-4 '></div>
+          <FavModalContent  state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys,
+            focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,
+            urlStateKeys:urlp.keysArray,
+          }} 
+            calls={{s__isLocalStorageModalOpen,triggerCloneFromUrl,
+              s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
+              s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, isLogsFilled,
+            }}
+          /> 
+        </div>
         
         <div className='Q_sm_x w-10 '></div>
         <div className='Q_lg_x w-10'></div>

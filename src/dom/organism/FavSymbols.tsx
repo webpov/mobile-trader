@@ -78,80 +78,77 @@ export function FavSymbols({ state, calls }: any) {
   return (<>
     <div className=" w-90  flex-col gap-1" >
       {!!state.LS_favs.length &&
-        <button className={`tx-white ${"tx-mdl"} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mb-2 translate-y--50`}
+        <button className={`tx-white ${"tx-mdl"} opaci-chov--50 bg-glass-10 bg-w-10 bord-r-25 pa-2 mb-2 translate-y--50`}
           onClick={triggerExportAsUrl}
         >
           Export as URL
         </button>
       }
-      {state.LS_favs.map((item: any, index: number) => {
-        return (<div key={index} className=" w-100">
-          <div className="  flex-col flex-align-stretch  bord-r-10  w-100 noborder tx-white "
-            style={{ 
-              background: "linear-gradient(45deg, #ffffff03, #ffffff11",
-              
-            }}
-            
-
-          >
-            <div className="tx-bold-9 px-2 flex  flex-justify-between gap-3">
-                {!!calls.isLogsFilled(item.symbol) &&  <>
-                  <button className="tx-center  tx-lgx tx-blue noborder bg-trans "
-                    // onClick={()=>{calls.triggerGetLogs()}}
-                  >
-                    |
-                  </button>
-                </>}
-              {/* <div className="tx-md tx-altfont-1">{index + 1}</div> */}
-              <div className="flex-1 tx-mdl py-1 my-2 tx-ls-2 tx-start bg-w-10 bord-r-25 pl-4 opaci-chov--50 underline" title={item.symbol}
-                onClick={()=>{triggerChangeSymbol(item.symbol)}}
-                style={{
-                  ...(state.focusSymbol == item.symbol ? {borderLeft:"3px solid white", background: "linear-gradient(-90deg, #ffffff44, #ffffff11)"} : {})
-                }}
-              >
-                {item.token0}
-              </div>
-              <div className="tx-roman tx-mdl flex-col">{!!item.floor && <>
-                {item.floor}
-              </>}</div>
-              <div className="flex-col">-</div>
-              <div className="tx-roman tx-mdl flex-col">{!!item.roof && <>
-                {item.roof}
-              </>}</div>
-              <div className="flex-col">
-                {!!state.isFetchingLogs && <>
-                  <button className={`tx-center  spin-${index+2}`}>
-                    ...
-                  </button>
-                </>}
-                {!state.isFetchingLogs && <>
-                  <button className={`bord-r-10 tx-center opaci-chov--50 ${!!calls.isLogsFilled(item.symbol) ? "border-blue" : ""}` }
-                    onClick={()=>{calls.triggerGetLogs(item.symbol)}}
-                  >
-                    Logs
-                  </button>
-                </>}
+      <div className="favSymbolsModalContent w-100">
+        {state.LS_favs.map((item: any, index: number) => {
+          return (<div key={index} className=" w-100">
+            <div className="  flex-col flex-align-stretch  bord-r-10  w-100 noborder tx-white "
+              style={{ 
+                background: "linear-gradient(45deg, #ffffff03, #ffffff11",
                 
+              }}
+              
+
+            >
+              <div className="tx-bold-9 px-2 flex  flex-justify-between gap-3">
+                  {!!calls.isLogsFilled(item.symbol) &&  <>
+                    <button className="tx-center  tx-lgx tx-blue noborder bg-trans "
+                      // onClick={()=>{calls.triggerGetLogs()}}
+                    >
+                      |
+                    </button>
+                  </>}
+                {/* <div className="tx-md tx-altfont-1">{index + 1}</div> */}
+                <div className="flex-1 tx-mdl py-1 my-2 tx-ls-2 tx-start bg-w-10 bord-r-25 pl-4 opaci-chov--50 underline" title={item.symbol}
+                  onClick={()=>{triggerChangeSymbol(item.symbol)}}
+                  style={{
+                    ...(state.focusSymbol == item.symbol ? {borderLeft:"3px solid white", background: "linear-gradient(-90deg, #ffffff44, #ffffff11)"} : {})
+                  }}
+                >
+                  {item.token0}
+                </div>
+                <div className="tx-roman tx-mdl flex-col">{!!item.floor && <>
+                  {item.floor}
+                </>}</div>
+                <div className="flex-col">-</div>
+                <div className="tx-roman tx-mdl flex-col">{!!item.roof && <>
+                  {item.roof}
+                </>}</div>
+                <div className="flex-col">
+                  {!!state.isFetchingLogs && <>
+                    <button className={`tx-center  spin-${index+2}`}>
+                      ...
+                    </button>
+                  </>}
+                  {!state.isFetchingLogs && <>
+                    <button className={`bord-r-10 tx-center opaci-chov--50 ${!!calls.isLogsFilled(item.symbol) ? "border-blue" : ""}` }
+                      onClick={()=>{calls.triggerGetLogs(item.symbol)}}
+                    >
+                      Logs
+                    </button>
+                  </>}
+                  
+                </div>
               </div>
             </div>
-          </div>
-        </div>);
-      })}
+          </div>);
+        })}
+      </div>
+
       {!!state.LS_favs.length &&
-        <button className={`tx-white ${"tx-lgx"} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
+        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
           onClick={triggerClearFavs}
         >
-          Clear
+          <div className="Q_sm_x tx-lgx">Clear</div>
+          <div className="Q_xs ">Clear</div>
         </button>
       }
       
-      {state.urlStateKeys && !!state.urlStateKeys.length && 
-        <button onClick={calls.triggerCloneFromUrl}
-          className="mt-8 border-white pa-1 px-2 opaci-chov--50 bg-w-10 tx-white noborder bord-r-10 tx-ls-2 tx-md tx-center"
-        >
-          Clone Url Config
-        </button>
-      }
       
       {!state.LS_favs.length &&
         <div className={`tx-white ${"tx-lgx"} opaci-50 tx-lx bg-w-10 bord-r-25 pa-2 mt-2 tx-center`}
@@ -160,9 +157,18 @@ export function FavSymbols({ state, calls }: any) {
           Not Found
         </div>
       }
+      
+      {state.urlStateKeys && !!state.urlStateKeys.length &&  <>
+        <button onClick={calls.triggerCloneFromUrl}
+          className="my-8 border-white pa-1 px-2 opaci-chov--50 bg-w-10 tx-white noborder bord-r-10 tx-ls-2 tx-md tx-center"
+        >
+          Clone Url Config
+        </button>
+      </>}
       <details className="w-100  flex-col flex-justify-center pos-rel flex-align-center pb-8 pos-rel">
         <summary className="flex-col opaci-chov--50">
-          <hr className="w-90 mt-8" />
+          <div className="Q_sm_x mt-8"></div>
+          <hr className="w-90 " />
           <button className="flex-col bg-trans noborder tx-white tx-mdl py-3 noclick">
             Account Keys
           </button>

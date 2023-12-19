@@ -10,9 +10,15 @@ import { FavSymbols } from "../FavSymbols";
 export function FavModalContent({ state, calls }: any) {
   
   return (<>
-    <div className="flex-col bg-b-50 bord-r-25 box-shadow-9-b flex-1">
+    <div className="flex-col w-100 bg-b-50 bord-r-25 box-shadow-9-b flex-1 ">
         
-        <button className="pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lx"
+    <button className="Q_sm_x pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lx"
+            style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
+            onClick={()=>{window.location.reload()}}
+          >
+            WebPOV: <small className="tx-mdl">Favorites</small>
+          </button>
+        <button className="Q_xs pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lg"
             style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
             onClick={()=>{window.location.reload()}}
           >
@@ -28,10 +34,12 @@ export function FavModalContent({ state, calls }: any) {
           >
             X
           </button>
-        {/* <div> */}
+
+        <div className="w-100 flex-col">
           {state.LS_favs && <>
             <FavSymbols
               state={{
+                urlStateKeys: state.urlStateKeys,
                 LS_favs:state.LS_favs,
                 LS_publicSecretKeys: state.LS_publicSecretKeys,
                 focusSymbol: state.focusSymbol,
@@ -51,7 +59,7 @@ export function FavModalContent({ state, calls }: any) {
               }}
             />
           </>}
-        {/* </div> */}
+        </div>
       </div>
   </>);
 }

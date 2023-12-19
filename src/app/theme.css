@@ -22,12 +22,23 @@
 }
 
 .blink_me {
-    animation: blinker 1s linear infinite;
-  }
+  animation: blinker 1s linear infinite;
+}
   
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
+@keyframes blinker {
+  50% {
+    opacity: 0;
   }
+}
 
+@media only screen and (max-width: 600px) {
+  .favSymbolsModalContent {
+    max-height: 45vh;
+    border: white;
+    overflow-y: auto;
+    border: 1px solid #77777777;
+    border-radius: 25px;
+    /* overflow-x: hidden; */
+    /* margin-top: 40px; */
+  }
+}
