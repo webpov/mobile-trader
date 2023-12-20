@@ -150,7 +150,7 @@ export function FavSymbols({ state, calls }: any) {
       }
       
       
-      {state.urlStateKeys && !state.urlStateKeys.length &&  <>
+      {!state.urlStateKeys && !state.urlStateKeys.length &&  <>
         <div
           className="my-8 pa-1 px-2   tx-white noborder bord-r-10 tx-ls-2 tx-md tx-center"
         >
