@@ -22,7 +22,7 @@ export function FavSymbols({ state, calls }: any) {
   const triggerExportAsUrl = () => {
     let returnString = ""
     state.LS_favs.map((item:any)=>{
-      returnString += `&${item.posCode}=${JSON.stringify({symbol:item.symbol})}`
+      returnString += `&${item.posCode}=${JSON.stringify(item)}`
     })
     let baseUrl = window.location.href.split("?")[0]
     returnString = `${baseUrl}?${returnString.substring(1)}`
