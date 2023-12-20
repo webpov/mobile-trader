@@ -150,11 +150,18 @@ export function FavSymbols({ state, calls }: any) {
       }
       
       
+      {state.urlStateKeys && !state.urlStateKeys.length &&  <>
+        <div
+          className="my-8 pa-1 px-2   tx-white noborder bord-r-10 tx-ls-2 tx-md tx-center"
+        >
+          No Selections <br /> Found
+        </div>
+      </>}
       {!state.LS_favs.length &&
         <div className={`tx-white ${"tx-lgx"} opaci-50 tx-lx bg-w-10 bord-r-25 pa-2 mt-2 tx-center`}
           // onClick={triggerClearFavs}
         >
-          Not Found
+          No Pairs <br /> Found
         </div>
       }
       
@@ -166,17 +173,17 @@ export function FavSymbols({ state, calls }: any) {
         </button>
       </>}
       <details className="w-100  flex-col flex-justify-center pos-rel flex-align-center pb-8 pos-rel">
-        <summary className="flex-col opaci-chov--50">
+        <summary className="flex-col opaci-chov--50 z-700">
           <div className="Q_sm_x mt-8"></div>
           <hr className="w-90 " />
-          <button className="flex-col bg-trans noborder tx-white tx-mdl py-3 noclick">
+          <button className="flex-col bg-trans noborder tx-white tx-mdl py-3 noclick ">
             Account Keys
           </button>
         </summary>
-        <div className="pos-abs z-500 bottom-50p w-100 "
+        <div className="pos-abs z-500 bottom-75p w-100 "
           
         >
-          <div className="flex-wrap   flex-justify-center box-shadow-9-t mb-8 gap-2 w-100 flex-align-center    bg-b-90 bord-r-25 py-6 bg-glass-5"
+          <div className="flex-wrap   flex-justify-center box-shadow-9-t  gap-2 w-100 flex-align-center    bg-b-90 bord-r-25 py-6 bg-glass-5"
             style={{boxShadow:"-4px -4px 4px -1px  #ffffff22"}}
           >
             <div className="flex-center px-3 w-100 ">
