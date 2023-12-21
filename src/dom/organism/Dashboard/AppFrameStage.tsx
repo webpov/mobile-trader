@@ -30,6 +30,23 @@ export default function AppFrameStage({}:any) {
     urlp.addTile(tileCode, posCode)
   }
 
+  const editTileToUrl = (tileCode:string, posCode:string) => {
+    alert("yes")
+    let existingTileItem = null
+
+    existingTileItem = urlp.gridData[posCode]
+    
+    console.log("existingTileItem", tileCode, existingTileItem, posCode)
+    // urlp.updateTile(tileCode, posCode)
+    
+    
+    
+    
+    
+    
+    // lsData.s__LS_favs(returnObj)
+  }
+
   const triggerCloneFromUrl = ()=>{
     const returnObj:any = []
     urlp.keysArray.map((aKey:string)=>{
@@ -63,6 +80,30 @@ export default function AppFrameStage({}:any) {
     htf:urlp.htf,
   }})
 
+  const editSingleToken = (symbol:string, side:string) => {
+    console.log(`editSingleToken(symbol, side)`, symbol, side)
+
+    const selectedLevel = prompt("Enter price", "")
+    if (!selectedLevel) { return }
+
+    const posCode = ""
+    const tileCode = ""
+    const cellObj = ""
+
+    
+    urlp.updateTile(tileCode, posCode, cellObj)
+    
+    // const returnObj:any = []
+
+    // urlp.keysArray.map((aKey:string)=>{
+    //   returnObj.push({...urlp.gridData[aKey], posCode: aKey})
+    // })
+
+    // lsData.s__LS_favs(returnObj)
+
+
+  }
+
   const triggerOpenModal = () => {
     
     let theDom:any = document.getElementById("main_scrollable_content")
@@ -87,11 +128,15 @@ export default function AppFrameStage({}:any) {
         <div className='Q_xl_x w-10 '></div>
         <div className="w-100 ">
           <div className='Q_xs mt-8 pt-4 '></div>
-          <FavModalContent  state={{LS_favs:lsData.LS_favs, LS_publicSecretKeys,
-            focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,
-            urlStateKeys:urlp.keysArray,
-          }} 
-            calls={{s__isLocalStorageModalOpen,triggerCloneFromUrl,
+          <FavModalContent
+            state={{
+              LS_favs:lsData.LS_favs, LS_publicSecretKeys,
+              focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,
+              urlStateKeys:urlp.keysArray,
+            }} 
+            calls={{
+              editSingleToken,
+              s__isLocalStorageModalOpen,triggerCloneFromUrl,
               s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
               s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, isLogsFilled,
             }}
@@ -110,25 +155,25 @@ export default function AppFrameStage({}:any) {
       >
       </div>
     </div>
-        {activeMobileTab == "chart" && <>
-    <div className='flex-row  tx-white  Q_lg_x  w-90 z-10'>
-      <div className='Q_lg_x w-10'></div>
-      <h1 className=" flex-1 mb-0 pb-0 pl-100 block">
-        <a href="/" className="tx-white nodeco">
-          <SymbolNameHeader label={focusSymbol || "N/A"} />
+    {activeMobileTab == "chart" && <>
+      <div className='flex-row  tx-white  Q_lg_x  w-90 z-10'>
+        <div className='Q_lg_x w-10'></div>
+        <h1 className=" flex-1 mb-0 pb-0 pl-100 block">
+          <a href="/" className="tx-white nodeco">
+            <SymbolNameHeader label={focusSymbol || "N/A"} />
+          </a>
+        </h1>
+      </div>
+      <div className='flex-row pos-rel flex-align-stretch  w-100 Q_xs_lg z-10 tx-white'>
+        <a href="/" className="flex-col tx-white nodeco">
+          <h2 className="mb-0 pb-0 flex-center bg-w-10 px-6 gap-2 box-shadow-i-9-b pt-2 bord-r-25 pb-3">
+            <SymbolNameHeader label={focusSymbol || "N/A"} />
+            <div>-</div>
+            {!!pricesObj && <div className=" tx-lg tx-roman">{(pricesObj[focusSymbol])}</div>}
+          </h2>
+          
         </a>
-      </h1>
-    </div>
-    <div className='flex-row pos-rel flex-align-stretch  w-100 Q_xs_lg z-10 tx-white'>
-      <a href="/" className="flex-col tx-white nodeco">
-        <h2 className="mb-0 pb-0 flex-center bg-w-10 px-6 gap-2 box-shadow-i-9-b pt-2 bord-r-25 pb-3">
-          <SymbolNameHeader label={focusSymbol || "N/A"} />
-          <div>-</div>
-          {!!pricesObj && <div className=" tx-lg tx-roman">{(pricesObj[focusSymbol])}</div>}
-        </h2>
-        
-      </a>
-    </div>
+      </div>
     </>}
     <div className='flex-row flex-align-stretch tx-white w-90 z-10'>
       {!!chartConfig.isLeftSidebarVisible &&
@@ -194,8 +239,8 @@ export default function AppFrameStage({}:any) {
         </button>
       </div>
         <div className="pos-abs z-300" style={{bottom:"-25px", left:"10%"}}>
-          <ChartWindowSubMenu state={{fuelPoints}} calls={{s__fuelPoints}} 
-            chartConfig={chartConfig}
+          <ChartWindowSubMenu state={{fuelPoints}} calls={{s__fuelPoints, editTileToUrl}} 
+            chartConfig={chartConfig} 
           />
           
         </div>

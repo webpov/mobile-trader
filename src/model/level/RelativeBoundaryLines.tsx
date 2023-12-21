@@ -50,7 +50,9 @@ export const RelativeBoundaryLines = ({ state, calls }: any) => {
     <Box args={[5, 0.02, 0.02]} position={[-3, 0, 0]}>
       <meshStandardMaterial color="white" emissive={"#555"} />
     </Box>
-    <Box args={[5, 0.01, 0.03]} position={[-2, 0, 0]} ref={$floorLine}>
+    <Box args={[5, 0.01, 0.03]} position={[-2, 0, 0]} ref={$floorLine}
+      onClick={(e)=>{e.stopPropagation(); alert(` ${selectedFav.floor} `)}}
+    >
       <meshStandardMaterial emissive="#0099ff" />
     </Box>
 
@@ -60,7 +62,9 @@ export const RelativeBoundaryLines = ({ state, calls }: any) => {
     <Box args={[5, 0.02, 0.02]} position={[-3, state.yRange ? state.yRange[1] : 0, 0]}>
       <meshStandardMaterial color="white" emissive={"#333"} />
     </Box>
-    <Box args={[5, 0.01, 0.03]} position={[-2, 0, 0]} ref={$topLine}>
+    <Box args={[5, 0.01, 0.03]} position={[-2, 0, 0]} ref={$topLine}
+      onClick={(e)=>{e.stopPropagation(); alert(` ${selectedFav.roof} `)}}
+    >
       <meshStandardMaterial emissive="#ffaa00" />
     </Box>
 

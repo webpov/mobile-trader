@@ -64,6 +64,9 @@ export function FavSymbols({ state, calls }: any) {
     calls.s__focusSymbol(aSymbol)
   }
   
+  const editSingleToken = (symbol:string, side:string) => {
+    calls.editSingleToken(symbol, side)
+  }
 
   const selectedTradeLogs = useMemo(()=>{
     if (!state.tradeLogsObj) { return null }
@@ -84,7 +87,7 @@ export function FavSymbols({ state, calls }: any) {
           Export as URL
         </button>
       }
-      <div className="favSymbolsModalContent w-100">
+      <div className="favSymbolsModalContent w-100 flex-col gap-1">
         {state.LS_favs.map((item: any, index: number) => {
           return (<div key={index} className=" w-100">
             <div className="  flex-col flex-align-stretch  bord-r-10  w-100 noborder tx-white "
@@ -112,13 +115,21 @@ export function FavSymbols({ state, calls }: any) {
                 >
                   {item.token0}
                 </div>
-                <div className="tx-roman tx-mdl flex-col">{!!item.floor && <>
-                  {item.floor}
-                </>}</div>
+                <div className="tx-roman tx-mdl _ddb pl-1 flex-col"
+                  onClick={()=>{editSingleToken(item.symbol, "floor")}}
+                >
+                  {!!item.floor && <>
+                    {item.floor}
+                  </>}
+                </div>
                 <div className="flex-col">-</div>
-                <div className="tx-roman tx-mdl flex-col">{!!item.roof && <>
-                  {item.roof}
-                </>}</div>
+                <div className="tx-roman tx-mdl _ddr pl-1 flex-col"
+                  onClick={()=>{editSingleToken(item.symbol, "roof")}}
+                >
+                  {!!item.roof && <>
+                    {item.roof}
+                  </>}
+                </div>
                 <div className="flex-col">
                   {!!state.isFetchingLogs && <>
                     <button className={`tx-center  spin-${index+2}`}>

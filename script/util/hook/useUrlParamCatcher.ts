@@ -33,7 +33,7 @@ export function useUrlParamCatcher() {
 
   const reftoken = searchParams.get('reftoken') || "USDT"
   // const symbol = searchParams.get('symbol') || "BTC"+reftoken
-  const ltf = searchParams.get('symbol') || "15m"
+  const ltf = searchParams.get('symbol') || "4h"
   const htf = searchParams.get('symbol') || "1d"
 
   
@@ -241,16 +241,34 @@ const keysArray = useMemo(()=>{
 
     const newParamsString = newParams.toString();
     router.push(`${pathname}?${newParamsString}`);
-    // router.push({
-    //   pathname:"/",
-    //   query:{
-    //     [posCode]: JSON.stringify({symbol:tileCode})
-    //   }
-    // })
+  }
+
+
+  const updateTile = (posCode:string, side:string, cellObj:any)=>{
+    const newParams = new URLSearchParams(searchParams.toString())
+
+    // const cellObj:any = {symbol:tileCode}
+    const promtValue = prompt(`Enter ${side} price`, side == "floor" ? "1" : "10")
+    if (!promtValue) { return }
+    // const promtRoof = prompt(`Enter roof price`, "10")
+    // if (!!promtRoof) { cellObj.roof = promtRoof }
+
+
+
+    newParams.set(posCode, JSON.stringify({
+      ...cellObj,
+      [side]: promtValue
+    }))
+
+
+
+    const newParamsString = newParams.toString();
+    router.push(`${pathname}?${newParamsString}`);
   }
 
   return {
     addTile,
+    updateTile,
     // symbolToken0,
     reftoken,
     // symbol,

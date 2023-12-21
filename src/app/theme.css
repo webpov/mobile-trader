@@ -38,6 +38,7 @@
     overflow-y: auto;
     border: 1px solid #77777777;
     border-radius: 25px;
+    padding: 10px;
     /* overflow-x: hidden; */
     /* margin-top: 40px; */
   }

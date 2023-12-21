@@ -84,7 +84,7 @@ export function FavoritesTab({ state, calls }: any) {
                 {parseInt(`${liveChangePercent*100}`)/100}
                 {/* <div className="opaci-20"> % </div> */}
               </div>
-              <div className={`Q_xs_md tx-smd box-shadow-9-b pa-1 bord-r-10 bg-b-90 tx-sans flex-center gap-1
+              <div className={`Q_xs_md   tx-smd box-shadow-9-b pa-1 bord-r-10 bg-b-90 tx-sans flex-center gap-1
                 pos-abs right-0 translate-x-50
                 ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>
                 {parseInt(`${liveChangePercent*100}`)/100}
