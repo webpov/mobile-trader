@@ -1,0 +1,1 @@
+'Mobile Trader' is a web-based trading dashboard application, focusing on providing a 3D interactive trading experience. The project is built using Next.js and integrates various APIs for trading functionalities.
