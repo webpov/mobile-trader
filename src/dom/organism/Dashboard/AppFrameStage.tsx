@@ -210,13 +210,13 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
   
 
     {isSelectedModalOpen &&
-      <div className="pos-fixed flex-align-start flex-justify-center pt-8 top-0 z-400 w-100vw h-100vh bg-glass-20 bg-b-50  tx-white">
+      <div className="pos-fixed flex-align-start flex-justify-center pt-8 top-0 z-400 w-100vw h-100vh bg-glass-20   tx-white">
         
         <div className='Q_sm_x w-10 '></div>
         <div className='Q_lg_x w-10 '></div>
         <div className='Q_xl_x w-10 '></div>
         <div className="w-100 ">
-          <div className='Q_xs mt-8 pt-4 '></div>
+          <div className=' mt-6  pt-4 '></div>
           <SelectedModalContent
             state={{pairs:StandardTokens,
               LS_favs:lsData.LS_favs, LS_publicSecretKeys,
@@ -268,7 +268,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     <div className='flex-row flex-align-stretch tx-white w-90 z-10'>
       {!!chartConfig.isLeftSidebarVisible &&
         <div className='Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
-          <div className="pb-4 tx-center">URL Grid</div>
+          <div className="pb-4 tx-center">URL <small>Favorites</small> </div>
           <div className="flex-col w-90">
             <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
               calls={{addTileToUrl, s__isSelectedModalOpen}}
@@ -368,7 +368,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
             <div className="Q_md_x py-2"></div> 
             <div className="Q_sm py-2"></div> 
             <div className="py-4 flex-center gap-3">
-              <div className="Q_md_x">Favorites</div> 
+              <div className="Q_md_x">Stored <br /> Favorites</div> 
               <div className="Q_xs_md">Fav</div> 
               {!!fuelPoints && <div>
                 <div className="blink_me pa-1 _ddg bord-r-50 "></div>
@@ -487,7 +487,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     <div className="mt-6 Q_sm_x"></div>
     <div className="flex-wrap w-100 mt-2 Q_xs_md mb-100 flex-align-start gap-2 z-100">
       <div className='Q_xs_md  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
-        <div className="pb-4 tx-lg tx-center">URL <br /> Grid</div>
+        <div className="pb-4 tx-lg tx-center">URL <br /> <small>Favorites</small> </div>
         <div className="flex-col w-90 tx-lg">
           <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
             calls={{addTileToUrl, s__isSelectedModalOpen}}
@@ -509,7 +509,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           }}
         >
           <div className=" flex-center gap-3 py-4">
-            <div className="tx-lgx Q _md_x">Favorites</div> 
+            <div className="tx-lgx Q _md_x">Stored <br />Favorites</div> 
             {/* <div className="Q_xs_md">Fav</div>  */}
             {!!fuelPoints && <div>
               <div className="blink_me pa-1 _ddg bord-r-50 "></div>

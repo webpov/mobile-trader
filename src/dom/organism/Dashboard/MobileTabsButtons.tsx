@@ -18,29 +18,33 @@ export const MobileTabsButtons = ({state, calls}:any) => {
     }
     return (<>
       <div className="flex-wrap gap-2  ">
-          <button className={` bg-glass-10 bg-w-10 neu-convex tx-white tx-lx  pa-2 bord-r-25 noborder ${borderIfSelected("chart")}`}
+          <button className={`flex-col bg-glass-10 bg-w-10 neu-convex tx-white   pa-2 bord-r-25 noborder ${borderIfSelected("chart")}`}
             onClick={()=>triggerChangeTab("chart")}
           >
-            📈
+            <div className="tx-lx">📈</div>
+            <div>Chart</div>
           </button>
         <div className="flex-center">
-          <button className={` bg-glass-10 bg-w-10 neu-convex tx-white tx-lx  pa-2 bord-r-25 noborder ${borderIfSelected("notes")}`}
+          <button className={`flex-col bg-glass-10 bg-w-10 neu-convex tx-white   pa-2 bord-r-25 noborder ${borderIfSelected("notes")}`}
             onClick={()=>triggerChangeTab("notes")}
           >
-            📖
+            <div className="tx-lx">📖</div>
+            <div>Notes</div>
           </button>
         </div>
         <div className="flex-center">
-          <button className={` bg-glass-10 bg-w-10 neu-convex tx-white tx-lx  pa-2 bord-r-25 noborder ${borderIfSelected("market")}`}
+          <button className={`flex-col bg-glass-10 bg-w-10 neu-convex tx-white   pa-2 bord-r-25 noborder ${borderIfSelected("market")}`}
             onClick={()=>triggerChangeTab("market")}
           >
-            📱
+            <div className="tx-lx">📱</div>
+            <div>Market</div>
           </button>
         </div>
-          <button className={` bg-glass-10 bg-w-10 neu-convex tx-white tx-lx  pa-2 bord-r-25 noborder ${borderIfSelected("favs")}`}
+          <button className={`flex-col bg-glass-10 bg-w-10 neu-convex tx-white   pa-2 bord-r-25 noborder ${borderIfSelected("favs")}`}
             onClick={()=>triggerChangeTab("favs")}
           >
-            ✨
+            <div className="tx-lx">✨</div>
+            <div>Favorites</div>
           </button>
       </div>
     </>)

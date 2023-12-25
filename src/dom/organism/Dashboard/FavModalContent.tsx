@@ -16,13 +16,13 @@ export function FavModalContent({ state, calls }: any) {
             style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
             onClick={()=>{window.location.reload()}}
           >
-            WebPOV: <small className="tx-mdl">Favorites</small>
+            WTrade: <small className="tx-mdl">Stored Favorites</small>
           </button>
         <button className="Q_xs pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lg"
             style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
             onClick={()=>{window.location.reload()}}
           >
-            WebPOV: <small className="tx-mdl">Favorites</small>
+            WTrade: <small className="tx-mdl">Stored Favorites</small>
           </button>
         <button className="pos-abs top-0 right-0 pa-3 ma-2 ml-0 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
             onClick={()=>{

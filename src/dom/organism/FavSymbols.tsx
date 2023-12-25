@@ -20,15 +20,20 @@ export function FavSymbols({ state, calls }: any) {
     s__hydrationSafeLoad(hydrationSafeLoad + 1);
   }, []);
   const triggerExportAsUrl = () => {
-    let returnString = ""
-    state.LS_favs.map((item:any)=>{
-      returnString += `&${item.posCode}=${JSON.stringify(item)}`
-    })
-    let baseUrl = window.location.href.split("?")[0]
-    returnString = `${baseUrl}?${returnString.substring(1)}`
-    clipbloard__do(returnString)
-    prompt("Export as URL", returnString)
-  }
+    let returnString = "";
+    state.LS_favs.map((item: any) => {
+      // Use encodeURIComponent to encode the item as a URI component
+      const encodedItem = encodeURIComponent(JSON.stringify(item));
+      returnString += `&${encodeURIComponent(item.posCode)}=${encodedItem}`;
+    });
+  
+    let baseUrl = window.location.href.split("?")[0];
+    // Ensure the entire query string is properly encoded
+    returnString = `${baseUrl}?${returnString.substring(1)}`;
+  
+    clipbloard__do(returnString); // I assume you meant 'clipboard' here
+    prompt("Export as URL", returnString);
+  };
 
 
   const triggerSetKeys = () => {
