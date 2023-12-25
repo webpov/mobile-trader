@@ -52,12 +52,12 @@ function getFirstDayOfNextQuarterUnix() {
   useEffect(()=>{
     const theUnixReference = getFirstDayOfCurrentQuarterUnix()
     const theUnixCutoff = getFirstDayOfNextQuarterUnix()
-    console.log("getFirstDayOfCurrentQuarterUnix", theUnixReference, theUnixCutoff)
+    // console.log("getFirstDayOfCurrentQuarterUnix", theUnixReference, theUnixCutoff)
 
     const currentUnix = Date.now()
     const unixLeft = theUnixCutoff - currentUnix
     const daysLeft = Math.floor(unixLeft/1000/60/60/24)
-    console.log("unixLeft", daysLeft, unixLeft)
+    // console.log("unixLeft", daysLeft, unixLeft)
 
     if (!$htfChart.current) return
 

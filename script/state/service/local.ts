@@ -44,7 +44,7 @@ export async function getTotalMarketCap() {
     const data = await response.json();
     const totalMarketCap = data
 
-    console.log('Total Cryptocurrency Market Cap:', totalMarketCap);
+    // console.log('Total Cryptocurrency Market Cap:', totalMarketCap);
     return totalMarketCap;
   } catch (error:any) {
     console.error('Error fetching data:', error.message);

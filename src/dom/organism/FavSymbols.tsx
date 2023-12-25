@@ -64,8 +64,8 @@ export function FavSymbols({ state, calls }: any) {
     calls.s__focusSymbol(aSymbol)
   }
   
-  const editSingleToken = (symbol:string, side:string) => {
-    calls.editSingleToken(symbol, side)
+  const editSingleToken = (theItem:any, side:string) => {
+    calls.editSingleToken(theItem, side)
   }
 
   const selectedTradeLogs = useMemo(()=>{
@@ -116,7 +116,7 @@ export function FavSymbols({ state, calls }: any) {
                   {item.token0}
                 </div>
                 <div className="tx-roman tx-mdl _ddb pl-1 flex-col"
-                  onClick={()=>{editSingleToken(item.symbol, "floor")}}
+                  onClick={()=>{editSingleToken(item, "floor")}}
                 >
                   {!!item.floor && <>
                     {item.floor}
@@ -124,7 +124,7 @@ export function FavSymbols({ state, calls }: any) {
                 </div>
                 <div className="flex-col">-</div>
                 <div className="tx-roman tx-mdl _ddr pl-1 flex-col"
-                  onClick={()=>{editSingleToken(item.symbol, "roof")}}
+                  onClick={()=>{editSingleToken(item, "roof")}}
                 >
                   {!!item.roof && <>
                     {item.roof}
@@ -176,7 +176,7 @@ export function FavSymbols({ state, calls }: any) {
         </div>
       }
       
-      {state.urlStateKeys && !!state.urlStateKeys.length &&  <>
+      {state.urlStateKeys && !!state.urlStateKeys.length &&  !state.LS_favs.length && <>
         <button onClick={calls.triggerCloneFromUrl}
           className="my-8 border-white pa-1 px-2 opaci-chov--50 bg-w-10 tx-white noborder bord-r-10 tx-ls-2 tx-md tx-center"
         >

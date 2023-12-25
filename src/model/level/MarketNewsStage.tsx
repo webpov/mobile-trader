@@ -27,7 +27,7 @@ export const MarketNewsStage = ({state}:any) => {
 
   const triggerOnToggleClick = async (aSide:string, newValue:boolean) => {
     // if (isClickBlocked) { return }
-    console.log("aside newv", aSide, newValue)
+    // console.log("aside newv", aSide, newValue)
     if (aSide != "main") {
       return
     }
@@ -36,13 +36,13 @@ export const MarketNewsStage = ({state}:any) => {
       try {
         getFearAndGreedAlternativeData()
       } catch (error) {
-        console.log("error getFearAndGreedAlternativeData()")
+        console.warn("error getFearAndGreedAlternativeData()")
       }
       
       try {
         getCoinmarketcapData()
       } catch (error) {
-        console.log("error getCoinmarketcapData()")
+        console.warn("error getCoinmarketcapData()")
       }
       s__isLightVisible(true)
     }
@@ -59,14 +59,14 @@ export const MarketNewsStage = ({state}:any) => {
     
     const fearNGreed = await getFearNGreed()
     const innerFNG = fearNGreed.data[0]
-    console.log("fearNGreed", innerFNG)
+    // console.log("fearNGreed", innerFNG)
     s__theData((oldData:any)=>({...oldData,["FNG"]: innerFNG.value}))
   }
   const getCoinmarketcapData = async() => {
 
       // Replace 'YOUR_API_KEY' with your actual CoinMarketCap API key
       const ttt = await getTotalMarketCap();
-      console.log("ttt", ttt)
+      // console.log("ttt", ttt)
       s__theData((oldData:any)=>({...oldData,["MCAP_USD"]: (parseInt(`${ttt.data.quote.USD.total_market_cap/1000000000}`))}))
       s__theData((oldData:any)=>({...oldData,["BTCD"]: (parseInt(`${parseFloat(ttt.data.btc_dominance)*10}`)/10)}))
       s__theData((oldData:any)=>({...oldData,["BTCD24"]: ((`${parseFloat(ttt.data.btc_dominance_24h_percentage_change).toFixed(2)}`))}))

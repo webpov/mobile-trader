@@ -28,7 +28,7 @@ export default function ToggleSwitch({calls, state, config={}, ...props}: any) {
 
   const triggerWheel = (e:any) => {
     e.stopPropagation()
-    console.log("eeeee", e)
+    // console.log("eeeee", e)
     if (e.wheelDeltaY > 0) {
       if (!currentState) {
         triggerToggleClick(e)

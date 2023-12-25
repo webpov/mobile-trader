@@ -39,7 +39,7 @@ export default function AppFrameStage({}:any) {
 
     existingTileItem = urlp.gridData[posCode]
     
-    console.log("existingTileItem", tileCode, existingTileItem, posCode)
+    // console.log("existingTileItem", tileCode, existingTileItem, posCode)
     // urlp.updateTile(tileCode, posCode)
     
     
@@ -83,18 +83,33 @@ export default function AppFrameStage({}:any) {
     htf:urlp.htf,
   }})
 
-  const editSingleToken = (symbol:string, side:string) => {
-    console.log(`editSingleToken(symbol, side)`, symbol, side)
+  const editSingleToken = (theItem:any, side:string) => {
+    // console.log(`editSingleToken(theItem, side)`, theItem, side)
 
     const selectedLevel = prompt("Enter price", "")
     if (!selectedLevel) { return }
 
-    const posCode = ""
+    const posCode = theItem.posCode
     const tileCode = ""
-    const cellObj = ""
+    const cellObj = {[side]: selectedLevel}
 
     
-    urlp.updateTile(tileCode, posCode, cellObj)
+    urlp.updateTile(theItem, posCode, side, cellObj)
+    
+    // console.log("lsData.s__LS_favs", lsData.LS_favs)
+    // console.log("lsData.s__LS_favs", lsData.s__LS_favs)
+    const modifiedLocalStorageObj:any = [...lsData.LS_favs].map((oneItem:any)=>{
+      // modifiedLocalStorageObj.push({...urlp.gridData[aKey], posCode: aKey})
+      return oneItem.posCode == posCode ? {
+              ...oneItem,
+              ...cellObj,
+            } : oneItem
+    })
+
+
+
+    // console.log(modifiedLocalStorageObj)
+    lsData.s__LS_favs(modifiedLocalStorageObj)
     
     // const returnObj:any = []
 
@@ -170,7 +185,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         <div className='Q_lg_x w-10 '></div>
         <div className='Q_xl_x w-10 '></div>
         <div className="w-100 ">
-          <div className='Q_xs mt-8 pt-4 '></div>
+          <div className=' mt-8 pt-4 '></div>
           <FavModalContent
             state={{
               LS_favs:lsData.LS_favs, LS_publicSecretKeys,

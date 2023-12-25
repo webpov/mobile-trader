@@ -244,21 +244,23 @@ const keysArray = useMemo(()=>{
   }
 
 
-  const updateTile = (posCode:string, side:string, cellObj:any)=>{
+  const updateTile = (theItem:any,posCode:string, side:string, cellObj:any)=>{
     const newParams = new URLSearchParams(searchParams.toString())
 
     // const cellObj:any = {symbol:tileCode}
-    const promtValue = prompt(`Enter ${side} price`, side == "floor" ? "1" : "10")
-    if (!promtValue) { return }
+    // const promtValue = prompt(`Enter ${side} price`, side == "floor" ? "1" : "10")
+    // if (!promtValue) { return }
     // const promtRoof = prompt(`Enter roof price`, "10")
     // if (!!promtRoof) { cellObj.roof = promtRoof }
 
 
 
-    newParams.set(posCode, JSON.stringify({
+    const newIteration = {
+      ...theItem,
       ...cellObj,
-      [side]: promtValue
-    }))
+    }
+    
+    newParams.set(posCode, JSON.stringify(newIteration))
 
 
 
