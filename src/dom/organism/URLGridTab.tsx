@@ -6,6 +6,10 @@ import { PANEL_KEY_LIST } from "@/../script/util/hook/useUrlParamCatcher";
 
 export function URLGridTab({ state, calls }: any) {
   const triggerAddTileToUrl = (e:any) => {
+    calls.s__isSelectedModalOpen(true)
+    
+    return
+    
     const newSymbol:any = prompt("Enter symbol","ETH"+state.baseToken)?.toUpperCase()
     if (!newSymbol) { return }
     const pairsArray = StandardTokens.map((item)=>(item+state.baseToken))

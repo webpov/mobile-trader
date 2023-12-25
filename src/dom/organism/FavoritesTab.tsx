@@ -34,7 +34,7 @@ export function FavoritesTab({ state, calls }: any) {
     </>);
   }
   return (<>
-    <div className=" w-100  flex-col gap-1">
+    <div className=" w-100  flex-col gap-2">
 
       {state.LS_favs.map((item: any, index: number) => {
         if (!state?.pricesObj) {return (<></>)}
@@ -43,22 +43,29 @@ export function FavoritesTab({ state, calls }: any) {
 
         const liveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen
         const liveChangePercent = (liveDiff) / state.pricesObj[item.symbol] * 100
-        return (<><div key={`${index}---`} className="Q_xs_md py-2 pt-3 w-100"></div><div key={index} className=" w-100">
-          <div className=" opaci-chov--50 pos-rel bord-r-10 pa-3 flex flex-justify-between "
+        return (<>
+        <div key={`${index}--`} className="Q_md pt-1"></div>
+        <div key={`${index}---`} className="Q_xs_md pt-1 w-100"></div>
+        <div key={index} className=" w-100">
+          <div className=" opaci-chov--50 pos-rel bord-r-25 pa-3 flex gap-2 flex-justify-between "
             onClick={()=>{triggerChangeSymbol(item.symbol)}}
-            style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11", ...({border: state.focusSymbol == item.symbol ? "1px dotted white" : ""}) }}
+            style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11"}}
           >
-            <div className="tx-bold-9 tx-start Q_lg_x flex-col">
+            <div className="tx-bold-9 tx-start Q_lg_x w-50px flex-col bord-r-10"
+              style={{background: state.focusSymbol == item.symbol ? "linear-gradient(10deg, #ffccaa77, #ffffff00)" : ""}}
+            >
               
               {item.token0}
             </div>
-            <div className="pos-abs top-0 tx-bold-9 tx-start Q_xs_lg bg-w-10 bord-r-10 px-3 py-1 translate-y--75 tx-bold-8 tx-sans tx-ls-3">
+            <div className="pos-abs top-0 tx-bold-9 tx-start Q_xs_lg   bord-r-10 px-3 py-1 translate-y--75 tx-bold-8 tx-sans tx-ls-3 "
+            style={state.focusSymbol == item.symbol ? {paddingBottom:"10px",background: "linear-gradient(10deg, #ffccaa 10%, #ffccaa77 30%, #ffffff00)",}:{}}
+            >
               
               {item.token0}
             </div>
             
             {!!state.pricesObj && <>
-              <div className="tx-mdl tx-roman flex-center gap-1 flex-1">
+              <div className="tx-mdl tx-roman flex-center tx-start  gap-1 flex-1">
                 
             
             {!!calls.isLogsFilled(item.symbol) &&  <>
@@ -68,8 +75,9 @@ export function FavoritesTab({ state, calls }: any) {
                     |
                   </div>
                 </>}
-                <div className="opaci-20 Q_lg_x"> $ </div>
-                <div className="tx-center">{state.pricesObj[item.symbol]}</div>
+                <div className="opaci-20 Q_md"> $ </div>
+                <div className="opaci-20 Q_xl_x"> $ </div>
+                <div className="tx-start  w-100">{state.pricesObj[item.symbol]}</div>
               </div>
             </>}
             {/* {!!state.ytdObj && <>
@@ -79,9 +87,16 @@ export function FavoritesTab({ state, calls }: any) {
               </div>
             </>} */}
             {!!state.ytdObj && <>
-              <div className={`Q_md_x tx-lg box-shadow-9-b pa-1 bord-r-10 bg-w-10 tx-sans flex-center gap-1
+              <div className={`Q_md_x translate-y-10  top-0 right-0 pos-abs  tx-lg box-shadow-9-b px-1 bord-r-10 bg-w-10 mr-1  tx-sans flex-center gap-1
                 ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>
                 {parseInt(`${liveChangePercent*100}`)/100}
+                {/* <div className="opaci-20"> % </div> */}
+              </div>
+              <div className={`Q_xl_x translate-y-50 ma-1 flex-wrap tx-xs box-shadow-9-b pa-1 bord-r-10 bg-w-10 tx-sans flex-center gap-1 opaci-50
+                `}>
+                <div>{item.floor}</div>
+                <div>x</div>
+                <div>{item.roof}</div>
                 {/* <div className="opaci-20"> % </div> */}
               </div>
               <div className={`Q_xs_md   tx-smd box-shadow-9-b pa-1 bord-r-10 bg-b-90 tx-sans flex-center gap-1

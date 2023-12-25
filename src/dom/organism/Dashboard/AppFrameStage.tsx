@@ -1,5 +1,5 @@
 "use client"
-
+import { AI_BASE, useAI } from "@/../script/util/hook/useAI"
 import ModelGameStage from "@/model/level/ModelGameStage"
 import { useUrlParamCatcher } from "@/../script/util/hook/useUrlParamCatcher"
 import useChartConfig from "@/../script/util/hook/useChartConfig"
@@ -17,6 +17,8 @@ import { ChartWindowOverlayLabels } from "./ChartWindowOverlayLabels"
 import { ODivider } from "@/dom/atom/ODivider"
 import { FavModalContent } from "./FavModalContent"
 import MarketNewsStage from "../../../model/level/MarketNewsStage"
+import { SelectedModalContent } from "./SelectedModalContent"
+import { StandardTokens } from "@/../script/constant/klines";
 
 export default function AppFrameStage({}:any) {
   const lsData:any = useLocalStorageCatcher()
@@ -24,6 +26,7 @@ export default function AppFrameStage({}:any) {
   const urlp = useUrlParamCatcher()
   const chartConfig = useChartConfig({})
   const [isLocalStorageModalOpen, s__isLocalStorageModalOpen] = useState(false)
+  const [isSelectedModalOpen, s__isSelectedModalOpen] = useState(false)
   const [activeMobileTab, s__activeMobileTab] = useState("chart")
 
   const addTileToUrl = (tileCode:string, posCode:string) => {
@@ -104,6 +107,46 @@ export default function AppFrameStage({}:any) {
 
   }
 
+
+
+
+
+
+type CompletionResponse = {
+  // Define the structure of your expected response here
+  // For example:
+  choices?: { text: string }[];
+  error?: string;
+};
+
+async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse> {
+  const response = await fetch('/api/ai', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ prompt }),
+  });
+
+  const data: CompletionResponse = await response.json();
+  return data;
+}
+
+  const chosenMidTimeframe = "4h"
+  const {askAI: ask_angelInvestorSimulator, theAIContextTimeframe, setAITimeframe} = useAI(chosenMidTimeframe,true)
+  const triggerAi = async () => {
+    
+
+    const wholeClosingPrices:any = ltfClosingList
+    let thePromptGuide = ask_angelInvestorSimulator("4h",wholeClosingPrices)
+    console.log("thePromptGuide", thePromptGuide)
+
+    console.log("AI_BASE + JSON.stringify(thePromptGuide)", AI_BASE + JSON.stringify(thePromptGuide))
+    const resres = await getCompletionFromAPI(AI_BASE + JSON.stringify(thePromptGuide))
+    console.log("resres*******************************")
+    console.log(resres)
+    console.log("resres*******************************")
+  }
   const triggerOpenModal = () => {
     
     let theDom:any = document.getElementById("main_scrollable_content")
@@ -120,7 +163,7 @@ export default function AppFrameStage({}:any) {
   return (<>
 
 
-    {isLocalStorageModalOpen &&
+{isLocalStorageModalOpen &&
       <div className="pos-fixed flex-align-start flex-justify-center pt-8 top-0 z-400 w-100vw h-100vh bg-glass-20 bg-b-50  tx-white">
         
         <div className='Q_sm_x w-10 '></div>
@@ -149,6 +192,38 @@ export default function AppFrameStage({}:any) {
       </div>
     }
   
+  
+
+    {isSelectedModalOpen &&
+      <div className="pos-fixed flex-align-start flex-justify-center pt-8 top-0 z-400 w-100vw h-100vh bg-glass-20 bg-b-50  tx-white">
+        
+        <div className='Q_sm_x w-10 '></div>
+        <div className='Q_lg_x w-10 '></div>
+        <div className='Q_xl_x w-10 '></div>
+        <div className="w-100 ">
+          <div className='Q_xs mt-8 pt-4 '></div>
+          <SelectedModalContent
+            state={{pairs:StandardTokens,
+              LS_favs:lsData.LS_favs, LS_publicSecretKeys,
+              focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,
+              urlStateKeys:urlp.keysArray,
+            }} 
+            calls={{
+              editSingleToken,
+              s__isSelectedModalOpen,triggerCloneFromUrl,
+              s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
+              s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, isLogsFilled,
+            }}
+          /> 
+        </div>
+        
+        <div className='Q_sm_x w-10 '></div>
+        <div className='Q_lg_x w-10'></div>
+        <div className='Q_xl_x w-10'></div>
+      </div>
+    }
+  
+
     <div className='pos-fix top-0 w-100 flex-col noverflow h-100vh z-2 ' style={{width: '100vw',}}>
       <div className={`${chartConfig.isTrendUp ? "_ddg" : "_ddr"} h-50 w-100 bord-r-100p spin-60 blur opaci-10 `} 
         style={{filter:"blur(200px)"}}
@@ -181,7 +256,7 @@ export default function AppFrameStage({}:any) {
           <div className="pb-4 tx-center">URL Grid</div>
           <div className="flex-col w-90">
             <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
-              calls={{addTileToUrl}}
+              calls={{addTileToUrl, s__isSelectedModalOpen}}
             />
           </div>
         </div>
@@ -222,7 +297,9 @@ export default function AppFrameStage({}:any) {
             >
               ⭐
             </button>
+        
           </div>
+          
         {!fuelPoints && 
           <div className="flex pointer pos-abs top-0 translate-x-50 right-50p">
             <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
@@ -236,6 +313,11 @@ export default function AppFrameStage({}:any) {
   <div className="flex opaci-chov--50 pos-abs bottom-0 right-0 mb-8 ma-2" onClick={() => {chartConfig.s__isChartMovable(!chartConfig.isChartMovable);}}>
         <button className=" bg-b-90 py-1 bord-r-10 tx-mdl noclick" >
         {!chartConfig.isChartMovable ? "🔎" : "🔒"}
+        </button>
+      </div>
+  <div className="flex opaci-chov--50 pos-abs top-0 left-0 mb-8 ma-2" onClick={() => {triggerAi();}}>
+        <button className=" bg-b-90 py-1 bord-r-10 tx-mdl noclick" >
+          {!chartConfig.isChartMovable ? "🪄" : "🪄"}
         </button>
       </div>
         <div className="pos-abs z-300" style={{bottom:"-25px", left:"10%"}}>
@@ -300,14 +382,7 @@ export default function AppFrameStage({}:any) {
           </div>
           
         </div> 
-        <div className='Q_md_lg w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'
-          style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
-        >
-          <div className="pb-4">Market Summary</div>
-          <div className="flex-col w-90">
-            <MarketNewsStage />
-          </div>
-        </div>
+        
       </div>
     </div>
     <div className="mt-6 Q_md_x"></div>
@@ -320,8 +395,18 @@ export default function AppFrameStage({}:any) {
           </button>
         </div>
       }
-      <div className='flex-1 flex-col mt-8 pb-8 Q_sm_x'>
+      <div className='flex-1 flex-col mt-8 pb-8 Q_sm_x '>
         <BuySellButtons />
+
+        
+        <div className='Q_md_lg w-100 mt-8 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'
+          style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
+        >
+          <div className="pb-4">Market Summary</div>
+          <div className="flex-col w-90">
+            <MarketNewsStage />
+          </div>
+        </div>
       </div>
       <div className='Q_xl_x w-25 mt-8  flex-col block   tx-center  '>
         <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
@@ -332,7 +417,8 @@ export default function AppFrameStage({}:any) {
         </div>
       </div>
       
-      <div className='Q_md_x w-20 mt-8 block bg-glass-20 bord-r-25 tx-center  neu-concave'>
+      <div className='Q_md_x flex-col w-20 gap-3'>
+      <div className='Q_md_x  w-100 mt-8 block bg-glass-20 bord-r-25 tx-center  neu-concave'>
         <details className="w-100  ">
           <summary className="flex py-4 opaci-chov--50">
             <div className="px-8">Account</div>
@@ -341,6 +427,7 @@ export default function AppFrameStage({}:any) {
             <h6>Sync</h6>
           </div>
         </details>
+      </div>
       </div>
 
       
@@ -352,6 +439,7 @@ export default function AppFrameStage({}:any) {
           🎮 <div className="Q_md_x">Games</div> 
         </button>
       </div>
+      
     </div>
 
     {/* <ODivider className="Q_xs_md w-90 my-4" /> */}
@@ -414,7 +502,8 @@ export default function AppFrameStage({}:any) {
           </div>
           <div className="flex-col w-90">
             <FavoritesTab state={{
-                LS_favs:lsData.LS_favs,urlStateKeys:urlp.keysArray, urlState: urlp.gridData,
+                LS_favs:lsData.LS_favs,urlStateKeys:urlp.keysArray,
+                urlState: urlp.gridData,
                 ytdObj, fuelPoints,
                 pricesObj, focusSymbol, isChartLoading,
               }} 
