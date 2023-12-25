@@ -141,7 +141,9 @@ export function FavSymbols({ state, calls }: any) {
                       ...
                     </button>
                   </>}
-                  {!state.isFetchingLogs && <>
+                  {process.env.NODE_ENV !== 'production' && 
+
+                  !state.isFetchingLogs && <>
                     <button className={`bord-r-10 tx-center opaci-chov--50 ${!!calls.isLogsFilled(item.symbol) ? "border-blue" : ""}` }
                       onClick={()=>{calls.triggerGetLogs(item.symbol)}}
                     >
