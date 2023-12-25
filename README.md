@@ -8,26 +8,32 @@
 ### 1. **AI Integration**
    - AI-driven functionalities for enhanced user experience.
    - [AI Route](https://github.com/webpov/mobile-trader/blob/main/src/app/api/ai/route.ts): Handles AI-related requests.
+   - [More about AI Integration](https://github.com/webpov/mobile-trader/blob/main/docs/AI_Integration.md)
 
 ### 2. **Authentication**
    - Secure authentication mechanism.
    - [Auth Route](https://github.com/webpov/mobile-trader/blob/main/src/app/api/auth/route.ts): Manages authentication processes.
+   - [More about Authentication](https://github.com/webpov/mobile-trader/blob/main/docs/Authentication.md)
 
 ### 3. **Market Data**
    - Real-time market data display.
    - [Market Route](https://github.com/webpov/mobile-trader/blob/main/src/app/api/market/route.ts): Fetches and displays market data.
+   - [More about Market Data](https://github.com/webpov/mobile-trader/blob/main/docs/Market_Data.md)
 
 ### 4. **Order Management**
    - Comprehensive order logging and management.
    - [Order Logs Route](https://github.com/webpov/mobile-trader/blob/main/src/app/api/order/logs/route.ts): Handles order-related data and logs.
+   - [More about Order Management](https://github.com/webpov/mobile-trader/blob/main/docs/Order_Management.md)
 
 ### 5. **3D Models and Graphics**
    - Interactive 3D models for an immersive trading experience.
    - [Model Game Stage](https://github.com/webpov/mobile-trader/blob/main/src/model/level/ModelGameStage.tsx): Integrates 3D models into the platform.
+   - [More about 3D Models and Graphics](https://github.com/webpov/mobile-trader/blob/main/docs/3D_Models_and_Graphics.md)
 
 ### 6. **Customizable UI Components**
    - Various UI components for a customizable user interface.
    - [Dashboard Components](https://github.com/webpov/mobile-trader/blob/main/src/dom/organism/Dashboard): Includes elements like Buy/Sell buttons, Chart Window, etc.
+   - [More about UI Components](https://github.com/webpov/mobile-trader/blob/main/docs/UI_Components.md)
 
 ## Technical Stack
 
@@ -40,6 +46,7 @@
 
 - **Next.js Configuration**: [next.config.js](https://github.com/webpov/mobile-trader/blob/main/next.config.js)
 - **Dependencies**: Listed in [package.json](https://github.com/webpov/mobile-trader/blob/main/package.json)
+- [More about Configuration and Setup](https://github.com/webpov/mobile-trader/blob/main/docs/Configuration_and_Setup.md)
 
 ## License
 
