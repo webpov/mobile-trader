@@ -66,7 +66,7 @@ export const MarketNewsStage = ({state}:any) => {
 
       // Replace 'YOUR_API_KEY' with your actual CoinMarketCap API key
       const ttt = await getTotalMarketCap();
-      // console.log("ttt", ttt)
+      console.log("ttt", ttt)
       s__theData((oldData:any)=>({...oldData,["MCAP_USD"]: (parseInt(`${ttt.data.quote.USD.total_market_cap/1000000000}`))}))
       s__theData((oldData:any)=>({...oldData,["BTCD"]: (parseInt(`${parseFloat(ttt.data.btc_dominance)*10}`)/10)}))
       s__theData((oldData:any)=>({...oldData,["BTCD24"]: ((`${parseFloat(ttt.data.btc_dominance_24h_percentage_change).toFixed(2)}`))}))
@@ -75,6 +75,7 @@ export const MarketNewsStage = ({state}:any) => {
       s__theData((oldData:any)=>({...oldData,["DERIV24"]: ((`${parseFloat(ttt.data.derivatives_24h_percentage_change).toFixed(1)}`))}))
       s__theData((oldData:any)=>({...oldData,["TOTAL24"]: ((`${parseFloat(ttt.data.quote.USD.total_market_cap_yesterday_percentage_change).toFixed(1)}`))}))
       s__theData((oldData:any)=>({...oldData,["DEFI24"]: ((`${parseFloat(ttt.data.defi_24h_percentage_change).toFixed(1)}`))}))
+      s__theData((oldData:any)=>({...oldData,["DERIVOL"]: (parseInt(`${parseInt(ttt.data.quote.USD.derivatives_volume_24h)/1000000000}`))}))
       
   }
   // const getChainlinkMarketData = async () => {
@@ -123,7 +124,7 @@ export const MarketNewsStage = ({state}:any) => {
         gl={{ preserveDrawingBuffer: true, }}
         // onCreated={(state)=>{ state.gl.setClearColor("#101319"); state.scene.fog = new Fog("#101319",8,16) }}
       >
-        <OrbitControls  autoRotateSpeed={.05} autoRotate={true} 
+        <OrbitControls  autoRotateSpeed={.1} autoRotate={true} 
         rotateSpeed={0.5}
           enableDamping={false}
           maxDistance={9}
@@ -153,6 +154,16 @@ export const MarketNewsStage = ({state}:any) => {
           <meshStandardMaterial color={"#ffffff"} />
         </Box> */}
 
+
+{!!theData && !!theData.DERIVOL &&
+<group position={[0, 0.86, -0.116]} rotation={[-Math.PI/2,Math.PI,0]}>
+            <DynaText text={`Deriv Vol: ${theData.DERIVOL} B`}  color="#fff" emissive="#999"
+              font={0.11}
+            />
+            </group>
+          }
+
+
         
 {!!theData && !!theData.FNG &&
 <group position={[0, 0.86, 0.116]} rotation={[Math.PI/2,0,0]}>
@@ -177,7 +188,7 @@ export const MarketNewsStage = ({state}:any) => {
   <DynaText text={`${theData.MCAP_USD}`}  color="#fff" emissive="#999"
                 font={0.2} position={[0,0,0.05]}
               />
-              <DynaText text={`Total MCAP`}  color="#fff" emissive="#999"
+              <DynaText text={`Total MCAP (B)`}  color="#fff" emissive="#999"
               font={0.08} position={[0,0,-0.1]}
             />
               </group>
@@ -201,7 +212,7 @@ export const MarketNewsStage = ({state}:any) => {
 <DynaText text={`${theData.TOTAL24}`}  color="#fff" emissive="#999"
               font={0.2} position={[0,0,0.05]}
             />
-            <DynaText text={`TOTAL 24h %`}  color="#fff" emissive="#999"
+            <DynaText text={`TOTAL 24h (%)`}  color="#fff" emissive="#999"
             font={0.06} position={[0,0,-0.1]}
           />
             </group>
@@ -226,7 +237,7 @@ export const MarketNewsStage = ({state}:any) => {
 <DynaText text={`${theData.DEFI24}`}  color="#fff" emissive="#999"
               font={0.2} position={[0,0,0.05]}
             />
-            <DynaText text={`Defi 24h %`}  color="#fff" emissive="#999"
+            <DynaText text={`Defi 24h (%)`}  color="#fff" emissive="#999"
             font={0.06} position={[0,0,-0.1]}
           />
             </group>
@@ -249,7 +260,7 @@ export const MarketNewsStage = ({state}:any) => {
 <DynaText text={`${theData.DERIV24}`}  color="#fff" emissive="#999"
               font={0.2} position={[0,0,0.05]}
             />
-            <DynaText text={`DERIV 24h %`}  color="#fff" emissive="#999"
+            <DynaText text={`DERIV 24h (%)`}  color="#fff" emissive="#999"
             font={0.06} position={[0,0,-0.1]}
           />
             </group>
@@ -269,7 +280,7 @@ export const MarketNewsStage = ({state}:any) => {
               <DynaText text={`${theData.BTCD}`}  color="#fff" emissive="#999"
               font={0.2} position={[0,0,0.05]}
             />
-            <DynaText text={`BTCD`}  color="#fff" emissive="#999"
+            <DynaText text={`BTCD (%)`}  color="#fff" emissive="#999"
             font={0.1} position={[0,0,-0.1]}
           />
             </group>
@@ -286,7 +297,7 @@ export const MarketNewsStage = ({state}:any) => {
               <DynaText text={`${theData.ETHD}`}  color="#fff" emissive="#999"
               font={0.2} position={[0,0,0.05]}
             />
-            <DynaText text={`ETHD`}  color="#fff" emissive="#999"
+            <DynaText text={`ETHD (%)`}  color="#fff" emissive="#999"
             font={0.1} position={[0,0,-0.1]}
           />
 
@@ -303,7 +314,7 @@ export const MarketNewsStage = ({state}:any) => {
               <DynaText text={`${theData.ETHD24}`}  color="#fff" emissive="#999"
               font={0.2} position={[0,0,0.05]}
             />
-            <DynaText text={`ETHD 24h %`}  color="#fff" emissive="#999"
+            <DynaText text={`ETHD 24h (%)`}  color="#fff" emissive="#999"
             font={0.07} position={[0,0,-0.1]}
           />
 
@@ -321,7 +332,7 @@ export const MarketNewsStage = ({state}:any) => {
               <DynaText text={`${theData.BTCD24}`}  color="#fff" emissive="#999"
               font={0.2} position={[0,0,0.05]}
             />
-            <DynaText text={`BTCD 24h %`}  color="#fff" emissive="#999"
+            <DynaText text={`BTCD 24h (%)`}  color="#fff" emissive="#999"
             font={0.07} position={[0,0,-0.1]}
           />
 
