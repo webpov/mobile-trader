@@ -7,9 +7,32 @@ import { useMap, MapOrEntries, useMediaQuery, useCopyToClipboard } from 'usehook
 import { FavSymbols } from "../FavSymbols";
 // import { updatePublicSecretKey } from "../../../script/state/service/local";
 import { StandardTokensGradients } from "@/../script/constant/klines";
+import { PANEL_KEY_LIST } from "../../../../script/util/hook/useUrlParamCatcher";
 
 export function SelectedModalContent({ state, calls }: any) {
-    const _StandardTokensGradients:any = { ...StandardTokensGradients}
+  const [selectedSymbol, s__selectedSymbol] = useState("")
+  const _StandardTokensGradients:any = { ...StandardTokensGradients}
+
+  const triggerSelectPair = (thePair:string) => {
+    
+    // let pricePrompt = prompt('Enter prices (Optional)')
+    // if ( !pricePrompt) {
+    //   return 
+    // }
+    
+    
+    let firstAvailablePanel = PANEL_KEY_LIST.find((aPanelKey:string)=>(
+      (!state.urlStateKeys.includes(aPanelKey)) 
+        // firstAvailablePanel = aPanelKey
+      
+    ))
+
+
+    // alert("newSymbol: "+ newSymbol)
+    calls.addTileToUrl(thePair, firstAvailablePanel)
+  }
+
+
   return (<>
     <div className="flex-col w-100 bg-b-50 bord-r-25 box-shadow-9-b flex-1 ">
         
@@ -30,25 +53,43 @@ export function SelectedModalContent({ state, calls }: any) {
               let theDom:any = document.getElementById("main_scrollable_content")
               if (!theDom) { return }
               theDom.className = theDom?.className.replace("noverflow h-max-100vh","")
-              calls.s__isLocalStorageModalOpen(false)
+              calls.s__isSelectedModalOpen(false)
             }}
           >
             X
           </button>
 
-        <div className="w-100 flex-col tx-white pt-8">
-            <div className="flex-wrap gap-2">
+        <div className="w-100 flex-col tx-white py-8  flex-justify-start  autoverflow-y"
+          style={{maxHeight:"70vh"}}
+        >
+            <div className="flex-wrap h-100 gap-2">
             {!!state.pairs && state.pairs.map((item:any,index:number)=>{
-                return (<div key={index}>
-                    <div className="tx-xxl   bord-r-100"
+              const baseToken = "usdt".toUpperCase()
+              console.log("state.urlStateKeys", state.urlState)
+              const theSymbolsOfUrl = state.urlStateKeys.map((aPosCode:string)=>{
+                return state.urlState[aPosCode].symbol
+              })
+              console.log("theSymbolsOfUrl", theSymbolsOfUrl)
+              const foundToken = theSymbolsOfUrl.includes(`${item}${baseToken}`.toUpperCase()) 
+              console.log("state", item, foundToken)
+                // conso
+                // {state.urlStateKeys.includes(state.gridData[item].posCode)}
+                if (foundToken) {
+                  return (<div key={index}></div>)
+                }
+                return (<div key={index}
+                    onClick={()=>{triggerSelectPair(`${item}${baseToken}`)}}
+                >
+                    <div className="tx-lx   bord-r-100"
                         style={{padding:"1px", 
                         background:`linear-gradient(0deg, ${_StandardTokensGradients[item] || "#998877,#447799"})`}}
                     >
                         <div className="w-150px h-150px bord-r-100 bg-black flex-center opaci-chov--75">
-                            asd
+                            {item}
+                            
                         </div>
                     </div>
-                    <div className="Q_xs tx-lg">asd</div>
+                    
                 </div>)
             })}
             </div>

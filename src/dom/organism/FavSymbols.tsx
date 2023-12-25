@@ -115,7 +115,7 @@ export function FavSymbols({ state, calls }: any) {
                 >
                   {item.token0}
                 </div>
-                <div className="tx-roman tx-mdl _ddb pl-1 flex-col"
+                <div className="tx-roman tx-mdl  pl-1 flex-col"
                   onClick={()=>{editSingleToken(item, "floor")}}
                 >
                   {!!item.floor && <>
@@ -123,7 +123,7 @@ export function FavSymbols({ state, calls }: any) {
                   </>}
                 </div>
                 <div className="flex-col">-</div>
-                <div className="tx-roman tx-mdl _ddr pl-1 flex-col"
+                <div className="tx-roman tx-mdl  pl-1 flex-col"
                   onClick={()=>{editSingleToken(item, "roof")}}
                 >
                   {!!item.roof && <>

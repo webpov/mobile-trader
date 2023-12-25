@@ -221,10 +221,10 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
             state={{pairs:StandardTokens,
               LS_favs:lsData.LS_favs, LS_publicSecretKeys,
               focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,
-              urlStateKeys:urlp.keysArray,
+              urlStateKeys:urlp.keysArray,urlState: urlp.gridData
             }} 
             calls={{
-              editSingleToken,
+              editSingleToken,addTileToUrl,
               s__isSelectedModalOpen,triggerCloneFromUrl,
               s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
               s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, isLogsFilled,
@@ -490,7 +490,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         <div className="pb-4 tx-lg tx-center">URL <br /> Grid</div>
         <div className="flex-col w-90 tx-lg">
           <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
-            calls={{addTileToUrl}}
+            calls={{addTileToUrl, s__isSelectedModalOpen}}
           />
         </div>
       </div>

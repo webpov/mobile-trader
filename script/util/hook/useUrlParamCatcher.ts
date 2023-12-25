@@ -216,9 +216,9 @@ const keysArray = useMemo(()=>{
       }
       builtObj[element] = refArray[element]
       const token0 = (
-        refArray[element].symbol.includes(reftoken)
-          ? refArray[element].symbol.replace(reftoken,"")
-          : refArray[element].symbol
+        refArray[element].symbol.toUpperCase().includes(reftoken.toUpperCase())
+          ? refArray[element].symbol.toUpperCase().replace(reftoken.toUpperCase(),"")
+          : refArray[element].symbol.toUpperCase()
       )
       builtObj[element].token0 = token0
     }
