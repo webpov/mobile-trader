@@ -30,7 +30,7 @@ export default function PackTabsScene() {
   function generateBoxPositions(count: number, interval: number, zigzagAmplitude: number=0) {
     const positions = [];
     for (let i = 0; i < count; i++) {
-      const yPosition = selectedCubes.has(i) ? 2 : 0; 
+      const yPosition = selectedCubes.has(i) ? 1 : 0; 
       const xPosition = (i % 2 === 0) ? -zigzagAmplitude : zigzagAmplitude;
       positions.push([xPosition, yPosition, i * interval]);
     }
@@ -56,10 +56,10 @@ export default function PackTabsScene() {
       <Canvas
         style={{ maxWidth: "100vw", height: "100%" }}
         shadows
-        camera={{ fov: 10, position: [0, isSmallDevice ? 12 : 8, isSmallDevice ? 12 : 8] }}
+        camera={{ fov: 10, position: [0, isSmallDevice ? 16 : 10, isSmallDevice ? 16 : 10] }}
         gl={{ preserveDrawingBuffer: true }}
       >
-        <FixedScrollingCamera zThreshold={isSmallDevice ? 12 : 8} />
+        <FixedScrollingCamera zThreshold={isSmallDevice ? 16 : 10} />
         
         <ambientLight intensity={0.02} />
         <pointLight position={[6, 8, 4]} intensity={2} distance={20} />
