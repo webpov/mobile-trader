@@ -33,25 +33,28 @@ export const FixedScrollingCamera = ({zThreshold=12}:{zThreshold?:number}) => {
       return () => window.removeEventListener('wheel', handleScroll);
     }, [camera]);
   
-    // Handle touch events for swipes (inverted for mobile)
-    useEffect(() => {
-      const handleTouchStart = (e: TouchEvent) => {
-        prevTouchY.current = e.touches[0].clientY;
-      };
+// Handle touch events for swipes (inverted for mobile)
+useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      e.preventDefault();  // Prevent default behavior like pull-to-refresh
+      prevTouchY.current = e.touches[0].clientY;
+    };
   
-      const handleTouchMove = (e: TouchEvent) => {
-        const deltaY = prevTouchY.current - e.touches[0].clientY; // Inverted direction
-        moveCamera(deltaY * 0.01); // Adjust sensitivity as needed
-        prevTouchY.current = e.touches[0].clientY;
-      };
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();  // Prevent default behavior like pull-to-refresh
+      const deltaY = prevTouchY.current - e.touches[0].clientY; // Inverted direction
+      moveCamera(deltaY * 0.01); // Adjust sensitivity as needed
+      prevTouchY.current = e.touches[0].clientY;
+    };
   
-      window.addEventListener('touchstart', handleTouchStart);
-      window.addEventListener('touchmove', handleTouchMove);
-      return () => {
-        window.removeEventListener('touchstart', handleTouchStart);
-        window.removeEventListener('touchmove', handleTouchMove);
-      };
-    }, [camera]);
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [camera]);
+  
   
     // Handle mouse drag events
     useEffect(() => {
