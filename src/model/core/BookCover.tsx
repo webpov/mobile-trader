@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 
-export default function BankRoof({
+export default function BookCover({
     color="#afaaaa",
     position = [0, 0, -10],
     points = null,

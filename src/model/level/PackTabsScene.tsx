@@ -11,7 +11,8 @@ import * as THREE from 'three'
 
 
 
-import BankRoof from "../core/BankRoof";
+import BookCover from "../core/BookCover";
+import DynaText from "../core/DynaText";
 
 export const FixedScrollingCamera = ({zThreshold=12}:{zThreshold?:number}) => {
   const { camera, scene } = useThree();
@@ -160,32 +161,56 @@ export default function PackTabsScene() {
       >
         <FixedScrollingCamera zThreshold={isSmallDevice ? 16 : 13} />
         <ambientLight intensity={0.02} />
-        <pointLight position={[6, 8, 4]} intensity={2} distance={20} />
-
+        {/* <pointLight position={[6, 8, 4]} intensity={2} distance={20} /> */}
         {boxPositions.map((position, index) => (
-          <group key={index}>
-            <RoundedBox
-              castShadow
-              receiveShadow
-              position={new THREE.Vector3(...position)}
-              args={[1, 1.5, 0.2]}
-              onPointerDown={(e) => {e.stopPropagation(); toggleCubeSelection(index);}}
-            >
-              <meshStandardMaterial color={selectedCubes.has(index) ? "grey" : "lightgrey"} />
-              
-            </RoundedBox>
-            {selectedCubes.has(index) ? <>
-              <group position={new THREE.Vector3(...position)}>
-                <Box args={[.85, 1, 0.05]} position={[0,0.15,0.1]} castShadow receiveShadow>
-                  <meshStandardMaterial color="lightgrey" />
-                </Box>
-              </group>
-            </> : <>
-              <group position={new THREE.Vector3(...position)}></group>
-            </>}
-            {/* Other components like BankRoof can be added here if needed */}
+  <group key={index} position={[-0.5,0,0]}>
+    <RoundedBox
+      castShadow
+      receiveShadow
+      position={new THREE.Vector3(...position)}
+      args={[1, 1.5, 0.2]}
+      onPointerDown={(e) => {e.stopPropagation(); toggleCubeSelection(index);}}
+    >
+      <meshStandardMaterial color={!selectedCubes.has(index) ? "lightgrey" : "white"} />
+    </RoundedBox>
+    {selectedCubes.has(index) && (
+      <group position={new THREE.Vector3(...position)}>
+        {[...Array(5)].map((_, row) => (
+          <group key={row}>
+            <Box args={[0.15, 0.12, 0.02]} position={[0.9, 0.5 - 0.25 * row, 0.13]} castShadow receiveShadow>
+              <meshStandardMaterial color={['red', 'green', 'blue', 'yellow', 'purple'][row]} />
+            </Box>
+            <Box args={[.85, 0.2, 0.05]} position={[1.2, 0.5 - 0.25 * row, 0.1]} castShadow receiveShadow>
+              <meshStandardMaterial color="black" />
+            </Box>
           </group>
         ))}
+      </group>
+    )}
+    
+    <group position={[0, 0, 0.13]} rotation={[0,0,0]}>
+    <group position={new THREE.Vector3(...position)} rotation={[Math.PI/2,0,0]}>
+  
+              
+  
+  <DynaText text={`#${index}`}  color="#000" emissive="#000"
+                font={0.5} position={[0,0,0.05]}
+              />
+              <DynaText text={`Book`}  color="#000" emissive="#000"
+              font={0.2} position={[0,0,-0.4]}
+            />
+              </group>
+              </group>
+
+
+    <group position={[0.48, -0.24, 0]}>
+      <group scale={[0.01,0.1,0.1]} position={new THREE.Vector3(...position)} rotation={[Math.PI/2, 0, Math.PI/2]}>
+        <BookCover color={!selectedCubes.has(index) ? "grey" : "lightgrey"} />
+      </group>
+    </group>
+  </group>
+))}
+
       </Canvas>
     </div>
   );
