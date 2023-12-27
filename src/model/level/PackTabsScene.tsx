@@ -10,16 +10,103 @@ import { useUrlParamCatcher } from "@/../script/util/hook/useUrlParamCatcher";
 import * as THREE from 'three'
 
 
-import { FixedScrollingCamera } from "../core/FixedScrollingCamera";
+
 import BankRoof from "../core/BankRoof";
 
+export const FixedScrollingCamera = ({zThreshold=12}:{zThreshold?:number}) => {
+  const { camera, scene } = useThree();
+  const lightRef = useRef<any>(); // Ref for the light
+
+  // Function to handle camera movement
+  const moveCamera = (deltaZ: number) => {
+      if (camera.position.z + deltaZ < zThreshold) {return}
+      camera.position.z += deltaZ;
+
+      // Move the light at half the speed of the camera
+      if (lightRef.current) {
+          lightRef.current.position.z += deltaZ / 1.5;
+      }
+  };
+
+  const prevTouchY = useRef<number>(0);
+  const prevMouseY = useRef<number>(0);
+  const isDragging = useRef<boolean>(false);
+
+  // Handle scroll event
+  useEffect(() => {
+    const handleScroll = (e: WheelEvent) => {
+      moveCamera(e.deltaY * 0.003); // Adjust sensitivity as needed
+    };
+
+    window.addEventListener('wheel', handleScroll);
+    return () => window.removeEventListener('wheel', handleScroll);
+  }, [camera]);
+
+// Handle touch events for swipes (inverted for mobile)
+useEffect(() => {
+  const handleTouchStart = (e: TouchEvent) => {
+    e.preventDefault();  // Prevent default behavior like pull-to-refresh
+    prevTouchY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    e.preventDefault();  // Prevent default behavior like pull-to-refresh
+    const deltaY = prevTouchY.current - e.touches[0].clientY; // Inverted direction
+    moveCamera(deltaY * 0.01); // Adjust sensitivity as needed
+    prevTouchY.current = e.touches[0].clientY;
+  };
+
+  window.addEventListener('touchstart', handleTouchStart, { passive: false });
+  window.addEventListener('touchmove', handleTouchMove, { passive: false });
+  return () => {
+    window.removeEventListener('touchstart', handleTouchStart);
+    window.removeEventListener('touchmove', handleTouchMove);
+  };
+}, [camera]);
+
+
+  // Handle mouse drag events
+  useEffect(() => {
+    const handleMouseDown = (e: MouseEvent) => {
+      prevMouseY.current = e.clientY;
+      isDragging.current = true;
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging.current) {
+        const deltaY = prevMouseY.current - e.clientY;
+        moveCamera(deltaY * 0.01);
+        prevMouseY.current = e.clientY;
+      }
+    };
+
+    const handleMouseUp = () => {
+      isDragging.current = false;
+    };
+
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [camera]);
+
+  useFrame(() => {
+    // Lock all other camera angles here if needed
+  });
+
+  return (<>
+      <group>
+          <pointLight ref={lightRef} position={[6, 8, 4]} intensity={2} distance={20} />
+      </group>
+  </>); 
+};
+
 export default function PackTabsScene() {
-  
-  const $ltfChart:any = useRef()
-  const $htfChart:any = useRef()
-
-
-  const searchParams = useSearchParams();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const [mounted, setMounted] = useState(false);
   const [selectedCubes, setSelectedCubes] = useState(new Set());
@@ -27,6 +114,7 @@ export default function PackTabsScene() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
 
   function generateBoxPositions(count: number, interval: number, zigzagAmplitude: number=0) {
     const positions = [];
@@ -37,10 +125,8 @@ export default function PackTabsScene() {
     }
     return positions;
   }
-  
-  const boxPositions = generateBoxPositions(15, 1,0.3);
-
-  function toggleCubeSelection(index: number) {
+  const boxPositions = generateBoxPositions(15, 1, 0.3);
+  function toggleCubeSelection(index:any) {
     const newSelection = new Set(selectedCubes);
     if (newSelection.has(index)) {
       newSelection.delete(index);
@@ -61,39 +147,26 @@ export default function PackTabsScene() {
         gl={{ preserveDrawingBuffer: true }}
       >
         <FixedScrollingCamera zThreshold={isSmallDevice ? 16 : 13} />
-        {/* <OrbitControls /> */}
-
-        <pointLight  position={[6, 8, 4]} intensity={2} distance={20} />
-        
         <ambientLight intensity={0.02} />
+        <pointLight position={[6, 8, 4]} intensity={2} distance={20} />
 
         {boxPositions.map((position, index) => (
           <group key={index}>
-            <group position={[0.48, -0.24, 0]}>
-              <group scale={[0.01,0.1,0.1]} position={new THREE.Vector3(...position)} rotation={[Math.PI/2, 0, Math.PI/2]}>
-                <BankRoof color={selectedCubes.has(index) ? "pink" : "grey"} />
-              </group>
-            </group>
-              <RoundedBox
-              
-                castShadow
-                receiveShadow
-                rotation={[0, 0, 0]}
-                position={new THREE.Vector3(...position)}
-                args={[1, 1.5, 0.2]}
-                onDoubleClick={(e:any) => {e.stopPropagation(); toggleCubeSelection(index)}}
-              >
-                <meshStandardMaterial color={selectedCubes.has(index) ? "red" : "white"} />
-              </RoundedBox>
+            <RoundedBox
+              castShadow
+              receiveShadow
+              position={new THREE.Vector3(...position)}
+              args={[1, 1.5, 0.2]}
+              onDoubleClick={(e) => {e.stopPropagation(); toggleCubeSelection(index);}}
+            >
+              <meshStandardMaterial color={selectedCubes.has(index) ? "red" : "white"} />
+            </RoundedBox>
+            {/* Other components like BankRoof can be added here if needed */}
           </group>
         ))}
-
-
-
-
       </Canvas>
     </div>
-  )
+  );
 }
 
 
