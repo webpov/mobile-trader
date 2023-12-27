@@ -171,8 +171,18 @@ export default function PackTabsScene() {
               args={[1, 1.5, 0.2]}
               onPointerDown={(e) => {e.stopPropagation(); toggleCubeSelection(index);}}
             >
-              <meshStandardMaterial color={selectedCubes.has(index) ? "red" : "white"} />
+              <meshStandardMaterial color={selectedCubes.has(index) ? "grey" : "lightgrey"} />
+              
             </RoundedBox>
+            {selectedCubes.has(index) ? <>
+              <group position={new THREE.Vector3(...position)}>
+                <Box args={[.85, 1, 0.05]} position={[0,0.15,0.1]} castShadow receiveShadow>
+                  <meshStandardMaterial color="lightgrey" />
+                </Box>
+              </group>
+            </> : <>
+              <group position={new THREE.Vector3(...position)}></group>
+            </>}
             {/* Other components like BankRoof can be added here if needed */}
           </group>
         ))}
