@@ -116,6 +116,18 @@ export default function PackTabsScene() {
   }, []);
 
 
+  const [lastTap, setLastTap] = useState(0);
+
+  function handleDoubleTap(index:number) {
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    if (tapLength < 500 && tapLength > 0) {
+      // Double tap detected
+      toggleCubeSelection(index);
+    }
+    setLastTap(currentTime);
+  }
+
   function generateBoxPositions(count: number, interval: number, zigzagAmplitude: number=0) {
     const positions = [];
     for (let i = 0; i < count; i++) {
@@ -151,19 +163,19 @@ export default function PackTabsScene() {
         <pointLight position={[6, 8, 4]} intensity={2} distance={20} />
 
         {boxPositions.map((position, index) => (
-          <group key={index}>
-            <RoundedBox
-              castShadow
-              receiveShadow
-              position={new THREE.Vector3(...position)}
-              args={[1, 1.5, 0.2]}
-              onDoubleClick={(e) => {alert();e.stopPropagation(); toggleCubeSelection(index);}}
-            >
-              <meshStandardMaterial color={selectedCubes.has(index) ? "red" : "white"} />
-            </RoundedBox>
-            {/* Other components like BankRoof can be added here if needed */}
-          </group>
-        ))}
+    <group key={index}>
+      <RoundedBox
+        castShadow
+        receiveShadow
+        position={new THREE.Vector3(...position)}
+        args={[1, 1.5, 0.2]}
+        onClick={() => handleDoubleTap(index)} // Replace onDoubleClick with onClick
+      >
+        <meshStandardMaterial color={selectedCubes.has(index) ? "red" : "white"} />
+      </RoundedBox>
+      {/* Other components like BankRoof can be added here if needed */}
+    </group>
+  ))}
       </Canvas>
     </div>
   );
