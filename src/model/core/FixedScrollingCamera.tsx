@@ -29,8 +29,8 @@ export const FixedScrollingCamera = ({zThreshold=12}:{zThreshold?:number}) => {
         moveCamera(e.deltaY * 0.003); // Adjust sensitivity as needed
       };
   
-      window.addEventListener('wheel', handleScroll);
-      return () => window.removeEventListener('wheel', handleScroll);
+      // document.getElementById('packFrame')?.addEventListener('wheel', handleScroll);
+      // return () => document.getElementById('packFrame')?.removeEventListener('wheel', handleScroll);
     }, [camera]);
   
 // Handle touch events for swipes (inverted for mobile)
@@ -47,11 +47,11 @@ useEffect(() => {
       prevTouchY.current = e.touches[0].clientY;
     };
   
-    window.addEventListener('touchstart', handleTouchStart, { passive: false });
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    // document.getElementById('packFrame')?.addEventListener('touchstart', handleTouchStart, { passive: false });
+    // document.getElementById('packFrame')?.addEventListener('touchmove', handleTouchMove, { passive: false });
     return () => {
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
+      // document.getElementById('packFrame')?.removeEventListener('touchstart', handleTouchStart);
+      // document.getElementById('packFrame')?.removeEventListener('touchmove', handleTouchMove);
     };
   }, [camera]);
   
@@ -75,14 +75,14 @@ useEffect(() => {
         isDragging.current = false;
       };
   
-      window.addEventListener('mousedown', handleMouseDown);
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
+      // document.getElementById('packFrame')?.addEventListener('mousedown', handleMouseDown);
+      // document.getElementById('packFrame')?.addEventListener('mousemove', handleMouseMove);
+      // document.getElementById('packFrame')?.addEventListener('mouseup', handleMouseUp);
   
       return () => {
-        window.removeEventListener('mousedown', handleMouseDown);
-        window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('mouseup', handleMouseUp);
+        // document.getElementById('packFrame')?.removeEventListener('mousedown', handleMouseDown);
+        // document.getElementById('packFrame')?.removeEventListener('mousemove', handleMouseMove);
+        // document.getElementById('packFrame')?.removeEventListener('mouseup', handleMouseUp);
       };
     }, [camera]);
   

@@ -28,7 +28,7 @@ export default function WebPackStage({}:any) {
     </>}
 
     
-    <div className='flex-row flex-align-stretch tx-white w-95 z-10'>
+    <div className='flex-row flex-align-stretch tx-white w-95 z-10' >
         <div className='Q_md_x mt-4 w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
           <div className="pb-4 tx-center">Important <small>Links</small> </div>
           <div className="flex-col w-90">
@@ -51,7 +51,7 @@ export default function WebPackStage({}:any) {
           </a>
           </div>
         </div>
-      <div className='tx-roman flex flex-align-stretch flex-1 mt-4 flex-center pos-rel'>
+      <div className='tx-roman flex flex-align-stretch flex-1 mt-4 flex-center pos-rel' >
         {"chart" == "chart" && <>
           <div className="w-95  pos-rel bord-r-25 h-100" style={{minHeight:"75vh"}}>
             <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  h-100'
