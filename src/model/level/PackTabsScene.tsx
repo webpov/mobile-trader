@@ -56,13 +56,12 @@ export default function PackTabsScene() {
       <Canvas
         style={{ maxWidth: "100vw", height: "100%" }}
         shadows
-        camera={{ fov: 10, position: [0, isSmallDevice ? 16 : 10, isSmallDevice ? 16 : 10] }}
+        camera={{ fov: 10, position: [0, isSmallDevice ? 18 : 10, isSmallDevice ? 18 : 10] }}
         gl={{ preserveDrawingBuffer: true }}
       >
-        <FixedScrollingCamera zThreshold={isSmallDevice ? 16 : 10} />
+        <FixedScrollingCamera zThreshold={isSmallDevice ? 18 : 10} />
         
         <ambientLight intensity={0.02} />
-        <pointLight position={[6, 8, 4]} intensity={2} distance={20} />
 
         {boxPositions.map((position, index) => (
           <RoundedBox

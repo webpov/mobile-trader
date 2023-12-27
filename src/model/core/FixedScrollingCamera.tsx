@@ -5,21 +5,23 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 
 export const FixedScrollingCamera = ({zThreshold=12}:{zThreshold?:number}) => {
-    const { camera } = useThree();
-    const prevTouchY = useRef<number>(0);
-    const prevMouseY = useRef<number>(0);
-    const isDragging = useRef<boolean>(false);
-  
+    const { camera, scene } = useThree();
+    const lightRef = useRef<any>(); // Ref for the light
+
     // Function to handle camera movement
     const moveCamera = (deltaZ: number) => {
         if (camera.position.z + deltaZ < zThreshold) {return}
-        // console.log("camera.position.z", camera.position.z)
-        if (camera.position.z < zThreshold) {
-      
-            return camera.position.z = zThreshold
+        camera.position.z += deltaZ;
+
+        // Move the light at half the speed of the camera
+        if (lightRef.current) {
+            lightRef.current.position.z += deltaZ / 1.5;
         }
-      camera.position.z += deltaZ;
     };
+
+    const prevTouchY = useRef<number>(0);
+    const prevMouseY = useRef<number>(0);
+    const isDragging = useRef<boolean>(false);
   
     // Handle scroll event
     useEffect(() => {
@@ -85,7 +87,11 @@ export const FixedScrollingCamera = ({zThreshold=12}:{zThreshold?:number}) => {
       // Lock all other camera angles here if needed
     });
   
-    return null; // This component does not render anything
+    return (<>
+        <group>
+            <pointLight ref={lightRef} position={[6, 8, 4]} intensity={2} distance={20} />
+        </group>
+    </>); 
   };
   
   export default FixedScrollingCamera
