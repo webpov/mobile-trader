@@ -254,7 +254,8 @@ export default function PackTabsScene() {
     </RoundedBox>
     {selectedCubes.has(index) && (
       <group position={new THREE.Vector3(...position)}
-        onClick={()=>openLinkInThisTab(index)}
+        onPointerUp={()=>openLinkInThisTab(index)}
+        
       >
         
         <Box args={[.88,1.28, 0.02]} position={[1, 0, 0.1]} castShadow receiveShadow>

@@ -486,6 +486,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
     <div className="mt-6 Q_sm_x"></div>
     <div className="flex-wrap w-100 mt-2 Q_xs_md mb-100 flex-align-start gap-2 z-100">
+      
       <div className='Q_xs_md  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
         <div className="pb-4 tx-lg tx-center">URL <br /> <small>Favorites</small> </div>
         <div className="flex-col w-90 tx-lg">
@@ -535,6 +536,17 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </button>
         </div>
       </div>
+      <div className='Q_xs_md  w-100 mb-8 flex-col flex-justify-start tx-white'>
+      <a href="/web/pack">
+        <button 
+  className="opaci-chov--50 neu-convex tx-white tx-lg pa-1 py-3 bord-r-15 border-white-50 tx-bold-8 tx-altfont-1 underline"
+
+  
+>
+  Pack
+</button>
+</a>
+        </div>
     </div>
 </>}
     {/* <ODivider className="Q_xs_xl w-90 mt-4" /> */}
