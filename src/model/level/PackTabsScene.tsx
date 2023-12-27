@@ -1,5 +1,5 @@
 "use client"
-import { Box, RoundedBox, MapControls } from "@react-three/drei";
+import { Box, RoundedBox, MapControls, OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useState, useEffect, useRef } from "react";
 import { useMediaQuery } from "usehooks-ts";
@@ -11,6 +11,7 @@ import * as THREE from 'three'
 
 
 import { FixedScrollingCamera } from "../core/FixedScrollingCamera";
+import BankRoof from "../core/BankRoof";
 
 export default function PackTabsScene() {
   
@@ -56,25 +57,35 @@ export default function PackTabsScene() {
       <Canvas
         style={{ maxWidth: "100vw", height: "100%" }}
         shadows
-        camera={{ fov: 10, position: [0, isSmallDevice ? 18 : 10, isSmallDevice ? 18 : 10] }}
+        camera={{ fov: 10, position: [0, isSmallDevice ? 16 : 13, isSmallDevice ? 16 : 13] }}
         gl={{ preserveDrawingBuffer: true }}
       >
-        <FixedScrollingCamera zThreshold={isSmallDevice ? 18 : 10} />
+        <FixedScrollingCamera zThreshold={isSmallDevice ? 16 : 13} />
+        {/* <OrbitControls /> */}
+
+        <pointLight  position={[6, 8, 4]} intensity={2} distance={20} />
         
         <ambientLight intensity={0.02} />
 
         {boxPositions.map((position, index) => (
-          <RoundedBox
-            key={index}
-            castShadow
-            receiveShadow
-            rotation={[0, 0, 0]}
-            position={new THREE.Vector3(...position)}
-            args={[1, 1.5, 0.2]}
-            onDoubleClick={(e:any) => {e.stopPropagation(); toggleCubeSelection(index)}}
-          >
-            <meshStandardMaterial color={selectedCubes.has(index) ? "red" : "white"} />
-          </RoundedBox>
+          <group key={index}>
+            <group position={[0.48, -0.24, 0]}>
+              <group scale={[0.01,0.1,0.1]} position={new THREE.Vector3(...position)} rotation={[Math.PI/2, 0, Math.PI/2]}>
+                <BankRoof color={selectedCubes.has(index) ? "pink" : "grey"} />
+              </group>
+            </group>
+              <RoundedBox
+              
+                castShadow
+                receiveShadow
+                rotation={[0, 0, 0]}
+                position={new THREE.Vector3(...position)}
+                args={[1, 1.5, 0.2]}
+                onDoubleClick={(e:any) => {e.stopPropagation(); toggleCubeSelection(index)}}
+              >
+                <meshStandardMaterial color={selectedCubes.has(index) ? "red" : "white"} />
+              </RoundedBox>
+          </group>
         ))}
 
 
