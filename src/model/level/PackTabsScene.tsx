@@ -157,7 +157,7 @@ export default function PackTabsScene() {
               receiveShadow
               position={new THREE.Vector3(...position)}
               args={[1, 1.5, 0.2]}
-              onDoubleClick={(e) => {e.stopPropagation(); toggleCubeSelection(index);}}
+              onDoubleClick={(e) => {alert();e.stopPropagation(); toggleCubeSelection(index);}}
             >
               <meshStandardMaterial color={selectedCubes.has(index) ? "red" : "white"} />
             </RoundedBox>
