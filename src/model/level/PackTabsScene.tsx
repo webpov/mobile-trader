@@ -218,6 +218,15 @@ export default function PackTabsScene() {
       window.open(`https://${url}`, "_blank");
     }
   }
+  const openLinkInThisTab = (index:number) => {
+    
+    const url = theData_links[index]
+    if (url.startsWith("http")) {
+      window.location.href = url
+    } else {
+      window.location.href = `https://${url}`
+    }
+  }
   if (!mounted) return <LoadingFullScreen />;
 
   return (
@@ -244,14 +253,18 @@ export default function PackTabsScene() {
     </RoundedBox>
     {selectedCubes.has(index) && (
       <group position={new THREE.Vector3(...position)}
-        onClick={()=>openLinkInNewTab(index)}
+        onClick={()=>openLinkInThisTab(index)}
       >
+        
+        <Box args={[.88,1.28, 0.02]} position={[1, 0, 0.1]} castShadow receiveShadow>
+              <meshStandardMaterial color="grey" />
+            </Box>
         {[...Array(5)].map((_, row) => (
           <group key={row}>
-            <Box args={[0.15, 0.12, 0.02]} position={[0.9, 0.5 - 0.25 * row, 0.13]} castShadow receiveShadow>
+            <Box args={[0.15, 0.12, 0.02]} position={[0.7, 0.5 - 0.25 * row, 0.13]} castShadow receiveShadow>
               <meshStandardMaterial color={['red', 'green', 'blue', 'yellow', 'purple'][row]} />
             </Box>
-            <Box args={[.85, 0.2, 0.05]} position={[1.2, 0.5 - 0.25 * row, 0.1]} castShadow receiveShadow>
+            <Box args={[.85, 0.2, 0.05]} position={[1, 0.5 - 0.25 * row, 0.1]} castShadow receiveShadow>
               <meshStandardMaterial color="black" />
             </Box>
           </group>
