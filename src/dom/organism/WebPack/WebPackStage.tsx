@@ -1,4 +1,4 @@
-import PackTabsScene from "@/model/level/PackTabsScene";
+import PackTabsScene from "@/model/level/pack/PackTabsScene";
 
 export default function WebPackStage({}:any) {
     return (<>
