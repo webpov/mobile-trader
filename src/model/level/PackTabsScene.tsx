@@ -64,8 +64,6 @@ useEffect(() => {
     window.removeEventListener('touchmove', handleTouchMove);
   };
 }, [camera]);
-
-
   // Handle mouse drag events
   useEffect(() => {
     const handleMouseDown = (e: MouseEvent) => {
@@ -148,7 +146,78 @@ export default function PackTabsScene() {
     }
     setSelectedCubes(newSelection);
   }
-
+  const theData_names = [
+    "Jump",
+  "Run",
+  "Swim",
+  "Dance",
+  "Sing",
+  "Write",
+  "Cook",
+  "Paint",
+  "Laugh",
+  "Sleep",
+  "Explore",
+  "Climb",
+  "Read",
+  "Drive",
+  "Fly",
+  "Study",
+  "Play",
+  "Create",
+  "Surf",
+  "Hike",
+  "testname8",
+  "testname9",
+  "testname10",
+  "testname11",
+  "testname12",
+  "testname13",
+  "testname14",
+  "testname15",
+  "testname16",
+  "testname17",
+  "testname18",
+  "testname19",
+  ]
+  const theData_links = [
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+    "https://wtrade.vercel.app/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%2C%22token0%22%3A%22BTC%22%2C%22posCode%22%3A%22a0%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%2C%22token0%22%3A%22ETH%22%2C%22posCode%22%3A%22a1%22%7D&a2=%7B%22symbol%22%3A%22LINKUSDT%22%2C%22token0%22%3A%22LINK%22%2C%22posCode%22%3A%22a2%22%7D&a3=%7B%22symbol%22%3A%22INJUSDT%22%2C%22token0%22%3A%22INJ%22%2C%22posCode%22%3A%22a3%22%7D&b0=%7B%22symbol%22%3A%22SOLUSDT%22%2C%22token0%22%3A%22SOL%22%2C%22posCode%22%3A%22b0%22%7D&b1=%7B%22symbol%22%3A%22MATICUSDT%22%2C%22token0%22%3A%22MATIC%22%2C%22posCode%22%3A%22b1%22%7D",
+  ]
+  const openLinkInNewTab = (index:number) => {
+    const url = theData_links[index]
+    if (url.startsWith("http")) {
+      window.open(url, "_blank");
+    } else {
+      window.open(`https://${url}`, "_blank");
+    }
+  }
   if (!mounted) return <LoadingFullScreen />;
 
   return (
@@ -174,7 +243,9 @@ export default function PackTabsScene() {
       <meshStandardMaterial color={!selectedCubes.has(index) ? "lightgrey" : "white"} />
     </RoundedBox>
     {selectedCubes.has(index) && (
-      <group position={new THREE.Vector3(...position)}>
+      <group position={new THREE.Vector3(...position)}
+        onClick={()=>openLinkInNewTab(index)}
+      >
         {[...Array(5)].map((_, row) => (
           <group key={row}>
             <Box args={[0.15, 0.12, 0.02]} position={[0.9, 0.5 - 0.25 * row, 0.13]} castShadow receiveShadow>
@@ -191,13 +262,16 @@ export default function PackTabsScene() {
     <group position={[0, 0, 0.13]} rotation={[0,0,0]}>
     <group position={new THREE.Vector3(...position)} rotation={[Math.PI/2,0,0]}>
   
+    <DynaText text={`${theData_names[index] || 'Book'}`} color="#000" emissive="#000"
+                  font={0.2} position={[0,0,-0.5]}
+        />
               
   
-  <DynaText text={`#${index}`}  color="#000" emissive="#000"
-                font={0.5} position={[0,0,0.05]}
+  <DynaText text={`#${index}`}  color="#666" emissive="#000"
+                font={0.5} position={[0,0,0.5]}
               />
-              <DynaText text={`Book`}  color="#000" emissive="#000"
-              font={0.2} position={[0,0,-0.4]}
+        <DynaText text={`Tier Pack`}  color="#333" emissive="#000"
+              font={0.1} position={[0,0,0.2]}
             />
               </group>
               </group>
