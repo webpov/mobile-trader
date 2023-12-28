@@ -39,6 +39,8 @@ export function FavModalContent({ state, calls }: any) {
           {state.LS_favs && <>
             <FavSymbols
               state={{
+                pricesObj: state.pricesObj,
+                ltfClosingList: state.ltfClosingList,
                 urlStateKeys: state.urlStateKeys,
                 LS_favs:state.LS_favs,
                 LS_publicSecretKeys: state.LS_publicSecretKeys,
@@ -56,6 +58,7 @@ export function FavModalContent({ state, calls }: any) {
                 s__isChartLoading: calls.s__isChartLoading,
                 s__tradeLogsObj: calls.s__tradeLogsObj,
                 triggerGetLogs: calls.triggerGetLogs,
+                exportLogs: calls.exportLogs,
                 isLogsFilled: calls.isLogsFilled,
                 triggerCloneFromUrl: calls.triggerCloneFromUrl,
               }}

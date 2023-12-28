@@ -208,6 +208,21 @@ export default function useSyncedKLines({state,calls}:any) {
     }, [focusSymbol, fuelPoints, startRotationTime, delayMsecs]);
 
 
+    const exportLogs = async (aSymbol:string) => {
+      console.log("aSymbolaSymbol", aSymbol)
+
+      const asdasd = `act as a professional bitcoin market researcher
+      analyze this simulated data and make a report:
+      the list is the closing daily prices of ${aSymbol} 
+      generate a only a support and a resistance level (floor and roof price) to trade for the next month
+      ${JSON.stringify(ltfClosingList.slice(150))}
+      `
+      console.log(asdasd)
+      
+      // ltfClosingList.slice(Math.max(ltfClosingList.length - 5, 1))
+      // console.log(JSON.stringify(ltfClosingList.slice(150)) )
+      // console.log(JSON.stringify(ltfClosingList) )
+    }
     const triggerGetLogs = async (aSymbol:string) => {
       let theChosenSymbol = aSymbol || focusSymbol
       s__isFetchingLogs(true)
@@ -241,7 +256,7 @@ export default function useSyncedKLines({state,calls}:any) {
       tradeLogsObj, s__tradeLogsObj, triggerGetLogs,
       isFetchingLogs, s__isFetchingLogs,
       focusSymbol, s__focusSymbol,
-
+      exportLogs,
       isChartLoading, s__isChartLoading,
       ltfList, s__ltfList,
       ltfClosingList, s__ltfClosingList,

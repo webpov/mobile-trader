@@ -60,7 +60,9 @@ export default function AppFrameStage({}:any) {
     lsData.s__LS_favs(returnObj)
     window.location.reload()
   }
+  //
   const {
+      
       fuelPoints, s__fuelPoints,
       ytdObj, s__ytdObj,
       focusSymbol, s__focusSymbol,
@@ -72,7 +74,7 @@ export default function AppFrameStage({}:any) {
       htfClosingList, s__htfClosingList,
       selectedSymbolYTDSummary,
       selectedSymbolLTFSummary,
-      tradeLogsObj, s__tradeLogsObj, triggerGetLogs,
+      tradeLogsObj, s__tradeLogsObj, triggerGetLogs, exportLogs,
       isFetchingLogs, s__isFetchingLogs,
       // fullmidtermList, s__fullmidtermList,
   } = useSyncedKLines({state:{
@@ -86,8 +88,10 @@ export default function AppFrameStage({}:any) {
 
   const editSingleToken = (theItem:any, side:string) => {
     // console.log(`editSingleToken(theItem, side)`, theItem, side)
+    const ratioMul = side !== "roof" ? 0.8 : 1.2
+    const baseprice:any = (pricesObj[theItem.symbol]*ratioMul).toFixed(1)
 
-    const selectedLevel = prompt("Enter price", "")
+    const selectedLevel = prompt("Enter price", baseprice)
     if (!selectedLevel) { return }
 
     const posCode = theItem.posCode
@@ -191,13 +195,13 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
             state={{
               LS_favs:lsData.LS_favs, LS_publicSecretKeys,
               focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,
-              urlStateKeys:urlp.keysArray,
+              urlStateKeys:urlp.keysArray, ltfClosingList, pricesObj,
             }} 
             calls={{
               editSingleToken,
               s__isLocalStorageModalOpen,triggerCloneFromUrl,
               s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
-              s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, isLogsFilled,
+              s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, exportLogs, isLogsFilled,
             }}
           /> 
         </div>
@@ -228,7 +232,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
               editSingleToken,addTileToUrl,
               s__isSelectedModalOpen,triggerCloneFromUrl,
               s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
-              s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, isLogsFilled,
+              s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, exportLogs, isLogsFilled,
             }}
           /> 
         </div>

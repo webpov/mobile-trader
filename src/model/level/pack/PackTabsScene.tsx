@@ -109,6 +109,12 @@ export default function PackTabsScene() {
     >
       <meshStandardMaterial color={!selectedCubes.has(index) ? "lightgrey" : "white"} />
     </RoundedBox>
+    
+    <group position={[0,1.3,-0.3]}>
+            <DynaText text={`${"Tap\na Book"}`} color="#fff" emissive="#fff" textAlign="center"
+              font={0.5} position={[0,0,0.13]} rotation={[0,0,0]} hoverSpeed={2}
+            />
+          </group>
     {selectedCubes.has(index) && (
       <group position={new THREE.Vector3(...position)}
         onPointerDown={()=>openLinkInThisTab(index)}
@@ -128,6 +134,7 @@ export default function PackTabsScene() {
            const Btokens:any = [];
            const Ctokens:any = [];
            const Dtokens:any = [];
+           const Etokens:any = [];
            urlParams.forEach((value, key) => {
             if (key.toLowerCase().startsWith('a')) {
               try {
@@ -169,12 +176,23 @@ export default function PackTabsScene() {
                 // Handle any parsing errors
               }
             }
+            if (key.toLowerCase().startsWith('e')) {
+              try {
+                const jsonValue = JSON.parse(value);
+                if (jsonValue && jsonValue.symbol) {
+                  Etokens.push(jsonValue.symbol);
+                }
+              } catch (e) {
+                // Handle any parsing errors
+              }
+            }
           });
           
            const tokenStringA = Atokens.join(', ')?.replace(/USDT/g,"")
            const tokenStringB = Btokens.join(', ')?.replace(/USDT/g,"")
            const tokenStringC = Ctokens.join(', ')?.replace(/USDT/g,"")
            const tokenStringD = Dtokens.join(', ')?.replace(/USDT/g,"")
+           const tokenStringE = Etokens.join(', ')?.replace(/USDT/g,"")
 
           
           return(
@@ -202,6 +220,11 @@ export default function PackTabsScene() {
           </group>
             <group position={[1.08,-0.25,0]}>
             <DynaText text={`${tokenStringD}`} color="#fff" emissive="#fff" textAlign="start"
+              font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
+            />
+          </group>
+            <group position={[1.08,-0.5,0]}>
+            <DynaText text={`${tokenStringE}`} color="#fff" emissive="#fff" textAlign="start"
               font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
             />
           </group>

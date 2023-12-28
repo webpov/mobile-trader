@@ -106,6 +106,7 @@ export function FavSymbols({ state, calls }: any) {
   }
   
   const editSingleToken = (theItem:any, side:string) => {
+    // console.log("asds", state.pricesObj[theItem.symbol], )
     calls.editSingleToken(theItem, side)
   }
 
@@ -163,27 +164,33 @@ export function FavSymbols({ state, calls }: any) {
                 >
                   {item.token0}
                 </div>
-                <div className="tx-roman tx-mdl  pl-1 flex-col"
+                <div className="tx-roman tx-mdl  pl-1 flex-col w-min-50px"
                   onClick={()=>{editSingleToken(item, "floor")}}
                 >
                   {<>
-                    {item.floor || ""}
+                    {item.floor || "N/A"}
                   </>}
                 </div>
                 <div className="flex-col">-</div>
-                <div className="tx-roman tx-mdl  pl-1 flex-col"
+                <div className="tx-roman tx-mdl  pl-1 flex-col w-min-50px"
                   onClick={()=>{editSingleToken(item, "roof")}}
                 >
-                  {!!item.roof && <>
-                    {item.roof}
+                  {<>
+                    {item.roof || "N/A"}
                   </>}
                 </div>
-                <div className="flex-col">
+                <div className="flex-col gap-1">
                   {!!state.isFetchingLogs && <>
                     <button className={`tx-center  spin-${index+2}`}>
                       ...
                     </button>
                   </>}
+                  
+                  <button className={`bord-r-10 bg-trans tx-white tx-center opaci-chov--50 ${!!calls.isLogsFilled(item.symbol) ? "border-blue" : ""}` }
+                      onClick={()=>{calls.exportLogs(item.symbol)}}
+                    >
+                      Exp.
+                    </button>
                   {process.env.NODE_ENV !== 'production' && 
 
                   !state.isFetchingLogs && <>
@@ -222,7 +229,7 @@ export function FavSymbols({ state, calls }: any) {
         <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
           onClick={triggerCloneResetFavs}
         >
-          <div className="Q_sm_x tx-lgx">Clone & Reset</div>
+          <div className="Q_sm_x tx-md">Clone & Reset</div>
           <div className="Q_xs ">Clone & Reset</div>
         </button>
       }

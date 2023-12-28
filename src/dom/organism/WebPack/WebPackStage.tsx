@@ -32,14 +32,19 @@ export default function WebPackStage({}:any) {
         <div className='Q_md_x mt-4 w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
           <div className="pb-4 tx-center">Important <small>Links</small> </div>
           <div className="flex-col w-90">
-            <a href="/" className="flex-col tx-white nodeco">
+            <a href="http://webpov.vercel.app/" className="flex-col tx-white nodeco">
             <h2 className="mb-0 pb-0 flex-col bg-w-10 px-2 gap-2 box-shadow-9-b pt-2 bord-r-15 pb-3">
               <div>POV</div>
             </h2>
           </a>
-            <a href="/" className="flex-col tx-white nodeco">
+            <a href="http://wqub.vercel.app/" className="flex-col tx-white nodeco">
             <h2 className="mb-0 pb-0 flex-col bg-w-10 px-2 gap-2 box-shadow-9-b pt-2 bord-r-15 pb-3">
               <div>QUB</div>
+            </h2>
+          </a>
+            <a href="http://wtrade.vercel.app/" className="flex-col tx-white nodeco">
+            <h2 className="mb-0 pb-0 flex-col bg-w-10 px-2 gap-2 box-shadow-9-b pt-2 bord-r-15 pb-3">
+              <div>TRADE</div>
             </h2>
           </a>
           <hr className="w-50 mt-6" />

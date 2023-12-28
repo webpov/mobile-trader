@@ -77,6 +77,8 @@ export const StandardTokens = [
   "NEO",     // NEO
   "TKX",     // Tokenize Xchange
   "SNX",     // Synthetix
+  "SUI",     // 
+  "ROSE",     // 
 ];
 
 
@@ -159,7 +161,9 @@ export const StandardTokensGradients = {
   "KAVA": "#ffc3a0,#ffafbd",
   "NEO": "#8a2387,#e94057,#f27121",
   "TKX": "#fddb92,#d1fdff",
-  "SNX": "#f5f7fa,#c3cfe2"
+  "SNX": "#f5f7fa,#c3cfe2",
+  "SUI": "#fddb92,#d1fdff",
+  "ROSE": "#f5f7fa,#c3cfe2",
 }
 
 export const ShortHardcodedKLines = [

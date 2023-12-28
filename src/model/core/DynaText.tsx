@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import { Text } from '@react-three/drei';
 import { MeshBasicMaterial, MeshStandardMaterial, Vector3 } from 'three';
+import { useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
 
 export function FontText ({
   theFont = '/fonts/marko.ttf',
@@ -10,8 +12,8 @@ export function FontText ({
 
   return (
         
-        
-        <Text {...props} font={theFont} textAlign='left' 
+        // textAlign='left' 
+        <Text {...props} font={theFont} 
         >
         {children}
       </Text>
@@ -20,17 +22,25 @@ export function FontText ({
 
 
 export function DynaText ({
-  onClick= ()=> {},
+  onClick= ()=> {}, hoverSpeed=0,
   text="asd", position=new THREE.Vector3(), color , emissive="#000000", isSelected = false,font=0.35,
   textAlign="center",
   ...props
 }:any)  {
 
   const material = new THREE.MeshStandardMaterial({ color: color, emissive: emissive });
+  const $textGroup:any = useRef()
+  useFrame((state, delta) => {
+    if (!$textGroup.current) {
+      return
+    } 
+    if (!hoverSpeed) {
+      return
+    } 
+    $textGroup.current.position.y = Math.sin(hoverSpeed*state.clock.elapsedTime) /10
+  });
 
-
-
-  return (
+  return (<group ref={$textGroup}> 
       <FontText
         receiveShadow
         // castShadow
@@ -50,6 +60,7 @@ export function DynaText ({
       >
         {text}
       </FontText>
+    </group>
   );
 };
 export default DynaText
