@@ -58,6 +58,7 @@ export default function AppFrameStage({}:any) {
 
     // const returnValues = Object.keys(state.urlState).map((item,index)=>({...item, posCode:}))
     lsData.s__LS_favs(returnObj)
+    window.location.reload()
   }
   const {
       fuelPoints, s__fuelPoints,
