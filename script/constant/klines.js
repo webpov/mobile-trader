@@ -1,40 +1,84 @@
 export const StandardTokens = [
-  "BTC",
-  "ETH",
-  "LINK",
-  "RUNE",
-  "RNDR",
-  "MATIC",
-  "AAVE",
-  "DOT",
-  "KSM",
-  "PEPE",
-  "GRT",
-  "ADA",
-  "DOGE",
-  "BNB",
-  "AVAX",
-  "XRP",
-  "LTC",
-  "SHIB",
-  "UNI",
-  "XMR",
-  "ETC",
-  "FIL",
-  "OP",
-  "ARB",
-  "TIA",
-  "LUNC",
-  "FTM",
-  "MANA",
-  "AXS",
-  "CAKE",
-  "AR",
-  "INJ",
-  "TRB",
-  "SOL",
-  "JTO",
-]
+  "BTC",     // Bitcoin
+  "ETH",     // Ethereum
+  "USDT",    // Tether
+  "BNB",     // Binance Coin
+  "SOL",     // Solana
+  "XRP",     // XRP
+  "USDC",    // USD Coin
+  "ADA",     // Cardano
+  "LINK",    // Chainlink
+  "RUNE",    // THORChain
+  "RNDR",    // Render Token
+  "MATIC",   // Polygon
+  "AAVE",    // Aave
+  "DOT",     // Polkadot
+  "KSM",     // Kusama
+  "PEPE",    // Pepe
+  "GRT",     // The Graph
+  "AVAX",    // Avalanche
+  "LTC",     // Litecoin
+  "SHIB",    // Shiba Inu
+  "UNI",     // Uniswap
+  "XMR",     // Monero
+  "ETC",     // Ethereum Classic
+  "FIL",     // Filecoin
+  "OP",      // Optimism
+  "ARB",     // Arbitrum
+  "TIA",     // Celestia
+  "LUNC",    // Terra Classic
+  "FTM",     // Fantom
+  "MANA",    // Decentraland
+  "AXS",     // Axie Infinity
+  "CAKE",    // PancakeSwap
+  "AR",      // Arweave
+  "INJ",     // Injective Protocol
+  "TRB",     // Tellor
+  "SOL",     // Solana
+  "JTO",     // Just Token
+  "ENJ",     // Enjin Coin
+  "STETH",   // Lido Staked Ether
+  "TRX",     // TRON
+  "TON",     // Toncoin
+  "WBTC",    // Wrapped Bitcoin
+  "DAI",     // Dai
+  "BCH",     // Bitcoin Cash
+  "ATOM",    // Cosmos
+  "ICP",     // Internet Computer
+  "NEAR",    // NEAR Protocol
+  "XLM",     // Stellar
+  "HBAR",    // Hedera Hashgraph
+  "APT",     // Aptos
+  "CRO",     // Cronos
+  "STX",     // Stacks
+  "QNT",     // Quant
+  "MNT",     // Mantle
+  "TAO",     // Bittensor
+  "ALGO",    // Algorand
+  "EGLD",    // MultiversX
+  "FDUSD",   // First Digital USD
+  "BSV",     // Bitcoin SV
+  "RETH",    // Rocket Pool ETH
+  "FLOW",    // Flow
+  "MKR",     // Maker
+  "ORDI",    // ORDI
+  "MINA",    // Mina Protocol
+  "THETA",   // Theta Network
+  "BTT",     // BitTorrent
+  "SAND",    // The Sandbox
+  "OSMO",    // Osmosis
+  "WEMIX",   // WEMIX
+  "KCS",     // KuCoin Token
+  "GALA",    // Gala
+  "SEI",     // Sei Network
+  "EOS",     // EOS
+  "BUSD",    // Binance USD
+  "KAVA",    // Kava
+  "NEO",     // NEO
+  "TKX",     // Tokenize Xchange
+  "SNX",     // Synthetix
+];
+
 
 export const StandardTokensGradients = {
   "BTC": "#ad8ffa,#5d138c",
@@ -71,7 +115,51 @@ export const StandardTokensGradients = {
   "INJ": "#6779c6,#b975f7",
   "TRB": "#002005,#5501b5",
   "SOL": "#e3c3b2,#c9f55b",
-  "JTO": "#7b6720,#a5baaa"
+  "ENJ": "#e3c3b2,#c9f55b",
+  "JTO": "#7b6720,#a5baaa",
+  "USDT": "#76c8a6,#1e4877",
+  "USDC": "#7e4988,#e1a95f",
+  "STETH": "#3da9fc,#fabea7",
+  "TRX": "#ff9a8a,#ff3d71",
+  "TON": "#a1c4fd,#c2e9fb",
+  "WBTC": "#ff758c,#ff7eb3",
+  "DAI": "#36d1dc,#5b86e5",
+  "BCH": "#f7971e,#ffd200",
+  "ATOM": "#a8ff78,#78ffd6",
+  "ICP": "#acb6e5,#86fde8",
+  "NEAR": "#f4c4f3,#fc67fa",
+  "XLM": "#12c2e9,#c471ed,#f64f59",
+  "HBAR": "#f2d50f,#da0641",
+  "APT": "#c33764,#1d2671",
+  "CRO": "#6a11cb,#2575fc",
+  "STX": "#ff9966,#ff5e62",
+  "QNT": "#667eea,#764ba2",
+  "MNT": "#ff758c,#ff7eb3",
+  "MNT": "#0093e9,#80d0c7",
+  "TAO": "#ff9a8b,#ff6a88",
+  "ALGO": "#43e97b,#38f9d7",
+  "EGLD": "#fa709a,#fee140",
+  "FDUSD": "#30cfd0,#330867",
+  "BSV": "#8ec5fc,#e0c3fc",
+  "RETH": "#f093fb,#f5576c",
+  "FLOW": "#43cbff,#9708cc",
+  "MKR": "#ff758c,#ff7eb3",
+  "ORDI": "#85ffbd,#fffb7d",
+  "MINA": "#ffc3a0,#ffafbd",
+  "THETA": "#8a2387,#e94057,#f27121",
+  "BTT": "#fddb92,#d1fdff",
+  "SAND": "#f5f7fa,#c3cfe2",
+  "OSMO": "#4facfe,#00f2fe",
+  "WEMIX": "#43e97b,#38f9d7",
+  "KCS": "#fa709a,#fee140",
+  "GALA": "#30cfd0,#330867",
+  "SEI": "#8ec5fc,#e0c3fc",
+  "EOS": "#f093fb,#f5576c",
+  "BUSD": "#85ffbd,#fffb7d",
+  "KAVA": "#ffc3a0,#ffafbd",
+  "NEO": "#8a2387,#e94057,#f27121",
+  "TKX": "#fddb92,#d1fdff",
+  "SNX": "#f5f7fa,#c3cfe2"
 }
 
 export const ShortHardcodedKLines = [
