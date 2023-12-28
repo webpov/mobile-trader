@@ -11,7 +11,7 @@ export const TIERPACK_COLORS = [
     ["#c8ffda", "#78fe8d"], //  (layer2)
     ["#ffcfaf", "#d59872"], //  (gamefi)
     ["#94ff9a", "#34ff2a"], //  (metaverse)
-    ["#c9f9ff", "#97ebff"], //  (privacy)
+    ["#c9f9ff", "#77bbcf"], //  (privacy)
     ["#fd8287", "#ed1237"], //  (storage)
     ["#93f7ff", "#83d0ff"], //  (oracle)
 ]
