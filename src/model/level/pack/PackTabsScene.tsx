@@ -14,7 +14,7 @@ import * as THREE from 'three'
 import BookCover from "../../core/BookCover";
 import DynaText from "../../core/DynaText";
 import FixedScrollingCamera from "../../core/FixedScrollingCamera";
-import { TIERPACK_LINKS, TIERPACK_NAMES } from "./DEFAULT_PACKS";
+import { TIERPACK_LINKS, TIERPACK_NAMES, TIERPACK_COLORS } from "./DEFAULT_PACKS";
 
 export default function PackTabsScene() {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
@@ -230,7 +230,7 @@ export default function PackTabsScene() {
 
     <group position={[0.48, -0.24, 0]}>
       <group scale={[0.01,0.1,0.1]} position={new THREE.Vector3(...position)} rotation={[Math.PI/2, 0, Math.PI/2]}>
-        <BookCover color={!selectedCubes.has(index) ? "grey" : "lightgrey"} />
+        <BookCover color={!!selectedCubes.has(index) ? TIERPACK_COLORS[index][0] : TIERPACK_COLORS[index][1]} />
       </group>
     </group>
   </group>
