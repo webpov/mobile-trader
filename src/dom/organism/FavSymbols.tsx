@@ -13,9 +13,14 @@ export function FavSymbols({ state, calls }: any) {
   const [clipbloardValue, clipbloard__do] = useCopyToClipboard()
 
 
-    const triggerClearFavs =()=>{
-      calls.s__LS_favs([])
-    }
+  const triggerClearFavs =()=>{
+    calls.s__LS_favs([])
+  }
+
+  const triggerResetFavs =()=>{
+    calls.s__LS_favs([])
+    window.location.reload()
+  }
   useEffect(() => {
     s__hydrationSafeLoad(hydrationSafeLoad + 1);
   }, []);
@@ -191,7 +196,7 @@ export function FavSymbols({ state, calls }: any) {
           </div>);
         })}
       </div>
-
+        <div className="flex-center">
       {!!state.LS_favs.length &&
         <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
           onClick={triggerClearFavs}
@@ -200,6 +205,15 @@ export function FavSymbols({ state, calls }: any) {
           <div className="Q_xs ">Clear</div>
         </button>
       }
+      {!!state.LS_favs.length &&
+        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
+          onClick={triggerResetFavs}
+        >
+          <div className="Q_sm_x tx-lgx">Reset</div>
+          <div className="Q_xs ">Reset</div>
+        </button>
+      }
+        </div>
       
       
       {!state.urlStateKeys && !state.urlStateKeys.length &&  <>

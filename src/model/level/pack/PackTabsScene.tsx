@@ -66,14 +66,24 @@ export default function PackTabsScene() {
     }
   }
   const openLinkInThisTab = (index:number) => {
-    
-    const url = TIERPACK_LINKS[index]
-    if (url.startsWith("http")) {
-      window.location.href = url
-    } else {
-      window.location.href = `https://${url}`
+    if (index < 0 || index >= TIERPACK_LINKS.length) {
+      console.error("Invalid index for TIERPACK_LINKS");
+      return;
     }
-  }
+  
+    const url = TIERPACK_LINKS[index];
+    if (/^https?:\/\//i.test(url)) {
+      // If the URL starts with http or https
+      window.location.href = url;
+    } else if (url.startsWith('/')) {
+      // If the URL is a relative path
+      window.location.href = window.location.origin + url;
+    } else {
+      // If the URL is not a relative path and does not start with http or https
+      window.location.href = `https://${url}`;
+    }
+  };
+  
   if (!mounted) return <LoadingFullScreen />;
 
   return (
