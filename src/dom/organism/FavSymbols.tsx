@@ -157,8 +157,8 @@ export function FavSymbols({ state, calls }: any) {
                 <div className="tx-roman tx-mdl  pl-1 flex-col"
                   onClick={()=>{editSingleToken(item, "floor")}}
                 >
-                  {!!item.floor && <>
-                    {item.floor}
+                  {<>
+                    {item.floor || ""}
                   </>}
                 </div>
                 <div className="flex-col">-</div>
