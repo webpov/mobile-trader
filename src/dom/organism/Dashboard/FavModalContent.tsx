@@ -47,6 +47,7 @@ export function FavModalContent({ state, calls }: any) {
                 focusSymbol: state.focusSymbol,
                 isChartLoading: state.isChartLoading,
                 tradeLogsObj: state.tradeLogsObj,
+                ytdObj: state.ytdObj,
                 isFetchingLogs: state.isFetchingLogs
               }} 
               calls={{

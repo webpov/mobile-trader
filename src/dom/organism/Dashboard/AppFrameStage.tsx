@@ -193,7 +193,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           <div className=' mt-8 pt-4 '></div>
           <FavModalContent
             state={{
-              LS_favs:lsData.LS_favs, LS_publicSecretKeys,
+              LS_favs:lsData.LS_favs, LS_publicSecretKeys,ytdObj,
               focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,
               urlStateKeys:urlp.keysArray, ltfClosingList, pricesObj,
             }} 

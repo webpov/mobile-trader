@@ -145,42 +145,58 @@ export const getRelevantChartData = (priceList) => {
   }
 }
 
+
 export const getLongTermData = (priceList) => {
   if (!priceList || (!!priceList && !priceList.length)) {
     return {
-      latestUnix:0,
-      oldestUnix:0,
-      closingPrices:[],
-      volumeList:[], // Include volume in the returned object
-  
+      latestUnix: 0,
+      oldestUnix: 0,
+      closingPrices: [],
+      volumeList: [], // Include volume in the returned object
+      lastWeeklyOpen: 0, // Initialize lastWeeklyOpen
+      startOfMonthOpen: 0, // Initialize startOfMonthOpen
     }
   }
-  let theLastIndex = priceList.length < 500 ? priceList.length-1 : 499
-  let latestUnix = parseInt( priceList[theLastIndex][0] )
-  let oldestUnix =  parseInt(priceList[0][0])
-  // const volumeList = priceList.map((item) => parseFloat(item[5])); // Extract volume data
 
-
-  // s__liveUnix(latestUnix - 2)
-  // s__diffUnix(oldestUnix - latestUnix)
-
+  let theLastIndex = priceList.length < 500 ? priceList.length - 1 : 499;
+  let latestUnix = parseInt(priceList[theLastIndex][0]);
+  let oldestUnix = parseInt(priceList[0][0]);
   const closingPrices = priceList.map((item) => parseFloat(item[4]));
-  // s__pricesList(closingPrices)
+  const lastOpen = priceList[theLastIndex][1];
+  const lastClose = priceList[theLastIndex][4];
+  const dailyDiff = (lastClose - lastOpen) / lastClose * 100;
 
-  
-  const lastOpen = priceList[theLastIndex][1]
-  const lastClose = priceList[theLastIndex][4]
-  const dailyDiff = (lastClose - lastOpen) / lastClose * 100
+  // Find the last Monday's open price
+  let lastWeeklyOpen = 0;
+  let startOfMonthOpen = 0;
+  let currentMonth = new Date(priceList[theLastIndex][0] * 1000).getMonth();
+
+  for (let i = theLastIndex; i >= 0; i--) {
+    const date = new Date(priceList[i][0] * 1000); // Convert Unix timestamp to Date
+    // Check for last Monday
+    if (date.getDay() === 1 && lastWeeklyOpen === 0) { 
+      lastWeeklyOpen = priceList[i][1]; // Open price of the last Monday
+    }
+    // Check for the start of the month
+    if (date.getMonth() !== currentMonth && startOfMonthOpen === 0) {
+      startOfMonthOpen = priceList[i + 1][1]; // Open price of the first day of the current month
+      currentMonth = date.getMonth();
+    }
+    // Break if both values are found
+    if (lastWeeklyOpen !== 0 && startOfMonthOpen !== 0) {
+      break;
+    }
+  }
 
   return {
     latestUnix,
     oldestUnix,
     closingPrices,
-
     dailyDiff: parseInt(Math.round(dailyDiff * 100)),
     lastOpen,
     lastClose,
+    lastWeeklyOpen, // Include lastWeeklyOpen in the returned object
+    startOfMonthOpen, // Include startOfMonthOpen in the returned object
     // volumeList, // Include volume in the returned object
-
   }
 }

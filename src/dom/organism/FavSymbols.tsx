@@ -138,6 +138,15 @@ export function FavSymbols({ state, calls }: any) {
       }
       <div className="favSymbolsModalContent w-100 flex-col gap-1 autoverflow-y flex-justify-start" style={{maxHeight:"40vh"}}>
         {state.LS_favs.map((item: any, index: number) => {
+          
+          const lastLiveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen
+          const lastWeekDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastWeeklyOpen
+          const startOfMonthDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.startOfMonthOpen
+          
+          const liveChangePercent = (lastLiveDiff) / state.pricesObj[item.symbol] * 100
+          const weekChangePercent = (lastWeekDiff) / state.pricesObj[item.symbol] * 100
+          const monthChangePercent = (startOfMonthDiff) / state.pricesObj[item.symbol] * 100
+
           return (<div key={index} className=" w-100">
             <div className="  flex-col flex-align-stretch  bord-r-10  w-100 noborder tx-white "
               style={{ 
@@ -147,7 +156,41 @@ export function FavSymbols({ state, calls }: any) {
               
 
             >
+              
               <div className="tx-bold-9 px-2 flex  flex-justify-between gap-3">
+              <div className=" tx-mdl  pl-1 flex-align-start flex-col bg-w-10 bord-r-l-25 pl-3 w-min-50px w-250px gap-1 Q_md_x"
+                  onClick={()=>{editSingleToken(item, "roof")}}
+                >
+                  {/* <div className="flex-col">|</div> */}
+                  <div className="flex flex-justify-around w-100">
+                  {<div className="tx-roman">
+                    {(state.pricesObj[item.symbol]*((liveChangePercent)/100)).toFixed(1)}
+                  </div>}
+                  {<div className="tx-roman">
+                    {(state.pricesObj[item.symbol]*((weekChangePercent)/100)).toFixed(1)}
+                  </div>}
+                  {<div className="tx-roman Q_lg_x">
+                    {(state.pricesObj[item.symbol]*((monthChangePercent)/100)).toFixed(1)}
+                  </div>}
+                  </div>
+
+                  
+                  <div className="flex flex-justify-around w-100">
+                    <div className="flex-center gap-1">
+                      <small>d </small>
+                      <div className={`tx-roman flex-col ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>{liveChangePercent.toFixed(1)}%</div>
+                    </div>
+                    <div></div>
+                    <div className="flex-center gap-1">
+                      <small>w </small>
+                      <div className={`tx-roman flex-col ${weekChangePercent < 0 ? "tx-red" : "tx-green"}`}>{weekChangePercent.toFixed(1)}%</div>
+                    </div>
+                    <div className="flex-center gap-1 Q_lg_x">
+                      <small>m </small>
+                      <div className={`tx-roman flex-col ${monthChangePercent < 0 ? "tx-red" : "tx-green"}`}>{monthChangePercent.toFixed(1)}%</div>
+                    </div>
+                  </div>
+                </div>
                   {!!calls.isLogsFilled(item.symbol) &&  <>
                     <button className="tx-center  tx-lgx tx-blue noborder bg-trans "
                       // onClick={()=>{calls.triggerGetLogs()}}
@@ -156,13 +199,13 @@ export function FavSymbols({ state, calls }: any) {
                     </button>
                   </>}
                 {/* <div className="tx-md tx-altfont-1">{index + 1}</div> */}
-                <div className="flex-1 tx-mdl py-1 my-2 tx-ls-2 tx-start bg-w-10 bord-r-25 pl-4 opaci-chov--50 underline" title={item.symbol}
+                <div className="flex-1 flex flex-justify-start tx-mdl py-1 my-2 tx-ls-2 tx-start bg-w-10 bord-r-r-25 pl-4 opaci-chov--50 gap-2" title={item.symbol}
                   onClick={()=>{triggerChangeSymbol(item.symbol)}}
                   style={{
                     ...(state.focusSymbol == item.symbol ? {borderLeft:"3px solid white", background: "linear-gradient(-90deg, #ffffff44, #ffffff11)"} : {})
                   }}
                 >
-                  {item.token0}
+                  <div className="underline">{item.token0}:</div> <div className="Q_sm_x">{state.pricesObj[item.symbol]}</div>
                 </div>
                 <div className="tx-roman tx-mdl  pl-1 flex-col w-min-50px"
                   onClick={()=>{editSingleToken(item, "floor")}}
@@ -179,6 +222,10 @@ export function FavSymbols({ state, calls }: any) {
                     {item.roof || "N/A"}
                   </>}
                 </div>
+                
+                
+                
+                
                 <div className="flex-col gap-1">
                   {!!state.isFetchingLogs && <>
                     <button className={`tx-center  spin-${index+2}`}>
@@ -189,7 +236,9 @@ export function FavSymbols({ state, calls }: any) {
                   <button className={`bord-r-10 bg-trans tx-white tx-center opaci-chov--50 ${!!calls.isLogsFilled(item.symbol) ? "border-blue" : ""}` }
                       onClick={()=>{calls.exportLogs(item.symbol)}}
                     >
-                      Exp.
+                      
+                      <div className="Q_xs">E</div>
+                      <div className="Q_sm_x">Exp.</div>
                     </button>
                   {process.env.NODE_ENV !== 'production' && 
 
@@ -197,7 +246,8 @@ export function FavSymbols({ state, calls }: any) {
                     <button className={`bord-r-10 tx-center opaci-chov--50 ${!!calls.isLogsFilled(item.symbol) ? "border-blue" : ""}` }
                       onClick={()=>{calls.triggerGetLogs(item.symbol)}}
                     >
-                      Logs
+                      <div className="Q_xs">L</div>
+                      <div className="Q_sm_x">Logs</div>
                     </button>
                   </>}
                   
