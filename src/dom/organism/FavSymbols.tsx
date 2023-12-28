@@ -23,7 +23,34 @@ export function FavSymbols({ state, calls }: any) {
     let returnString = "";
     state.LS_favs.map((item: any) => {
       // Use encodeURIComponent to encode the item as a URI component
-      const encodedItem = encodeURIComponent(JSON.stringify(item));
+      let returnObj:any = {
+        symbol: item.symbol,
+      }
+      if (item.floor) { returnObj["floor"] = item.floor } 
+      if (item.roof) { returnObj["roof"] = item.roof } 
+      const encodedItem = encodeURIComponent(JSON.stringify(returnObj));
+      returnString += `&${encodeURIComponent(item.posCode)}=${encodedItem}`;
+    });
+  
+    let baseUrl = window.location.href.split("?")[0];
+    // Ensure the entire query string is properly encoded
+    returnString = `${baseUrl}?${returnString.substring(1)}`;
+  
+    clipbloard__do(returnString); // I assume you meant 'clipboard' here
+    prompt("Export as URL", returnString);
+  };
+
+  
+  const triggerExportLeanUrl = () => {
+    let returnString = "";
+    state.LS_favs.map((item: any) => {
+      // Use encodeURIComponent to encode the item as a URI component
+      let returnObj:any = {
+        symbol: item.symbol,
+      }
+      // if (item.floor) { returnObj["floor"] = item.floor } 
+      // if (item.roof) { returnObj["roof"] = item.roof } 
+      const encodedItem = encodeURIComponent(JSON.stringify(returnObj));
       returnString += `&${encodeURIComponent(item.posCode)}=${encodedItem}`;
     });
   
@@ -90,6 +117,13 @@ export function FavSymbols({ state, calls }: any) {
           onClick={triggerExportAsUrl}
         >
           Export as URL
+        </button>
+      }
+      {!!state.LS_favs.length &&
+        <button className={`tx-white ${"tx-sm"} opaci-chov--50 bg-glass-10 border-blue bg-w-10 bord-r-15 pa-1 mb-2 translate-y--50`}
+          onClick={triggerExportLeanUrl}
+        >
+          Export Pack
         </button>
       }
       <div className="favSymbolsModalContent w-100 flex-col gap-1">

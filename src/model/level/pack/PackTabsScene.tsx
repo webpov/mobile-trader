@@ -14,7 +14,7 @@ import * as THREE from 'three'
 import BookCover from "../../core/BookCover";
 import DynaText from "../../core/DynaText";
 import FixedScrollingCamera from "../../core/FixedScrollingCamera";
-import { theData_links, theData_names } from "./DEFAULT_PACKS";
+import { TIERPACK_LINKS, TIERPACK_NAMES } from "./DEFAULT_PACKS";
 
 export default function PackTabsScene() {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
@@ -58,7 +58,7 @@ export default function PackTabsScene() {
     setSelectedCubes(newSelection);
   }
   const openLinkInNewTab = (index:number) => {
-    const url = theData_links[index]
+    const url = TIERPACK_LINKS[index]
     if (url.startsWith("http")) {
       window.open(url, "_blank");
     } else {
@@ -67,7 +67,7 @@ export default function PackTabsScene() {
   }
   const openLinkInThisTab = (index:number) => {
     
-    const url = theData_links[index]
+    const url = TIERPACK_LINKS[index]
     if (url.startsWith("http")) {
       window.location.href = url
     } else {
@@ -108,7 +108,66 @@ export default function PackTabsScene() {
         <Box args={[.88,1.28, 0.02]} position={[1, 0, 0.1]} castShadow receiveShadow>
               <meshStandardMaterial color="grey" />
             </Box>
-        {[...Array(5)].map((_, row) => (
+        {[...Array(5)].map((_, row) => {
+           const selectedATier = TIERPACK_LINKS[index];
+  
+           const urlParams = new URLSearchParams(
+            new URL(selectedATier, window.location.href).search
+          )
+           const Atokens:any = [];
+           const Btokens:any = [];
+           const Ctokens:any = [];
+           const Dtokens:any = [];
+           urlParams.forEach((value, key) => {
+            if (key.toLowerCase().startsWith('a')) {
+              try {
+                const jsonValue = JSON.parse(value);
+                if (jsonValue && jsonValue.symbol) {
+                  Atokens.push(jsonValue.symbol);
+                }
+              } catch (e) {
+                // Handle any parsing errors
+              }
+            }
+            if (key.toLowerCase().startsWith('b')) {
+              try {
+                const jsonValue = JSON.parse(value);
+                if (jsonValue && jsonValue.symbol) {
+                  Btokens.push(jsonValue.symbol);
+                }
+              } catch (e) {
+                // Handle any parsing errors
+              }
+            }
+            if (key.toLowerCase().startsWith('c')) {
+              try {
+                const jsonValue = JSON.parse(value);
+                if (jsonValue && jsonValue.symbol) {
+                  Ctokens.push(jsonValue.symbol);
+                }
+              } catch (e) {
+                // Handle any parsing errors
+              }
+            }
+            if (key.toLowerCase().startsWith('d')) {
+              try {
+                const jsonValue = JSON.parse(value);
+                if (jsonValue && jsonValue.symbol) {
+                  Dtokens.push(jsonValue.symbol);
+                }
+              } catch (e) {
+                // Handle any parsing errors
+              }
+            }
+          });
+          
+           const tokenStringA = Atokens.join(', ');
+           const tokenStringB = Btokens.join(', ');
+           const tokenStringC = Ctokens.join(', ');
+           const tokenStringD = Dtokens.join(', ');
+
+          
+          return(
           <group key={row}>
             <Box args={[0.15, 0.12, 0.02]} position={[0.7, 0.5 - 0.25 * row, 0.13]} castShadow receiveShadow>
               <meshStandardMaterial color={['red', 'green', 'blue', 'yellow', 'purple'][row]} />
@@ -116,15 +175,35 @@ export default function PackTabsScene() {
             <Box args={[.85, 0.2, 0.05]} position={[1, 0.5 - 0.25 * row, 0.1]} castShadow receiveShadow>
               <meshStandardMaterial color="black" />
             </Box>
+            <group position={[0.96,0.5,0]}>
+            <DynaText text={`${tokenStringA  || '...'}`} color="#fff" emissive="#fff"
+              font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
+            />
           </group>
-        ))}
+            <group position={[0.96,0.25,0]}>
+            <DynaText text={`${tokenStringB  || '...'}`} color="#fff" emissive="#fff"
+              font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
+            />
+          </group>
+            <group position={[0.96,0,0]}>
+            <DynaText text={`${tokenStringC  || '...'}`} color="#fff" emissive="#fff"
+              font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
+            />
+          </group>
+            <group position={[0.96,-0.25,0]}>
+            <DynaText text={`${tokenStringD  || '...'}`} color="#fff" emissive="#fff"
+              font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
+            />
+          </group>
+          </group>
+        )})}
       </group>
     )}
     
     <group position={[0, 0, 0.13]} rotation={[0,0,0]}>
     <group position={new THREE.Vector3(...position)} rotation={[Math.PI/2,0,0]}>
   
-    <DynaText text={`${theData_names[index] || 'Book'}`} color="#000" emissive="#000"
+    <DynaText text={`${TIERPACK_NAMES[index] || 'Book'}`} color="#000" emissive="#000"
                   font={0.2} position={[0,0,-0.5]}
         />
               
