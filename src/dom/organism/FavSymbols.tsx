@@ -17,6 +17,10 @@ export function FavSymbols({ state, calls }: any) {
     calls.s__LS_favs([])
   }
 
+  const triggerCloneResetFavs =()=>{
+    calls.triggerCloneFromUrl()
+    window.location.reload()
+  }
   const triggerResetFavs =()=>{
     calls.s__LS_favs([])
     window.location.reload()
@@ -131,7 +135,7 @@ export function FavSymbols({ state, calls }: any) {
           Export Pack
         </button>
       }
-      <div className="favSymbolsModalContent w-100 flex-col gap-1">
+      <div className="favSymbolsModalContent w-100 flex-col gap-1 autoverflow-y flex-justify-start" style={{maxHeight:"40vh"}}>
         {state.LS_favs.map((item: any, index: number) => {
           return (<div key={index} className=" w-100">
             <div className="  flex-col flex-align-stretch  bord-r-10  w-100 noborder tx-white "
@@ -196,7 +200,7 @@ export function FavSymbols({ state, calls }: any) {
           </div>);
         })}
       </div>
-        <div className="flex-center">
+        <div className="flex-center gap-2">
       {!!state.LS_favs.length &&
         <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
           onClick={triggerClearFavs}
@@ -214,6 +218,14 @@ export function FavSymbols({ state, calls }: any) {
         </button>
       }
         </div>
+      {!!state.LS_favs.length &&
+        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
+          onClick={triggerCloneResetFavs}
+        >
+          <div className="Q_sm_x tx-lgx">Clone & Reset</div>
+          <div className="Q_xs ">Clone & Reset</div>
+        </button>
+      }
       
       
       {!state.urlStateKeys && !state.urlStateKeys.length &&  <>

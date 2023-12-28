@@ -119,11 +119,21 @@ export function useUrlParamCatcher() {
 
 
   const panelListMid = useMemo(()=>{
+    const panelKeys = ["c0","c1","c2", "c3"]
+    try {
+        const panelListResult:any = getPanelListFromUrlByKeys(panelKeys)
+        return panelListResult
+      } catch (error) {
+      return {}
+    }
 
-  },[panel_d0, panel_d1, panel_d2, panel_d3])
+  },[panel_b0, panel_b1, panel_b2, panel_b3])
   const panelListMidKeys:any = useMemo(()=>{
-      return []
-  },[panelListTop])
+    const returnVal = (
+      Object.keys(panelListMid).filter((item:any)=>(JSON.stringify(panelListMid[item]) !== "{}"))
+    )
+      return returnVal
+  },[panelListMid])
   
 
 
@@ -150,23 +160,41 @@ export function useUrlParamCatcher() {
 
 
 
-
-  const panelListBottom = useMemo(()=>{
-
-  },[panel_c0, panel_c1, panel_c2, panel_c3])
-  const panelListBottomKeys:any = useMemo(()=>{
-      return []
-  },[panelListTop])
 
   const panelListMidBottom = useMemo(()=>{
+    const panelKeys = ["d0","d1","d2", "d3"]
+    try {
+        const panelListResult:any = getPanelListFromUrlByKeys(panelKeys)
+        return panelListResult
+      } catch (error) {
+      return {}
+    }
 
-  },[panel_e0, panel_e1, panel_e2, panel_e3])
-  
+  },[panel_b0, panel_b1, panel_b2, panel_b3])
   const panelListMidBottomKeys:any = useMemo(()=>{
-    return []
-},[panelListTop])
-    
+    const returnVal = (
+      Object.keys(panelListMidBottom).filter((item:any)=>(JSON.stringify(panelListMidBottom[item]) !== "{}"))
+    )
+      return returnVal
+  },[panelListMidBottom])
 
+  const panelListBottom = useMemo(()=>{
+    const panelKeys = ["e0","e1","e2", "e3"]
+    try {
+        const panelListResult:any = getPanelListFromUrlByKeys(panelKeys)
+        return panelListResult
+      } catch (error) {
+      return {}
+    }
+
+  },[panel_b0, panel_b1, panel_b2, panel_b3])
+  const panelListBottomKeys:any = useMemo(()=>{
+    const returnVal = (
+      Object.keys(panelListBottom).filter((item:any)=>(JSON.stringify(panelListBottom[item]) !== "{}"))
+    )
+      return returnVal
+  },[panelListBottom])
+  
 
 
 
@@ -212,6 +240,15 @@ const keysArray = useMemo(()=>{
         break;
         case 'b':
           refArray = {...panelListMidTop}
+        break;
+        case 'c':
+          refArray = {...panelListMid}
+        break;
+        case 'd':
+          refArray = {...panelListMidBottom}
+        break;
+        case 'e':
+          refArray = {...panelListBottom}
         break;
       }
       builtObj[element] = refArray[element]

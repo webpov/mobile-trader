@@ -171,10 +171,10 @@ export default function PackTabsScene() {
             }
           });
           
-           const tokenStringA = Atokens.join(', ');
-           const tokenStringB = Btokens.join(', ');
-           const tokenStringC = Ctokens.join(', ');
-           const tokenStringD = Dtokens.join(', ');
+           const tokenStringA = Atokens.join(', ')?.replace(/USDT/g,"")
+           const tokenStringB = Btokens.join(', ')?.replace(/USDT/g,"")
+           const tokenStringC = Ctokens.join(', ')?.replace(/USDT/g,"")
+           const tokenStringD = Dtokens.join(', ')?.replace(/USDT/g,"")
 
           
           return(
@@ -185,22 +185,22 @@ export default function PackTabsScene() {
             <Box args={[.85, 0.2, 0.05]} position={[1, 0.5 - 0.25 * row, 0.1]} castShadow receiveShadow>
               <meshStandardMaterial color="black" />
             </Box>
-            <group position={[0.96,0.5,0]}>
+            <group position={[1.08,0.5,0]}>
             <DynaText text={`${tokenStringA}`} color="#fff" emissive="#fff" textAlign="start"
               font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
             />
           </group>
-            <group position={[0.96,0.25,0]}>
+            <group position={[1.08,0.25,0]}>
             <DynaText text={`${tokenStringB}`} color="#fff" emissive="#fff" textAlign="start"
               font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
             />
           </group>
-            <group position={[0.96,0,0]}>
+            <group position={[1.08,0,0]}>
             <DynaText text={`${tokenStringC}`} color="#fff" emissive="#fff" textAlign="start"
               font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
             />
           </group>
-            <group position={[0.96,-0.25,0]}>
+            <group position={[1.08,-0.25,0]}>
             <DynaText text={`${tokenStringD}`} color="#fff" emissive="#fff" textAlign="start"
               font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
             />

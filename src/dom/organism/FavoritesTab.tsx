@@ -34,7 +34,9 @@ export function FavoritesTab({ state, calls }: any) {
     </>);
   }
   return (<>
-    <div className=" w-100  flex-col gap-2">
+    <div className=" w-100   autoverflow-y  flex-col flex-justify-start gap-2"
+      style={{maxHeight:"60vh"}}
+    >
 
       {state.LS_favs.map((item: any, index: number) => {
         if (!state?.pricesObj) {return (<></>)}
@@ -87,11 +89,12 @@ export function FavoritesTab({ state, calls }: any) {
               </div>
             </>} */}
             {!!state.ytdObj && <>
-              <div className={`Q_md_x translate-y-10  top-0 right-0 pos-abs  tx-lg box-shadow-9-b px-1 bord-r-10 bg-w-10 mr-1  tx-sans flex-center gap-1
+              <div className={`Q_md_x translate-y-10  top-0 right-0 pos-abs  tx-lg  px-1 bord-r-10 bg-w-10 mr-1  tx-sans flex-center gap-1
                 ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>
                 {parseInt(`${liveChangePercent*100}`)/100}
                 {/* <div className="opaci-20"> % </div> */}
               </div>
+              {(!!item.floor || !!item.floor) &&  
               <div className={`Q_xl_x translate-y-50 ma-1 flex tx-xs box-shadow-9-b pa-1 bord-r-10 bg-w-10 tx-sans flex-center gap-1 opaci-50
                 `}>
                 <div>{item.floor}</div>
@@ -99,6 +102,7 @@ export function FavoritesTab({ state, calls }: any) {
                 <div>{item.roof}</div>
                 {/* <div className="opaci-20"> % </div> */}
               </div>
+              }
               <div className={`Q_xs_md   tx-smd box-shadow-9-b pa-1 bord-r-10 bg-b-90 tx-sans flex-center gap-1
                 pos-abs right-0 translate-x-50
                 ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>

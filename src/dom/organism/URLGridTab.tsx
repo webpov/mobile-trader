@@ -40,7 +40,7 @@ export function URLGridTab({ state, calls }: any) {
     </>);
   }
   return (<>
-    <div className=" w-100  flex-col gap-1">
+    <div className=" w-100 autoverflow-y flex-justify-start  flex-col gap-1 " style={{maxHeight:"60vh"}}>
 
       {state.urlStateKeys.map((item: any, index: number) => {
         return (<div key={index} className=" w-100">

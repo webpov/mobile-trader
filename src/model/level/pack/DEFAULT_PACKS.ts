@@ -17,6 +17,7 @@ export const TIERPACK_COLORS = [
 ]
 
 export const TIERPACK_NAMES = [
+"all",
 "layer1",
 "smart\ncontract",
 "topdefi",
@@ -34,6 +35,7 @@ export const TIERPACK_NAMES = [
 ]
 
 export const TIERPACK_LINKS = [
+`/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%7D&b0=%7B%22symbol%22%3A%22ADAUSDT%22%7D&b1=%7B%22symbol%22%3A%22UNIUSDT%22%7D&c0=%7B%22symbol%22%3A%22AXSUSDT%22%7D&c1=%7B%22symbol%22%3A%22AAVEUSDT%22%7D&d0=%7B%22symbol%22%3A%22SANDUSDT%22%7D&d1=%7B%22symbol%22%3A%22MKRUSDT%22%7D&e0=%7B%22symbol%22%3A%22FETUSDT%22%7D&e1=%7B%22symbol%22%3A%22RNDRUSDT%22%7D&e2=%7B%22symbol%22%3A%22TIAUSDT%22%7D`, // all
 `/?a0=%7B%22symbol%22%3A%22BTCUSDT%22%7D&a1=%7B%22symbol%22%3A%22ETHUSDT%22%7D&b0=%7B%22symbol%22%3A%22ADAUSDT%22%7D`, // Layer 1 (L1)
 `/?a0=%7B%22symbol%22%3A%22XRPUSDT%22%7D&a1=%7B%22symbol%22%3A%22LTCUSDT%22%7D&b0=%7B%22symbol%22%3A%22DOTUSDT%22%7D`, // Smart Contract Platform
 `/?a0=%7B%22symbol%22%3A%22LINKUSDT%22%7D&a1=%7B%22symbol%22%3A%22AAVEUSDT%22%7D&b0=%7B%22symbol%22%3A%22COMPUSDT%22%7D`, // DeFi
