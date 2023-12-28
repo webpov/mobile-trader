@@ -22,6 +22,7 @@ export function FontText ({
 export function DynaText ({
   onClick= ()=> {},
   text="asd", position=new THREE.Vector3(), color , emissive="#000000", isSelected = false,font=0.35,
+  textAlign="center",
   ...props
 }:any)  {
 
@@ -44,7 +45,7 @@ export function DynaText ({
         maxWidth={100}
         lineHeight={1}
         letterSpacing={-0.06}
-        textAlign="center"
+        textAlign={textAlign}
 
       >
         {text}

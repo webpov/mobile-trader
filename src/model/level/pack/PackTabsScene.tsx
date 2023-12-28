@@ -47,7 +47,7 @@ export default function PackTabsScene() {
     }
     return positions;
   }
-  const boxPositions = generateBoxPositions(15, 1, 0.3);
+  const boxPositions = generateBoxPositions(14, 1, 0.3);
   function toggleCubeSelection(index:any) {
     const newSelection = new Set(selectedCubes);
     if (newSelection.has(index)) {
@@ -170,28 +170,28 @@ export default function PackTabsScene() {
           return(
           <group key={row}>
             <Box args={[0.15, 0.12, 0.02]} position={[0.7, 0.5 - 0.25 * row, 0.13]} castShadow receiveShadow>
-              <meshStandardMaterial color={['red', 'green', 'blue', 'yellow', 'purple'][row]} />
+              <meshStandardMaterial color={['red', 'gold', 'green', 'blue',  'purple'][row]} />
             </Box>
             <Box args={[.85, 0.2, 0.05]} position={[1, 0.5 - 0.25 * row, 0.1]} castShadow receiveShadow>
               <meshStandardMaterial color="black" />
             </Box>
             <group position={[0.96,0.5,0]}>
-            <DynaText text={`${tokenStringA  || '...'}`} color="#fff" emissive="#fff"
+            <DynaText text={`${tokenStringA}`} color="#fff" emissive="#fff" textAlign="start"
               font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
             />
           </group>
             <group position={[0.96,0.25,0]}>
-            <DynaText text={`${tokenStringB  || '...'}`} color="#fff" emissive="#fff"
+            <DynaText text={`${tokenStringB}`} color="#fff" emissive="#fff" textAlign="start"
               font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
             />
           </group>
             <group position={[0.96,0,0]}>
-            <DynaText text={`${tokenStringC  || '...'}`} color="#fff" emissive="#fff"
+            <DynaText text={`${tokenStringC}`} color="#fff" emissive="#fff" textAlign="start"
               font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
             />
           </group>
             <group position={[0.96,-0.25,0]}>
-            <DynaText text={`${tokenStringD  || '...'}`} color="#fff" emissive="#fff"
+            <DynaText text={`${tokenStringD}`} color="#fff" emissive="#fff" textAlign="start"
               font={0.07} position={[0,0,0.13]} rotation={[0,0,0]}
             />
           </group>

@@ -16,7 +16,7 @@ export const FixedScrollingCamera = ({zThreshold=12}:{zThreshold?:number}) => {
 
       // Move the light at half the speed of the camera
       if (lightRef.current) {
-          lightRef.current.position.z += deltaZ / 1.5;
+          lightRef.current.position.z += deltaZ / 1.25;
       }
   };
 
