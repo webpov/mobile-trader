@@ -101,7 +101,7 @@ export default function PackTabsScene() {
     </RoundedBox>
     {selectedCubes.has(index) && (
       <group position={new THREE.Vector3(...position)}
-        onPointerUp={()=>openLinkInThisTab(index)}
+        onPointerDown={()=>openLinkInThisTab(index)}
         
       >
         
