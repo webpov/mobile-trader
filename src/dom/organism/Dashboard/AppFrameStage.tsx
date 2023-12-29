@@ -19,7 +19,7 @@ import { FavModalContent } from "./FavModalContent"
 import MarketNewsStage from "../../../model/level/MarketNewsStage"
 import { SelectedModalContent } from "./SelectedModalContent"
 import { StandardTokens } from "@/../script/constant/klines";
-
+import { SocialMediaRow } from '@/dom/atom/popup/SocialMediaRow'
 export default function AppFrameStage({}:any) {
   const lsData:any = useLocalStorageCatcher()
   const {LS_publicSecretKeys, s__LS_publicSecretKeys, } = lsData
@@ -409,11 +409,11 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     <div className='Q_sm_x flex-1 flex flex-align-start  tx-white w-90 z-10'>
       
       {chartConfig.isLeftSidebarVisible &&
-        <div className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
+        <a href="https://wgame.vercel.app/" className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
           <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 pb-5 neu-convex opaci-chov--50 border-white tx-altfont-1'>
             🎮 <div className="Q_lg_x">Games</div> 
           </button>
-        </div>
+        </a>
       }
       <div className='flex-1 flex-col mt-8 pb-8 Q_sm_x '>
         <BuySellButtons />
@@ -430,10 +430,14 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       </div>
       <div className='Q_xl_x w-25 mt-8  flex-col block   tx-center  '>
         <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
-          Live Orders
+          WebPOV
         </div>
         <div className="pa-8">
-          <div className="tx-lx opaci-10">Not Found</div>
+          {/* <div className="tx-lx opaci-10">Not Found</div> */}
+          <div>
+            <SocialMediaRow />
+
+          </div>
         </div>
       </div>
       
