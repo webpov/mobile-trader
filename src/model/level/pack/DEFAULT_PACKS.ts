@@ -20,9 +20,9 @@ export const TIERPACK_COLORS = [
 ]
 
 export const TIERPACK_NAMES = [
-    "top10",
+    "top10\ntokens",
     "all\ndefi",
-    "layer1",
+    "base\nlayer1",
     "a16z\nholdings",
     "smart\ncontract",
     "topdefi",

@@ -3,20 +3,50 @@ import { Box, Cylinder, OrbitControls, Plane, Ring, RoundedBox, Sphere, useTextu
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ReactNode, useRef, Suspense, useEffect, useState, useMemo, forwardRef, useImperativeHandle } from "react"
 
+type HoverSelectorProps = {
+  sceneState: any; // Replace 'any' with a more specific type if available
+  sceneCalls: any; // Replace 'any' with a more specific type if available
+  fullSpinCount: number;
+  triggerModel: ReactNode;
+  s__fullSpinCount: (count: number) => void;
+  isActionActive: boolean;
+  s__isActionActive: (isActive: boolean) => void;
+  children?: ReactNode;
+};
 
-export function HoverSelector({sceneState, sceneCalls,fullSpinCount, triggerModel, s__fullSpinCount, isActionActive,s__isActionActive,children, ...props}: any) {
-  const $mainGroupRef:any = useRef()
-  const triggerClickStart = (e:any) => {
-    e.stopPropagation()
-    if (isActionActive || reachedEnd) { return
+// Define a type for the ref object
+export interface HoverSelectorRef {
+  triggerClickStart: (e: any) => void;
+}
+
+export const HoverSelector = forwardRef<HoverSelectorRef, HoverSelectorProps>(({
+  sceneState,
+  sceneCalls,
+  fullSpinCount,
+  triggerModel,
+  s__fullSpinCount,
+  isActionActive,
+  s__isActionActive,
+  children,
+  ...props
+}, ref) => {
+  const $mainGroupRef = useRef<any>(null);
+
+  const triggerClickStart = (e: any) => {
+    if (!!e?.stopPropagation) {e.stopPropagation();}
+    if (isActionActive || reachedEnd) {
+      return;
     }
-      // alert()
-    s__isActionActive(!isActionActive)
+    s__isActionActive(!isActionActive);
     if (!isActionActive) {
-      sceneCalls.audioNotification("neutral","../sound/click33.wav")
-      // setTargetRotation(Math.PI/2)
+      sceneCalls.audioNotification("neutral", "../sound/click33.wav");
     }
-  }
+  };
+
+  useImperativeHandle(ref, () => ({
+    triggerClickStart,
+  }));
+
 
   const ACTION_SPEED = 1
   const LERP_SPEED = 0.05;
@@ -57,7 +87,7 @@ export function HoverSelector({sceneState, sceneCalls,fullSpinCount, triggerMode
         setTimeout(()=>{
           s__isActionActive(false)
           
-        },1500)
+        },2500)
       }
       
       sceneCalls.audioNotification("neutral","../sound/click58.wav")
@@ -75,4 +105,4 @@ export function HoverSelector({sceneState, sceneCalls,fullSpinCount, triggerMode
     {children}
   </group>
   </>)
-}
+})

@@ -5,16 +5,36 @@ import BookCover from "../../core/BookCover";
 import DynaText from "../../core/DynaText";
 import { TIERPACK_LINKS, TIERPACK_NAMES, TIERPACK_COLORS } from "./DEFAULT_PACKS";
 import { HoverSelector } from "@/model/tools/HoverSelector";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 
 export function PackTab({ state, calls }: any) {
-  
+    const $hoverSelector = useRef<any>(null);
   const [reachedEnd, s__reachedEnd] = useState(false);
   const [fullSpinCount, s__fullSpinCount] = useState(0);
 
   const [isMoonSpinActive, s__isMoonisSpinActive] = useState(false);
-  
+  const triggerIsActionActive = () => {
+    if (isMoonSpinActive) {
+      // alert("Moon spin is active");
+      calls.toggleCubeSelection(state.index)
+    //   if ($hoverSelector.current) {
+    //     $hoverSelector.current.triggerClickStart();
+    //   }
+    } else {
+      calls.toggleCubeSelection(state.index)
+    }
+    s__isMoonisSpinActive(!isMoonSpinActive);
+  };
+  const triggerSelectCube = (e:any) => {
+    if (!reachedEnd) { return }
+    e.stopPropagation();
+    
+    if ($hoverSelector.current) {
+      $hoverSelector.current.triggerClickStart();
+    }
+    calls.toggleCubeSelection(state.index);
+  }
   return (<>
 
 
@@ -22,10 +42,13 @@ export function PackTab({ state, calls }: any) {
     <group position={new THREE.Vector3(...state.position)}>
 
       
-      <HoverSelector {...{
+      <HoverSelector
+      ref={$hoverSelector}
+      sceneState={{}}
+      {...{
         sceneCalls: { audioNotification: (arg1: any, arg2: any) => { } },
         isActionActive: isMoonSpinActive,
-        s__isActionActive: s__isMoonisSpinActive,
+        s__isActionActive: triggerIsActionActive,
         s__reachedEnd: s__reachedEnd,
         fullSpinCount: fullSpinCount, 
         s__fullSpinCount: s__fullSpinCount,
@@ -34,18 +57,24 @@ export function PackTab({ state, calls }: any) {
         // <Sphere args={[0.1, 12, 12]} castShadow receiveShadow position={[0,1,0]}>
         //   <meshStandardMaterial color="orange" emissive={state.isMoonSpinActive ? "#332200" : "#000"} />
         // </Sphere>
-        <Box args={[1.3,2,0.4]} position={[-0.5,-0.6,0]}>
+        <>
+        <Box args={[1.3,2,0.9]} position={[-0.6,-0.7,0]}>
           <meshStandardMaterial color="lightgrey" />
 
         </Box>
+        <Box args={[0.5,0.5,0.5]} position={[-0.85,!isMoonSpinActive && !reachedEnd ? 0.2 : 0.1,0]}>
+        <meshStandardMaterial color={!isMoonSpinActive && !reachedEnd ? "red" : "grey"} />
+
+      </Box>
+      </>
         }
       >
-        <group>
+        <group onPointerDown={(e) => { triggerSelectCube(e) }}>
           <RoundedBox
             castShadow
             receiveShadow
             args={[1, 1.5, 0.2]}
-            onPointerDown={(e) => { e.stopPropagation(); calls.toggleCubeSelection(state.index); }}
+            
           >
             <meshStandardMaterial color={!state.selectedCubes.has(state.index) ? "lightgrey" : "white"} />
           </RoundedBox>

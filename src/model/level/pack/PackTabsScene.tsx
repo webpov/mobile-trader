@@ -46,7 +46,7 @@ export default function PackTabsScene() {
     }
     return positions;
   }
-  const boxPositions = generateBoxPositions(14, .7, 0.1);
+  const boxPositions = generateBoxPositions(14, 1, 0.1);
   function toggleCubeSelection(index: any) {
     const newSelection = new Set(selectedCubes);
     if (newSelection.has(index)) {
@@ -104,7 +104,7 @@ export default function PackTabsScene() {
         <ambientLight intensity={0.02} />
         {/* <pointLight position={[6, 8, 4]} intensity={2} distance={20} /> */}
         {boxPositions.map((position, index) => (
-          <group key={index} position={[-0.5, 0, 0]}>
+          <group key={index} position={[-0.25, 0, 0]}>
                 <PackTab
                  state={{index, selectedCubes, position}}
                  calls={{openLinkInThisTab, toggleCubeSelection}}
