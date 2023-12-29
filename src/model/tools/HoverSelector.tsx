@@ -106,3 +106,5 @@ export const HoverSelector = forwardRef<HoverSelectorRef, HoverSelectorProps>(({
   </group>
   </>)
 })
+
+HoverSelector.displayName = "HoverSelector";
