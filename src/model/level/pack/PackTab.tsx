@@ -27,13 +27,17 @@ export function PackTab({ state, calls }: any) {
     s__isMoonisSpinActive(!isMoonSpinActive);
   };
   const triggerSelectCube = (e:any) => {
-    if (!reachedEnd) { return }
+    
     e.stopPropagation();
     
     if ($hoverSelector.current) {
       $hoverSelector.current.triggerClickStart();
     }
     calls.toggleCubeSelection(state.index);
+  }
+  const triggerFullSpinCount = (val:any) => {
+    console.log("triggerFullSpinCount", val);
+    s__fullSpinCount(val);
   }
   return (<>
 
@@ -51,7 +55,7 @@ export function PackTab({ state, calls }: any) {
         s__isActionActive: triggerIsActionActive,
         s__reachedEnd: s__reachedEnd,
         fullSpinCount: fullSpinCount, 
-        s__fullSpinCount: s__fullSpinCount,
+        s__fullSpinCount: triggerFullSpinCount,
       }}
         triggerModel={
         // <Sphere args={[0.1, 12, 12]} castShadow receiveShadow position={[0,1,0]}>
