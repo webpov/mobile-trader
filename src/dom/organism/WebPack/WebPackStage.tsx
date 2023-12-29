@@ -13,13 +13,13 @@ export default function WebPackStage({}:any) {
       <div className='flex-row  tx-white  Q_lg_x  w-95 z-10'>
         {/* <div className='Q_lg_x w-10'></div> */}
         <h1 className=" flex-1 mb-0 pb-0  block">
-          <a href="/web/pack" className="tx-white nodeco">
+          <a href="https://wpack.vercel.app/" className="tx-white nodeco">
             WebPack
           </a>
         </h1>
       </div>
       <div className='flex-row pos-rel flex-align-stretch  w-100 Q_xs_lg z-10 tx-white'>
-        <a href="/web/pack" className="flex-col tx-white nodeco">
+        <a href="https://wpack.vercel.app/" className="flex-col tx-white nodeco">
           <h2 className="mb-0 pb-0 flex-center bg-w-10 px-6 gap-2 box-shadow-i-9-b pt-2 bord-r-25 pb-3">
             WebPack
           </h2>

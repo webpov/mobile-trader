@@ -28,7 +28,7 @@ export const BuySellButtons = () => {
 >
   Refresh
 </button>
-<a href="/web/pack">
+<a href="https://wpack.vercel.app/">
         <button 
   className="opaci-chov--50 neu-convex tx-white tx-lg pa-1 py-3 bord-r-15 border-white-50 tx-bold-8 tx-altfont-1 underline"
 

@@ -546,7 +546,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </div>
       </div>
       <div className='Q_xs_md  w-100 mb-8 flex-col flex-justify-start tx-white'>
-      <a href="/web/pack">
+      <a href="https://wpack.vercel.app/">
         <button 
   className="opaci-chov--50 neu-convex tx-white tx-lg pa-1 py-3 bord-r-15 border-white-50 tx-bold-8 tx-altfont-1 underline"
 
