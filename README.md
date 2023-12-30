@@ -1,53 +1,48 @@
-# Mobile Trader Project
+# WebTrade - 3D Web Trading Dashboard
 
 ## Overview
-"Mobile Trader" is a web-based trading dashboard application, focusing on providing a 3D interactive trading experience. The project is built using Next.js and integrates various APIs for trading functionalities.
+
+WebTrade is a core component of the WebPOV game framework, designed to deliver an engaging and immersive trading experience in a 3D web environment. This module integrates seamlessly with other WebPOV components, offering users a dynamic and interactive platform for exploring and engaging in digital trading activities.
 
 ## Key Features
 
-### 1. **AI Integration**
-   - AI-driven functionalities for enhanced user experience.
-   - [AI Route](https://github.com/webpov/mobile-trader/blob/main/src/app/api/ai/route.ts): Handles AI-related requests.
-   - [More about AI Integration](https://github.com/webpov/mobile-trader/blob/main/docs/AI_Integration.md)
+- **3D Trading Dashboard**: A rich, three-dimensional interface for monitoring and managing trades.
+  - [Dashboard Details](/docs/Dashboard.md)
+- **Integration with WebQub**: Seamless connection with WebQub for an immersive trading experience.
+  - [WebQub Integration](/docs/WebQubIntegration.md)
+- **Real-Time Data Visualization**: Visualize trading data in real-time with interactive charts and graphs.
+  - [Data Visualization](/docs/DataVisualization.md)
+- **User Customization**: Personalize your trading dashboard to suit your preferences and needs.
+  - [Customization Options](/docs/Customization.md)
+- **Link to Webpack**: Direct access to Webpack's digital blog and book resources for informed trading.
+  - [Webpack Integration](/docs/WebpackIntegration.md)
 
-### 2. **Authentication**
-   - Secure authentication mechanism.
-   - [Auth Route](https://github.com/webpov/mobile-trader/blob/main/src/app/api/auth/route.ts): Manages authentication processes.
-   - [More about Authentication](https://github.com/webpov/mobile-trader/blob/main/docs/Authentication.md)
+## Tech Stack
 
-### 3. **Market Data**
-   - Real-time market data display.
-   - [Market Route](https://github.com/webpov/mobile-trader/blob/main/src/app/api/market/route.ts): Fetches and displays market data.
-   - [More about Market Data](https://github.com/webpov/mobile-trader/blob/main/docs/Market_Data.md)
+- **Frontend**: HTML5, Three.js, WebGL
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **APIs**: Various trading and financial data APIs
+- **Hosting/Deployment**: AWS, Docker
 
-### 4. **Order Management**
-   - Comprehensive order logging and management.
-   - [Order Logs Route](https://github.com/webpov/mobile-trader/blob/main/src/app/api/order/logs/route.ts): Handles order-related data and logs.
-   - [More about Order Management](https://github.com/webpov/mobile-trader/blob/main/docs/Order_Management.md)
+## Config and Setup
 
-### 5. **3D Models and Graphics**
-   - Interactive 3D models for an immersive trading experience.
-   - [Model Game Stage](https://github.com/webpov/mobile-trader/blob/main/src/model/level/ModelGameStage.tsx): Integrates 3D models into the platform.
-   - [More about 3D Models and Graphics](https://github.com/webpov/mobile-trader/blob/main/docs/3D_Models_and_Graphics.md)
+To set up and configure WebTrade, follow these steps:
 
-### 6. **Customizable UI Components**
-   - Various UI components for a customizable user interface.
-   - [Dashboard Components](https://github.com/webpov/mobile-trader/blob/main/src/dom/organism/Dashboard): Includes elements like Buy/Sell buttons, Chart Window, etc.
-   - [More about UI Components](https://github.com/webpov/mobile-trader/blob/main/docs/UI_Components.md)
+1. **Clone the Repository**: `git clone https://github.com/WebPOV/webtrade.git`
+2. **Install Dependencies**: `npm install`
+3. **Configuration**: Set up your `.env` file with necessary API keys and database configurations.
+4. **Running Locally**: `npm start` to run on localhost.
+5. **Deployment**: Follow deployment guidelines for AWS and Docker setups.
 
-## Technical Stack
+For more detailed setup instructions, refer to [Setup Guide](/docs/SetupGuide.md).
 
-- **Frontend**: React, Next.js, Three.js
-- **Backend**: Node.js, Next.js API routes
-- **3D Graphics**: @react-three/fiber, @react-three/drei
-- **Styling**: CSS Modules
+## Extra
 
-## Configuration and Setup
+### License
 
-- **Next.js Configuration**: [next.config.js](https://github.com/webpov/mobile-trader/blob/main/next.config.js)
-- **Dependencies**: Listed in [package.json](https://github.com/webpov/mobile-trader/blob/main/package.json)
-- [More about Configuration and Setup](https://github.com/webpov/mobile-trader/blob/main/docs/Configuration_and_Setup.md)
+WebTrade is licensed under the [MIT License](LICENSE.md). This license permits free use, modification, and distribution, with the requirement that the same license is preserved in derivative works.
 
-## License
+---
 
-This project is licensed under the [MIT License](https://github.com/webpov/mobile-trader/blob/main/LICENSE).
+For more information and support, please visit the [WebPOV project page](https://webpov.com/).
