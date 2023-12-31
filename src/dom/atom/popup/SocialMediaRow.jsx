@@ -34,9 +34,9 @@ export function SocialMediaRow ({}) {
          /> 
       </Link>
       
-      <Link className='nodeco pa-1 opaci-chov--50' href="https://wpack.vercel.app/" >
-        {/* <img src="/wfun.jpg" alt="bank" width={64} height={64} className='block bord-r-100p noverflow' />  */}
-        <div className='tx-white bg-black tx-lx w-50px h-50px bord-r-10 flex-col '>P</div>
+      <Link className='pa-1 opaci-chov--50' href="https://wpack.vercel.app/" >
+        <img src="/www.jpg" alt="bank" width={64} height={64} className='block bord-r-100p noverflow'
+         /> 
       </Link>
       
       <Link className='pa-1 opaci-chov--50' href="https://webpov.vercel.app/" >

@@ -452,6 +452,22 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </div>
         </details>
       </div>
+
+      
+      <div className='Q_xs_xl  w-100 mt-8  flex-col block   tx-center  '>
+        <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
+          WebPOV
+        </div>
+        <div className="pa-8">
+          {/* <div className="tx-lx opaci-10">Not Found</div> */}
+          <div>
+            <SocialMediaRow />
+
+          </div>
+        </div>
+      </div>
+
+
       </div>
 
       
@@ -490,6 +506,18 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       
       
       
+<div className='Q_sm_md  w-100   flex-col block   tx-center  '>
+        <div className="neu-convex py-4 px-8 bord-r-25 tx-white box-shadow-9-b">
+          WebPOV
+        </div>
+        <div className="pa-8">
+          {/* <div className="tx-lx opaci-10">Not Found</div> */}
+          <div>
+            <SocialMediaRow />
+
+          </div>
+        </div>
+      </div>
       
       {activeMobileTab == "favs" && <>
 
@@ -511,6 +539,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           <MarketNewsStage />
         </div>
       </div>
+      
       <div className='Q_xs_sm w-40  pos-rel block px-4  bord-r-25 tx-center tx-white mb-8 z-200'>
         <div className=' tx-center  pa-2 pb-6  bg-glass-50 h-100 bord-r-25 neu-convex flex-col flex-justify-start'
           style={{
@@ -546,15 +575,21 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </div>
       </div>
       <div className='Q_xs_md  w-100 mb-8 flex-col flex-justify-start tx-white'>
-      <a href="https://wpack.vercel.app/">
-        <button 
-  className="opaci-chov--50 neu-convex tx-white tx-lg pa-1 py-3 bord-r-15 border-white-50 tx-bold-8 tx-altfont-1 underline"
+        
+      
+<div className='Q_xs  w-100   flex-col block   tx-center  '>
+        <div className="neu-convex py-4 px-8 bord-r-25 tx-white box-shadow-9-b">
+          WebPOV
+        </div>
+        <div className="pa-8">
+          {/* <div className="tx-lx opaci-10">Not Found</div> */}
+          <div>
+            <SocialMediaRow />
 
-  
->
-  Pack
-</button>
-</a>
+          </div>
+        </div>
+      </div>
+      
         </div>
     </div>
 </>}

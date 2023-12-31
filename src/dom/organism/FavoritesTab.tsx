@@ -34,7 +34,7 @@ export function FavoritesTab({ state, calls }: any) {
     </>);
   }
   return (<>
-    <div className=" w-100   autoverflow-y  flex-col flex-justify-start gap-2"
+    <div className=" w-100   autoverflow-y  flex-col flex-justify-start gap-2 pt-4"
       style={{maxHeight:"60vh"}}
     >
 
@@ -92,7 +92,6 @@ export function FavoritesTab({ state, calls }: any) {
               <div className={`Q_md_x translate-y-10  top-0 right-0 pos-abs  tx-lg  px-1 bord-r-10 bg-w-10 mr-1  tx-sans flex-center gap-1
                 ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>
                 {parseInt(`${liveChangePercent*100}`)/100}
-                {/* <div className="opaci-20"> % </div> */}
               </div>
               {(!!item.floor || !!item.floor) &&  
               <div className={`Q_xl_x pos-abs right-0 translate-y-50 mt-1 flex tx-xs box-shadow-9-b pa-1 bord-r-10 bg-w-10 tx-sans flex-center gap-1 opaci-50
@@ -104,10 +103,9 @@ export function FavoritesTab({ state, calls }: any) {
               </div>
               }
               <div className={`Q_xs_md   tx-smd box-shadow-9-b pa-1 bord-r-10 bg-b-90 tx-sans flex-center gap-1
-                pos-abs right-0 translate-x-50
+                pos-abs right-0 
                 ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>
                 {parseInt(`${liveChangePercent*100}`)/100}
-                {/* <div className="opaci-20"> % </div> */}
               </div>
             </>}
             {!state.pricesObj && <>
