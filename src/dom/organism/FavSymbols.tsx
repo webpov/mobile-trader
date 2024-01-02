@@ -139,6 +139,7 @@ export function FavSymbols({ state, calls }: any) {
       <div className="favSymbolsModalContent w-100 flex-col gap-1 autoverflow-y flex-justify-start" style={{maxHeight:"40vh"}}>
         {state.LS_favs.map((item: any, index: number) => {
           
+          if (!state.ytdObj){ return (<div key={index} className=" "></div>)}
           const lastLiveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen
           const lastWeekDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastWeeklyOpen
           const startOfMonthDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.startOfMonthOpen
