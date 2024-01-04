@@ -167,6 +167,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     console.log(resres)
     console.log("resres*******************************")
   }
+  const triggerOpenPack = () => {
+
+  }
   const triggerOpenModal = () => {
     
     let theDom:any = document.getElementById("main_scrollable_content")
@@ -312,11 +315,18 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
               </ModelGameStage>
             </div>
             
-        <button className="pos-abs translate-y-50 border-white-50 Q_xs  bottom-0 right-0 pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
-              onClick={()=>{triggerOpenModal()}}
-            >
-              ⭐
-            </button>
+            <button className="pos-abs translate-y-50 border-white-50 Q_xs  bottom-0 right-0 pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+                  onClick={()=>{triggerOpenModal()}}
+                >
+                  ⭐
+                </button>
+            
+            <a href="https://wpack.vercel.app/">
+            <button className="pos-abs translate-y-50 border-white-50 Q_xs  bottom-0 left-50p pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+                >
+                  🌐
+                </button>
+            </a>
         
           </div>
           
