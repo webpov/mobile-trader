@@ -273,11 +273,14 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </a>
       </div>
     </>}
-    <div className='flex-row flex-align-stretch tx-white w-90 z-10'>
+    <div className='flex-row flex-align-stretch tx-white w-90 z-10'
+    >
       {!!chartConfig.isLeftSidebarVisible &&
-        <div className='Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
+        <div className=' Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pb-8 pt-4 neu-convex flex-col flex-justify-start'
+        style={{maxHeight:"60vh"}}
+        >
           <div className="pb-4 tx-center">URL <small>Favorites</small> </div>
-          <div className="flex-col w-90">
+          <div className="flex-col w-90 h-100 autoverflow-y">
             <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
               calls={{addTileToUrl, s__isSelectedModalOpen}}
             />
@@ -379,7 +382,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       <div className='Q_sm_x px-4 w-20 gap-3 pos-rel block flex-col flex-justify-start tx-center'>
          
         <div className='Q_sm_x w-100 h-100 pos-rel block px-4  bord-r-25 tx-center'>
-          <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex  flex-col flex-justify-start'>
+          <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex  flex-col flex-justify-start'
+        style={{maxHeight:"70vh"}}
+        >
             <div className="Q_md_x py-2"></div> 
             <div className="Q_sm py-2"></div> 
             <div className="py-4 flex-center gap-3">
@@ -389,7 +394,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
                 <div className="blink_me pa-1 _ddg bord-r-50 "></div>
               </div>}
             </div>
-            <div className="flex-col w-90 pb-4">
+            <div className="flex-col w-90 pb-4 h-100 autoverflow-y"
+            >
               <FavoritesTab state={{
                   LS_favs:lsData.LS_favs,urlStateKeys:urlp.keysArray, urlState: urlp.gridData,
                   ytdObj, fuelPoints, focusSymbol, isChartLoading,
@@ -532,13 +538,15 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       {activeMobileTab == "favs" && <>
 
     <div className="mt-6 Q_sm_x"></div>
-    <div className="flex-wrap w-100 mt-2 Q_xs_md mb-100 flex-align-start gap-2 z-100">
+      
+    <div className="flex-wrap w-100 mt-2 Q_xs_md mb-100 flex-align-start gap-2 z-100  " >
       
       <div className='Q_xs_md  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'
-        // style={{maxHeight:"45vh"}}
       >
         <div className="pb-4 tx-lg tx-center">URL <br /> <small>Favorites</small> </div>
-        <div className="flex-col w-90 tx-lg">
+        <div className="flex-col w-90 tx-lg"
+        style={{maxHeight:"40vh"}}
+        >
           <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
             calls={{addTileToUrl, s__isSelectedModalOpen}}
           />
@@ -547,7 +555,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       
       <div className='Q_sm w-50 z-200 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
         <div className="pb-4">Market Summary</div>
-        <div className="flex-col w-90">
+        <div className="flex-col w-90 "
+        >
           <MarketNewsStage />
         </div>
       </div>
@@ -567,7 +576,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
             </div>}
           </div>
           <div className="flex-col w-90"
-           style={{}}>
+        style={{maxHeight:"50vh"}}
+        >
             <FavoritesTab state={{
                 LS_favs:lsData.LS_favs,urlStateKeys:urlp.keysArray,
                 urlState: urlp.gridData,

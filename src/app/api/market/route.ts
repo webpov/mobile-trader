@@ -12,7 +12,7 @@ export async function GET(req : NextRequest ) {
   const url = new URL(req.url)
   
   if (!COINMARKETCAP_KEY) {
-    return new Response(JSON.stringify({ error: 'An error occurred.' }), {
+    return new Response(JSON.stringify({ error: 'A "COINMARKETCAP_KEY" error occurred.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
