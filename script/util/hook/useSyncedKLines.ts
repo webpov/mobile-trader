@@ -211,6 +211,7 @@ export default function useSyncedKLines({state,calls}:any) {
 
 
     const exportLogs = async (aSymbol:string) => {
+      if (!pricesObj[aSymbol]) { return }
       console.log("aSymbolaSymbol", aSymbol)
 
       const asdasd = `act as a professional bitcoin market researcher

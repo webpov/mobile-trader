@@ -13,6 +13,7 @@ export function FavoritesTab({ state, calls }: any) {
 
   const triggerChangeSymbol = (aSymbol:string) => {
     if (state.focusSymbol == aSymbol) { return }
+    if (!state.pricesObj[aSymbol]) { return }
     calls.s__isChartLoading(true)
     calls.s__focusSymbol(aSymbol)
   }
@@ -66,7 +67,7 @@ export function FavoritesTab({ state, calls }: any) {
               {item.token0}
             </div>
             
-            {!!state.pricesObj && <>
+            {!!state.pricesObj && !!state.pricesObj[item.symbol] && <>
               <div className="tx-mdl tx-roman flex-center tx-start  gap-1 flex-1">
                 
             
@@ -88,7 +89,7 @@ export function FavoritesTab({ state, calls }: any) {
                 {parseFloat(state.ytdObj[item.symbol].output.lastOpen).toFixed(2)}
               </div>
             </>} */}
-            {!!state.ytdObj && <>
+            {!!state.ytdObj && !!state.pricesObj[item.symbol] && <>
               <div className={`Q_md_x translate-y-10  top-0 right-0 pos-abs  tx-lg  px-1 bord-r-10 bg-w-10 mr-1  tx-sans flex-center gap-1
                 ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>
                 {parseInt(`${liveChangePercent*100}`)/100}

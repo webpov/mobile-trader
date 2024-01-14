@@ -27,26 +27,31 @@ export const getCurrentPrices = async (symbol="BTCUSDT") => {
 export const getBulkCandles = async (symbols = ["BTCUSDT"], timeframe = "1d", startUnixDate) => {
   try {
     const candlePromises = symbols.map(async (symbol) => {
-      const url = `https://api.binance.com/api/v3/klines?interval=${timeframe}&symbol=${symbol}`;
-      
-      // You can add more query parameters like startTime if needed
-      // For example: url += `&startTime=${startUnixDate}`;
+      try {
+        const url = `https://api.binance.com/api/v3/klines?interval=${timeframe}&symbol=${symbol}`;
+        // You can add more query parameters like startTime if needed
+        // For example: url += `&startTime=${startUnixDate}`;
 
-      const response = await fetch(url);
-      const candlesData = await response.json();
-      return {symbol,data:candlesData}
-      // return {
-      //   symbol: symbol,
-      //   candles: candlesData.map((candle) => ({
-      //     openTime: candle[0],
-      //     open: parseFloat(candle[1]),
-      //     high: parseFloat(candle[2]),
-      //     low: parseFloat(candle[3]),
-      //     close: parseFloat(candle[4]),
-      //     volume: parseFloat(candle[5]),
-      //     closeTime: candle[6],
-      //   })),
-      // };
+        const response = await fetch(url);
+        const candlesData = await response.json();
+        return { symbol, data: candlesData };
+        // return {
+        //   symbol: symbol,
+        //   candles: candlesData.map((candle) => ({
+        //     openTime: candle[0],
+        //     open: parseFloat(candle[1]),
+        //     high: parseFloat(candle[2]),
+        //     low: parseFloat(candle[3]),
+        //     close: parseFloat(candle[4]),
+        //     volume: parseFloat(candle[5]),
+        //     closeTime: candle[6],
+        //   })),
+        // };
+      } catch (e) {
+        console.log(`Fetch failed for symbol ${symbol}`);
+        // Return a default value (like an empty array or a predefined object) if fetch fails
+        return { symbol, data: [] }; // Returning an empty array as the default value
+      }
     });
 
     const bulkCandles = await Promise.all(candlePromises);
@@ -54,20 +59,29 @@ export const getBulkCandles = async (symbols = ["BTCUSDT"], timeframe = "1d", st
     return bulkCandles;
   } catch (e) {
     console.log("FETCH FAILED");
-    return null;
+    return null; // General error handling for the entire function
   }
 };
+
 export const getTickerPrices = async (symbols = ["BTCUSDT"]) => {
   try {
     const pricePromises = symbols.map(async (symbol) => {
-      const spotSymbol = symbol;
-      const spotPriceResponse = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${spotSymbol}`);
-      const spotPriceData = await spotPriceResponse.json();
+      try {
+        const spotSymbol = symbol;
+        const spotPriceResponse = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${spotSymbol}`);
+        const spotPriceData = await spotPriceResponse.json();
 
-      return {
-        symbol: spotSymbol,
-        spotPrice: parseFloat(spotPriceData.price)
-      };
+        return {
+          symbol: spotSymbol,
+          spotPrice: parseFloat(spotPriceData.price)
+        };
+      } catch (e) {
+        console.log(`Fetch failed for symbol ${symbol}`);
+        return {
+          symbol: symbol,
+          spotPrice: 0 // Return 0 if fetch fails
+        };
+      }
     });
 
     const tickerPrices = await Promise.all(pricePromises);
@@ -78,6 +92,7 @@ export const getTickerPrices = async (symbols = ["BTCUSDT"]) => {
     return null;
   }
 };
+
 
 export const getPricesList = async (timeframe, requestToken, startUnixDate) => {
     let t = timeframe || "15m"

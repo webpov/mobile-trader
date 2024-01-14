@@ -101,11 +101,13 @@ export function FavSymbols({ state, calls }: any) {
   }
 
   const triggerChangeSymbol = (aSymbol:string) => {
+    if (!state.pricesObj[aSymbol]) { return }
     calls.s__isChartLoading(true)
     calls.s__focusSymbol(aSymbol)
   }
   
   const editSingleToken = (theItem:any, side:string) => {
+    if (!state.pricesObj[theItem.symbol]) { return }
     // console.log("asds", state.pricesObj[theItem.symbol], )
     calls.editSingleToken(theItem, side)
   }
@@ -158,10 +160,16 @@ export function FavSymbols({ state, calls }: any) {
               }}
             >
               <div className="tx-bold-9 px-2 flex  flex-justify-between gap-3">
+                {!state.pricesObj[item.symbol] &&
+              <div className=" tx-mdl  pl-1 flex-align-start flex-col bg-w-10 bord-r-l-25 pl-3 w-min-50px w-250px gap-1 Q_md_x"
+                  
+                >
+                  </div>}
+                {!!state.pricesObj[item.symbol] &&
               <div className=" tx-mdl  pl-1 flex-align-start flex-col bg-w-10 bord-r-l-25 pl-3 w-min-50px w-250px gap-1 Q_md_x"
                   onClick={()=>{editSingleToken(item, "roof")}}
                 >
-                  {/* <div className="flex-col">|</div> */}
+                  {!!state.pricesObj[item.symbol] &&
                   <div className="flex flex-justify-around w-100 tx-sm">
                     {<div className="tx-roman">
                       {(state.pricesObj[item.symbol]*((liveChangePercent)/100)).toFixed(1)}
@@ -172,7 +180,7 @@ export function FavSymbols({ state, calls }: any) {
                     {<div className="tx-roman Q_lg_x">
                       {(state.pricesObj[item.symbol]*((monthChangePercent)/100)).toFixed(1)}
                     </div>}
-                  </div>
+                  </div>}
 
                   
                   <div className="flex flex-justify-around w-100">
@@ -191,6 +199,7 @@ export function FavSymbols({ state, calls }: any) {
                     </div>
                   </div>
                 </div>
+        }
                   {!!calls.isLogsFilled(item.symbol) &&  <>
                     <button className="tx-center  tx-lgx tx-blue noborder bg-trans "
                       // onClick={()=>{calls.triggerGetLogs()}}
