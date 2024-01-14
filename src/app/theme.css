@@ -47,8 +47,27 @@
 .border-black {
   border: 1px solid black;
 }
-@media only screen and (max-height: 600px) {
+
+.hideNotesVertical {
+  height: 200px;
+}
+@media only screen and (max-height: 900px) {
   .hideNotesVertical {
+    height: 150px;
+  }
+}
+@media only screen and (max-height: 800px) {
+  .hideNotesVertical {
+    height: 100px;
+  }
+}
+@media only screen and (max-height: 750px) {
+  .hideNotesVertical {
+    height: 70px;
+  }
+}
+@media only screen and (max-height: 700px) {
+  .hideNotesVerticalContainer {
     display: none !important;
   }
 }

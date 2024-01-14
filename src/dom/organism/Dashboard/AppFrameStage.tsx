@@ -345,6 +345,15 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
             </button>
           </div>
         }
+        {!!fuelPoints && 
+          <div className="flex pointer pos-abs top-0 translate-x-50 right-50p">
+            <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
+              onClick={()=>s__fuelPoints(0)}
+            >
+              🛑
+            </button>
+          </div>
+        }
         
   <div className="flex opaci-chov--50 pos-abs bottom-0 right-0 mb-8 ma-2" onClick={() => {chartConfig.s__isChartMovable(!chartConfig.isChartMovable);}}>
         <button className=" bg-b-90 py-1 bord-r-10 tx-mdl noclick" >
@@ -374,8 +383,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
                 <MarketNewsStage />
               </div>
             </div>
-            <div className='Q_xl_x hideNotesVertical w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
-              <div className="pb-4">Daily Log</div>
+            <div className='Q_xl_x hideNotesVerticalContainer w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+              {/* <div className="pb-4">Daily Log</div> */}
               <div className="flex-col w-90">
                 <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:20}} calls={{s__LS_notes: lsData.s__LS_notes}} />
               </div>

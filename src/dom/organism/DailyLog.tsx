@@ -40,13 +40,13 @@ export function DailyLog({ state, calls }: any) {
   const AddNoteButton = ({ fontSize = "tx-lg", isClearable = false }: any) => {
     return (
       <div className="flex flex-justify-between flex-align-start w-100">
-        <button className={`tx-white ${fontSize || "tx-lgx"} opaci-chov--50 bg-w-10 bord-r-25 pa-4`}
+        <button className={`tx-white ${fontSize || "tx-lgx"} opaci-chov--50 bg-w-10 bord-r-25 px-4 py-2`}
           onClick={triggerAddNote}
         >
           + Add Note
         </button>
         {isClearable &&
-          <button className={`tx-white ${fontSize || "tx-lgx"} opaci-chov--50 bg-w-10 bord-r-25 pa-2`}
+          <button className={`tx-white ${fontSize || "tx-lgx"} opaci-chov--50 bg-w-10 bord-r-25 py-1 px-2`}
             onClick={triggerClearNotes}
           >
             Clear
@@ -66,13 +66,13 @@ export function DailyLog({ state, calls }: any) {
   }
   return (<>
     <div className=" w-100  flex-col gap-1">
-      <div className="pb-2 w-100">
+      <div className=" w-100">
         <AddNoteButton isClearable={true} fontSize="tx-sm" />
       </div>
-      <div className="w-100 h-max-150px bord-r-10  autoverflow-y flex-col-r flex-justify-start gap-1">
+      <div className="w-100 hideNotesVertical bord-r-10  autoverflow-y flex-col-r flex-justify-start gap-1">
         {state.LS_notes.map((item: any, index: number) => {
           return (<div key={index} className=" w-100">
-            <button className=" opaci-chov--50 bord-r-10 pa-3 w-100 noborder tx-white "
+            <button className=" opaci-chov--50 bord-r-10 px-3 py-1 w-100 noborder tx-white "
               onClick={() => triggerNoteClick(index)}
               style={{ background: "linear-gradient(45deg, #ffffff03, #ffffff11" }}
             >
