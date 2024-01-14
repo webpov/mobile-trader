@@ -287,14 +287,17 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </div>
         </div>
       }
-      <div className='tx-roman flex flex-align-stretch flex-1 mt-4 flex-center pos-rel'>
+      <div className='tx-roman flex flex-align-stretch flex-1 mt-4 flex-center pos-rel '
+                style={{maxHeight:"65vh"}}
+
+      >
         {activeMobileTab == "chart" && <>
         {!!focusSymbol && !!selectedSymbolYTDSummary &&
           selectedSymbolLTFSummary && chartConfig.isOverlayLabeled && <>
           <ChartWindowOverlayLabels state={{selectedSymbolLTFSummary, selectedSymbolYTDSummary}} />
           
         </>}
-          <div className="w-90  pos-rel bord-r-25 h-100" style={{minHeight:"55vh"}}>
+          <div className="w-90  pos-rel bord-r-25 h-100" style={{minHeight:"55vh",}}>
             <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  h-100'
               style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
             >
@@ -371,7 +374,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
                 <MarketNewsStage />
               </div>
             </div>
-            <div className='Q_xl_x w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+            <div className='Q_xl_x hideNotesVertical w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
               <div className="pb-4">Daily Log</div>
               <div className="flex-col w-90">
                 <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:20}} calls={{s__LS_notes: lsData.s__LS_notes}} />
@@ -383,7 +386,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
          
         <div className='Q_sm_x w-100 h-100 pos-rel block px-4  bord-r-25 tx-center'>
           <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex  flex-col flex-justify-start'
-        style={{maxHeight:"70vh"}}
+        style={{maxHeight:"68vh"}}
         >
             <div className="Q_md_x py-2"></div> 
             <div className="Q_sm py-2"></div> 
@@ -425,7 +428,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     <div className='Q_sm_x flex-1 flex flex-align-start  tx-white w-90 z-10'>
       
       {chartConfig.isLeftSidebarVisible &&
-        <a href="https://wgame.vercel.app/" className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
+        <a href="https://wfun.vercel.app/" className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
           <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 pb-5 neu-convex opaci-chov--50 border-white tx-altfont-1'>
             🎮 <div className="Q_lg_x">Games</div> 
           </button>
@@ -444,7 +447,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </div>
         </div>
       </div>
-      <div className='Q_xl_x w-25 mt-8  flex-col block   tx-center  '>
+      <div className='Q_xl_x w-25 mt-  flex-col block   tx-center  '>
         <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
           WebPOV
         </div>

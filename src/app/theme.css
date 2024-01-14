@@ -47,3 +47,8 @@
 .border-black {
   border: 1px solid black;
 }
+@media only screen and (max-height: 600px) {
+  .hideNotesVertical {
+    display: none !important;
+  }
+}

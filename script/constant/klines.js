@@ -7,6 +7,7 @@ export const StandardTokens = [
   "XRP",     // XRP
   "USDC",    // USD Coin
   "ADA",     // Cardano
+  "ARB",     // Cardano
   "LINK",    // Chainlink
   "RUNE",    // THORChain
   "RNDR",    // Render Token
@@ -95,6 +96,7 @@ export const StandardTokensGradients = {
   "PEPE": "#89a31e,#765805",
   "GRT": "#90d011,#eabca2",
   "ADA": "#336c40,#eb3ed8",
+  "ARB": "#336c90,#3b9ef8",
   "DOGE": "#05c034,#838321",
   "BNB": "#6d13e7,#db1336",
   "AVAX": "#5f83f7,#a9d61f",
