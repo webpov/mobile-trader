@@ -534,7 +534,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     <div className="mt-6 Q_sm_x"></div>
     <div className="flex-wrap w-100 mt-2 Q_xs_md mb-100 flex-align-start gap-2 z-100">
       
-      <div className='Q_xs_md  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'>
+      <div className='Q_xs_md  w-30 mb-8 pb-100 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 bg-w-10 flex-col flex-justify-start tx-white'
+        // style={{maxHeight:"45vh"}}
+      >
         <div className="pb-4 tx-lg tx-center">URL <br /> <small>Favorites</small> </div>
         <div className="flex-col w-90 tx-lg">
           <URLGridTab state={{urlStateKeys:urlp.keysArray, urlState: urlp.gridData,baseToken:urlp.reftoken}}
@@ -554,7 +556,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         <div className=' tx-center  pa-2 pb-6  bg-glass-50 h-100 bord-r-25 neu-convex flex-col flex-justify-start'
           style={{
             boxShadow:"-2px -2px 4px -2px #ffffff44",
-
+            
           }}
         >
           <div className=" flex-center gap-3 py-4">
@@ -564,7 +566,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
               <div className="blink_me pa-1 _ddg bord-r-50 "></div>
             </div>}
           </div>
-          <div className="flex-col w-90">
+          <div className="flex-col w-90"
+           style={{}}>
             <FavoritesTab state={{
                 LS_favs:lsData.LS_favs,urlStateKeys:urlp.keysArray,
                 urlState: urlp.gridData,

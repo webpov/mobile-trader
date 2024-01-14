@@ -140,39 +140,38 @@ export function FavSymbols({ state, calls }: any) {
         {state.LS_favs.map((item: any, index: number) => {
           
           if (!state.ytdObj){ return (<div key={index} className=" "></div>)}
-          const lastLiveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen
-          const lastWeekDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastWeeklyOpen
-          const startOfMonthDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.startOfMonthOpen
+          const lastLiveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen;
+          const lastWeekDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastWeeklyOpen;
+          const startOfMonthDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.startOfMonthOpen;
           
-          const liveChangePercent = (lastLiveDiff) / state.pricesObj[item.symbol] * 100
-          const weekChangePercent = (lastWeekDiff) / state.pricesObj[item.symbol] * 100
-          const monthChangePercent = (startOfMonthDiff) / state.pricesObj[item.symbol] * 100
+          const liveChangePercent = (lastLiveDiff) / (lastLiveDiff > 0 ? state.ytdObj[item.symbol].output.lastOpen : state.pricesObj[item.symbol]) * 100;
+          const weekChangePercent = (lastWeekDiff) / (lastWeekDiff > 0 ? state.ytdObj[item.symbol].output.lastWeeklyOpen : state.pricesObj[item.symbol]) * 100;
+          const monthChangePercent = (startOfMonthDiff) / (startOfMonthDiff > 0 ? state.ytdObj[item.symbol].output.startOfMonthOpen : state.pricesObj[item.symbol]) * 100;
+          
+          console.log("item.symbol", item.symbol, state.pricesObj[item.symbol], "asdqwe")
+          console.log("ff", state.ytdObj[item.symbol].output)
 
           return (<div key={index} className=" w-100">
             <div className="  flex-col flex-align-stretch  bord-r-10  w-100 noborder tx-white "
               style={{ 
                 background: "linear-gradient(45deg, #ffffff03, #ffffff11",
-                
               }}
-              
-
             >
-              
               <div className="tx-bold-9 px-2 flex  flex-justify-between gap-3">
               <div className=" tx-mdl  pl-1 flex-align-start flex-col bg-w-10 bord-r-l-25 pl-3 w-min-50px w-250px gap-1 Q_md_x"
                   onClick={()=>{editSingleToken(item, "roof")}}
                 >
                   {/* <div className="flex-col">|</div> */}
-                  <div className="flex flex-justify-around w-100">
-                  {<div className="tx-roman">
-                    {(state.pricesObj[item.symbol]*((liveChangePercent)/100)).toFixed(1)}
-                  </div>}
-                  {<div className="tx-roman">
-                    {(state.pricesObj[item.symbol]*((weekChangePercent)/100)).toFixed(1)}
-                  </div>}
-                  {<div className="tx-roman Q_lg_x">
-                    {(state.pricesObj[item.symbol]*((monthChangePercent)/100)).toFixed(1)}
-                  </div>}
+                  <div className="flex flex-justify-around w-100 tx-sm">
+                    {<div className="tx-roman">
+                      {(state.pricesObj[item.symbol]*((liveChangePercent)/100)).toFixed(1)}
+                    </div>}
+                    {<div className="tx-roman">
+                      {(state.pricesObj[item.symbol]*((weekChangePercent)/100)).toFixed(1)}
+                    </div>}
+                    {<div className="tx-roman Q_lg_x">
+                      {(state.pricesObj[item.symbol]*((monthChangePercent)/100)).toFixed(1)}
+                    </div>}
                   </div>
 
                   

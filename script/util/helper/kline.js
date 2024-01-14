@@ -152,9 +152,8 @@ export const getLongTermData = (priceList) => {
       latestUnix: 0,
       oldestUnix: 0,
       closingPrices: [],
-      volumeList: [], // Include volume in the returned object
-      lastWeeklyOpen: 0, // Initialize lastWeeklyOpen
-      startOfMonthOpen: 0, // Initialize startOfMonthOpen
+      lastWeeklyOpen: 0,
+      startOfMonthOpen: 0,
     }
   }
 
@@ -162,31 +161,16 @@ export const getLongTermData = (priceList) => {
   let latestUnix = parseInt(priceList[theLastIndex][0]);
   let oldestUnix = parseInt(priceList[0][0]);
   const closingPrices = priceList.map((item) => parseFloat(item[4]));
-  const lastOpen = priceList[theLastIndex][1];
-  const lastClose = priceList[theLastIndex][4];
+  const lastOpen = parseFloat(priceList[theLastIndex][1]);
+  const lastClose = parseFloat(priceList[theLastIndex][4]);
   const dailyDiff = (lastClose - lastOpen) / lastClose * 100;
 
-  // Find the last Monday's open price
   let lastWeeklyOpen = 0;
   let startOfMonthOpen = 0;
   let currentMonth = new Date(priceList[theLastIndex][0] * 1000).getMonth();
 
-  for (let i = theLastIndex; i >= 0; i--) {
-    const date = new Date(priceList[i][0] * 1000); // Convert Unix timestamp to Date
-    // Check for last Monday
-    if (date.getDay() === 1 && lastWeeklyOpen === 0) { 
-      lastWeeklyOpen = priceList[i][1]; // Open price of the last Monday
-    }
-    // Check for the start of the month
-    if (date.getMonth() !== currentMonth && startOfMonthOpen === 0) {
-      startOfMonthOpen = priceList[i + 1][1]; // Open price of the first day of the current month
-      currentMonth = date.getMonth();
-    }
-    // Break if both values are found
-    if (lastWeeklyOpen !== 0 && startOfMonthOpen !== 0) {
-      break;
-    }
-  }
+  lastWeeklyOpen = getLastWeeklyOpen(priceList);
+  startOfMonthOpen = getStartOfMonthOpen(priceList);
 
   return {
     latestUnix,
@@ -195,8 +179,49 @@ export const getLongTermData = (priceList) => {
     dailyDiff: parseInt(Math.round(dailyDiff * 100)),
     lastOpen,
     lastClose,
-    lastWeeklyOpen, // Include lastWeeklyOpen in the returned object
-    startOfMonthOpen, // Include startOfMonthOpen in the returned object
-    // volumeList, // Include volume in the returned object
+    lastWeeklyOpen,
+    startOfMonthOpen,
   }
 }
+
+const getLastWeeklyOpen = (priceList) => {
+  // Find the date of the last Monday
+  const findLastMonday = (date) => {
+    let lastMonday = new Date(date);
+    // Adjust to the previous Monday
+    lastMonday.setDate(date.getDate() - ((date.getDay() + 7) % 7));
+    return lastMonday;
+  }
+
+  let theLastIndex = priceList.length < 500 ? priceList.length - 1 : 499;
+  let latestUnix = parseInt(priceList[theLastIndex][0]);
+  let latestDate = new Date(latestUnix);
+  let lastMonday = findLastMonday(latestDate);
+  
+  for (let i = theLastIndex; i >= 0; i--) {
+    let itemDate = new Date(parseInt(priceList[i][0]));
+    // Check if the date is the same as the last Monday
+    if (itemDate.setHours(0, 0, 0, 0) === lastMonday.setHours(0, 0, 0, 0)) {
+      return parseFloat(priceList[i][1]);
+    }
+  }
+  return 0; // Return 0 if not found
+};
+
+const getStartOfMonthOpen = (priceList) => {
+  let theLastIndex = priceList.length - 1
+  let latestUnix = parseInt(priceList[theLastIndex][0]);
+  let currentMonth = new Date(latestUnix).getMonth();
+
+  for (let i = theLastIndex; i >= 0; i--) {
+    const theDate = new Date(parseInt(priceList[i][0]))
+    let itemMonth = theDate.getMonth();
+    let itemDay = theDate.getDate();
+
+    if (itemMonth === currentMonth && itemDay === 1) {
+      return parseFloat(priceList[i][1]);
+    }
+  }
+  
+  return 0; // Return 0 if not found
+};

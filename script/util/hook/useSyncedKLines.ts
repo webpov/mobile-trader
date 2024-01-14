@@ -117,9 +117,11 @@ export default function useSyncedKLines({state,calls}:any) {
       let tokenList = state.favs.map((item:any)=>(item.symbol))
       let currentYTDData:any = await getBulkCandles(tokenList, state.htf)
       currentYTDData.map((item:any)=>{
+        const outputData = getLongTermData(item.data)
+        console.log("symbol", item.symbol, "outputData", outputData) 
         ydtSummaryObj[item.symbol] = {
           candles: item.data,
-          output: getLongTermData(item.data)
+          output: outputData
         }
       })
       

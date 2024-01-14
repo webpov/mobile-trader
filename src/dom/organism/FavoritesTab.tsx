@@ -34,8 +34,8 @@ export function FavoritesTab({ state, calls }: any) {
     </>);
   }
   return (<>
-    <div className=" w-100   autoverflow-y  flex-col flex-justify-start gap-2 pt-4"
-      style={{maxHeight:"60vh"}}
+    <div className=" w-100   autoverflow-y  flex-col flex-justify-start gap-2 pt-4 "
+      style={{maxHeight:"45vh"}}
     >
 
       {state.LS_favs.map((item: any, index: number) => {
@@ -44,7 +44,7 @@ export function FavoritesTab({ state, calls }: any) {
         if (!state?.ytdObj[item.symbol]) {return (<></>)}
 
         const liveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen
-        const liveChangePercent = (liveDiff) / state.pricesObj[item.symbol] * 100
+        const liveChangePercent = (liveDiff) / (liveDiff > 0 ? state.ytdObj[item.symbol].output.lastOpen : state.pricesObj[item.symbol]) * 100
         return (<>
         <div key={`${index}--`} className="Q_md pt-1"></div>
         <div key={`${index}---`} className="Q_xs_md pt-1 w-100"></div>

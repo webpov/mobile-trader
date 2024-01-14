@@ -40,7 +40,7 @@ export function URLGridTab({ state, calls }: any) {
     </>);
   }
   return (<>
-    <div className=" w-100 autoverflow-y flex-justify-start  flex-col gap-1 " style={{maxHeight:"60vh"}}>
+    <div className=" w-100 autoverflow-y flex-justify-start  flex-col gap-1 " style={{maxHeight:"45vh"}}>
 
       {state.urlStateKeys.map((item: any, index: number) => {
         return (<div key={index} className=" w-100">
@@ -57,15 +57,15 @@ export function URLGridTab({ state, calls }: any) {
       })}
       {state.urlStateKeys.length && <div className="pos-abs bottom-0 pb-2 flex-center Q_xs_lg_flex-col gap-1 ">
           <a className=" opaci-chov--50" href="/">
-            <button className="tx-white bg-b-10 bord-r-10 px-2 pointer">
+            <button className="tx-white bg-b-90 bord-r-10 px-2 pointer ">
               Clear
             </button>
           </a>
           <div className="flex-center gap-1">
-            <button onClick={triggerAddTileToUrl} className=" opaci-chov--50 tx-white bg-b-10 bord-r-25 px-2 py-1">
+            <button onClick={triggerAddTileToUrl} className=" opaci-chov--50 tx-white bg-b-90 bord-r-25 px-2 py-1">
               +
             </button>
-            <button onClick={()=>{window.location.reload()}} className=" opaci-chov--50 tx-white bg-b-10 bord-r-5 px-1  border-white-50">
+            <button onClick={()=>{window.location.reload()}} className=" opaci-chov--50 tx-white bg-b-90 bord-r-5 px-1  border-white-50">
               Re
             </button>
           </div>
