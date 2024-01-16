@@ -33,8 +33,8 @@ export function useUrlParamCatcher() {
 
   const reftoken = searchParams.get('reftoken') || "USDT"
   // const symbol = searchParams.get('symbol') || "BTC"+reftoken
-  const ltf = searchParams.get('symbol') || "4h"
-  const htf = searchParams.get('symbol') || "1d"
+  const ltf = searchParams.get('ltf') || "4h"
+  const htf = searchParams.get('htf') || "1d"
 
   
   const panel_a0 = searchParams.get('a0')
