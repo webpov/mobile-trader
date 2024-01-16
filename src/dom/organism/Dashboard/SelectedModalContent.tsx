@@ -65,13 +65,13 @@ export function SelectedModalContent({ state, calls }: any) {
             <div className="flex-wrap h-100 gap-2">
             {!!state.pairs && state.pairs.map((item:any,index:number)=>{
               const baseToken = "usdt".toUpperCase()
-              console.log("state.urlStateKeys", state.urlState)
+              // console.log("state.urlStateKeys", state.urlState)
               const theSymbolsOfUrl = state.urlStateKeys.map((aPosCode:string)=>{
                 return state.urlState[aPosCode].symbol
               })
-              console.log("theSymbolsOfUrl", theSymbolsOfUrl)
+              // console.log("theSymbolsOfUrl", theSymbolsOfUrl)
               const foundToken = theSymbolsOfUrl.includes(`${item}${baseToken}`.toUpperCase()) 
-              console.log("state", item, foundToken)
+              // console.log("state", item, foundToken)
                 // conso
                 // {state.urlStateKeys.includes(state.gridData[item].posCode)}
                 if (foundToken) {

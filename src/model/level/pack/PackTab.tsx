@@ -36,7 +36,7 @@ export function PackTab({ state, calls }: any) {
     calls.toggleCubeSelection(state.index);
   }
   const triggerFullSpinCount = (val:any) => {
-    console.log("triggerFullSpinCount", val);
+    // console.log("triggerFullSpinCount", val);
     s__fullSpinCount(val);
   }
   return (<>

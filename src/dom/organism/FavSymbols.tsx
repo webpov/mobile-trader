@@ -150,8 +150,8 @@ export function FavSymbols({ state, calls }: any) {
           const weekChangePercent = (lastWeekDiff) / (lastWeekDiff > 0 ? state.ytdObj[item.symbol].output.lastWeeklyOpen : state.pricesObj[item.symbol]) * 100;
           const monthChangePercent = (startOfMonthDiff) / (startOfMonthDiff > 0 ? state.ytdObj[item.symbol].output.startOfMonthOpen : state.pricesObj[item.symbol]) * 100;
           
-          console.log("item.symbol", item.symbol, state.pricesObj[item.symbol], "asdqwe")
-          console.log("ff", state.ytdObj[item.symbol].output)
+          // console.log("item.symbol", item.symbol, state.pricesObj[item.symbol], "asdqwe")
+          // console.log("ff", state.ytdObj[item.symbol].output)
 
           return (<div key={index} className=" w-100">
             <div className="  flex-col flex-align-stretch  bord-r-10  w-100 noborder tx-white "

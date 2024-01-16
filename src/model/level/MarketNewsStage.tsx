@@ -66,7 +66,7 @@ export const MarketNewsStage = ({state}:any) => {
 
       // Replace 'YOUR_API_KEY' with your actual CoinMarketCap API key
       const ttt = await getTotalMarketCap();
-      console.log("ttt", ttt)
+      // console.log("ttt", ttt)
       s__theData((oldData:any)=>({...oldData,["MCAP_USD"]: (parseInt(`${ttt.data.quote.USD.total_market_cap/1000000000}`))}))
       s__theData((oldData:any)=>({...oldData,["BTCD"]: (parseInt(`${parseFloat(ttt.data.btc_dominance)*10}`)/10)}))
       s__theData((oldData:any)=>({...oldData,["BTCD24"]: ((`${parseFloat(ttt.data.btc_dominance_24h_percentage_change).toFixed(2)}`))}))
