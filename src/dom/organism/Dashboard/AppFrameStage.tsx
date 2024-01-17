@@ -281,10 +281,10 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </a>
         </h1>
       </div>
-      <div className='flex-row pos-rel flex-align-stretch  w-100 Q_xs_lg z-10 tx-white'>
+      <div className='flex-row pos-rel flex-justify-end mr-8  w-100 Q_xs_lg z-10 tx-white'>
         <a href="/" className="flex-col tx-white nodeco" onClick={()=>window.location.reload}>
-          <h2 className="mb-0 pb-0 flex-center bg-w-10 px-6 gap-2 box-shadow-i-9-b pt-2 bord-r-25 pb-3">
-            <SymbolNameHeader label={focusSymbol || "N/A"} />
+          <h2 className="mb-0 pb-0 flex-center bg-w-10 px-4 gap-2 box-shadow-i-9-b pt-2 bord-r-25 pb-3">
+            <div className="tx-sm"><SymbolNameHeader label={focusSymbol || "N/A"} /></div>
             <div>-</div>
             {!!pricesObj && <div className=" tx-lg tx-roman">{(pricesObj[focusSymbol])}</div>}
           </h2>
