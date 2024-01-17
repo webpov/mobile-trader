@@ -36,6 +36,7 @@ export function FavoritesTab({ state, calls }: any) {
   }
   return (<>
     <div className=" w-100   autoverflow-y  flex-col flex-justify-start gap-2 pt-4 "
+    
       // style={{maxHeight:"45vh"}}
     >
 

@@ -139,6 +139,14 @@ type CompletionResponse = {
   error?: string;
 };
 
+const triggerMobileTab = (newTab:string) => {
+  s__activeMobileTab(newTab)
+  
+  if (newTab == "chart") {
+    // recalcChartContext(newTab)
+  }
+}
+
 async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse> {
   const response = await fetch('/api/ai', {
     method: 'POST',
@@ -162,10 +170,14 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     console.log("thePromptGuide", thePromptGuide)
 
     console.log("AI_BASE + JSON.stringify(thePromptGuide)", AI_BASE + JSON.stringify(thePromptGuide))
-    const resres = await getCompletionFromAPI(AI_BASE + JSON.stringify(thePromptGuide))
-    console.log("resres*******************************")
-    console.log(resres)
-    console.log("resres*******************************")
+    const promptGuide = AI_BASE + JSON.stringify(thePromptGuide)
+    
+    // console.log(asdasd)
+    prompt(`Consult ${focusSymbol}`, promptGuide)
+    // const resres = await getCompletionFromAPI(AI_BASE + JSON.stringify(thePromptGuide))
+    // console.log("resres*******************************")
+    // console.log(resres)
+    // console.log("resres*******************************")
   }
   const triggerOpenPack = () => {
 
@@ -254,6 +266,12 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       </div>
     </div>
     {activeMobileTab == "chart" && <>
+    <a href="/" className="nodeco z-10 block opaci-chov--50 tx-white pa-2 pos-abs left-0 flex-row Q_xs_flex-col top-0 tx-md tx-bold-8 tx-ls-1 ">
+        <span className="tx-altfont-5">Web</span>
+        <span className="">Trade</span>
+    </a>
+
+      {/* <div className="tx-white pa-2 pos-fix left-0 top-0 tx-md tx-bold-8 tx-ls-1 tx-altfont-5">Web</div> */}
       <div className='flex-row  tx-white  Q_lg_x  w-90 z-10'>
         <div className='Q_lg_x w-10'></div>
         <h1 className=" flex-1 mb-0 pb-0 pl-100 block">
@@ -277,7 +295,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     >
       {!!chartConfig.isLeftSidebarVisible &&
         <div className=' Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pb-8 pt-4 neu-convex flex-col flex-justify-start'
-        style={{maxHeight:"60vh"}}
+          style={{maxHeight:"60vh", background: "linear-gradient(0deg, #00000099, #00000019)"}}
         >
           <div className="pb-4 tx-center">URL <small>Favorites</small> </div>
           <div className="flex-col w-90 h-100 autoverflow-y">
@@ -299,7 +317,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </>}
           <div className="w-90  pos-rel bord-r-25 h-100" style={{minHeight:"55vh",}}>
             <div className='bord-r-25 w-100 noverflow bg-b-50 bg-glass-50  h-100'
-              style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
+              style={{boxShadow:"inset 5px 8px 5px #ffffff22, 4px 4px 10px #000000cc"}}
             >
               <ModelGameStage config={chartConfig} state={{
                 ltfClosingList, ltfList, isChartLoading,
@@ -321,7 +339,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
               </ModelGameStage>
             </div>
             
-            <button className="pos-abs translate-y-50 border-white-50 Q_xs  bottom-0 right-0 pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+            <button className="pos-abs huerotate-1 translate-y-50 border-white-50 Q_xs  bottom-0 right-0 pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
                   onClick={()=>{triggerOpenModal()}}
                 >
                   ⭐
@@ -337,7 +355,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </div>
           
         {!fuelPoints && 
-          <div className="flex pointer pos-abs top-0 translate-x-50 right-50p">
+          <div className="flex hover-10 some-shakefull-1 pointer pos-abs top-0 translate-x-50 right-50p">
             <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
               onClick={()=>s__fuelPoints(1)}
             >
@@ -346,7 +364,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </div>
         }
         {!!fuelPoints && 
-          <div className="flex pointer pos-abs top-0 translate-x-50 right-50p">
+          <div className="flex pointer pos-abs top-0 translate-xy--50 right-50p">
             <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
               onClick={()=>s__fuelPoints(0)}
             >
@@ -395,7 +413,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
          
         <div className='Q_sm_x w-100 h-100 pos-rel block px-4  bord-r-25 tx-center'>
           <div className=' tx-center bg-glass-50 h-100 bord-r-25 neu-convex  flex-col flex-justify-start'
-        style={{maxHeight:"68vh"}}
+        style={{maxHeight:"68vh", background: "linear-gradient(0deg, #000000aa, #00000022)"}}
         >
             <div className="Q_md_x py-2"></div> 
             <div className="Q_sm py-2"></div> 
@@ -403,7 +421,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
               <div className="Q_md_x">Stored <br /> Favorites</div> 
               <div className="Q_xs_md">Fav</div> 
               {!!fuelPoints && <div>
-                <div className="blink_me pa-1 _ddg bord-r-50 "></div>
+                <div className="blink_me pa-1 _ddr bord-r-50 "></div>
               </div>}
             </div>
             <div className="flex-col w-90 pb-4 h-100 autoverflow-y"
@@ -422,7 +440,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
             
 
-            <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+            <button className="pos-abs huerotate-1 top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
               onClick={()=>{triggerOpenModal()}}
             >
               ⭐
@@ -439,7 +457,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       {chartConfig.isLeftSidebarVisible &&
         <a href="https://wfun.vercel.app/" className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
           <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 pb-5 neu-convex opaci-chov--50 border-white tx-altfont-1'>
-            🎮 <div className="Q_lg_x">Games</div> 
+            <div className="hover-jump pb-2">🎮</div> <div className="Q_lg_x">Games</div> 
           </button>
         </a>
       }
@@ -458,9 +476,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       </div>
       <div className='Q_xl_x w-25 mt-  flex-col block   tx-center  '>
         <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
-          WebPOV
+          WebPOV Ecosystem
         </div>
-        <div className="pa-8">
+        <div className="pa-2">
           {/* <div className="tx-lx opaci-10">Not Found</div> */}
           <div>
             <SocialMediaRow />
@@ -484,9 +502,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       
       <div className='Q_xs_xl  w-100 mt-8  flex-col block   tx-center  '>
         <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
-          WebPOV
+          WebPOV Ecosystem
         </div>
-        <div className="pa-8">
+        <div className="pa-2">
           {/* <div className="tx-lx opaci-10">Not Found</div> */}
           <div>
             <SocialMediaRow />
@@ -504,7 +522,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           Acc <div className="Q_md_x">Acc</div> 
         </button>
         <button className='w-100 pb-5 tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 neu-convex opaci-chov--50 border-white-50 tx-altfont-1'>
-          🎮 <div className="Q_md_x">Games</div> 
+          <div className="hover-jump pb-2">🎮</div> <div className="Q_md_x">Games</div> 
         </button>
       </div>
       
@@ -536,9 +554,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       
 <div className='Q_sm_md  w-100   flex-col block   tx-center  '>
         <div className="neu-convex py-4 px-8 bord-r-25 tx-white box-shadow-9-b">
-          WebPOV
+          WebPOV Ecosystem
         </div>
-        <div className="pa-8">
+        <div className="pa-2">
           {/* <div className="tx-lx opaci-10">Not Found</div> */}
           <div>
             <SocialMediaRow />
@@ -614,9 +632,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       
 <div className='Q_xs  w-100   flex-col block   tx-center  '>
         <div className="neu-convex py-4 px-8 bord-r-25 tx-white box-shadow-9-b">
-          WebPOV
+          WebPOV Ecosystem
         </div>
-        <div className="pa-8">
+        <div className="pa-2">
           {/* <div className="tx-lx opaci-10">Not Found</div> */}
           <div>
             <SocialMediaRow />
@@ -642,7 +660,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
       
       <div className='flex-1 flex-col mt-8 pb-6 Q_xs z-300  pos-fixed bottom-0 '>
-        <MobileTabsButtons state={{activeMobileTab}}  calls={{s__activeMobileTab}} />
+        <MobileTabsButtons state={{activeMobileTab}}  calls={{s__activeMobileTab: triggerMobileTab}} />
       </div>
 
     </>)

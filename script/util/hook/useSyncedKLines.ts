@@ -118,7 +118,7 @@ export default function useSyncedKLines({state,calls}:any) {
       let currentYTDData:any = await getBulkCandles(tokenList, state.htf)
       currentYTDData.map((item:any)=>{
         const outputData = getLongTermData(item.data)
-        console.log("symbol", item.symbol, "outputData", outputData) 
+        // console.log("symbol", item.symbol, "outputData", outputData) 
         ydtSummaryObj[item.symbol] = {
           candles: item.data,
           output: outputData
@@ -221,6 +221,7 @@ export default function useSyncedKLines({state,calls}:any) {
       ${JSON.stringify(ltfClosingList.slice(150))}
       `
       console.log(asdasd)
+      prompt(`Consult ${focusSymbol}`, asdasd)
       
       // ltfClosingList.slice(Math.max(ltfClosingList.length - 5, 1))
       // console.log(JSON.stringify(ltfClosingList.slice(150)) )

@@ -14,7 +14,6 @@ export const MobileTabsButtons = ({state, calls}:any) => {
             return
         }
         calls.s__activeMobileTab(aTab)
-
     }
     return (<>
       <div className="flex-wrap gap-2  ">

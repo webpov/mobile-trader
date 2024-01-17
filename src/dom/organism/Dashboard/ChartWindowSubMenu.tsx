@@ -25,7 +25,7 @@ export const ChartWindowSubMenu = ({ chartConfig, state, calls }: any) => {
             <div>Labels</div>
             <div className={`${chartConfig.isOverlayLabeled ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isOverlayLabeled ? "True" : "False"}</div>
           </button>
-          <ODivider className="w-90 " />
+          <ODivider className="w-90 Q_lg_x" />
           <button className="Q_lg_x flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={() => {
             chartConfig.s__isLeftSidebarVisible(!chartConfig.isLeftSidebarVisible);
           }}>
