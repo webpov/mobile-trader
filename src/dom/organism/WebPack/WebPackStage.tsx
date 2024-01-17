@@ -1,4 +1,6 @@
 import PackTabsScene from "@/model/level/pack/PackTabsScene";
+import Link from 'next/link'
+
 
 export default function WebPackStage({}:any) {
     return (<>
@@ -32,21 +34,21 @@ export default function WebPackStage({}:any) {
         <div className='Q_md_x mt-4 w-10 box-shadow-9-b bg-glass-20 bord-r-25 pt-4 neu-convex flex-col flex-justify-start'>
           <div className="pb-4 tx-center">Important <small>Links</small> </div>
           <div className="flex-col w-90">
-            <a href="http://webpov.vercel.app/" className="flex-col tx-white nodeco">
+            <Link href="http://webpov.vercel.app/" className="flex-col tx-white nodeco">
             <h2 className="mb-0 pb-0 flex-col bg-w-10 px-2 gap-2 box-shadow-9-b pt-2 bord-r-15 pb-3">
               <div>POV</div>
             </h2>
-          </a>
-            <a href="http://wqub.vercel.app/" className="flex-col tx-white nodeco">
+          </Link>
+            <Link href="http://wqub.vercel.app/?hd=1" className="flex-col tx-white nodeco">
             <h2 className="mb-0 pb-0 flex-col bg-w-10 px-2 gap-2 box-shadow-9-b pt-2 bord-r-15 pb-3">
               <div>QUB</div>
             </h2>
-          </a>
-            <a href="http://wtrade.vercel.app/" className="flex-col tx-white nodeco">
+          </Link>
+            <Link href="http://wtrade.vercel.app/" className="flex-col tx-white nodeco">
             <h2 className="mb-0 pb-0 flex-col bg-w-10 px-2 gap-2 box-shadow-9-b pt-2 bord-r-15 pb-3">
               <div>TRADE</div>
             </h2>
-          </a>
+          </Link>
           <hr className="w-50 mt-6" />
             <a href="/" className="flex-col tx-white nodeco">
             <h2 className="mb-0 pb-0 flex-col bg-w-10 px-2 gap-2 box-shadow-9-b pt-2 bord-r-15 pb-3">

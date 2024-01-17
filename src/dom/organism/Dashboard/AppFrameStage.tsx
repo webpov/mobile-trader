@@ -2,6 +2,7 @@
 import { AI_BASE, useAI } from "@/../script/util/hook/useAI"
 import ModelGameStage from "@/model/level/ModelGameStage"
 import { useUrlParamCatcher } from "@/../script/util/hook/useUrlParamCatcher"
+import Link from 'next/link'
 import useChartConfig from "@/../script/util/hook/useChartConfig"
 import useLocalStorageCatcher from "@/../script/util/hook/useLocalStorageCatcher"
 import { URLGridTab } from "../URLGridTab"
@@ -455,11 +456,11 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     <div className='Q_sm_x flex-1 flex flex-align-start  tx-white w-90 z-10'>
       
       {chartConfig.isLeftSidebarVisible &&
-        <a href="https://wfun.vercel.app/" className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
+        <Link href="https://wfun.vercel.app/" className='Q_sm_x w-10 block  Q_md_x  bord-r-25 tx-center '>
           <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 pb-5 neu-convex opaci-chov--50 border-white tx-altfont-1'>
             <div className="hover-jump pb-2">🎮</div> <div className="Q_lg_x">Games</div> 
           </button>
-        </a>
+        </Link>
       }
       <div className='flex-1 flex-col mt-8 pb-8 Q_sm_x '>
         <BuySellButtons />
