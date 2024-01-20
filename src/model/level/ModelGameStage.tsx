@@ -57,13 +57,20 @@ function getFirstDayOfNextQuarterUnix() {
     const currentUnix = Date.now()
     const unixLeft = theUnixCutoff - currentUnix
     const daysLeft = Math.floor(unixLeft/1000/60/60/24)
-    // console.log("unixLeft", daysLeft, unixLeft)
+    console.log("unixLeft", daysLeft, unixLeft, !!$htfChart.current)
 
-    if (!$htfChart.current) return
+    if (!$htfChart.current) {
+      setTimeout(()=>{
+        if ($htfChart.current) {
+          $htfChart.current.position.x = -0.02*(daysLeft)
+        }
+      },500)
+      return
+    }
 
     $htfChart.current.position.x = -0.02*(daysLeft)
 
-  },[state.ltfClosingList, state.activeMobileTab, state.focusSymbol])
+  },[$htfChart.current, state.ltfClosingList, state.activeMobileTab, state.focusSymbol])
 
   const CHOP_AMOUNT = 400
   const lastOfLTF = useMemo(()=>{
