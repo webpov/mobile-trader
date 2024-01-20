@@ -809,7 +809,7 @@
 /* From Small to Medium */
 @media (min-width: 0901px) , (max-width: 0600px){.Q_sm_md{display: none } }
 /* From Small to Large */
-@media (min-width: 1201px) , (max-width: 0600px){.Q_sm_lg{display: none } }
+@media (max-width: 0600px) , (min-width: 1437px){.Q_sm_lg{display: none } }
 /* From Small to Large */
 @media (min-width: 1437px) , (max-width: 0600px){.Q_sm_xl{display: none } }
 /* From Small to Infinity */

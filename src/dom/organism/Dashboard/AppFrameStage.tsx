@@ -266,7 +266,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       >
       </div>
     </div><a href="/" className="nodeco z-800 block opaci-chov--50 tx-white pa-2 pos-abs left-0 flex-row Q_xs_flex-col top-0 tx-md tx-bold-8 tx-ls-1 ">
-      <img src="/webtrade11.jpg" className="border-white bord-r-100p" width="50" height="50"  />
+      <img src="/webtrade11.jpg" className="border-white-50 bord-r-100p" width="50" height="50"  />
         {/* <span className="tx-altfont-5">Web</span>
         <span className="">Trade</span> */}
     </a>
@@ -327,7 +327,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
                 
                 selectedSymbolYTDSummary,
                 selectedSymbolLTFSummary,
-
+                activeMobileTab,
                 htfList,
                 htfClosingList,
                 ytdObj, focusSymbol,
@@ -341,18 +341,13 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
               </ModelGameStage>
             </div>
             
-            <button className="pos-abs huerotate-1 translate-y-50 border-white-50 Q_xs  bottom-0 right-0 pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+            <button className="pos-abs  translate-y-50 border-white-50 Q_xs  bottom-0 right-0 pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
                   onClick={()=>{triggerOpenModal()}}
                 >
                   ⭐
                 </button>
             
-            <a href="https://wpack.vercel.app/">
-            <button className="pos-abs translate-y-50 border-white-50 Q_xs  bottom-0 left-50p pa-1 pb-2 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
-                >
-                  🌐
-                </button>
-            </a>
+            
         
           </div>
           
@@ -442,7 +437,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
             
 
-            <button className="pos-abs huerotate-1 top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
+            <button className="pos-abs top-0 right-0 pa-1 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-lgx"
               onClick={()=>{triggerOpenModal()}}
             >
               ⭐
@@ -467,11 +462,11 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         <BuySellButtons />
 
         
-        <div className='Q_md_lg w-100 mt-8 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'
+        <div className='Q_sm_lg w-90 mt-8  box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'
           style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
         >
           <div className="pb-4">Market Summary</div>
-          <div className="flex-col w-90">
+          <div className="flex-col w-90 ">
             <MarketNewsStage />
           </div>
         </div>
@@ -493,7 +488,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       <div className='Q_md_x  w-100 mt-8 block bg-glass-20 bord-r-25 tx-center  neu-concave'>
         <details className="w-100  ">
           <summary className="flex py-4 opaci-chov--50">
-            <div className="px-8">Account</div>
+            <div className="px-8">{">"} Account</div>
           </summary>
           <div>
             <h6>Sync</h6>
@@ -502,12 +497,11 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       </div>
 
       
-      <div className='Q_xs_xl  w-100 mt-8  flex-col block   tx-center  '>
-        <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
-          WebPOV Ecosystem
+      <div className=' Q_xs_xl  w-100 mt-8  flex-col block   tx-center  '>
+        <div className=" neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
+          WebPOV Apps
         </div>
-        <div className="pa-2">
-          {/* <div className="tx-lx opaci-10">Not Found</div> */}
+        <div className="pa-4">
           <div>
             <SocialMediaRow />
 
@@ -537,18 +531,6 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       
       
       
-<div className='Q_sm_md  w-100   flex-col block   tx-center  '>
-        <div className="neu-convex py-4 px-8 bord-r-25 tx-white box-shadow-9-b">
-          WebPOV Ecosystem
-        </div>
-        <div className="pa-2">
-          {/* <div className="tx-lx opaci-10">Not Found</div> */}
-          <div>
-            <SocialMediaRow />
-
-          </div>
-        </div>
-      </div>
       
       {activeMobileTab == "favs" && <>
 
@@ -612,23 +594,6 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </button>
         </div>
       </div>
-      <div className='Q_xs_md  w-100 mb-8 flex-col flex-justify-start tx-white'>
-        
-      
-<div className='Q_xs  w-100   flex-col block   tx-center  '>
-        <div className="neu-convex py-4 px-8 bord-r-25 tx-white box-shadow-9-b">
-          WebPOV Ecosystem
-        </div>
-        <div className="pa-2">
-          {/* <div className="tx-lx opaci-10">Not Found</div> */}
-          <div>
-            <SocialMediaRow />
-
-          </div>
-        </div>
-      </div>
-      
-        </div>
     </div>
 </>}
     {/* <ODivider className="Q_xs_xl w-90 mt-4" /> */}
@@ -636,7 +601,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
     {activeMobileTab == "notes" && <>
       {!!pricesObj && 
-        <div className="Q_xs pb-4 flex-center gap-1 tx-white">
+        <div className="Q_xs pb-4 px-4 flex-center  gap-1 tx-white"
+          style={{alignSelf:"flex-end"}}
+        >
           <div className=" tx-lg tx-roman tx-altfont-1">{(focusSymbol)}</div>
           <div>-</div>
           <div className=" tx-lg tx-roman">{(pricesObj[focusSymbol])}</div>
@@ -664,6 +631,20 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       
       <div className='flex-1 flex-col mt-8 pb-6 Q_xs z-300  pos-fixed bottom-0 '>
         <MobileTabsButtons state={{activeMobileTab}}  calls={{s__activeMobileTab: triggerMobileTab}} />
+      </div>
+
+
+      
+      <div className=' Q_sm_md  w-100 mt-8  flex-col block   tx-center  '>
+        <div className="tx-white neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
+          The WebPOV Project
+        </div>
+        <div className="pa-4">
+          <div>
+            <SocialMediaRow />
+
+          </div>
+        </div>
       </div>
 
     </>)

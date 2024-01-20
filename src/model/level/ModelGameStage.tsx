@@ -63,7 +63,7 @@ function getFirstDayOfNextQuarterUnix() {
 
     $htfChart.current.position.x = -0.02*(daysLeft)
 
-  },[state.ltfClosingList])
+  },[state.ltfClosingList, state.activeMobileTab])
 
   const CHOP_AMOUNT = 400
   const lastOfLTF = useMemo(()=>{
