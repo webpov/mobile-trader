@@ -266,7 +266,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       >
       </div>
     </div><a href="/" className="nodeco z-800 block opaci-chov--50 tx-white pa-2 pos-abs left-0 flex-row Q_xs_flex-col top-0 tx-md tx-bold-8 tx-ls-1 ">
-      <img src="/webtrade11.jpg" className="border-white-50 bord-r-100p" width="50" height="50"  />
+      <img src="/webtrade11.jpg" className=" bord-r-100p" width="50" height="50"  />
         {/* <span className="tx-altfont-5">Web</span>
         <span className="">Trade</span> */}
     </a>
