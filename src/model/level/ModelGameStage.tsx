@@ -1,5 +1,5 @@
 "use client"
-import { Box, GizmoHelper, GizmoViewcube, MapControls, OrbitControls } from "@react-three/drei";
+import { Box, GizmoHelper, GizmoViewcube, MapControls, OrbitControls, Plane } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
@@ -193,14 +193,14 @@ function getFirstDayOfNextQuarterUnix() {
               </group>
 
 
-              <Box args={[0.02*90,2,0.01]} position={[1.09,-2,0]}>
-                  <meshStandardMaterial wireframe={true} emissive="#553" />
-                </Box>   
+              <Plane args={[0.02*90,2,3]} position={[1.09,-2,0]}>
+                  <meshStandardMaterial wireframe={true} emissive="#420" />
+                </Plane>   
 
               <group ref={$htfChart}> 
-                <Box args={[0.02*83,1.8,0.01]} position={[1.16,-2,0]}>
+                {/* <Box args={[0.02*83,1.8,0.01]} position={[1.16,-2,0]}>
                   <meshStandardMaterial wireframe={true} emissive="#444" />
-                </Box>   
+                </Box>    */}
 
                 {!state.isChartLoading && 
                   <group position={[2,-2.9 ,0]}>
