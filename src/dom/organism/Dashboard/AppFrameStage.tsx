@@ -265,12 +265,13 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         style={{filter:"blur(200px)"}}
       >
       </div>
-    </div>
-    {activeMobileTab == "chart" && <>
-    <a href="/" className="nodeco z-10 block opaci-chov--50 tx-white pa-2 pos-abs left-0 flex-row Q_xs_flex-col top-0 tx-md tx-bold-8 tx-ls-1 ">
-        <span className="tx-altfont-5">Web</span>
-        <span className="">Trade</span>
+    </div><a href="/" className="nodeco z-800 block opaci-chov--50 tx-white pa-2 pos-abs left-0 flex-row Q_xs_flex-col top-0 tx-md tx-bold-8 tx-ls-1 ">
+      <img src="/webtrade11.jpg" className="border-white bord-r-100p" width="50" height="50"  />
+        {/* <span className="tx-altfont-5">Web</span>
+        <span className="">Trade</span> */}
     </a>
+    {activeMobileTab == "chart" && <>
+    
 
       {/* <div className="tx-white pa-2 pos-fix left-0 top-0 tx-md tx-bold-8 tx-ls-1 tx-altfont-5">Web</div> */}
       <div className='flex-row  tx-white  Q_lg_x  w-90 z-10'>
@@ -283,7 +284,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       </div>
       <div className='flex-row pos-rel flex-justify-end mr-8  w-100 Q_xs_lg z-10 tx-white'>
         <a href="/" className="flex-col tx-white nodeco" onClick={()=>window.location.reload}>
-          <h2 className="mb-0 pb-0 flex-center bg-w-10 px-4 gap-2 box-shadow-i-9-b pt-2 bord-r-25 pb-3">
+          <h2 className="mb-0 pb-0 flex-center bg-w-10 px-4 gap-2 box-shadow-i-9-b pt-2 bord-r-25 pb-2">
             <div className="tx-sm"><SymbolNameHeader label={focusSymbol || "N/A"} /></div>
             <div>-</div>
             {!!pricesObj && <div className=" tx-lg tx-roman">{(pricesObj[focusSymbol])}</div>}
@@ -532,23 +533,6 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     {/* <ODivider className="Q_xs_md w-90 my-4" /> */}
 
     
-      {activeMobileTab == "market" && <>
-      {!!pricesObj && 
-        <div className="Q_xs pb-4 flex-center gap-1 tx-white">
-          <div className=" tx-lg tx-roman tx-altfont-1">{(focusSymbol)}</div>
-          <div>-</div>
-          <div className=" tx-lg tx-roman">{(pricesObj[focusSymbol])}</div>
-        </div>
-      } 
-    <div className='Q_xs w-90 z-200   box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
-        <div className="pb-4 tx-white tx-lg">Market Summary</div>
-        <div className="flex-col w-90 h-min-50vh">
-          <MarketNewsStage state={{canvasHeight:"350px"}} />
-        </div>
-      </div>
-
-      </>
-}
 
       
       
@@ -649,16 +633,34 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 </>}
     {/* <ODivider className="Q_xs_xl w-90 mt-4" /> */}
     
+
+    {activeMobileTab == "notes" && <>
+      {!!pricesObj && 
+        <div className="Q_xs pb-4 flex-center gap-1 tx-white">
+          <div className=" tx-lg tx-roman tx-altfont-1">{(focusSymbol)}</div>
+          <div>-</div>
+          <div className=" tx-lg tx-roman">{(pricesObj[focusSymbol])}</div>
+        </div>
+      } 
+    <div className='Q_xs w-90 z-200   box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+        <div className="pb-4 tx-white tx-lg">Market Summary</div>
+        <div className="flex-col w-90 h-min-50vh">
+          <MarketNewsStage state={{canvasHeight:"350px"}} />
+        </div>
+      </div>
+
+      </>
+}
     {activeMobileTab == "notes" && <>
       <div className="mt-8 Q_sm_x"></div>
-      <div className='z-200 mb-100  pb-100  Q_xs_xl w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
+      <div className='z-200  mb-150 mt-4 pb-100  Q_xs_xl w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
         <div className="pb-4 tx-white">Daily Log</div>
         <div className="flex-col w-90">
           <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:32}} calls={{s__LS_notes: lsData.s__LS_notes}} />
         </div>
+              
       </div>
     </>}
-
       
       <div className='flex-1 flex-col mt-8 pb-6 Q_xs z-300  pos-fixed bottom-0 '>
         <MobileTabsButtons state={{activeMobileTab}}  calls={{s__activeMobileTab: triggerMobileTab}} />
