@@ -142,13 +142,14 @@ export function FavSymbols({ state, calls }: any) {
         {state.LS_favs.map((item: any, index: number) => {
           
           if (!state.ytdObj){ return (<div key={index} className=" "></div>)}
+          console.log(item.symbol, "---->", state.ytdObj[item.symbol].output)
           const lastLiveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen;
           const lastWeekDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastWeeklyOpen;
           const startOfMonthDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.startOfMonthOpen;
           
-          const liveChangePercent = (lastLiveDiff) / (lastLiveDiff > 0 ? state.ytdObj[item.symbol].output.lastOpen : state.pricesObj[item.symbol]) * 100;
-          const weekChangePercent = (lastWeekDiff) / (lastWeekDiff > 0 ? state.ytdObj[item.symbol].output.lastWeeklyOpen : state.pricesObj[item.symbol]) * 100;
-          const monthChangePercent = (startOfMonthDiff) / (startOfMonthDiff > 0 ? state.ytdObj[item.symbol].output.startOfMonthOpen : state.pricesObj[item.symbol]) * 100;
+          const liveChangePercent = (lastLiveDiff) / (state.ytdObj[item.symbol].output.lastOpen) * 100;
+          const weekChangePercent = (lastWeekDiff) / (state.ytdObj[item.symbol].output.lastWeeklyOpen) * 100;
+          const monthChangePercent = (startOfMonthDiff) / (state.ytdObj[item.symbol].output.startOfMonthOpen) * 100;
           
           // console.log("item.symbol", item.symbol, state.pricesObj[item.symbol], "asdqwe")
           // console.log("ff", state.ytdObj[item.symbol].output)
