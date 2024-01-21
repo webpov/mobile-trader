@@ -48,9 +48,11 @@ export function FavModalContent({ state, calls }: any) {
                 isChartLoading: state.isChartLoading,
                 tradeLogsObj: state.tradeLogsObj,
                 ytdObj: state.ytdObj,
-                isFetchingLogs: state.isFetchingLogs
+                isFetchingLogs: state.isFetchingLogs,
+                fuelPoints: state.fuelPoints,
               }} 
               calls={{
+                s__fuelPoints: calls.s__fuelPoints,
                 editSingleToken: calls.editSingleToken,
                 s__LS_favs: calls.s__LS_favs,
                 s__LS_publicSecretKeys: calls.s__LS_publicSecretKeys,

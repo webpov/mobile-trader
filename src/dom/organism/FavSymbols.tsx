@@ -124,20 +124,41 @@ export function FavSymbols({ state, calls }: any) {
   }
   return (<>
     <div className=" w-90  flex-col gap-1" >
-      {!!state.LS_favs.length &&
-        <button className={`tx-white ${"tx-mdl"} opaci-chov--50 bg-glass-10 bg-w-10 bord-r-25 pa-2 mb-2 translate-y--50`}
-          onClick={triggerExportAsUrl}
-        >
-          Export as URL
-        </button>
-      }
-      {!!state.LS_favs.length &&
-        <button className={`tx-white ${"tx-sm"} opaci-chov--50 bg-glass-10 border-blue bg-w-10 bord-r-15 pa-1 mb-2 translate-y--50`}
-          onClick={triggerExportLeanUrl}
-        >
-          Export Pack
-        </button>
-      }
+      <div className="flex-center translate-y--50 gap-2">
+        
+      {!state.fuelPoints && 
+          <div className="flex hover-10 some-shakefull-1 pointer ">
+            <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
+              onClick={()=>calls.s__fuelPoints(1)}
+            >
+              Feed
+            </button>
+          </div>
+        }
+        {!!state.fuelPoints && 
+          <div className="flex pointer ">
+            <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
+              onClick={()=>calls.s__fuelPoints(0)}
+            >
+              🛑
+            </button>
+          </div>
+        }
+        {!!state.LS_favs.length &&
+          <button className={`tx-white ${"tx-mdl"} opaci-chov--50 bg-glass-10 bg-w-10 bord-r-25 pa-2  `}
+            onClick={triggerExportAsUrl}
+          >
+            Export as URL
+          </button>
+        }
+        {!!state.LS_favs.length &&
+          <button className={`tx-white ${"tx-sm"} opaci-chov--50 bg-glass-10 border-blue bg-w-10 bord-r-15 pa-1  `}
+            onClick={triggerExportLeanUrl}
+          >
+            Export Pack
+          </button>
+        }
+      </div>
       <div className="favSymbolsModalContent w-100 flex-col gap-1 autoverflow-y flex-justify-start" style={{maxHeight:"40vh"}}>
         {state.LS_favs.map((item: any, index: number) => {
           

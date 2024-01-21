@@ -212,9 +212,10 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
               LS_favs:lsData.LS_favs, LS_publicSecretKeys,ytdObj,
               focusSymbol, isChartLoading, tradeLogsObj,isFetchingLogs,
               urlStateKeys:urlp.keysArray, ltfClosingList, pricesObj,
+              fuelPoints,
             }} 
             calls={{
-              editSingleToken,
+              editSingleToken, s__fuelPoints,
               s__isLocalStorageModalOpen,triggerCloneFromUrl,
               s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,
               s__focusSymbol, s__isChartLoading, s__tradeLogsObj, triggerGetLogs, exportLogs, isLogsFilled,
@@ -352,17 +353,17 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </div>
           
         {!fuelPoints && 
-          <div className="flex hover-10 some-shakefull-1 pointer pos-abs top-0 translate-x-50 right-50p">
-            <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
+          <div className="flex hover-10 some-shakefull-1 pointer pos-abs top-0  right-50p">
+            <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 translate-y--50" 
               onClick={()=>s__fuelPoints(1)}
             >
-              Start
+              Feed
             </button>
           </div>
         }
         {!!fuelPoints && 
-          <div className="flex pointer pos-abs top-0 translate-xy--50 right-50p">
-            <button className="opaci-chov--50 bg-b-90 py-1 bord-r-50 tx-mdl tx-white px-3 " 
+          <div className="flex pointer pos-abs top-0  right-50p">
+            <button className="opaci-chov--50 bg-b-90 translate-y--50 py-1 bord-r-50 tx-mdl tx-white px-3 " 
               onClick={()=>s__fuelPoints(0)}
             >
               🛑
