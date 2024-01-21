@@ -41,13 +41,13 @@ export function FavoritesTab({ state, calls }: any) {
     >
 
       {state.LS_favs.map((item: any, index: number) => {
-        if (!state?.pricesObj) {return (<></>)}
-        if (!state?.ytdObj) {return (<></>)}
-        if (!state?.ytdObj[item.symbol]) {return (<></>)}
+        if (!state?.pricesObj) {return (<div key={`${index}-1-`}></div>)}
+        if (!state?.ytdObj) {return (<div key={`${index}-2-`}></div>)}
+        if (!state?.ytdObj[item.symbol]) {return (<div key={`${index}-3-`}></div>)}
 
         const liveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen
         const liveChangePercent = (liveDiff) / (liveDiff > 0 ? state.ytdObj[item.symbol].output.lastOpen : state.pricesObj[item.symbol]) * 100
-        return (<>
+        return (<div className="w-100" key={`${index}--999`}>
         <div key={`${index}--`} className="Q_md pt-1"></div>
         <div key={`${index}---`} className="Q_xs_md pt-1 w-100"></div>
         <div key={index} className=" w-100">
@@ -116,7 +116,7 @@ export function FavoritesTab({ state, calls }: any) {
               </div>
             </>}
           </div>
-        </div></>);
+        </div></div>);
       })}
     </div>
   </>);

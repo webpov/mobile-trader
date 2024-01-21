@@ -262,7 +262,23 @@ export function FavSymbols({ state, calls }: any) {
                   
                 </div>
               </div>
+            <div className="Q_xs flex flex-justify-around pb-1">
+                    <div className="flex-center gap-1">
+                      <small>d </small>
+                      <div className={`tx-roman flex-col ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>{liveChangePercent.toFixed(1)}%</div>
+                    </div>
+                    <div></div>
+                    <div className="flex-center gap-1">
+                      <small>w </small>
+                      <div className={`tx-roman flex-col ${weekChangePercent < 0 ? "tx-red" : "tx-green"}`}>{weekChangePercent.toFixed(1)}%</div>
+                    </div>
+                    <div className="flex-center gap-1 ">
+                      <small>m </small>
+                      <div className={`tx-roman flex-col ${monthChangePercent < 0 ? "tx-red" : "tx-green"}`}>{monthChangePercent.toFixed(1)}%</div>
+                    </div>
+                  </div>
             </div>
+            
           </div>);
         })}
       </div>

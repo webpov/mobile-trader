@@ -12,17 +12,17 @@ export function FavModalContent({ state, calls }: any) {
   return (<>
     <div className="flex-col w-100 bg-b-50 bord-r-25 box-shadow-9-b flex-1 ">
         
-    <button className="Q_sm_x pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lx"
+    <button className="Q_sm_x pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lx flex "
             style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
             onClick={()=>{window.location.reload()}}
           >
-            WTrade: <small className="tx-mdl">Stored Favorites</small>
+            <div className=" block"></div> <div className="tx-mdl">Stored Favorites</div>
           </button>
-        <button className="Q_xs pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 nodeco pa-3 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lg"
+        <button className="Q_xs pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 ml-8 nodeco py-2 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lg flex "
             style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
             onClick={()=>{window.location.reload()}}
           >
-            WTrade: <small className="tx-mdl">Stored Favorites</small>
+            <div className="px-1 block"></div> <div className="tx-mdl">Stored Favorites</div>
           </button>
         <button className="pos-abs top-0 right-0 pa-3 ma-2 ml-0 opaci-chov--50 bg-b-90 noborder bord-r-50 tx-white tx-lx"
             onClick={()=>{

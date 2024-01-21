@@ -11,14 +11,14 @@
 .tx-altfont-5 {     font-family: 'Lobster', serif !important}
 
 .neu-concave {
-    background: linear-gradient(145deg, #000000, #0f0f0f77);
+    background: linear-gradient(145deg, #00000099, #0f0f0f77);
     box-shadow:  10px 10px 20px #00000077,
-                -10px -10px 20px #0a0a0a;
+                -10px -10px 20px #0a0a0aaa;
 }
 .neu-convex {
-    background: linear-gradient(-45deg, #000000, #0f0f0f77);
+    background: linear-gradient(-45deg, #00000099, #0f0f0f77);
     box-shadow:  10px 10px 20px #00000077,
-                -10px -10px 20px #0a0a0a;
+                -10px -10px 20px #0a0a0aaa;
 }
 
 .blink_me {
