@@ -12,6 +12,7 @@ import TiltShiftEffects from "@/model/tools/tiltshift";
 import useSyncedKLines from "@/../script/util/hook/useSyncedKLines";
 import { useUrlParamCatcher } from "@/../script/util/hook/useUrlParamCatcher";
 import { BoxCandleKLine } from '@/model/tools/charts/BoxCandleKLine'
+import { BoxCandleKLineGuideLines } from '@/model/tools/charts/BoxCandleKLineGuideLines'
 import HistoryLogs from "../tools/charts/HistoryLogs";
 import { RelativeBoundaryLines } from "./RelativeBoundaryLines";
 
@@ -57,7 +58,7 @@ function getFirstDayOfNextQuarterUnix() {
     const currentUnix = Date.now()
     const unixLeft = theUnixCutoff - currentUnix
     const daysLeft = Math.floor(unixLeft/1000/60/60/24)
-    console.log("unixLeft", daysLeft, unixLeft, !!$htfChart.current)
+    // console.log("unixLeft", daysLeft, unixLeft, !!$htfChart.current)
 
     if (!$htfChart.current) {
       setTimeout(()=>{
@@ -83,6 +84,16 @@ function getFirstDayOfNextQuarterUnix() {
   },[state.htfClosingList])
 
 
+  const selectedFav: any = useMemo(() => {
+    if (!state.favs) return null;
+    if (!state.favs.length) return null;
+    const selectedSymbolData = state.favs.filter((item: any) => {
+      return item.symbol == state.focusSymbol;
+    });
+    // console.log("selectedFav", selectedSymbolData)  
+    return selectedSymbolData[0];
+  }, [state.favs, state.focusSymbol,]);
+  
   const semiFixedViewConfig = {
     
     minAzimuthAngle:0,
@@ -185,9 +196,55 @@ function getFirstDayOfNextQuarterUnix() {
                     fullArray={state.ltfList} 
                   />
                             
-                  <Box args={[7, 0.02, 0.02]} position={[-3, 2.35, 0]}>
+                  {/* <Box args={[7, 0.02, 0.02]} position={[-3, 2.35, 0]}>
                     <meshStandardMaterial color="white" emissive={"#555"} />
-                  </Box>
+                  </Box> */}
+
+
+
+
+                  
+{!!selectedFav && 
+                    <group  position={[-0.025*50,0,0]} >
+                    <BoxCandleKLineGuideLines cubeSize={.025} closingContextPrices={lastOfLTF} 
+                    yRange={[0,3.6]}
+                      // chopStart={500-CHOP_AMOUNT}
+                      chopStart={0}
+                      fullArray={[
+                        [0,parseFloat(selectedFav.floor),parseFloat(selectedFav.floor),
+                          parseFloat(selectedFav.floor),parseFloat(selectedFav.floor)*1.001,
+                          0,0
+                        ],
+                        [0,parseFloat(selectedFav.roof),parseFloat(selectedFav.roof),
+                          parseFloat(selectedFav.roof),parseFloat(selectedFav.roof)*0.999,
+                          0,0
+                        ],
+                      ]} 
+                      state={{
+                        symbol: state.focusSymbol,
+                        // yRange:[0,2.15],
+                        favs: state.favs,
+                        summaryDetails: state.selectedSymbolYTDSummary,
+                        }}
+                    />
+                    </group>}
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  {/* <group position={[0,-4.8,0]}>
+                    <RelativeBoundaryLines state={{
+                      symbol: state.focusSymbol,
+                      yRange:[0,8.1],
+                      favs: state.favs,
+                      summaryDetails: state.selectedSymbolYTDSummary,
+                      }}
+                    />
+                </group> */}
                 </group>
                 }
               </group>
@@ -201,6 +258,9 @@ function getFirstDayOfNextQuarterUnix() {
                 {/* <Box args={[0.02*83,1.8,0.01]} position={[1.16,-2,0]}>
                   <meshStandardMaterial wireframe={true} emissive="#444" />
                 </Box>    */}
+                <Plane args={[0.02*83/3,1.8]} position={[1.16+(0.02*83/3),-2,-0.1]}>
+                  <meshStandardMaterial color="#fff" wireframe={true} emissive={"#555"} />
+                </Plane>   
 
                 {!state.isChartLoading && 
                   <group position={[2,-2.9 ,0]}>
@@ -210,13 +270,39 @@ function getFirstDayOfNextQuarterUnix() {
                       chopStart={0}
                       fullArray={state.htfList} 
                     />
+                    {!!selectedFav && 
+                    <group /* position={[0.02*450,0,0]} */>
+                    <BoxCandleKLineGuideLines cubeSize={.02} closingContextPrices={lastOfHTF} 
+                      yRange={[0,1.8]}
+                      // chopStart={500-CHOP_AMOUNT}
+                      chopStart={0}
+                      fullArray={[
+                        [0,parseFloat(selectedFav.floor),parseFloat(selectedFav.floor),
+                          parseFloat(selectedFav.floor),parseFloat(selectedFav.floor)*1.001,
+                          0,0
+                        ],
+                        [0,parseFloat(selectedFav.roof),parseFloat(selectedFav.roof),
+                          parseFloat(selectedFav.roof),parseFloat(selectedFav.roof)*0.999,
+                          0,0
+                        ],
+                      ]} 
+                      state={{
+                        symbol: state.focusSymbol,
+                        // yRange:[0,2.15],
+                        favs: state.favs,
+                        summaryDetails: state.selectedSymbolYTDSummary,
+                        }}
+                    />
+                    </group>}
+                    {/* <group position={[0,-0.38,0]}>
                     <RelativeBoundaryLines state={{
                       symbol: state.focusSymbol,
-                      yRange:[0,1.8],
+                      yRange:[0,2.15],
                       favs: state.favs,
                       summaryDetails: state.selectedSymbolYTDSummary,
                       }}
                     />
+                    </group> */}
 
                     {!!selectedTradeLogs && <>
                       <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,1.7,9.8]}>  {/* 1.97 */}

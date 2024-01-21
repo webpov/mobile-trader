@@ -63,7 +63,7 @@ export const HoverSelector = forwardRef<HoverSelectorRef, HoverSelectorProps>(({
         if ($mainGroupRef.current.position.y > 0 && $mainGroupRef.current.position.y < 0.01){
 
           $mainGroupRef.current.position.y = 0
-          console.log("here")
+          // console.log("here")
           if (reachedEnd) {
             s__reachedEnd(false)
             s__fullSpinCount(fullSpinCount+1)

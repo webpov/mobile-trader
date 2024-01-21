@@ -28,6 +28,7 @@ export const RelativeBoundaryLines = ({ state, calls }: any) => {
 
     const worldRelativeHeight = state.yRange[1];
 
+    // console.log("state.summaryDetails", state.summaryDetails)
     const priceAbsHeight = state.summaryDetails.maxValue - state.summaryDetails.minValue;
     const absMinValue = selectedFav.floor - state.summaryDetails.minValue;
     let absMaxValue = selectedFav.roof - state.summaryDetails.minValue;

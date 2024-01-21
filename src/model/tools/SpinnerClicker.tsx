@@ -31,7 +31,7 @@ export function SpinnerClicker({sceneState, sceneCalls,fullSpinCount, triggerMod
         if ($mainGroupRef.current.rotation.y > 0 && $mainGroupRef.current.rotation.y < 0.01){
 
           $mainGroupRef.current.rotation.y = 0
-          console.log("here")
+          // console.log("here")
           if (reachedEnd) {
             s__reachedEnd(false)
             s__fullSpinCount(fullSpinCount+1)
