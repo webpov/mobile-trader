@@ -116,8 +116,16 @@ function getFirstDayOfNextQuarterUnix() {
     if (!state.tradeLogsObj) { return null }
     if (!state.focusSymbol) { return null }
 
+    console.log("state.tradeLogsObj[state.focusSymbol]", state.tradeLogsObj[state.focusSymbol])
     return state.tradeLogsObj[state.focusSymbol]
   },[state.tradeLogsObj, state.focusSymbol])
+  const selectedCustomTradeLogs = useMemo(()=>{
+    if (!state.customTradeList) { return null }
+    if (!state.focusSymbol) { return null }
+
+    console.log("selectedCustomTradeLogs", state.customTradeList, state.focusSymbol)
+    return state.customTradeList[state.focusSymbol]
+  },[state.customTradeList, state.focusSymbol])
   useEffect(() => {
       s__Mounted(true);
   }, []);
@@ -304,7 +312,7 @@ function getFirstDayOfNextQuarterUnix() {
                     />
                     </group> */}
 
-                    {!!selectedTradeLogs && <>
+                    {!!selectedTradeLogs && state.selectedSymbolYTDSummary && <>
                       <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,1.7,9.8]}>  {/* 1.97 */}
                         <HistoryLogs
 
@@ -316,6 +324,19 @@ function getFirstDayOfNextQuarterUnix() {
                         />
                       </group>
                     </>}
+
+                  {!!selectedCustomTradeLogs && state.selectedSymbolYTDSummary&& <>
+                    <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,1.7,9.8]}>  {/* 1.97 */}
+                      <HistoryLogs
+
+                        calls={{refetchLogs:()=>{}}}
+                        state={{orderLogs: selectedCustomTradeLogs, }}
+                        minValue={state.selectedSymbolYTDSummary.minValue}
+                        maxValue={state.selectedSymbolYTDSummary.maxValue}
+                        latestUnix={htf_latestUnix} oldestUnix={htf_oldestUnix}
+                      />
+                    </group>
+                  </>}
                 </group>
                 }
             </group>    

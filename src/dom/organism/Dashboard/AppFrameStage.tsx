@@ -21,6 +21,8 @@ import MarketNewsStage from "../../../model/level/MarketNewsStage"
 import { SelectedModalContent } from "./SelectedModalContent"
 import { StandardTokens } from "@/../script/constant/klines";
 import { SocialMediaRow } from '@/dom/atom/popup/SocialMediaRow'
+import { useLocalStorage } from "usehooks-ts"
+import { parseDateTimeString, parseDecimals, mapTradeHistory } from "../../../../script/util/hook/useOrderHistory"
 export default function AppFrameStage({}:any) {
   const lsData:any = useLocalStorageCatcher()
   const {LS_publicSecretKeys, s__LS_publicSecretKeys, } = lsData
@@ -50,6 +52,93 @@ export default function AppFrameStage({}:any) {
     
     // lsData.s__LS_favs(returnObj)
   }
+  const [LS_customTradeList, s__LS_customTradeList] = useLocalStorage<any>("custom_myTrades", {});
+  const [customTradeList, s__customTradeList] = useState<any>(
+    Object.keys(LS_customTradeList).reduce((acc:any, key) => {
+      acc[key] = LS_customTradeList[key].map(mapTradeHistory);
+      return acc;
+    }, {})
+  );
+
+  const baseTradeObj = {
+    symbol: "", // e.g., "BTCUSDT"
+    orderId: 0,
+    orderListId: -1, // Unless part of an OCO, the value will always be -1
+    price: "0.00",
+    qty: "0.00",
+    quoteQty: "0.00",
+    commission: "0.00",
+    commissionAsset: "BTC",
+    time: 0,
+    isBuyer: false,
+    isMaker: false,
+    isBestMatch: true,
+  };
+  const baseQty = 330
+
+  const generateTradeAtCurrentLevel = (side: string, isMaker = true, promptForTime = false) => {
+    let tradeTime = Date.now();
+
+    if (promptForTime) {
+        const minutesAgo = prompt("How many minutes ago did the trade happen?");
+        const minutesAgoMs = minutesAgo ? parseInt(minutesAgo) * 60000 : 0;
+        tradeTime -= minutesAgoMs;
+    }
+
+    let customTrade = {
+        ...baseTradeObj,
+        id: LS_customTradeList.length || 0,
+        symbol: focusSymbol,
+        orderId: LS_customTradeList.length,
+        price: `${pricesObj[focusSymbol]}`,
+        qty: `${(baseQty / pricesObj[focusSymbol])}`,
+        quoteQty: `33`,
+        time: tradeTime,
+        isBuyer: side === "buy",
+        isMaker: isMaker,
+    };
+
+    return customTrade;
+};
+  const updateTradeList = (trade:any) => {
+    const updatedList = { ...LS_customTradeList };
+    if (!updatedList[trade.symbol]) {
+      updatedList[trade.symbol] = [];
+    }
+
+    
+
+
+    updatedList[trade.symbol].push(trade);
+    s__LS_customTradeList(updatedList);
+
+    
+    let theList = updatedList[trade.symbol]
+    theList = theList.map(mapTradeHistory) // .reverse()
+    // s__orderLogs(theList)
+
+
+    // s__tradeLogsObj((oldLogsObj:any)=>{
+    //   return {...oldLogsObj, [focusSymbol]: theList}
+    // })
+    // s__isFetchingLogs(false)
+
+
+    s__customTradeList({...LS_customTradeList, [focusSymbol]: theList});
+    // s__LS_customTradeList(updatedList);
+  };
+  
+  const triggerBuy = () => {
+    const theTrade = generateTradeAtCurrentLevel("buy");
+    console.log("newobj", theTrade);
+    updateTradeList(theTrade);
+  };
+  
+  const triggerSell = () => {
+    const theTrade = generateTradeAtCurrentLevel("sell");
+    console.log("newobj", theTrade);
+    updateTradeList(theTrade);
+  };
 
   const triggerCloneFromUrl = ()=>{
     const returnObj:any = []
@@ -333,6 +422,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
                 htfClosingList,
                 ytdObj, focusSymbol,
                 tradeLogsObj, isFetchingLogs,
+                customTradeList,
               }}
                 calls={{}}
               >
@@ -460,7 +550,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </Link>
       }
       <div className='flex-1 flex-col mt-8 pb-8 Q_sm_x '>
-        <BuySellButtons />
+        <BuySellButtons triggerBuy={triggerBuy} triggerSell={triggerSell} />
 
         
         <div className='Q_sm_lg w-90 mt-8  box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'

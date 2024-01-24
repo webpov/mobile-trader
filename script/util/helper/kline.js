@@ -234,7 +234,7 @@ const getStartOfMonthOpen = (priceList) => {
     let itemDay = theDate.getDate();
 
     if (itemMonth === currentMonth && itemDay === 1) {
-      console.log("priceList[i][1]", priceList[i])
+      // console.log("priceList[i][1]", priceList[i])
       if (!!priceList[i-1]) {
         return parseFloat(priceList[i-1][1]);
       } else {

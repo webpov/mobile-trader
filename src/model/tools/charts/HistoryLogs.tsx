@@ -16,8 +16,9 @@ export const HistoryLogs = ({ calls, state, minValue = 15000, maxValue = 69000, 
 
   return (
     <>
-      {!!state.orderLogs &&
-        state.orderLogs.map((order: any, index: any) => {
+      {!!state.orderLogs && <>
+      
+        {state.orderLogs.map((order: any, index: any) => {
           // Calculate the Y position based on the price relative to the min and max values
           const price = parseFloat(order.price);
           const normalizedPrice = (price - minValue) / (maxValue - minValue);
@@ -27,14 +28,15 @@ export const HistoryLogs = ({ calls, state, minValue = 15000, maxValue = 69000, 
           const tradeTime = new Date(order.time).getTime();
           const timeRange = oldestUnix - latestUnix; // Assuming latestUnix and oldestUnix are in milliseconds
           const zPos = ((tradeTime - latestUnix) / timeRange) 
-
+          console.log(yPos, normalizedPrice, zPos, tradeTime, timeRange, latestUnix)
           return (
             <group position={[0, yPos, zPos]} key={index}>
+              {/* <Box args={[0.01,0.01,0.01]}></Box> */}
                     {/* <Box args={[0.01,0.01,0.01]}></Box> */}
               <group position={[0.05, 0, 0]}>
                 <mesh onClick={() => toggleCubeClick(index)}>
                   <boxBufferGeometry args={[cubeSize * (parseInt(order.qty.slice(1)) / 20), cubeSize / 2 * (order.side =="Buy" ? 1 : 1.1), cubeSize / 2]} />
-                  <meshStandardMaterial color={order.side == "Buy" ? "#00ff00" : "#ff0000"}  emissive={order.side == "Buy" ? "#00ff00" : "#ff0000"}  />
+                  <meshStandardMaterial color={order.side == "Buy" ? "#0099ff" : "#ff00ff"}  emissive={order.side == "Buy" ? "#00ff00" : "#ff0000"}  />
                 </mesh>
                 {clickedCubes.includes(index) && (
                   <>
@@ -58,7 +60,7 @@ export const HistoryLogs = ({ calls, state, minValue = 15000, maxValue = 69000, 
               </group>
             </group>
           );
-        })}
+        })}</>}
     </>
   );
 };

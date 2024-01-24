@@ -11,7 +11,14 @@ export const parseDateTimeString = (_theDate:any)=>{
       `${zeroPad(theDate.getHours(),2)}:${zeroPad(theDate.getMinutes(),2)}`
   )
 }
-
+export const mapTradeHistory = (anItem:any) => {
+  return {...anItem,...{
+      side: anItem.isBuyer ? "Buy" : "Sell",
+      price: parseDecimals(anItem.price),
+      qty: "$"+parseDecimals(parseFloat(anItem.price)*parseFloat(anItem.qty)),
+      time: parseDateTimeString(new Date(anItem.time/1)),
+  }}
+}
 export const parseDecimals = (x:number) => {
   x = parseFloat(`${x}`)
   if (x == 0) return 0
