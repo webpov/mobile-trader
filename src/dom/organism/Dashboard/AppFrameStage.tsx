@@ -160,7 +160,13 @@ export default function AppFrameStage({}:any) {
     console.log("newobj", theTrade);
     updateTradeList(theTrade);
   };
+  const triggerResetFocusSymbolCustomLogs = () => {
+    const updatedList = { ...LS_customTradeList };
+    delete updatedList[focusSymbol];
+    s__LS_customTradeList(updatedList);
+    s__customTradeList({...LS_customTradeList, [focusSymbol]: []});
 
+  }
   const triggerCloneFromUrl = ()=>{
     const returnObj:any = []
     urlp.keysArray.map((aKey:string)=>{
@@ -506,8 +512,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </button>
       </summary>
       <div className="pa-2 bg-b-50 border-blue bord-r-10 mb-8 bg-glass-10 box-shadow-9-b">
-          <BuySellButtons triggerBuy={triggerBuy} triggerSell={triggerSell}
+          <BuySellButtons triggerBuy={triggerBuy} triggerSell={triggerSell} 
             triggerConfigBuy={triggerConfigBuy} triggerConfigSell={triggerConfigSell}
+            triggerResetFocusSymbolCustomLogs={triggerResetFocusSymbolCustomLogs} state={{focusSymbol}}
           />
         </div>
         </details>
@@ -587,6 +594,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       <div className='flex-1 flex-col mt-8 pb-8 Q_sm_x '>
         <BuySellButtons triggerBuy={triggerBuy} triggerSell={triggerSell}
           triggerConfigBuy={triggerConfigBuy} triggerConfigSell={triggerConfigSell}
+          triggerResetFocusSymbolCustomLogs={triggerResetFocusSymbolCustomLogs} state={{focusSymbol}}
         />
 
         

@@ -1,8 +1,13 @@
 
-export const BuySellButtons = ({triggerBuy, triggerSell, triggerConfigBuy, triggerConfigSell}:any) => {
+export const BuySellButtons = ({state, triggerBuy, triggerSell, triggerConfigBuy, triggerConfigSell, triggerResetFocusSymbolCustomLogs}:any) => {
   const confirmRedirect = (url:string) => {
     if (window.confirm("Do you want to open WebQub in a new tab? \n\n URL: wqub.vercel.app")) {
       window.open(url, "_blank");
+    }
+  };
+  const confirmClean = () => {
+    if (window.confirm(`Do you want to clear ${state.focusSymbol} custom logs?`)) {
+      triggerResetFocusSymbolCustomLogs()
     }
   };
 
@@ -32,7 +37,7 @@ export const BuySellButtons = ({triggerBuy, triggerSell, triggerConfigBuy, trigg
         </div>
         <button 
   className="opaci-chov--50 neu-convex tx-white tx-lg pa-3 py-3 bord-r-25 border-blue tx-bold-8 tx-altfont-1 "
-  onClick={() => window.location.reload()}
+  onClick={() => confirmClean()}
 >
 🔄
 </button>
