@@ -495,9 +495,23 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         <div className="pos-abs z-300" style={{bottom:"-25px", left:"10%"}}>
           <ChartWindowSubMenu state={{fuelPoints}} calls={{s__fuelPoints, editTileToUrl}} 
             chartConfig={chartConfig} 
-          />
-          
+          />          
         </div>
+        <div className="Q_xs pos-abs z-300" style={{bottom:"-25px", left:"25%"}}>
+          
+  <details className="">
+      <summary className="flex opaci-chov--50 pos-abs bottom-0">
+        <button className=" bg-b-90 border-blue py-1 bord-r-50 tx-mdl noclick">
+        💰
+        </button>
+      </summary>
+      <div className="pa-2 bg-b-50 border-blue bord-r-10 mb-8 bg-glass-10 box-shadow-9-b">
+          <BuySellButtons triggerBuy={triggerBuy} triggerSell={triggerSell}
+            triggerConfigBuy={triggerConfigBuy} triggerConfigSell={triggerConfigSell}
+          />
+        </div>
+        </details>
+      </div>
         </>}
       </div>
         {!!chartConfig.isNotesVisible &&
