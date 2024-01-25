@@ -76,13 +76,18 @@ export default function AppFrameStage({}:any) {
   };
   const baseQty = 330
 
-  const generateTradeAtCurrentLevel = (side: string, isMaker = true, promptForTime = false) => {
+  const generateTradeAtCurrentLevel = (side: string, isMaker = true, promptConfig = false) => {
     let tradeTime = Date.now();
+    let price = `${pricesObj[focusSymbol]}`
 
-    if (promptForTime) {
+    if (promptConfig) {
         const minutesAgo = prompt("How many minutes ago did the trade happen?");
+        if (!minutesAgo) return
         const minutesAgoMs = minutesAgo ? parseInt(minutesAgo) * 60000 : 0;
         tradeTime -= minutesAgoMs;
+        const pricePrompt = prompt("Enter custom price");
+        if (!pricePrompt) return
+        price = pricePrompt
     }
 
     let customTrade = {
@@ -90,7 +95,7 @@ export default function AppFrameStage({}:any) {
         id: LS_customTradeList.length || 0,
         symbol: focusSymbol,
         orderId: LS_customTradeList.length,
-        price: `${pricesObj[focusSymbol]}`,
+        price: price,
         qty: `${(baseQty / pricesObj[focusSymbol])}`,
         quoteQty: `33`,
         time: tradeTime,
@@ -130,12 +135,28 @@ export default function AppFrameStage({}:any) {
   
   const triggerBuy = () => {
     const theTrade = generateTradeAtCurrentLevel("buy");
+    if (!theTrade) return
     console.log("newobj", theTrade);
     updateTradeList(theTrade);
   };
   
   const triggerSell = () => {
     const theTrade = generateTradeAtCurrentLevel("sell");
+    if (!theTrade) return
+    console.log("newobj", theTrade);
+    updateTradeList(theTrade);
+  };
+  
+  const triggerConfigBuy = () => {
+    const theTrade = generateTradeAtCurrentLevel("buy",true,true);
+    if (!theTrade) return
+    console.log("newobj", theTrade);
+    updateTradeList(theTrade);
+  };
+  
+  const triggerConfigSell = () => {
+    const theTrade = generateTradeAtCurrentLevel("sell",true,true);
+    if (!theTrade) return
     console.log("newobj", theTrade);
     updateTradeList(theTrade);
   };
@@ -550,7 +571,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </Link>
       }
       <div className='flex-1 flex-col mt-8 pb-8 Q_sm_x '>
-        <BuySellButtons triggerBuy={triggerBuy} triggerSell={triggerSell} />
+        <BuySellButtons triggerBuy={triggerBuy} triggerSell={triggerSell}
+          triggerConfigBuy={triggerConfigBuy} triggerConfigSell={triggerConfigSell}
+        />
 
         
         <div className='Q_sm_lg w-90 mt-8  box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'

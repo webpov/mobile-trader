@@ -1,5 +1,5 @@
 
-export const BuySellButtons = ({triggerBuy, triggerSell}:any) => {
+export const BuySellButtons = ({triggerBuy, triggerSell, triggerConfigBuy, triggerConfigSell}:any) => {
   const confirmRedirect = (url:string) => {
     if (window.confirm("Do you want to open WebQub in a new tab? \n\n URL: wqub.vercel.app")) {
       window.open(url, "_blank");
@@ -16,7 +16,7 @@ export const BuySellButtons = ({triggerBuy, triggerSell}:any) => {
     BUY
   </button>
 </div>
-          <button onClick={() => confirmRedirect("https://wqub.vercel.app")} className="hover-27 opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-green">
+          <button onClick={triggerConfigBuy} className="hover-27 opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-green">
             ⚙️
           </button>
         </div>
@@ -26,7 +26,7 @@ export const BuySellButtons = ({triggerBuy, triggerSell}:any) => {
     SELL
   </button>
 </div>
-          <button onClick={() => confirmRedirect("https://wqub.vercel.app")} className="hover-31 opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-red">
+          <button onClick={triggerConfigSell} className="hover-31 opaci-chov--50 neu-convex tx-white tx-mdl  pa-2 bord-r-r-25 border-red">
             ⚙️
           </button>
         </div>
