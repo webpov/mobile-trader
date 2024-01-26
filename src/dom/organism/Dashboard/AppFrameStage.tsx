@@ -133,31 +133,58 @@ export default function AppFrameStage({}:any) {
     // s__LS_customTradeList(updatedList);
   };
   
+  const triggerImportLogs = () => {
+    const jsonString = prompt("Enter the JSON string for trade list:");
+    if (jsonString) {
+      try {
+        const importList = JSON.parse(jsonString);
+        // Assuming LS_customTradeList is your local storage trade list
+        // You need to implement a method to update LS_customTradeList with importList
+        s__LS_customTradeList(importList);
+      } catch (e) {
+        console.error("Invalid JSON string", e);
+      }
+    }
+  };
+  
+  const triggerExportLogs = () => {
+    const jsonString = JSON.stringify(LS_customTradeList);
+    const blob = new Blob([jsonString], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+  
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'customTradeList.json';
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+  
   const triggerBuy = () => {
     const theTrade = generateTradeAtCurrentLevel("buy");
     if (!theTrade) return
-    console.log("newobj", theTrade);
+    // console.log("newobj", theTrade);
     updateTradeList(theTrade);
   };
   
   const triggerSell = () => {
     const theTrade = generateTradeAtCurrentLevel("sell");
     if (!theTrade) return
-    console.log("newobj", theTrade);
+    // console.log("newobj", theTrade);
     updateTradeList(theTrade);
   };
   
   const triggerConfigBuy = () => {
     const theTrade = generateTradeAtCurrentLevel("buy",true,true);
     if (!theTrade) return
-    console.log("newobj", theTrade);
+    // console.log("newobj", theTrade);
     updateTradeList(theTrade);
   };
   
   const triggerConfigSell = () => {
     const theTrade = generateTradeAtCurrentLevel("sell",true,true);
     if (!theTrade) return
-    console.log("newobj", theTrade);
+    // console.log("newobj", theTrade);
     updateTradeList(theTrade);
   };
   const triggerResetFocusSymbolCustomLogs = () => {
@@ -202,7 +229,7 @@ export default function AppFrameStage({}:any) {
     ltf:urlp.ltf,
     htf:urlp.htf,
   }})
-
+  
   const editSingleToken = (theItem:any, side:string) => {
     // console.log(`editSingleToken(theItem, side)`, theItem, side)
     const ratioMul = side !== "roof" ? 0.8 : 1.2
@@ -263,7 +290,6 @@ const triggerMobileTab = (newTab:string) => {
     // recalcChartContext(newTab)
   }
 }
-
 async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse> {
   const response = await fetch('/api/ai', {
     method: 'POST',
@@ -331,6 +357,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
               fuelPoints,
             }} 
             calls={{
+              triggerImportLogs, triggerExportLogs,
               editSingleToken, s__fuelPoints,
               s__isLocalStorageModalOpen,triggerCloneFromUrl,
               s__LS_favs: lsData.s__LS_favs, s__LS_publicSecretKeys, s__isFetchingLogs,

@@ -115,13 +115,13 @@ function getFirstDayOfNextQuarterUnix() {
   const ltf_minValue = useMemo(() => {
     if (!state.ltfList || state.ltfList.length === 0) return null;
     const returnValue = Math.min(...state.ltfList.map((item:any) => item[2]));
-    console.log("returnValue", returnValue)
+    // console.log("returnValue", returnValue)
     return returnValue
   }, [state.ltfList]);  
   const ltf_maxValue = useMemo(() => {
     if (!state.ltfList || state.ltfList.length === 0) return null;
     const returnValue = Math.max(...state.ltfList.map((item:any) => item[4]));
-    console.log("returnValue", returnValue)
+    // console.log("returnValue", returnValue)
     return returnValue
   }, [state.ltfList]);
   
@@ -139,14 +139,14 @@ function getFirstDayOfNextQuarterUnix() {
     if (!state.tradeLogsObj) { return null }
     if (!state.focusSymbol) { return null }
 
-    console.log("state.tradeLogsObj[state.focusSymbol]", state.tradeLogsObj[state.focusSymbol])
+    // console.log("state.tradeLogsObj[state.focusSymbol]", state.tradeLogsObj[state.focusSymbol])
     return state.tradeLogsObj[state.focusSymbol]
   },[state.tradeLogsObj, state.focusSymbol])
   const selectedCustomTradeLogs = useMemo(()=>{
     if (!state.customTradeList) { return null }
     if (!state.focusSymbol) { return null }
 
-    console.log("selectedCustomTradeLogs", state.customTradeList, state.focusSymbol)
+    // console.log("selectedCustomTradeLogs", state.customTradeList, state.focusSymbol)
     return state.customTradeList[state.focusSymbol]
   },[state.customTradeList, state.focusSymbol])
   useEffect(() => {
@@ -183,7 +183,7 @@ function getFirstDayOfNextQuarterUnix() {
           minAzimuthAngle={!config.isChartMovable ? 0 : 0}
           maxAzimuthAngle={!config.isChartMovable ? 0 : 0}
           minPolarAngle={!config.isChartMovable ? Math.PI/4 : 0.5}
-          maxPolarAngle={!config.isChartMovable ? Math.PI/4 : 0.88}
+          maxPolarAngle={!config.isChartMovable ? Math.PI/4 : 1}
 
           // {...(config.isChartMovable ? semiFixedViewConfig : {})}
         />

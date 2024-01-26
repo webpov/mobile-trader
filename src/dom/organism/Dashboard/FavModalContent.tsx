@@ -16,7 +16,7 @@ export function FavModalContent({ state, calls }: any) {
             style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
             onClick={()=>{window.location.reload()}}
           >
-            <div className=" block"></div> <div className="tx-mdl">Stored Favorites</div>
+            <div className="px-3 block"></div> <div className="tx-mdl">Stored Favorites</div>
           </button>
         <button className="Q_xs pos-abs tx-altfont-0 tx-altfont-1 px-4 ma-2 mr-0 top-0 left-0 ml-8 nodeco py-2 opaci-chov--50 bg-b-90 noborder  bord-r-50 tx-white tx-lg flex "
             style={{boxShadow:"-2px -2px 4px -2px #ffffff44"}}
@@ -52,6 +52,8 @@ export function FavModalContent({ state, calls }: any) {
                 fuelPoints: state.fuelPoints,
               }} 
               calls={{
+                triggerImportLogs: calls.triggerImportLogs,
+                triggerExportLogs: calls.triggerExportLogs,
                 s__fuelPoints: calls.s__fuelPoints,
                 editSingleToken: calls.editSingleToken,
                 s__LS_favs: calls.s__LS_favs,

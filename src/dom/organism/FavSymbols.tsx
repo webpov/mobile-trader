@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import crypto from "crypto";
 import { computeHash } from '@/../script/util/webhelp'
-import { useMap, MapOrEntries, useMediaQuery, useCopyToClipboard } from 'usehooks-ts';
+import { useMap, MapOrEntries, useMediaQuery, useCopyToClipboard, useLocalStorage } from 'usehooks-ts';
 import { updatePublicSecretKey } from "../../../script/state/service/local";
 
 export function FavSymbols({ state, calls }: any) {
@@ -12,11 +12,19 @@ export function FavSymbols({ state, calls }: any) {
   const pathname = usePathname()
   const [clipbloardValue, clipbloard__do] = useCopyToClipboard()
 
+  const triggerImportLogs = () => {
+    calls.triggerImportLogs()
+  }
+  const triggerExportLogs = () => {
+    calls.triggerExportLogs()
+  }
 
+  
   const triggerClearFavs =()=>{
     calls.s__LS_favs([])
   }
 
+  
   const triggerCloneResetFavs =()=>{
     calls.triggerCloneFromUrl()
     window.location.reload()
@@ -148,14 +156,14 @@ export function FavSymbols({ state, calls }: any) {
           <button className={`tx-white ${"tx-mdl"} opaci-chov--50 bg-glass-10 bg-w-10 bord-r-25 pa-2  `}
             onClick={triggerExportAsUrl}
           >
-            Export as URL
+            Share URL
           </button>
         }
         {!!state.LS_favs.length &&
           <button className={`tx-white ${"tx-sm"} opaci-chov--50 bg-glass-10 border-blue bg-w-10 bord-r-15 pa-1  `}
             onClick={triggerExportLeanUrl}
           >
-            Export Pack
+            Share Pack
           </button>
         }
       </div>
@@ -163,7 +171,7 @@ export function FavSymbols({ state, calls }: any) {
         {state.LS_favs.map((item: any, index: number) => {
           
           if (!state.ytdObj){ return (<div key={index} className=" "></div>)}
-          console.log(item.symbol, "---->", state.ytdObj[item.symbol].output)
+          // console.log(item.symbol, "---->", state.ytdObj[item.symbol].output)
           const lastLiveDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastOpen;
           const lastWeekDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.lastWeeklyOpen;
           const startOfMonthDiff = state.pricesObj[item.symbol] - state.ytdObj[item.symbol].output.startOfMonthOpen;
@@ -304,34 +312,62 @@ export function FavSymbols({ state, calls }: any) {
           </div>);
         })}
       </div>
+      <div className="flex-center gap-6 mt-2">
+      <div className="flex-col gap-2">
+        <div>Favs</div>
+      {!!state.LS_favs.length &&
+        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 `}
+          onClick={triggerCloneResetFavs}
+        >
+          <div className="Q_sm_x tx-lgx">Clone</div>
+          <div className="Q_xs ">Clone</div>
+        </button>
+      }
         <div className="flex-center gap-2">
       {!!state.LS_favs.length &&
-        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
+        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 `}
           onClick={triggerClearFavs}
         >
-          <div className="Q_sm_x tx-lgx">Clear</div>
+          <div className="Q_sm_x tx-md">Clear</div>
           <div className="Q_xs ">Clear</div>
         </button>
       }
+        </div>
+      </div>
+      <div className="bg-white opaci-25 h-100px" style={{paddingLeft: "1px"}}>
+
+      </div>
+      <div className="flex-col">
+        <div>Logs</div>
+        <div className="flex-center gap-2">
       {!!state.LS_favs.length &&
+        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 mt-2`}
+          onClick={triggerImportLogs}
+        >
+          <div className="Q_sm_x tx-md">Import</div>
+          <div className="Q_xs ">Import</div>
+        </button>
+      }
+        </div>
+      {!!state.LS_favs.length &&
+        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 mt-2`}
+          onClick={triggerExportLogs}
+        >
+          <div className="Q_sm_x tx-md">Export</div>
+          <div className="Q_xs ">Export</div>
+        </button>
+      }
+      </div>
+      </div>
+      
+      {/* !!state.LS_favs.length &&
         <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
           onClick={triggerResetFavs}
         >
           <div className="Q_sm_x tx-lgx">Reset</div>
           <div className="Q_xs ">Reset</div>
         </button>
-      }
-        </div>
-      {!!state.LS_favs.length &&
-        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
-          onClick={triggerCloneResetFavs}
-        >
-          <div className="Q_sm_x tx-md">Clone & Reset</div>
-          <div className="Q_xs ">Clone & Reset</div>
-        </button>
-      }
-      
-      
+    */}
       {!state.urlStateKeys && !state.urlStateKeys.length &&  <>
         <div
           className="my-8 pa-1 px-2   tx-white noborder bord-r-10 tx-ls-2 tx-md tx-center"

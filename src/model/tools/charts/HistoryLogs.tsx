@@ -28,7 +28,7 @@ export const HistoryLogs = ({ calls, state, minValue = 15000, maxValue = 69000, 
           const tradeTime = new Date(order.time).getTime();
           const timeRange = oldestUnix - latestUnix; // Assuming latestUnix and oldestUnix are in milliseconds
           const zPos = ((tradeTime - latestUnix) / timeRange) 
-          console.log(yPos, normalizedPrice, zPos, tradeTime, timeRange, latestUnix)
+          // console.log(yPos, normalizedPrice, zPos, tradeTime, timeRange, latestUnix)
           return (
             <group position={[0, yPos, zPos]} key={index}>
               {/* <Box args={[0.01,0.01,0.01]}></Box> */}
