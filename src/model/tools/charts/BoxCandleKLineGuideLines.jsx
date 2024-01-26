@@ -21,7 +21,7 @@ export function BoxCandleKLineGuideLines({
   const [candleArray, s__candleArray] = useState([]);
   // const [wickArray, s__wickArray] = useState([]);
 
-  const fixedArray = [...Array(2).keys()]
+  const fixedArray = [...Array(3).keys()]
 
   useEffect(() => {
     if (!refCandleContainer.current) { return }

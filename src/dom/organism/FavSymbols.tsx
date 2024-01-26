@@ -45,6 +45,7 @@ export function FavSymbols({ state, calls }: any) {
       }
       if (item.floor) { returnObj["floor"] = item.floor } 
       if (item.roof) { returnObj["roof"] = item.roof } 
+      if (item.target) { returnObj["target"] = item.target } 
       const encodedItem = encodeURIComponent(JSON.stringify(returnObj));
       returnString += `&${encodeURIComponent(item.posCode)}=${encodedItem}`;
     });
@@ -253,7 +254,11 @@ export function FavSymbols({ state, calls }: any) {
                     {item.floor || "N/A"}
                   </>}
                 </div>
-                <div className="flex-col">-</div>
+                <div className="flex-col py-3 border-white-50 px-1  tx-sm opaci-chov--50"
+                  onClick={()=>{editSingleToken(item, "target")}}
+                >
+                  {item.target || "-"}                  
+                </div>
                 <div className="tx-roman tx-mdl  pl-1 flex-col w-min-50px"
                   onClick={()=>{editSingleToken(item, "roof")}}
                 >

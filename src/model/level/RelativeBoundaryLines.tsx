@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 export const RelativeBoundaryLines = ({ state, calls }: any) => {
   const $floorLine: any = useRef();
+  const $targetLine: any = useRef();
   const $topLine: any = useRef();
   const [refreshCounter, s__refreshCounter] = useState(0);
 
@@ -32,11 +33,14 @@ export const RelativeBoundaryLines = ({ state, calls }: any) => {
     const priceAbsHeight = state.summaryDetails.maxValue - state.summaryDetails.minValue;
     const absMinValue = selectedFav.floor - state.summaryDetails.minValue;
     let absMaxValue = selectedFav.roof - state.summaryDetails.minValue;
+    let absTargetValue = selectedFav.target - state.summaryDetails.minValue;
     if (absMaxValue < 0) { absMaxValue = -(absMaxValue - priceAbsHeight); }
     const localizedFloorHeight = absMinValue * worldRelativeHeight / priceAbsHeight;
     const localizedRoofHeight = absMaxValue * worldRelativeHeight / priceAbsHeight;
+    const localizedTargetHeight = absTargetValue * worldRelativeHeight / priceAbsHeight;
 
     $floorLine.current.position.y = localizedFloorHeight;
+    $targetLine.current.position.y = localizedRoofHeight;
     $topLine.current.position.y = localizedRoofHeight;
   }, [state.summaryDetails, selectedFav, $topLine, $floorLine, state.yRange, refreshCounter]);
 
@@ -67,6 +71,16 @@ export const RelativeBoundaryLines = ({ state, calls }: any) => {
       onClick={(e)=>{e.stopPropagation(); alert(` ${selectedFav.roof} `)}}
     >
       <meshStandardMaterial emissive="#ffaa00" />
+    </Box>
+
+
+
+
+    
+    <Box args={[5, 0.01, 0.03]} position={[-2, 0, 0]} ref={$targetLine}
+      onClick={(e)=>{e.stopPropagation(); alert(` ${selectedFav.target} `)}}
+    >
+      <meshStandardMaterial emissive="#ff00ff" />
     </Box>
 
   </>);

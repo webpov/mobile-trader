@@ -235,7 +235,7 @@ export default function AppFrameStage({}:any) {
   
   const editSingleToken = (theItem:any, side:string) => {
     // console.log(`editSingleToken(theItem, side)`, theItem, side)
-    const ratioMul = side !== "roof" ? 0.8 : 1.2
+    const ratioMul = side == "target" ? 1 : (side !== "roof" ? 0.8 : 1.2) 
     const baseprice:any = (pricesObj[theItem.symbol]*ratioMul).toFixed(1)
 
     const selectedLevel = prompt("Enter price", baseprice)

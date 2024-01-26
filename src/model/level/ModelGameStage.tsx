@@ -250,6 +250,10 @@ function getFirstDayOfNextQuarterUnix() {
                           parseFloat(selectedFav.roof),parseFloat(selectedFav.roof)*0.999,
                           0,0
                         ],
+                        [0,parseFloat(selectedFav.target),parseFloat(selectedFav.target),
+                          parseFloat(selectedFav.target),parseFloat(selectedFav.target)*0.999,
+                          0,0
+                        ],
                       ]} 
                       state={{
                         symbol: state.focusSymbol,
@@ -327,6 +331,10 @@ function getFirstDayOfNextQuarterUnix() {
                         ],
                         [0,parseFloat(selectedFav.roof),parseFloat(selectedFav.roof),
                           parseFloat(selectedFav.roof),parseFloat(selectedFav.roof)*0.999,
+                          0,0
+                        ],
+                        [0,parseFloat(selectedFav.target),parseFloat(selectedFav.target),
+                          parseFloat(selectedFav.target),parseFloat(selectedFav.target)*0.999,
                           0,0
                         ],
                       ]} 
