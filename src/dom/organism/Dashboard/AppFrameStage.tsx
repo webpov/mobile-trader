@@ -79,6 +79,8 @@ export default function AppFrameStage({}:any) {
   const generateTradeAtCurrentLevel = (side: string, isMaker = true, promptConfig = false) => {
     let tradeTime = Date.now();
     let price = `${pricesObj[focusSymbol]}`
+    const amountTokens = prompt("Trade USD amount?");
+    if (!amountTokens) return
 
     if (promptConfig) {
         const minutesAgo = prompt("How many minutes ago did the trade happen?");
@@ -96,7 +98,8 @@ export default function AppFrameStage({}:any) {
         symbol: focusSymbol,
         orderId: LS_customTradeList.length,
         price: price,
-        qty: `${(baseQty / pricesObj[focusSymbol])}`,
+        // qty: `${(baseQty / pricesObj[focusSymbol])}`,
+        qty: amountTokens,
         quoteQty: `33`,
         time: tradeTime,
         isBuyer: side === "buy",
@@ -421,8 +424,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       <div className='flex-row  tx-white  Q_lg_x  w-90 z-10'>
         <div className='Q_lg_x w-10'></div>
         <h1 className=" flex-1 mb-0 pb-0 pl-100 block">
-          <a href="/" className="tx-white nodeco" onClick={()=>window.location.reload()}>
+          <a href="/" className="tx-white flex-center flex-justify-start gap-1  nodeco" onClick={()=>window.location.reload()}>
             <SymbolNameHeader label={focusSymbol || "N/A"} />
+            {!!pricesObj && <div className=" tx-lg  tx-roman">: {(pricesObj[focusSymbol])}</div>}
           </a>
         </h1>
       </div>
