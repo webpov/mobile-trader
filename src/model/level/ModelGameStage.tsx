@@ -110,8 +110,31 @@ function getFirstDayOfNextQuarterUnix() {
     if (!state.htfList) return 1
     if (!state.htfList[0]) return 1
     return state.htfList[0][0]
-    // return state.htfList[CHOP_AMOUNT][0]
   },[state.htfList])
+
+  const ltf_minValue = useMemo(() => {
+    if (!state.ltfList || state.ltfList.length === 0) return null;
+    const returnValue = Math.min(...state.ltfList.map((item:any) => item[2]));
+    console.log("returnValue", returnValue)
+    return returnValue
+  }, [state.ltfList]);  
+  const ltf_maxValue = useMemo(() => {
+    if (!state.ltfList || state.ltfList.length === 0) return null;
+    const returnValue = Math.max(...state.ltfList.map((item:any) => item[4]));
+    console.log("returnValue", returnValue)
+    return returnValue
+  }, [state.ltfList]);
+  
+  const ltf_latestUnix = useMemo(() => {
+    if (!state.ltfList || state.ltfList.length === 0 || !state.ltfList[499]) return 1;
+    return state.ltfList[499][0];
+  }, [state.ltfList]);
+  
+  const ltf_oldestUnix = useMemo(() => {
+    if (!state.ltfList || state.ltfList.length === 0 || !state.ltfList[0]) return 1;
+    return state.ltfList[0][0];
+  }, [state.ltfList]);
+  
   const selectedTradeLogs = useMemo(()=>{
     if (!state.tradeLogsObj) { return null }
     if (!state.focusSymbol) { return null }
@@ -238,6 +261,19 @@ function getFirstDayOfNextQuarterUnix() {
                     </group>}
                   
                   
+
+                    {!!selectedCustomTradeLogs && state.selectedSymbolYTDSummary&& <>
+                    <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,3.5,12.25]}>  {/* 1.97 */}
+                      <HistoryLogs
+
+                        calls={{refetchLogs:()=>{}}}
+                        state={{orderLogs: selectedCustomTradeLogs, }}
+                        minValue={ltf_minValue}
+                        maxValue={ltf_maxValue}
+                        latestUnix={ltf_latestUnix} oldestUnix={ltf_oldestUnix}
+                      />
+                    </group>
+                  </>}
                   
                   
                   
