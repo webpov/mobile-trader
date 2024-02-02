@@ -79,7 +79,7 @@ export default function AppFrameStage({}:any) {
   const generateTradeAtCurrentLevel = (side: string, isMaker = true, promptConfig = false) => {
     let tradeTime = Date.now();
     let price = `${pricesObj[focusSymbol]}`
-    const amountTokens = prompt("Trade USD amount?");
+    const amountTokens = prompt(`${focusSymbol} amount?`);
     if (!amountTokens) return
 
     if (promptConfig) {
@@ -135,6 +135,22 @@ export default function AppFrameStage({}:any) {
     s__customTradeList({...LS_customTradeList, [focusSymbol]: theList});
     // s__LS_customTradeList(updatedList);
   };
+  const triggerUploadLogs = (jsonString:string) => {
+    if (jsonString) {
+      try {
+        const uploadList = JSON.parse(jsonString);
+        // Assuming LS_customTradeList is your local storage trade list
+        // You need to implement a method to update LS_customTradeList with uploadList
+        s__LS_customTradeList(uploadList);
+      } catch (e) {
+        console.error("Invalid JSON string", e);
+      }
+    }
+  };
+  
+  
+  
+  
   
   const triggerImportLogs = () => {
     const jsonString = prompt("Enter the JSON string for trade list:");
@@ -360,6 +376,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
               fuelPoints,
             }} 
             calls={{
+              triggerUploadLogs,
               triggerImportLogs, triggerExportLogs,
               editSingleToken, s__fuelPoints,
               s__isLocalStorageModalOpen,triggerCloneFromUrl,
@@ -633,7 +650,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
         >
           <div className="pb-4">Market Summary</div>
-          <div className="flex-col w-90 ">
+          <div className="flex-col w-95 ">
             <MarketNewsStage />
           </div>
         </div>
@@ -777,7 +794,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </div>
       } 
     <div className='Q_xs w-90 z-200   box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
-        <div className="pb-4 tx-white tx-lg">Market Summary</div>
+        <div className="pb-4 tx-white tx-lg">Market <br /> Summary</div>
         <div className="flex-col w-90 h-min-50vh">
           <MarketNewsStage state={{canvasHeight:"350px"}} />
         </div>

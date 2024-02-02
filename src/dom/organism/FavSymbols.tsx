@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import crypto from "crypto";
 import { computeHash } from '@/../script/util/webhelp'
 import { useMap, MapOrEntries, useMediaQuery, useCopyToClipboard, useLocalStorage } from 'usehooks-ts';
@@ -120,7 +120,22 @@ export function FavSymbols({ state, calls }: any) {
     // console.log("asds", state.pricesObj[theItem.symbol], )
     calls.editSingleToken(theItem, side)
   }
+  const inputRef:any = useRef(null);
 
+  const handleFileUpload = (event:any) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Handle the file, for example by reading it as JSON
+      const reader = new FileReader();
+      reader.onload = (e:any) => {
+        const content = JSON.parse(e.target.result);
+        // Do something with the JSON content
+        calls.triggerUploadLogs(JSON.stringify(content))
+      };
+      reader.readAsText(file);
+    }
+  };
+  
   const selectedTradeLogs = useMemo(()=>{
     if (!state.tradeLogsObj) { return null }
     if (!state.focusSymbol) { return null }
@@ -353,6 +368,25 @@ export function FavSymbols({ state, calls }: any) {
           <div className="Q_xs ">Import</div>
         </button>
       }
+      {!!state.LS_favs.length &&
+  <>
+    <input
+      type="file"
+      style={{ display: 'none' }}
+      accept=".json"
+      onChange={handleFileUpload}
+      ref={inputRef} // You need to create this ref in your component
+    />
+    <button
+      className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 mt-2`}
+      onClick={() => inputRef.current.click()} // Programmatically clicks the file input
+    >
+      <div className="Q_sm_x tx-md">Upload</div>
+      <div className="Q_xs ">Upload</div>
+    </button>
+  </>
+}
+
         </div>
       {!!state.LS_favs.length &&
         <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 mt-2`}

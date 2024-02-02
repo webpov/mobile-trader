@@ -52,6 +52,7 @@ export function FavModalContent({ state, calls }: any) {
                 fuelPoints: state.fuelPoints,
               }} 
               calls={{
+                triggerUploadLogs: calls.triggerUploadLogs,
                 triggerImportLogs: calls.triggerImportLogs,
                 triggerExportLogs: calls.triggerExportLogs,
                 s__fuelPoints: calls.s__fuelPoints,

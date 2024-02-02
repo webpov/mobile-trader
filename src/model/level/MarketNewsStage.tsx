@@ -10,6 +10,7 @@ import { WorldModelTextured } from "./WorldModelTextured";
 import { Html } from "@react-three/drei";
 import { getFearNGreed, getTotalMarketCap } from "../../../script/state/service/local";
 import DynaText from "../core/DynaText";
+import TradingViewNews from "@/dom/organism/TradingViewNews";
 
 
 export const MarketNewsStage = ({state}:any) => {
@@ -105,11 +106,27 @@ export const MarketNewsStage = ({state}:any) => {
   const isDataPopulated = useMemo(()=>{
     return JSON.stringify(theData) !== "{}"
   },[theData])
-
+  const [isTab, s__isTab] = useState("3d")
   if (!mounted) return <LoadingFullScreen />;
 
   return (<>
-    <div className={`flex-col w-100 h-100 tx-altfont-4 bg-b-10 box-shadow-i-9-b ${true ? "" : "nopointer"}`}>
+    <div className={`flex-col  w-100 h-100 tx-altfont-4 bg-b-10 box-shadow-i-9-b ${true ? "" : "nopointer"}`}>
+    <div className="pos-abs top-0 flex right-0  tx-white opaci-50 tx-lgx pa-2 pt-4">
+    {isTab == "3d" &&
+    <div className="opaci-chov--50" onClick={()=>s__isTab("tradingview")}>
+            <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-2" >
+              <div className="tx-sm">Switch to <br /> TradingView</div>
+            </div>
+            </div>
+  }
+         {isTab == "tradingview" &&
+         <div className="opaci-chov--50" onClick={()=>s__isTab("3d")}>
+            <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-2" >
+              <div className="tx-sm">Switch to <br /> Globe Data</div>
+            </div>
+            </div>
+  } 
+    </div>      
 
       {isDataPopulated && isLightVisible && <>
         <div className="pos-abs top-0 right-0 tx-white opaci-50 tx-lgx pa-2 pt-4">
@@ -117,7 +134,7 @@ export const MarketNewsStage = ({state}:any) => {
           
         </div>      
       </>}
-      
+      {isTab == "3d" &&
       <Canvas style={{width:"100%",height:state?.canvasHeight || "250px"}} shadows 
         className={` ${true ? "" : "nopointer"} flex-col flex-align-stretch`}
         camera={{fov:20,position:[1,1,isMediumDevice?4.5:3.5]}}
@@ -401,8 +418,12 @@ export const MarketNewsStage = ({state}:any) => {
           <meshStandardMaterial wireframe={true} emissive={"#333f33"} />
         </Torus> */}
         </group>
-      </Canvas>        
-    </div>        
+      </Canvas> 
+}
+{isTab == "tradingview" &&
+  <TradingViewNews />
+}   
+    </div>     
     </>)
 }
 
