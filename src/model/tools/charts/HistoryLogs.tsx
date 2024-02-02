@@ -2,7 +2,7 @@ import { Box, Html, Sphere } from "@react-three/drei";
 import { useState } from "react";
 import { Mesh, MeshStandardMaterial } from "three";
 
-export const HistoryLogs = ({ customChildren, calls, state, minValue = 15000, maxValue = 69000, latestUnix, oldestUnix }: any) => {
+export const HistoryLogs = ({ customChildren, customSizeRatio=10, calls, state, minValue = 15000, maxValue = 69000, latestUnix, oldestUnix }: any) => {
   const cubeSize = 0.01;
   const [clickedCubes, setClickedCubes] = useState<number[]>([]);
 
@@ -41,7 +41,7 @@ export const HistoryLogs = ({ customChildren, calls, state, minValue = 15000, ma
                 </mesh>}
                 {!!customChildren && <>
                   {/* {customChildren()} */}
-                  <Sphere args={[cubeSize * (parseInt(order.qty.slice(1)) / 20)/5,4,4]} scale={[1,1,0.3]} >
+                  <Sphere args={[cubeSize * (parseInt(order.quoteQty) / customSizeRatio),4,4]} scale={[1,1,0.3]} >
                     <meshStandardMaterial color={order.side == "Buy" ? "#0099ff" : "#ff00ff"}  emissive={order.side == "Buy" ? "#00ff00" : "#ff0000"}  />
                   </Sphere>
                 </>}

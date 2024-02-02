@@ -142,6 +142,7 @@ export default function AppFrameStage({}:any) {
         // Assuming LS_customTradeList is your local storage trade list
         // You need to implement a method to update LS_customTradeList with uploadList
         s__LS_customTradeList(uploadList);
+        window.location.reload()
       } catch (e) {
         console.error("Invalid JSON string", e);
       }
@@ -160,6 +161,7 @@ export default function AppFrameStage({}:any) {
         // Assuming LS_customTradeList is your local storage trade list
         // You need to implement a method to update LS_customTradeList with importList
         s__LS_customTradeList(importList);
+        window.location.reload()
       } catch (e) {
         console.error("Invalid JSON string", e);
       }

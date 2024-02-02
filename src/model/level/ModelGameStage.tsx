@@ -269,6 +269,7 @@ function getFirstDayOfNextQuarterUnix() {
                     {!!selectedCustomTradeLogs && state.selectedSymbolYTDSummary&& <>
                     <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,3.5,12.25]}>  {/* 1.97 */}
                       <HistoryLogs
+                      customSizeRatio={20}
                           customChildren={true}
 
                         calls={{refetchLogs:()=>{}}}
