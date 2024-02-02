@@ -9,7 +9,7 @@ import { URLGridTab } from "../URLGridTab"
 import { FavoritesTab } from "../FavoritesTab"
 import { DailyLog } from "../DailyLog"
 import { SymbolNameHeader } from "../SymbolNameHeader"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import useSyncedKLines from "@/../script/util/hook/useSyncedKLines"
 import MobileTabsButtons from "./MobileTabsButtons"
 import BuySellButtons from "./BuySellButtons"
@@ -21,7 +21,7 @@ import MarketNewsStage from "../../../model/level/MarketNewsStage"
 import { SelectedModalContent } from "./SelectedModalContent"
 import { StandardTokens } from "@/../script/constant/klines";
 import { SocialMediaRow } from '@/dom/atom/popup/SocialMediaRow'
-import { useLocalStorage } from "usehooks-ts"
+import { useLocalStorage, useMediaQuery } from "usehooks-ts"
 import { parseDateTimeString, parseDecimals, mapTradeHistory } from "../../../../script/util/hook/useOrderHistory"
 export default function AppFrameStage({}:any) {
   const lsData:any = useLocalStorageCatcher()
@@ -357,6 +357,11 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
     return !!tradeLogsObj[aSymbol]
   }
+  const isMediumDevice = useMediaQuery("only screen and (max-width : 600px)");
+
+  const memoActiveMobileTab = useMemo(()=>{
+    return isMediumDevice ? activeMobileTab : "chart"
+  },[activeMobileTab, isMediumDevice])
   return (<>
 
 
@@ -434,7 +439,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         {/* <span className="tx-altfont-5">Web</span>
         <span className="">Trade</span> */}
     </a>
-    {activeMobileTab == "chart" && <>
+    {memoActiveMobileTab == "chart" && <>
     
 
       {/* <div className="tx-white pa-2 pos-fix left-0 top-0 tx-md tx-bold-8 tx-ls-1 tx-altfont-5">Web</div> */}
@@ -476,7 +481,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
                 style={{maxHeight:"65vh"}}
 
       >
-        {activeMobileTab == "chart" && <>
+        {memoActiveMobileTab == "chart" && <>
         {!!focusSymbol && !!selectedSymbolYTDSummary &&
           selectedSymbolLTFSummary && chartConfig.isOverlayLabeled && <>
           <ChartWindowOverlayLabels state={{selectedSymbolLTFSummary, selectedSymbolYTDSummary}} />
@@ -492,7 +497,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
                 
                 selectedSymbolYTDSummary,
                 selectedSymbolLTFSummary,
-                activeMobileTab,
+                activeMobileTab: memoActiveMobileTab,
                 htfList,
                 htfClosingList,
                 ytdObj, focusSymbol,
@@ -716,7 +721,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       
       
       
-      {activeMobileTab == "favs" && <>
+      {memoActiveMobileTab == "favs" && <>
 
     <div className="mt-6 Q_sm_x"></div>
       
@@ -783,7 +788,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     {/* <ODivider className="Q_xs_xl w-90 mt-4" /> */}
     
 
-    {activeMobileTab == "notes" && <>
+    {memoActiveMobileTab == "notes" && <>
       {!!pricesObj && 
         <div className="Q_xs pb-4 px-4 flex-center  gap-1 tx-white"
           style={{alignSelf:"flex-end"}}
@@ -802,7 +807,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
       </>
 }
-    {activeMobileTab == "notes" && <>
+    {memoActiveMobileTab == "notes" && <>
       <div className="mt-8 Q_sm_x"></div>
       <div className='z-200  mb-150 mt-4 pb-100  Q_xs_xl w-90 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start pt-4'>
         <div className="pb-4 tx-white">Daily Log</div>
@@ -814,7 +819,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     </>}
       
       <div className='flex-1 flex-col mt-8 pb-6 Q_xs z-300  pos-fixed bottom-0 '>
-        <MobileTabsButtons state={{activeMobileTab}}  calls={{s__activeMobileTab: triggerMobileTab}} />
+        <MobileTabsButtons state={{activeMobileTab: memoActiveMobileTab}}  calls={{s__activeMobileTab: triggerMobileTab}} />
       </div>
 
 
