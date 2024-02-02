@@ -269,6 +269,7 @@ function getFirstDayOfNextQuarterUnix() {
                     {!!selectedCustomTradeLogs && state.selectedSymbolYTDSummary&& <>
                     <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,3.5,12.25]}>  {/* 1.97 */}
                       <HistoryLogs
+                          customChildren={true}
 
                         calls={{refetchLogs:()=>{}}}
                         state={{orderLogs: selectedCustomTradeLogs, }}
@@ -359,7 +360,6 @@ function getFirstDayOfNextQuarterUnix() {
                     {!!selectedTradeLogs && state.selectedSymbolYTDSummary && <>
                       <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,1.7,9.8]}>  {/* 1.97 */}
                         <HistoryLogs
-
                           calls={{refetchLogs:()=>{}}}
                           state={{orderLogs: selectedTradeLogs, }}
                           minValue={state.selectedSymbolYTDSummary.minValue}

@@ -110,24 +110,8 @@ export const MarketNewsStage = ({state}:any) => {
   if (!mounted) return <LoadingFullScreen />;
 
   return (<>
-    <div className={`flex-col  w-100 h-100 tx-altfont-4 bg-b-10 box-shadow-i-9-b ${true ? "" : "nopointer"}`}>
-    <div className="pos-abs top-0 flex right-0  tx-white opaci-50 tx-lgx pa-2 pt-4">
-    {isTab == "3d" &&
-    <div className="opaci-chov--50" onClick={()=>s__isTab("tradingview")}>
-            <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-2" >
-              <div className="tx-sm">Switch to <br /> TradingView</div>
-            </div>
-            </div>
-  }
-         {isTab == "tradingview" &&
-         <div className="opaci-chov--50" onClick={()=>s__isTab("3d")}>
-            <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-2" >
-              <div className="tx-sm">Switch to <br /> Globe Data</div>
-            </div>
-            </div>
-  } 
-    </div>      
-
+    <div className={`flex-col bord-r-25  w-100 h-100 tx-altfont-4 bg-b-10 box-shadow-i-9-b ${true ? "" : "nopointer"}`}>
+   
       {isDataPopulated && isLightVisible && <>
         <div className="pos-abs top-0 right-0 tx-white opaci-50 tx-lgx pa-2 pt-4">
           <div className=""><div className="">⚡</div></div>
@@ -135,7 +119,7 @@ export const MarketNewsStage = ({state}:any) => {
         </div>      
       </>}
       {isTab == "3d" &&
-      <Canvas style={{width:"100%",height:state?.canvasHeight || "250px"}} shadows 
+        <Canvas style={{width:"100%",height:state?.canvasHeight || "250px"}} shadows 
         className={` ${true ? "" : "nopointer"} flex-col flex-align-stretch`}
         camera={{fov:20,position:[1,1,isMediumDevice?4.5:3.5]}}
         gl={{ preserveDrawingBuffer: true, }}
@@ -418,13 +402,30 @@ export const MarketNewsStage = ({state}:any) => {
           <meshStandardMaterial wireframe={true} emissive={"#333f33"} />
         </Torus> */}
         </group>
-      </Canvas> 
-}
-{isTab == "tradingview" &&
-  <TradingViewNews />
-}   
+        </Canvas> 
+      }
+      {isTab == "tradingview" && <>
+        <div className="w-100 "><TradingViewNews /></div>
+      </>}   
+      <div className="pos-abs top-0 pos-rel  z-900 flex right-0  tx-white opaci-50 tx-lgx pa-2 pt-4">
+    {isTab == "3d" &&
+    <div className="opaci-chov--50 z-600 block" onClick={()=>s__isTab("tradingview")}>
+            <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-1" >
+              <div className="tx-sm">Switch to <br /> TradingView</div>
+            </div>
+            </div>
+  }
+         {isTab == "tradingview" &&
+         <div className="opaci-chov--50" onClick={()=>s__isTab("3d")}>
+            <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-1" >
+              <div className="tx-sm">Switch to <br /> Globe Data</div>
+            </div>
+            </div>
+  } 
+    </div>      
+
     </div>     
-    </>)
+  </>)
 }
 
 export default MarketNewsStage

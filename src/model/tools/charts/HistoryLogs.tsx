@@ -1,8 +1,8 @@
-import { Box, Html } from "@react-three/drei";
+import { Box, Html, Sphere } from "@react-three/drei";
 import { useState } from "react";
 import { Mesh, MeshStandardMaterial } from "three";
 
-export const HistoryLogs = ({ calls, state, minValue = 15000, maxValue = 69000, latestUnix, oldestUnix }: any) => {
+export const HistoryLogs = ({ customChildren, calls, state, minValue = 15000, maxValue = 69000, latestUnix, oldestUnix }: any) => {
   const cubeSize = 0.01;
   const [clickedCubes, setClickedCubes] = useState<number[]>([]);
 
@@ -34,10 +34,19 @@ export const HistoryLogs = ({ calls, state, minValue = 15000, maxValue = 69000, 
               {/* <Box args={[0.01,0.01,0.01]}></Box> */}
                     {/* <Box args={[0.01,0.01,0.01]}></Box> */}
               <group position={[0.05, 0, 0]}>
-                <mesh onClick={() => toggleCubeClick(index)}>
+                <group onClick={() => toggleCubeClick(index)}>
+                {!customChildren && <mesh >
                   <boxBufferGeometry args={[cubeSize * (parseInt(order.qty.slice(1)) / 20), cubeSize / 2 * (order.side =="Buy" ? 1 : 1.1), cubeSize / 2]} />
                   <meshStandardMaterial color={order.side == "Buy" ? "#0099ff" : "#ff00ff"}  emissive={order.side == "Buy" ? "#00ff00" : "#ff0000"}  />
-                </mesh>
+                </mesh>}
+                {!!customChildren && <>
+                  {/* {customChildren()} */}
+                  <Sphere args={[cubeSize * (parseInt(order.qty.slice(1)) / 20)/5,4,4]} scale={[1,1,0.3]} >
+                    <meshStandardMaterial color={order.side == "Buy" ? "#0099ff" : "#ff00ff"}  emissive={order.side == "Buy" ? "#00ff00" : "#ff0000"}  />
+                  </Sphere>
+                </>}
+        
+                </group>
                 {clickedCubes.includes(index) && (
                   <>
                     <Html position={[0, -0.1, 0]} rotation={[0, 0, 0]}>

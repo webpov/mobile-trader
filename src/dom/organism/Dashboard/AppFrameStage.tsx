@@ -575,12 +575,16 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </>}
       </div>
         {!!chartConfig.isNotesVisible &&
-          <div className="Q_xl_x w-20 flex-col flex-justify-start gap-3">
-            <div className='Q_xl_x w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'
+          <div className="Q_xl_x  w-25 flex-col flex-justify-start gap-3">
+            <div className='Q_xl_x w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start  py-4'
               style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
             >
-              <div className="pb-4">Market Summary</div>
-              <div className="flex-col w-90">
+              <div className="pb-4 w-100 tx-start pl-8" data-responsive="xl">
+                <div className="pl-4">Market <br /> Summary</div>
+              </div>
+              <div className="flex-col w-90  right-0"
+                // style={{width:"50vw"}}
+              >
                 <MarketNewsStage />
               </div>
             </div>
@@ -654,7 +658,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         <div className='Q_sm_lg w-90 mt-8  box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'
           style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
         >
-          <div className="pb-4">Market Summary</div>
+          <div className="pb-4" data-responsive="md-lg">Market Summary</div>
           <div className="flex-col w-95 ">
             <MarketNewsStage />
           </div>
@@ -739,13 +743,13 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </div>
       </div>
       
-      <div className='Q_sm w-50 z-200 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
-        <div className="pb-4">Market Summary</div>
+      {/* <div className='Q_sm w-50 z-200 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+        <div className="pb-4">684Market Summary</div>
         <div className="flex-col w-90 "
         >
           <MarketNewsStage />
         </div>
-      </div>
+      </div> */}
       
       <div className='Q_xs_sm w-40  pos-rel block px-4  bord-r-25 tx-center tx-white mb-8 z-200'>
         <div className=' tx-center  pa-2 pb-6  bg-glass-50 h-100 bord-r-25 neu-convex flex-col flex-justify-start'
@@ -799,7 +803,9 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </div>
       } 
     <div className='Q_xs w-90 z-200   box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
-        <div className="pb-4 tx-white tx-lg">Market <br /> Summary</div>
+        <div className="pb-4 tx-white tx-lg" data-responsive="xs" >
+          Market <br /> Summary
+        </div>
         <div className="flex-col w-90 h-min-50vh">
           <MarketNewsStage state={{canvasHeight:"350px"}} />
         </div>

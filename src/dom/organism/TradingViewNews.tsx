@@ -2,8 +2,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { useMediaQuery } from "usehooks-ts";
 
 export const TradingViewNews = () => {
+  const isMediumDevice = useMediaQuery("only screen and (max-width : 992px)");
   const myRef:any = useRef();
   const [widgetCount, s__widgetCount] = useState(0)
   useEffect(()=>{
@@ -28,7 +30,7 @@ export const TradingViewNews = () => {
 
   return (<>
   <div className="pos-abs bottom-0 left-0 bg-glass-20 flex-col gap-2 border-white bord-r-25 pb-2 bg-b-50 tx-white">
-    <h1 className="tx-sm ma-0 px-6 Q_xs_px-2 pt-4 pa-0 tx-bold-2">Tradingview&apos;s Crypto <br /> Market Widget</h1>
+    <h1 className="tx-sm ma-0 px-6 Q_xs_px-2 pt-2 pa-0 tx-bold-2">Tradingview&apos;s Crypto <br /> Market Widget</h1>
     <h3 className="tx-sm ma-0 px-6 Q_xs_px-2 pa-0 tx-link">
         <Link className="tx-white" href="https://www.tradingview.com/widget-docs/widgets/screeners/crypto-mkt-screener/" target="_blank">
           tradingview <br /> .com/widget-docs
@@ -37,7 +39,7 @@ export const TradingViewNews = () => {
       </div>
     <div className="mt- w-min-300px w-100 ">
       
-      <div className="tradingview-widget-container mt-2  w-100" ref={myRef}>
+      <div className="tradingview-widget-container bord-r-25 noverflow border-white-50 w-100" ref={myRef}>
           {/* <div className="tradingview-widget-container__widget"></div>     */}
       </div>
     </div>
