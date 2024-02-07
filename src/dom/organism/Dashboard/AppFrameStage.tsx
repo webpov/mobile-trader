@@ -100,7 +100,7 @@ export default function AppFrameStage({}:any) {
         price: price,
         // qty: `${(baseQty / pricesObj[focusSymbol])}`,
         qty: amountTokens,
-        quoteQty: `33`,
+        quoteQty: parseInt(`${parseFloat(price)*parseFloat(amountTokens)}`),
         time: tradeTime,
         isBuyer: side === "buy",
         isMaker: isMaker,
