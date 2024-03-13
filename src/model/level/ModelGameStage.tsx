@@ -153,6 +153,25 @@ function getFirstDayOfNextQuarterUnix() {
       s__Mounted(true);
   }, []);
 
+  const deleteCube = (index:number) => {
+    // state.customTradeList
+    // console.log("state.customTradeList", state.customTradeList, state.focusSymbol, index)
+    // console.log("state.customTradeList", state.customTradeList[state.focusSymbol])
+    // console.log("state.customTradeList", state.LS_customTradeList[state.focusSymbol])
+    const currentArray = state.LS_customTradeList[state.focusSymbol]
+    const arrayWithoutIndex = currentArray.filter((item:any, i:number)=> i!== index)
+    const newCustom = {...state.LS_customTradeList, [state.focusSymbol]: arrayWithoutIndex}
+    // console.log("newCustom", newCustom)
+    // const newFull = {...state.LS_customTradeList, [state.focusSymbol]: arrayWithoutIndex}
+    calls.s__customTradeList(newCustom)
+    calls.s__LS_customTradeList(newCustom)
+
+    // calls.
+    // s__LS_customTradeList,
+    // s__customTradeList,
+
+  }
+
   if (!mounted) return <LoadingFullScreen />;
 
   return (
@@ -269,6 +288,7 @@ function getFirstDayOfNextQuarterUnix() {
                     {!!selectedCustomTradeLogs && state.selectedSymbolYTDSummary&& <>
                     <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,3.5,12.25]}>  {/* 1.97 */}
                       <HistoryLogs
+                      deleteCube={deleteCube}
                       customSizeRatio={20}
                           customChildren={true}
 

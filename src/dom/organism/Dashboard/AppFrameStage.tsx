@@ -505,8 +505,12 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
                 ytdObj, focusSymbol,
                 tradeLogsObj, isFetchingLogs,
                 customTradeList,
+                LS_customTradeList,
               }}
-                calls={{}}
+                calls={{
+                  s__LS_customTradeList,
+                  s__customTradeList,
+                }}
               >
                 <div>
                   

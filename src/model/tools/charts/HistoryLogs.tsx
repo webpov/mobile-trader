@@ -2,10 +2,13 @@ import { Box, Html, Sphere } from "@react-three/drei";
 import { useState } from "react";
 import { Mesh, MeshStandardMaterial } from "three";
 
-export const HistoryLogs = ({ customChildren, customSizeRatio=10, calls, state, minValue = 15000, maxValue = 69000, latestUnix, oldestUnix }: any) => {
+export const HistoryLogs = ({ deleteCube, customChildren, customSizeRatio=10, calls, state, minValue = 15000, maxValue = 69000, latestUnix, oldestUnix }: any) => {
   const cubeSize = 0.01;
   const [clickedCubes, setClickedCubes] = useState<number[]>([]);
-
+  const toggleDeleteCube = (index: number) => {
+    if (!deleteCube) { return }
+    deleteCube(index)
+  }
   const toggleCubeClick = (index: number) => {
     if (clickedCubes.includes(index)) {
       setClickedCubes(clickedCubes.filter((clickedIndex) => clickedIndex !== index));
@@ -34,7 +37,7 @@ export const HistoryLogs = ({ customChildren, customSizeRatio=10, calls, state, 
               {/* <Box args={[0.01,0.01,0.01]}></Box> */}
                     {/* <Box args={[0.01,0.01,0.01]}></Box> */}
               <group position={[0.05, 0, 0]}>
-                <group onClick={() => toggleCubeClick(index)}>
+                <group onClick={() => toggleCubeClick(index)} >
                 {!customChildren && <mesh >
                   <boxBufferGeometry args={[cubeSize * (parseInt(order.qty.slice(1)) / 20), cubeSize / 2 * (order.side =="Buy" ? 1 : 1.1), cubeSize / 2]} />
                   <meshStandardMaterial color={order.side == "Buy" ? "#0099ff" : "#ff00ff"}  emissive={order.side == "Buy" ? "#00ff00" : "#ff0000"}  />
@@ -64,6 +67,11 @@ export const HistoryLogs = ({ customChildren, customSizeRatio=10, calls, state, 
                         {order.qty}
                       </div>
                     </Html>
+                    <Box args={[0.1,0.05,0.01]} position={[0.65,-.5,0]} 
+                      onClick={(e) => {e.stopPropagation(); toggleDeleteCube(index)}}
+                    >                    
+                      <meshStandardMaterial emissive="#ff00ff" />
+                    </Box>
                   </>
                 )}
               </group>
