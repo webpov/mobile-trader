@@ -32,7 +32,8 @@ export function useUrlParamCatcher() {
   const router = useRouter()
 
   const reftoken = searchParams.get('reftoken') || "USDT"
-  // const symbol = searchParams.get('symbol') || "BTC"+reftoken
+  const symbol = searchParams.get('symbol') || "BTC"+reftoken
+  console.log("symbol",symbol)
   const ltf = searchParams.get('ltf') || "4h"
   // const htf = searchParams.get('htf') || "1d"
   const htf = "1d"
@@ -311,7 +312,7 @@ const keysArray = useMemo(()=>{
     updateTile,
     // symbolToken0,
     reftoken,
-    // symbol,
+    symbol,
     ltf,
     htf,
     keysArray,

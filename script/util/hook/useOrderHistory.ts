@@ -77,7 +77,7 @@ export const useOrderHistory = (publicSecretHash:string) => {
     if ( !pwPrompt) { return }
     
 
-    let pair = "BTCUSDT"
+    // let pair = "BTCUSDT"
     const theListRes = await fetch(`/api/order/history/`,{
       method:"POST",
       body:JSON.stringify({

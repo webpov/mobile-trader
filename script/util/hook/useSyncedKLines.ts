@@ -38,7 +38,7 @@ export default function useSyncedKLines({state,calls}:any) {
     s__isChartLoading(false)
   }
 
-  const getFocusSymbol = (_state:any) => {
+  const getFocusSymbol = (_state:any, urlSymbol=null) => {
     let theFocusSymbol = ""
     
     const noFavs = (!_state.favs || (!!_state.favs && !_state.favs.length)) 
@@ -61,6 +61,9 @@ export default function useSyncedKLines({state,calls}:any) {
     if (!noFavs && !noUrlPicks) {
       theFocusSymbol = (_state.favs[0].symbol)
     }
+    if (!!urlSymbol) {
+      theFocusSymbol = urlSymbol
+    }
 
     return theFocusSymbol
   }
@@ -68,7 +71,7 @@ export default function useSyncedKLines({state,calls}:any) {
     useEffect(() => {
       if (isChartLoading) {return}
 
-      const calculatedFocusSymbol:string = getFocusSymbol(state) || ""
+      const calculatedFocusSymbol:string = getFocusSymbol(state, state.urlSymbol) || ""
       s__focusSymbol(calculatedFocusSymbol)
 
       s__isChartLoading(true)

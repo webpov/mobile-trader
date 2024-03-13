@@ -243,6 +243,7 @@ export default function AppFrameStage({}:any) {
       isFetchingLogs, s__isFetchingLogs,
       // fullmidtermList, s__fullmidtermList,
   } = useSyncedKLines({state:{
+    urlSymbol: urlp.symbol.toUpperCase(),
     gridData: urlp.gridData,
     urlArray: urlp.keysArray,
     favs: lsData.LS_favs,
@@ -448,7 +449,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       <div className='flex-row  tx-white  Q_lg_x  w-90 z-10'>
         <div className='Q_lg_x w-10'></div>
         <h1 className=" flex-1 mb-0 pb-0 pl-100 block">
-          <a href="/" className="tx-white flex-center flex-justify-start gap-1  nodeco" onClick={()=>window.location.reload()}>
+          <a href={`/?symbol=${focusSymbol?.toUpperCase()}`} className="tx-white flex-center flex-justify-start gap-1  nodeco" onClick={()=>window.location.reload()}>
             <SymbolNameHeader label={focusSymbol || "N/A"} />
             {!!pricesObj && <div className=" tx-lg  tx-roman">: {(pricesObj[focusSymbol])}</div>}
           </a>
