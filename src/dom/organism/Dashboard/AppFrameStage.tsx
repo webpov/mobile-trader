@@ -671,6 +671,12 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </div>
         </div>
       </div>
+      <div className='Q_sm_lg px-2 pt-4 mr-3 pb-4 neu-convex bord-r-25'>
+        <div className="w-100 tx-center pb-2">Notes</div>
+        <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:20}} calls={{s__LS_notes: lsData.s__LS_notes}} />
+      </div>
+
+      
       <div className='Q_xl_x w-25 mt-  flex-col block   tx-center  '>
         <div className="neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
           WebPOV Ecosystem

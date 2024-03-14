@@ -39,11 +39,12 @@ export function DailyLog({ state, calls }: any) {
 
   const AddNoteButton = ({ fontSize = "tx-lg", isClearable = false }: any) => {
     return (
-      <div className="flex flex-justify-between flex-align-start w-100">
-        <button className={`tx-white ${fontSize || "tx-lgx"} opaci-chov--50 bg-w-10 bord-r-25 px-4 py-2`}
+      <div className="flex gap-1 flex-justify-between flex-align-start w-100">
+        <button className={`tx-white ${fontSize || "tx-lgx"} opaci-chov--50 bg-w-10 bord-r-25 py-2`}
           onClick={triggerAddNote}
         >
-          + Add Note
+          <div className="px-4  Q_lg_x">+ Add Note</div>
+          <div className="px-1  Q_xs_lg">+ Add Note</div>
         </button>
         {isClearable &&
           <button className={`tx-white ${fontSize || "tx-lgx"} opaci-chov--50 bg-w-10 bord-r-25 py-1 px-2`}
