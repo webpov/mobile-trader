@@ -583,8 +583,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       </div>
         {!!chartConfig.isNotesVisible &&
           <div className="Q_xl_x  w-25 flex-col flex-justify-start gap-3">
-            <div className='Q_xl_x w-100 box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start  py-4'
-              style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
+            <div className='Q_xl_x w-100  block pos-rel bord-r-25 tx-center flex-col flex-justify-start  py-4'
+              // style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
             >
               <div className="pb-4 w-100 tx-start pl-8" data-responsive="xl">
                 <div className="pl-4">Market <br /> Summary</div>
@@ -815,7 +815,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           <div className=" tx-lg tx-roman">{(pricesObj[focusSymbol])}</div>
         </div>
       } 
-    <div className='Q_xs w-90 z-200   box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'>
+    <div className='Q_xs w-90 z-200   box-shadow-9-b block bg-glass-50 bord-r-25 tx-center  flex-col flex-justify-start py-4'>
         <div className="pb-4 tx-white tx-lg" data-responsive="xs" >
           Market <br /> Summary
         </div>

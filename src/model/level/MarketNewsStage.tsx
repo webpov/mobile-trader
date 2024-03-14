@@ -110,18 +110,18 @@ export const MarketNewsStage = ({state}:any) => {
   if (!mounted) return <LoadingFullScreen />;
 
   return (<>
-    <div className={`flex-col bord-r-25  w-100 h-100 tx-altfont-4 bg-b-10 box-shadow-i-9-b ${true ? "" : "nopointer"}`}>
+    <div className={`flex-col   w-100 h-100 tx-altfont-4   ${true ? "" : "nopointer"}`}>
    
       {isDataPopulated && isLightVisible && <>
-        <div className="pos-abs top-0 right-0 tx-white opaci-50 tx-lgx pa-2 pt-4">
-          <div className=""><div className="">⚡</div></div>
+        <div className="pos-abs top-0 left-50 tx-white opaci-50 tx-lgx pa-2 pt-4">
+          <div className=""><div className=" hover-jump">⚡</div></div>
           
         </div>      
       </>}
       {isTab == "3d" &&
         <Canvas style={{width:"100%",height:state?.canvasHeight || "250px"}} shadows 
         className={` ${true ? "" : "nopointer"} flex-col flex-align-stretch`}
-        camera={{fov:20,position:[1,1,isMediumDevice?4.5:3.5]}}
+        camera={{fov:30,position:[1,1,isMediumDevice?4.5:3.5]}}
         gl={{ preserveDrawingBuffer: true, }}
         // onCreated={(state)=>{ state.gl.setClearColor("#101319"); state.scene.fog = new Fog("#101319",8,16) }}
       >
@@ -130,7 +130,7 @@ export const MarketNewsStage = ({state}:any) => {
           enableDamping={false}
           maxDistance={9}
           minDistance={2}
-          // enablePan={false}
+          enablePan={false}
           // dampingFactor={.05} 
           maxPolarAngle={Math.PI/2+0.7} minPolarAngle={Math.PI/2-0.7}
           // minAzimuthAngle={Math.PI/4}

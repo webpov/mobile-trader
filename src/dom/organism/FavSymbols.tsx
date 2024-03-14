@@ -147,7 +147,7 @@ export function FavSymbols({ state, calls }: any) {
     return (<></>);
   }
   return (<>
-    <div className=" w-90  flex-col gap-1" >
+    <div className=" w-90  flex-col gap-1" style={{maxHeight:"90vh"}}>
       <div className="flex-center translate-y--50 gap-2">
         
       {!state.fuelPoints && 
@@ -183,7 +183,7 @@ export function FavSymbols({ state, calls }: any) {
           </button>
         }
       </div>
-      <div className="favSymbolsModalContent w-100 flex-col gap-1 autoverflow-y flex-justify-start" style={{maxHeight:"40vh"}}>
+      <div className="favSymbolsModalContent w-100 flex-col gap-1 autoverflow-y flex-justify-start" >
         {state.LS_favs.map((item: any, index: number) => {
           
           if (!state.ytdObj){ return (<div key={index} className=" "></div>)}
@@ -332,15 +332,16 @@ export function FavSymbols({ state, calls }: any) {
           </div>);
         })}
       </div>
-      <div className="flex-center gap-6 mt-2">
-      <div className="flex-col gap-2">
+      <div className="flex-center gap-6 mt-1">
+      <div className="flex-center gap-2">
         <div>Favs</div>
+      <div className="flex gap-1">
       {!!state.LS_favs.length &&
         <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 `}
           onClick={triggerCloneResetFavs}
         >
-          <div className="Q_sm_x tx-lgx">Clone</div>
-          <div className="Q_xs ">Clone</div>
+          <div className="Q_sm_x tx-lgx">✅</div>
+          <div className="Q_xs ">✅</div>
         </button>
       }
         <div className="flex-center gap-2">
@@ -348,24 +349,24 @@ export function FavSymbols({ state, calls }: any) {
         <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 `}
           onClick={triggerClearFavs}
         >
-          <div className="Q_sm_x tx-md">Clear</div>
-          <div className="Q_xs ">Clear</div>
+          <div className="Q_sm_x tx-md">❌</div>
+          <div className="Q_xs ">❌</div>
         </button>
-      }
+      }</div>
         </div>
       </div>
-      <div className="bg-white opaci-25 h-100px" style={{paddingLeft: "1px"}}>
+      <div className="bg-white opaci-25 h-80px" style={{paddingLeft: "1px"}}>
 
       </div>
-      <div className="flex-col">
-        <div>Logs</div>
+      <div className="flex-wrap gap-2">
+        <div className="">Logs</div>
         <div className="flex-center gap-2">
       {!!state.LS_favs.length &&
-        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 mt-2`}
+        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
           onClick={triggerImportLogs}
         >
-          <div className="Q_sm_x tx-md">Import</div>
-          <div className="Q_xs ">Import</div>
+          <div className="Q_sm_x tx-md">✏️</div>
+          <div className="Q_xs ">✏️</div>
         </button>
       }
       {!!state.LS_favs.length &&
@@ -378,24 +379,24 @@ export function FavSymbols({ state, calls }: any) {
       ref={inputRef} // You need to create this ref in your component
     />
     <button
-      className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 mt-2`}
+      className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
       onClick={() => inputRef.current.click()} // Programmatically clicks the file input
     >
-      <div className="Q_sm_x tx-md">Upload</div>
-      <div className="Q_xs ">Upload</div>
+      <div className="Q_sm_x tx-md">📁</div>
+      <div className="Q_xs ">📁</div>
     </button>
   </>
 }
 
-        </div>
-      {!!state.LS_favs.length &&
-        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 mt-2`}
+{!!state.LS_favs.length &&
+        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
           onClick={triggerExportLogs}
         >
-          <div className="Q_sm_x tx-md">Export</div>
-          <div className="Q_xs ">Export</div>
+          <div className="Q_sm_x tx-md">💾</div>
+          <div className="Q_xs ">💾</div>
         </button>
       }
+        </div>
       </div>
       </div>
       
@@ -431,7 +432,7 @@ export function FavSymbols({ state, calls }: any) {
       </>}
       <details className="w-100  flex-col flex-justify-center pos-rel flex-align-center pb-8 pos-rel">
         <summary className="flex-col opaci-chov--50 z-700">
-          <div className="Q_sm_x mt-8"></div>
+          <div className="Q_sm_x mt-2"></div>
           <hr className="w-90 " />
           <button className="flex-col bg-trans noborder tx-white tx-mdl py-3 noclick ">
             Account Keys
@@ -457,7 +458,7 @@ export function FavSymbols({ state, calls }: any) {
                 placeholder="Password" type="text" 
               />
             </div>
-            <div className="w-100 flex-center">
+            <div className="w-100 flex-center pos-abs top-0 translate-y--75">
               <button className="tx-lg px-3 py-1 bord-r-10 mt-1 opaci-chov--50"
                 onClick={triggerSaveKeys}
               >
