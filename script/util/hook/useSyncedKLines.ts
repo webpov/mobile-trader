@@ -149,7 +149,8 @@ export default function useSyncedKLines({state,calls}:any) {
 
 
       
-      const selectedSymbolData = ytdObj[focusSymbol].candles
+      const selectedSymbolData = ytdObj[focusSymbol]?.candles
+      if (!selectedSymbolData) { return null }
       let htfPricesData = getRelevantChartData(selectedSymbolData)
 
       const minValue =  Math.min(...htfPricesData.closingPrices)
