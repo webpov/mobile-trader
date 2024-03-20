@@ -614,8 +614,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         >
             <div className="Q_md_x py-2"></div> 
             <div className="Q_sm py-2"></div> 
-            <div className="py-4 flex-center gap-3">
-              <div className="Q_md_x">Stored <br /> Favorites</div> 
+            <div className="py-2 flex-center pos-abs gap-3">
+              <div className="Q_lg_x">Stored Favorites</div> 
               <div className="Q_xs_md">Fav</div> 
               {!!fuelPoints && <div>
                 <div className="blink_me pa-1 _ddr bord-r-50 "></div>
@@ -665,8 +665,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         />
 
         
-        <div className='Q_sm_lg w-90 mt-8  box-shadow-9-b block bg-glass-50 bord-r-25 tx-center neu-concave flex-col flex-justify-start py-4'
-          style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
+        <div className='Q_sm_lg w-90 mt-8   block  tx-center flex-col flex-justify-start py-4'
+          // style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
         >
           <div className="pb-4" data-responsive="md-lg">Market Summary</div>
           <div className="flex-col w-95 ">
