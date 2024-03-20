@@ -3,6 +3,9 @@
 import { ODivider } from "@/dom/atom/ODivider";
 
 export const ChartWindowSubMenu = ({ chartConfig, state, calls }: any) => {
+  const addLTFParam = (timeframe:string) => {
+    calls.addLTFParam(timeframe)
+  }
   return (<>
   <details className="">
       <summary className="flex opaci-chov--50 pos-abs bottom-0">
@@ -55,6 +58,31 @@ export const ChartWindowSubMenu = ({ chartConfig, state, calls }: any) => {
             <div>Movable Camera</div>
             <div className={`${chartConfig.isChartMovable ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isChartMovable ? "True" : "False"}</div>
           </button>
+          <div className="flex"> 
+            
+          <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={() => {
+              addLTFParam("3m")
+            }}>
+              <div>3m</div>
+            </button>
+            
+            <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={() => {
+              addLTFParam("15m")
+            }}>
+              <div>15m</div>
+            </button>
+          <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={() => {
+              addLTFParam("1h")
+            }}>
+              <div>1h</div>
+            </button>
+            
+            <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={() => {
+              addLTFParam("4h")
+            }}>
+              <div>4h</div>
+            </button>
+          </div>
 
           {!!state.fuelPoints && <>
             <ODivider className="w-90 " />

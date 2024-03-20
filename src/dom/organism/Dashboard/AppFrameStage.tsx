@@ -151,7 +151,9 @@ export default function AppFrameStage({}:any) {
   
   
   
-  
+  const addLTFParam = (timeframe:string) => {
+    urlp.addLTFParam(timeframe)
+  }
   
   const triggerImportLogs = () => {
     const jsonString = prompt("Enter the JSON string for trade list:");
@@ -559,7 +561,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </button>
       </div>
         <div className="pos-abs z-300" style={{bottom:"-25px", left:"10%"}}>
-          <ChartWindowSubMenu state={{fuelPoints}} calls={{s__fuelPoints, editTileToUrl}} 
+          <ChartWindowSubMenu state={{fuelPoints}} 
+            calls={{s__fuelPoints, editTileToUrl, addLTFParam}} 
             chartConfig={chartConfig} 
           />          
         </div>
