@@ -211,16 +211,23 @@ export function FavSymbols({ state, calls }: any) {
                   
                 >
                   </div>}
+                  
                 {!!state.pricesObj[item.symbol] &&
-              <div className=" tx-mdl  pl-1 flex-align-start flex-col bg-w-10 bord-r-l-25 pl-3 w-min-50px w-250px gap-1 Q_md_x"
+                  <div className="flex-center gap-1 Q_sm_lg">
+                      <small className="Q_lg_x" >d </small>
+                      <div className={`tx-roman flex-col ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>{liveChangePercent.toFixed(1)}%</div>
+                    </div>
+        }
+                {!!state.pricesObj[item.symbol] &&
+              <div className=" tx-mdl  pl-1 flex-align-start flex-col Q_lg_x bg-w-10 bord-r-l-25 pl-3 w-min-50px w-250px gap-1 Q_sm_x"
                   onClick={()=>{editSingleToken(item, "roof")}}
                 >
                   {!!state.pricesObj[item.symbol] &&
-                  <div className="flex flex-justify-around w-100 tx-sm">
+                  <div className="flex flex-justify-around w-100 tx-sm Q_lg_x">
                     {<div className="tx-roman">
                       {(state.pricesObj[item.symbol]*((liveChangePercent)/100)).toFixed(1)}
                     </div>}
-                    {<div className="tx-roman">
+                    {<div className="tx-roman Q_lg_x">
                       {(state.pricesObj[item.symbol]*((weekChangePercent)/100)).toFixed(1)}
                     </div>}
                     {<div className="tx-roman Q_lg_x">
@@ -229,13 +236,13 @@ export function FavSymbols({ state, calls }: any) {
                   </div>}
 
                   
-                  <div className="flex flex-justify-around w-100">
+                  <div className="flex flex-justify-around w-100 ">
                     <div className="flex-center gap-1">
-                      <small>d </small>
+                      <small className="Q_lg_x" >d </small>
                       <div className={`tx-roman flex-col ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>{liveChangePercent.toFixed(1)}%</div>
                     </div>
                     <div></div>
-                    <div className="flex-center gap-1">
+                    <div className="flex-center gap-1 Q_lg_x">
                       <small>w </small>
                       <div className={`tx-roman flex-col ${weekChangePercent < 0 ? "tx-red" : "tx-green"}`}>{weekChangePercent.toFixed(1)}%</div>
                     </div>
@@ -254,7 +261,7 @@ export function FavSymbols({ state, calls }: any) {
                     </button>
                   </>}
                 {/* <div className="tx-md tx-altfont-1">{index + 1}</div> */}
-                <div className="flex-1 flex flex-justify-start tx-mdl py-1 my-2 tx-ls-2 tx-start bg-w-10 bord-r-r-25 pl-4 opaci-chov--50 gap-2" title={item.symbol}
+                <div className=" flex-1 flex flex-justify-start tx-mdl py-1 my-2 tx-ls-2 tx-start bg-w-10 bord-r-r-25 pl-4 opaci-chov--50 gap-2" title={item.symbol}
                   onClick={()=>{triggerChangeSymbol(item.symbol)}}
                   style={{
                     ...(state.focusSymbol == item.symbol ? {borderLeft:"3px solid white", background: "linear-gradient(-90deg, #ffffff44, #ffffff11)"} : {})
