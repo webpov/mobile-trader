@@ -616,7 +616,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
             <div className="Q_sm py-2"></div> 
             <div className="py-2 flex-center pos-abs gap-3">
               <div className="Q_lg_x">Stored Favorites</div> 
-              <div className="Q_xs_md">Fav</div> 
+              {/* <div className="Q_xs_md">Fav</div>  */}
               {!!fuelPoints && <div>
                 <div className="blink_me pa-1 _ddr bord-r-50 "></div>
               </div>}
@@ -674,7 +674,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </div>
         </div>
       </div>
-      <div className='Q_sm_lg px-2 pt-4 mr-3 pb-4 neu-convex bord-r-25'>
+      <div className='Q_sm_lg px-2 pt-4 mr-3 mt-3 pb-4 neu-convex bord-r-25'>
         <div className="w-100 tx-center pb-2">Notes</div>
         <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:20}} calls={{s__LS_notes: lsData.s__LS_notes}} />
       </div>
