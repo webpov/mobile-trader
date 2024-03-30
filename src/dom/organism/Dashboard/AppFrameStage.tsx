@@ -434,7 +434,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     }
   
 
-    <div className='pos-fix top-0 w-100 flex-col noverflow h-100vh z-2 ' style={{width: '100vw',}}>
+  {/* <div className="pos-abs w- bottom-0 tx-white">asdfge</div> */}
+  <div className='pos-fix top-0 w-100 flex-col noverflow h-100vh z-2 ' style={{width: '100vw',}}>
       <div className={`${chartConfig.isTrendUp ? "_ddg" : "_ddr"} h-50 w-100 bord-r-100p spin-60 blur opaci-10 `} 
         style={{filter:"blur(200px)"}}
       >
@@ -658,7 +659,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           </button>
         </Link>
       }
-      <div className='flex-1 flex-col mt-8 pb-8 Q_sm_x '>
+      <div className='flex-1 flex-col mt-8 pb-8  Q_sm_x '>
         <BuySellButtons triggerBuy={triggerBuy} triggerSell={triggerSell}
           triggerConfigBuy={triggerConfigBuy} triggerConfigSell={triggerConfigSell}
           triggerResetFocusSymbolCustomLogs={triggerResetFocusSymbolCustomLogs} state={{focusSymbol}}
@@ -669,7 +670,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           // style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
         >
           <div className="pb-4" data-responsive="md-lg">Market Summary</div>
-          <div className="flex-col w-95 ">
+          <div className="flex-col  w-95 ">
             <MarketNewsStage />
           </div>
         </div>
@@ -678,6 +679,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         <div className="w-100 tx-center pb-2">Notes</div>
         <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:20}} calls={{s__LS_notes: lsData.s__LS_notes}} />
       </div>
+      <div></div>
 
       
       <div className='Q_xl_x w-25 mt-  flex-col block   tx-center  '>
@@ -721,7 +723,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
       </div>
 
-      
+{/*       
     <div className='Q_sm mt-8 w-10 block flex-col gap-3 bord-r-25 tx-center '>
       <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-10 py-4 neu-convex opaci-chov--50 border-white tx-altfont-1'>
           Acc <div className="Q_md_x">Acc</div> 
@@ -729,10 +731,11 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         <button className='w-100 pb-5 tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 neu-convex opaci-chov--50 border-white-50 tx-altfont-1'>
           <div className="hover-jump pb-2">🎮</div> <div className="Q_md_x">Games</div> 
         </button>
-      </div>
+      </div> */}
+      
       
     </div>
-
+    
     {/* <ODivider className="Q_xs_md w-90 my-4" /> */}
 
     
@@ -846,17 +849,27 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
 
       
-      <div className=' Q_sm_md  w-100 mt-8  flex-col block   tx-center  '>
+      <div className=' Q_sm_md z-800 w-100 mt-8  flex-col block   tx-center  '>
         <div className="tx-white neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
           The WebPOV Project
         </div>
         <div className="pa-4">
+          
           <div>
             <SocialMediaRow />
 
           </div>
         </div>
+    <div className='Q_sm mb-4 z-800  block flex gap-3 bord-r-25 tx-center '>
+      <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-10 py-4 neu-convex opaci-chov--50 border-white tx-altfont-1'>
+          Account
+        </button>
+        <button className='w-100 pb-5 px-3 tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-25 py-4 neu-convex opaci-chov--50 border-white-50 tx-altfont-1'>
+          <div className="hover-jump pb-2">🎮</div> <div className="">Games</div> 
+        </button>
       </div>
+      </div>
+      
 
     </>)
 }
