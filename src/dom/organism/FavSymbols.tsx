@@ -361,7 +361,7 @@ export function FavSymbols({ state, calls }: any) {
 
 
 
-      <div className="flex-center gap-6 mt-1 Q_xs_lg">
+      <div className="flex-center gap-6 mt-1 Q_xs_sm">
         <div className="flex-center gap-2">
           <div>Favs</div>
           <div className="flex gap-1">
@@ -444,7 +444,7 @@ export function FavSymbols({ state, calls }: any) {
 
 
       
-      <div className="flex-col pos-abs left-0 ml-4  gap-6 mt-1 Q_lg_x">
+      <div className="flex-col pos-abs top-0 mt-100 left-0 ml-4  gap-6 mt-1 Q_sm_x">
         <div className="flex-col gap-2">
           <div>Favs</div>
           <div className="flex flex-col gap-1">
