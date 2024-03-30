@@ -147,7 +147,7 @@ export function FavSymbols({ state, calls }: any) {
     return (<></>);
   }
   return (<>
-    <div className=" w-90  flex-col gap-1" style={{maxHeight:"90vh"}}>
+    <div className=" w-90 flex-col gap-1" style={{maxHeight:"95vh"}}>
       <div className="flex-center translate-y--50 gap-2">
         
       {!state.fuelPoints && 
@@ -332,73 +332,208 @@ export function FavSymbols({ state, calls }: any) {
           </div>);
         })}
       </div>
-      <div className="flex-center gap-6 mt-1">
-      <div className="flex-center gap-2">
-        <div>Favs</div>
-      <div className="flex gap-1">
-      {!!state.LS_favs.length &&
-        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 `}
-          onClick={triggerCloneResetFavs}
-        >
-          <div className="Q_sm_x tx-lgx">✅</div>
-          <div className="Q_xs ">✅</div>
-        </button>
-      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div className="flex-center gap-6 mt-1 Q_xs_lg">
         <div className="flex-center gap-2">
-      {!!state.LS_favs.length &&
-        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 `}
-          onClick={triggerClearFavs}
-        >
-          <div className="Q_sm_x tx-md">❌</div>
-          <div className="Q_xs ">❌</div>
-        </button>
-      }</div>
+          <div>Favs</div>
+          <div className="flex gap-1">
+            {!!state.LS_favs.length &&
+              <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 `}
+                onClick={triggerCloneResetFavs}
+              >
+                <div className="Q_sm_x tx-lgx">✅</div>
+                <div className="Q_xs ">✅</div>
+              </button>
+            }
+            <div className="flex-center gap-2">
+              {!!state.LS_favs.length &&
+                <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 `}
+                  onClick={triggerClearFavs}
+                >
+                  <div className="Q_sm_x tx-md">❌</div>
+                  <div className="Q_xs ">❌</div>
+                </button>
+              }</div>
+          </div>
+        </div>
+        <div className="bg-white opaci-25 h-80px" style={{ paddingLeft: "1px" }}>
+
+        </div>
+        <div className="flex-wrap gap-2">
+          <div className="">Logs</div>
+          <div className="flex-center gap-2">
+            {!!state.LS_favs.length &&
+              <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
+                onClick={triggerImportLogs}
+              >
+                <div className="Q_sm_x tx-md">✏️</div>
+                <div className="Q_xs ">✏️</div>
+              </button>
+            }
+            {!!state.LS_favs.length &&
+              <>
+                <input
+                  type="file"
+                  style={{ display: 'none' }}
+                  accept=".json"
+                  onChange={handleFileUpload}
+                  ref={inputRef}
+                />
+                <button
+                  className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
+                  onClick={() => inputRef.current.click()}
+                >
+                  <div className="Q_sm_x tx-md">📁</div>
+                  <div className="Q_xs ">📁</div>
+                </button>
+              </>
+            }
+
+            {!!state.LS_favs.length &&
+              <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
+                onClick={triggerExportLogs}
+              >
+                <div className="Q_sm_x tx-md">💾</div>
+                <div className="Q_xs ">💾</div>
+              </button>
+            }
+          </div>
         </div>
       </div>
-      <div className="bg-white opaci-25 h-80px" style={{paddingLeft: "1px"}}>
 
-      </div>
-      <div className="flex-wrap gap-2">
-        <div className="">Logs</div>
-        <div className="flex-center gap-2">
-      {!!state.LS_favs.length &&
-        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
-          onClick={triggerImportLogs}
-        >
-          <div className="Q_sm_x tx-md">✏️</div>
-          <div className="Q_xs ">✏️</div>
-        </button>
-      }
-      {!!state.LS_favs.length &&
-  <>
-    <input
-      type="file"
-      style={{ display: 'none' }}
-      accept=".json"
-      onChange={handleFileUpload}
-      ref={inputRef} // You need to create this ref in your component
-    />
-    <button
-      className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
-      onClick={() => inputRef.current.click()} // Programmatically clicks the file input
-    >
-      <div className="Q_sm_x tx-md">📁</div>
-      <div className="Q_xs ">📁</div>
-    </button>
-  </>
-}
 
-{!!state.LS_favs.length &&
-        <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
-          onClick={triggerExportLogs}
-        >
-          <div className="Q_sm_x tx-md">💾</div>
-          <div className="Q_xs ">💾</div>
-        </button>
-      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      <div className="flex-col pos-abs left-0 ml-4  gap-6 mt-1 Q_lg_x">
+        <div className="flex-col gap-2">
+          <div>Favs</div>
+          <div className="flex flex-col gap-1">
+            {!!state.LS_favs.length &&
+              <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 `}
+                onClick={triggerCloneResetFavs}
+              >
+                <div className="Q_sm_x tx-lgx">✅</div>
+                <div className="Q_xs ">✅</div>
+              </button>
+            }
+            <div className="flex-center gap-2">
+              {!!state.LS_favs.length &&
+                <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 `}
+                  onClick={triggerClearFavs}
+                >
+                  <div className="Q_sm_x tx-md">❌</div>
+                  <div className="Q_xs ">❌</div>
+                </button>
+              }</div>
+          </div>
+        </div>
+        <div className="flex-col gap-2">
+          <div className="">Logs</div>
+          <div className="flex-col gap-2">
+            {!!state.LS_favs.length &&
+              <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
+                onClick={triggerImportLogs}
+              >
+                <div className="Q_sm_x tx-md">✏️</div>
+                <div className="Q_xs ">✏️</div>
+              </button>
+            }
+            {!!state.LS_favs.length &&
+              <>
+                <input
+                  type="file"
+                  style={{ display: 'none' }}
+                  accept=".json"
+                  onChange={handleFileUpload}
+                  ref={inputRef}
+                />
+                <button
+                  className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
+                  onClick={() => inputRef.current.click()}
+                >
+                  <div className="Q_sm_x tx-md">📁</div>
+                  <div className="Q_xs ">📁</div>
+                </button>
+              </>
+            }
+
+            {!!state.LS_favs.length &&
+              <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-5 pa-1 `}
+                onClick={triggerExportLogs}
+              >
+                <div className="Q_sm_x tx-md">💾</div>
+                <div className="Q_xs ">💾</div>
+              </button>
+            }
+          </div>
         </div>
       </div>
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
       {/* !!state.LS_favs.length &&
         <button className={`tx-white ${""} opaci-chov--50 bg-w-10 bord-r-25 pa-2 mt-2`}
@@ -430,7 +565,7 @@ export function FavSymbols({ state, calls }: any) {
           Clone Url Config
         </button>
       </>}
-      <details className="w-100  flex-col flex-justify-center pos-rel flex-align-center pb-8 pos-rel">
+      <details className="w-100  flex-col flex-justify-center pos-rel flex-align-center  pos-rel">
         <summary className="flex-col opaci-chov--50 z-700">
           <div className="Q_sm_x mt-2"></div>
           <hr className="w-90 " />

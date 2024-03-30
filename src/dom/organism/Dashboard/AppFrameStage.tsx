@@ -371,13 +371,13 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
 
 {isLocalStorageModalOpen &&
-      <div className="pos-fixed flex-align-start flex-justify-center pt-8 top-0 z-400 w-100vw h-100vh bg-glass-20 bg-b-50  tx-white">
+      <div className="pos-fixed flex-align-start flex-justify-center pt- top-0 z-400 w-100vw h-100vh bg-glass-20 bg-b-50  tx-white">
         
         <div className='Q_sm_x w-10 '></div>
         <div className='Q_lg_x w-10 '></div>
         <div className='Q_xl_x w-10 '></div>
         <div className="w-100 ">
-          <div className=' mt-8 pt-4 '></div>
+          <div className=' mt- pt-5 '></div>
           <FavModalContent
             state={{
               LS_favs:lsData.LS_favs, LS_publicSecretKeys,ytdObj,
