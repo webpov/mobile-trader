@@ -213,8 +213,8 @@ export function FavSymbols({ state, calls }: any) {
                   </div>}
                   
                 {!!state.pricesObj[item.symbol] &&
-                  <div className="flex-center gap-1 Q_sm_lg">
-                      <small className="Q_lg_x" >d </small>
+                  <div className="flex-center gap-1 Q_sm_md ">
+                      {/* <small className="Q_xl_x" >d </small> */}
                       <div className={`tx-roman flex-col ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>{liveChangePercent.toFixed(1)}%</div>
                     </div>
         }

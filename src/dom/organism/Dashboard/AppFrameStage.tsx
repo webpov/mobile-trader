@@ -616,7 +616,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
             <div className="Q_md_x py-2"></div> 
             <div className="Q_sm py-2"></div> 
             <div className="py-2 flex-center pos-abs gap-3">
-              <div className="Q_lg_x">Stored Favorites</div> 
+              <div className="Q_xl_x">Stored Favorites</div> 
               {/* <div className="Q_xs_md">Fav</div>  */}
               {!!fuelPoints && <div>
                 <div className="blink_me pa-1 _ddr bord-r-50 "></div>
