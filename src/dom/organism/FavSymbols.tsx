@@ -213,7 +213,7 @@ export function FavSymbols({ state, calls }: any) {
                   </div>}
                   
                 {!!state.pricesObj[item.symbol] &&
-                  <div className="flex-center gap-1 Q_sm_md ">
+                  <div className="flex-center gap-1 Q_sm_x ">
                       {/* <small className="Q_xl_x" >d </small> */}
                       <div className={`tx-roman flex-col ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>{liveChangePercent.toFixed(1)}%</div>
                     </div>
@@ -224,9 +224,9 @@ export function FavSymbols({ state, calls }: any) {
                 >
                   {!!state.pricesObj[item.symbol] &&
                   <div className="flex flex-justify-around w-100 tx-sm Q_lg_x">
-                    {<div className="tx-roman">
+                    {/* {<div className="tx-roman">
                       {(state.pricesObj[item.symbol]*((liveChangePercent)/100)).toFixed(1)}
-                    </div>}
+                    </div>} */}
                     {<div className="tx-roman Q_lg_x">
                       {(state.pricesObj[item.symbol]*((weekChangePercent)/100)).toFixed(1)}
                     </div>}
@@ -237,10 +237,10 @@ export function FavSymbols({ state, calls }: any) {
 
                   
                   <div className="flex flex-justify-around w-100 ">
-                    <div className="flex-center gap-1">
+                    {/* <div className="flex-center gap-1">
                       <small className="Q_lg_x" >d </small>
                       <div className={`tx-roman flex-col ${liveChangePercent < 0 ? "tx-red" : "tx-green"}`}>{liveChangePercent.toFixed(1)}%</div>
-                    </div>
+                    </div> */}
                     <div></div>
                     <div className="flex-center gap-1 Q_lg_x">
                       <small>w </small>
