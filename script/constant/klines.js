@@ -16,6 +16,7 @@ export const StandardTokens = [
   "DOT",     // Polkadot
   "KSM",     // Kusama
   "PEPE",    // Pepe
+  "WIF",    // Pepe
   "GRT",     // The Graph
   "AVAX",    // Avalanche
   "LTC",     // Litecoin
@@ -94,6 +95,7 @@ export const StandardTokensGradients = {
   "DOT": "#fd4cc7,#3dc8b0",
   "KSM": "#8a6fd5,#293bea",
   "PEPE": "#89a31e,#765805",
+  "WIF": "#89a31e,#765805",
   "GRT": "#90d011,#eabca2",
   "ADA": "#336c40,#eb3ed8",
   "ARB": "#336c90,#3b9ef8",
