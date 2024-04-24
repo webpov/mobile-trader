@@ -29,7 +29,23 @@ export const TradingViewNews = () => {
   },[])
 
   return (<>
-  <div className="pos-abs bottom-0 left-0 bg-glass-20 flex-col gap-2 border-white bord-r-25 pb-2 bg-b-50 tx-white">
+  <div className="Q_xs_xl  mb-2 bottom-0 left-0 bg-glass-20 flex-wrap gap-2 border-white bord-r-25 pb-2 bg-b-50 tx-white">
+    <h1 className="tx-sm ma-0 px-6 Q_xs_px-2 pt-2 pa-0 tx-bold-2">Tradingview&apos;s Crypto <br /> Market Widget</h1>
+    <h3 className="tx-sm ma-0 px-6 Q_xs_px-2 pa-0 tx-link">
+        <Link className="tx-white" href="https://www.tradingview.com/widget-docs/widgets/screeners/crypto-mkt-screener/" target="_blank">
+          tradingview <br /> .com/widget-docs
+        </Link>
+      </h3>
+      </div>
+    <div className="mt- w-min-300px w-100 ">
+      
+      <div className="tradingview-widget-container bord-r-25 noverflow border-white-50 w-100" ref={myRef}>
+          {/* <div className="tradingview-widget-container__widget"></div>     */}
+      </div>
+    </div>
+
+
+    <div className="Q_xl_x pos-abs bottom-0 left-0 bg-glass-20 flex-col gap-2 border-white bord-r-25 pb-2 bg-b-50 tx-white">
     <h1 className="tx-sm ma-0 px-6 Q_xs_px-2 pt-2 pa-0 tx-bold-2">Tradingview&apos;s Crypto <br /> Market Widget</h1>
     <h3 className="tx-sm ma-0 px-6 Q_xs_px-2 pa-0 tx-link">
         <Link className="tx-white" href="https://www.tradingview.com/widget-docs/widgets/screeners/crypto-mkt-screener/" target="_blank">

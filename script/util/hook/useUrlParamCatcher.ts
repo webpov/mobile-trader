@@ -33,7 +33,7 @@ export function useUrlParamCatcher() {
 
   const reftoken = searchParams.get('reftoken') || "USDT"
   const symbol = searchParams.get('symbol') || "BTC"+reftoken
-  console.log("symbol",symbol)
+  // console.log("symbol",symbol)
   const ltf = searchParams.get('ltf') || "4h"
   // const htf = searchParams.get('htf') || "1d"
   const htf = "1d"
@@ -306,10 +306,19 @@ const keysArray = useMemo(()=>{
     const newParamsString = newParams.toString();
     router.push(`${pathname}?${newParamsString}`);
   }
+  const addLTFParam = (ltf:string) => {
+    const newParams = new URLSearchParams(window.location.search); // Use the current URL's search params
+    newParams.set("ltf", ltf); // Set your new parameter
+    const newParamsString = newParams.toString();
+    // Set the window's location to the new URL, causing a hard reload
+    window.location.href = `${window.location.pathname}?${newParamsString}`;
+  }
+  
 
   return {
     addTile,
     updateTile,
+    addLTFParam,
     // symbolToken0,
     reftoken,
     symbol,

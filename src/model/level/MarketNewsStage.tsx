@@ -407,21 +407,39 @@ export const MarketNewsStage = ({state}:any) => {
       {isTab == "tradingview" && <>
         <div className="w-100 "><TradingViewNews /></div>
       </>}   
-      <div className="pos-abs top-0 pos-rel  z-900 flex right-0  tx-white opaci-50 tx-lgx pa-2 pt-4">
-    {isTab == "3d" &&
-    <div className="opaci-chov--50 z-600 block" onClick={()=>s__isTab("tradingview")}>
-            <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-1" >
-              <div className="tx-sm">Switch to <br /> TradingView</div>
-            </div>
-            </div>
-  }
-         {isTab == "tradingview" &&
-         <div className="opaci-chov--50" onClick={()=>s__isTab("3d")}>
-            <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-1" >
-              <div className="tx-sm">Switch to <br /> Globe Data</div>
-            </div>
-            </div>
-  } 
+      <div className="pos-abs top-0 pos-rel Q_xl_x z-900 flex right-0  tx-white opaci-50 tx-lgx pa-2 pt-4">
+        {isTab == "3d" &&
+        <div className="opaci-chov--50 z-600 block" onClick={()=>s__isTab("tradingview")}>
+        <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-1" >
+          <div className="tx-sm">Switch to <br /> TradingView</div>
+        </div>
+        </div>
+        }
+        {isTab == "tradingview" &&
+        <div className="opaci-chov--50" onClick={()=>s__isTab("3d")}>
+        <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-1" >
+          <div className="tx-sm">Switch to <br /> Globe Data</div>
+        </div>
+        </div>
+        } 
+    </div>   
+
+    
+      <div className=" top-0  Q_xs_xl z-900 flex right-0  tx-white opaci-50 tx-lgx pa-2 pt-4">
+        {isTab == "3d" &&
+        <div className="opaci-chov--50 z-600 block" onClick={()=>s__isTab("tradingview")}>
+        <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-1" >
+          <div className="tx-sm">Switch to <br /> TradingView</div>
+        </div>
+        </div>
+        }
+        {isTab == "tradingview" &&
+        <div className="opaci-chov--50" onClick={()=>s__isTab("3d")}>
+        <div className="border-white bord-r-10  bg-glass-20 bg-b-90 px-1 py-1" >
+          <div className="tx-sm">Switch to <br /> Globe Data</div>
+        </div>
+        </div>
+        } 
     </div>      
 
     </div>     
