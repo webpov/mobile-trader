@@ -58,6 +58,12 @@ export const ChartWindowSubMenu = ({ chartConfig, state, calls }: any) => {
             <div>Movable Camera</div>
             <div className={`${chartConfig.isChartMovable ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isChartMovable ? "True" : "False"}</div>
           </button>
+          
+
+            <input type="range" min={10} max={50}  onClick={(e:any) => {
+              calls.s__logSphereSize(e.target.value);
+            }} />
+
           <div className="flex"> 
             
           <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={() => {

@@ -228,6 +228,7 @@ export default function AppFrameStage({}:any) {
     window.location.reload()
   }
   //
+  const [logSphereSize, s__logSphereSize] = useState(20)
   const {
       
       fuelPoints, s__fuelPoints,
@@ -510,6 +511,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
                 tradeLogsObj, isFetchingLogs,
                 customTradeList,
                 LS_customTradeList,
+                logSphereSize, 
               }}
                 calls={{
                   s__LS_customTradeList,
@@ -562,8 +564,8 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         </button>
       </div>
         <div className="pos-abs z-300" style={{bottom:"-25px", left:"10%"}}>
-          <ChartWindowSubMenu state={{fuelPoints}} 
-            calls={{s__fuelPoints, editTileToUrl, addLTFParam}} 
+          <ChartWindowSubMenu state={{fuelPoints, logSphereSize}} 
+            calls={{s__fuelPoints, editTileToUrl, addLTFParam, s__logSphereSize}} 
             chartConfig={chartConfig} 
           />          
         </div>

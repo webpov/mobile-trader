@@ -174,11 +174,8 @@ function getFirstDayOfNextQuarterUnix() {
 
   if (!mounted) return <LoadingFullScreen />;
 
-  return (
+  return (<>
     <div className={`flex-col h-100 tx-altfont-4 bg-b-10 box-shadow-i-9-b ${config.isChartMovable ? "" : "nopointer"}`}>
-
-      
-      
       <Canvas style={{maxWidth:"100vw",height:"100%"}} shadows 
         className={` ${config.isChartMovable ? "" : "nopointer"}`}
         camera={{fov:10,position:[0,isSmallDevice?30:25,isSmallDevice?30:25]}}
@@ -289,7 +286,7 @@ function getFirstDayOfNextQuarterUnix() {
                     <group rotation={[0,-Math.PI/2,0]} position={[-0.05,0.05,1]} scale={[1,3.5,12.25]}>  {/* 1.97 */}
                       <HistoryLogs
                       deleteCube={deleteCube}
-                      customSizeRatio={20}
+                      customSizeRatio={state.logSphereSize}
                           customChildren={true}
 
                         calls={{refetchLogs:()=>{}}}
@@ -409,7 +406,7 @@ function getFirstDayOfNextQuarterUnix() {
         </group>
       </Canvas>
     </div>
-  )
+  </>)
 }
 
 
