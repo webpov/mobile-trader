@@ -683,10 +683,12 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         />
 
       </div>
+      
       <div className='Q_sm_lg px-2 pt-4 mr-3 mt-3 pb-4 neu-convex bord-r-25'>
         <div className="w-100 tx-center pb-2">Notes</div>
         <DailyLog state={{LS_notes:lsData.LS_notes, maxChars:20}} calls={{s__LS_notes: lsData.s__LS_notes}} />
       </div>
+
       <div></div>
 
       
@@ -716,17 +718,6 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       </div>
 
       
-      <div className=' Q_xs_xl  w-100 mt-8  flex-col block   tx-center  '>
-        <div className=" neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
-          WebPOV Apps
-        </div>
-        <div className="pa-4">
-          <div>
-            <SocialMediaRow />
-
-          </div>
-        </div>
-      </div>
 
 
       </div>
@@ -818,6 +809,19 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 </>}
     {/* <ODivider className="Q_xs_xl w-90 mt-4" /> */}
     
+      
+      <div className=' Q_sm_xl  w-100 mt-4  flex-wrap block   tx-center  '>
+        <div className=" neu-convex py-4 px-8 bord-r-25 box-shadow-9-b tx-white">
+          WebPOV Apps
+        </div>
+        <div className="pa-4">
+          <div>
+            <SocialMediaRow />
+
+          </div>
+        </div>
+      </div>
+      
 
     {memoActiveMobileTab == "notes" && <>
       {!!pricesObj && 
@@ -858,7 +862,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
       
       <div className=' Q_sm_md z-800 w-100 mt-8  flex-col block   tx-center  '>
-        <div className="tx-white neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
+        {/* <div className="tx-white neu-convex py-4 px-8 bord-r-25 box-shadow-9-b">
           The WebPOV Project
         </div>
         <div className="pa-4">
@@ -867,7 +871,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
             <SocialMediaRow />
 
           </div>
-        </div>
+        </div> */}
     <div className='Q_sm mb-4 z-800  block flex gap-3 bord-r-25 tx-center '>
       <button className='w-100  tx-white tx-lg tx-center bg-glass-50 h-100 bord-r-10 py-4 neu-convex opaci-chov--50 border-white tx-altfont-1'>
           Account
