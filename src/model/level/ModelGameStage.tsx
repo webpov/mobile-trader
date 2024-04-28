@@ -126,9 +126,15 @@ function getFirstDayOfNextQuarterUnix() {
   }, [state.ltfList]);
   
   const ltf_latestUnix = useMemo(() => {
-    if (!state.ltfList || state.ltfList.length === 0 || !state.ltfList[499]) return 1;
-    return state.ltfList[499][0];
-  }, [state.ltfList]);
+    if (!state.ltfList || state.ltfList.length === 0) return 1;
+
+    const extendedList = [...state.ltfList];
+    while (extendedList.length < 500) {
+      extendedList.unshift(extendedList[0])
+    }
+
+    return extendedList[499][0];
+}, [state.ltfList]);
   
   const ltf_oldestUnix = useMemo(() => {
     if (!state.ltfList || state.ltfList.length === 0 || !state.ltfList[0]) return 1;
