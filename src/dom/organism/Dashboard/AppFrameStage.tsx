@@ -659,7 +659,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
         >
           <details className="">
             <summary className="flex  opaci-chov--50 ">
-              <div className="tx-white mt-3 pa-1 tx-bold-8 border-white bord-r-10" data-responsive="md-lg">Market <br /> Summary</div>
+              <div className="tx-white mt- pa-1 tx-bold-8 border-white bord-r-10" data-responsive="md-lg">Market <br /> <div className="Q_xl_x">Summary</div></div>
             </summary>
             <div className="flex-col w-min-300px ">
             <MarketNewsStage />
@@ -831,7 +831,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       } 
     <div className='Q_xs w-90 z-200   box-shadow-9-b block bg-glass-50 bord-r-25 tx-center  flex-col flex-justify-start py-4'>
         <div className="pb-4 tx-white tx-lg" data-responsive="xs" >
-          Market <br /> Summary
+          Market <br /> <div className="">Summary</div>
         </div>
         <div className="flex-col w-90 h-min-50vh">
           <MarketNewsStage state={{canvasHeight:"350px"}} />
