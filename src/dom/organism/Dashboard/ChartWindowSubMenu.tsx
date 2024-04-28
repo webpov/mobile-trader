@@ -59,13 +59,15 @@ export const ChartWindowSubMenu = ({ chartConfig, state, calls }: any) => {
             <div className={`${chartConfig.isChartMovable ? "tx-green" : "tx-red"} tx-altfont-4`}>{chartConfig.isChartMovable ? "True" : "False"}</div>
           </button>
           
-
-            <input type="range" min={10} max={50}  onClick={(e:any) => {
-              calls.s__logSphereSize(e.target.value);
+          <div className="flex-center gap-1">
+            <label className="tx-sans" htmlFor="logRange">Size</label>
+            <input id="logRange" type="range" min={10} max={95}  onClick={(e:any) => {
+              calls.s__logSphereSize(100-e.target.value);
             }} />
+            </div>
 
-          <div className="flex"> 
-            
+          <div className="flex-center "> 
+            <div className="tx-xs flex-1 pr-2 tx-sans">Time <br /> frame</div>
           <button className="flex tx-mdl pa-1 w-100 flex-justify-between opaci-chov--50 bg-b-90 tx-white bord-r-10 noborder" onClick={() => {
               addLTFParam("3m")
             }}>

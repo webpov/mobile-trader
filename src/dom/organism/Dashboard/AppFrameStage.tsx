@@ -437,7 +437,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
 
   {/* <div className="pos-abs w- bottom-0 tx-white">asdfge</div> */}
   <div className='pos-fix top-0 w-100 flex-col noverflow h-100vh z-2 ' style={{width: '100vw',}}>
-      <div className={`${chartConfig.isTrendUp ? "_ddg" : "_ddr"} h-50 w-100 bord-r-100p spin-60 blur opaci-10 `} 
+      <div className={`${chartConfig.isTrendUp ? "" : ""} h-50 w-100 bord-r-100p spin-60 blur opaci-10 `} 
         style={{filter:"blur(200px)"}}
       >
       </div>
@@ -473,7 +473,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     <div className='flex-row flex-align-stretch tx-white w-90 z-10'
     >
       {!!chartConfig.isLeftSidebarVisible &&
-        <div className=' Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pb-8 pt-4 neu-convex flex-col flex-justify-start'
+        <div className=' Q_lg_x w-10 box-shadow-9-b bg-glass-20 bord-r-25 pb-8 pt-4 neu-convex flex-col flex-justify-start mt-100'
           style={{maxHeight:"60vh", background: "linear-gradient(0deg, #00000099, #00000019)"}}
         >
           <div className="pb-4 tx-center">URL <small>Favorites</small> </div>
@@ -621,7 +621,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
               <div className="Q_xl_x">Stored Favorites</div> 
               {/* <div className="Q_xs_md">Fav</div>  */}
               {!!fuelPoints && <div>
-                <div className="blink_me pa-1 _ddr bord-r-50 "></div>
+                <div className="blink_me pa-1  bord-r-50 "></div>
               </div>}
             </div>
             <div className="flex-col w-90 pb-4 h-100 autoverflow-y"
@@ -652,6 +652,21 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
       </div>
     </div>
     <div className="mt-6 Q_md_x"></div>
+    
+        
+    <div className='Q_sm_lg  mt-8   block  tx-center flex-col flex-justify-start py-4 pos-abs top-0 left-0 z-800 pl-8 '
+          // style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
+        >
+          <details className="">
+            <summary className="flex  opaci-chov--50 ">
+              <div className="tx-white mt-3 pa-1 tx-bold-8 border-white bord-r-10" data-responsive="md-lg">Market <br /> Summary</div>
+            </summary>
+            <div className="flex-col w-min-300px ">
+            <MarketNewsStage />
+          </div>
+          </details>
+  
+        </div>
     <div className='Q_sm_x flex-1 flex flex-align-start  tx-white w-90 z-10'>
       
       {chartConfig.isLeftSidebarVisible &&
@@ -667,15 +682,6 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
           triggerResetFocusSymbolCustomLogs={triggerResetFocusSymbolCustomLogs} state={{focusSymbol}}
         />
 
-        
-        <div className='Q_sm_lg w-90 mt-8   block  tx-center flex-col flex-justify-start py-4'
-          // style={{boxShadow:"inset 5px 8px 5px #ffffff10, 4px 4px 10px #000000"}}
-        >
-          <div className="pb-4" data-responsive="md-lg">Market Summary</div>
-          <div className="flex-col  w-95 ">
-            <MarketNewsStage />
-          </div>
-        </div>
       </div>
       <div className='Q_sm_lg px-2 pt-4 mr-3 mt-3 pb-4 neu-convex bord-r-25'>
         <div className="w-100 tx-center pb-2">Notes</div>
@@ -783,7 +789,7 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
             <div className="tx-lgx Q _md_x">Stored <br />Favorites</div> 
             {/* <div className="Q_xs_md">Fav</div>  */}
             {!!fuelPoints && <div>
-              <div className="blink_me pa-1 _ddg bord-r-50 "></div>
+              <div className="blink_me pa-1  bord-r-50 "></div>
             </div>}
           </div>
           <div className="flex-col w-90"
