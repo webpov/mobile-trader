@@ -342,10 +342,10 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     
     // console.log(asdasd)
     prompt(`Consult ${focusSymbol}`, promptGuide)
-    // const resres = await getCompletionFromAPI(AI_BASE + JSON.stringify(thePromptGuide))
-    // console.log("resres*******************************")
-    // console.log(resres)
-    // console.log("resres*******************************")
+    const resres = await getCompletionFromAPI(AI_BASE + JSON.stringify(thePromptGuide))
+    console.log("resres*******************************")
+    console.log(resres)
+    console.log("resres*******************************")
   }
   const triggerOpenPack = () => {
 

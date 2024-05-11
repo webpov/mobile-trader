@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'text-davinci-003',
+        model: 'gpt-3.5-turbo-instruct',
         prompt,
         max_tokens: 40,
       }),
