@@ -296,8 +296,66 @@ export default function AppFrameStage({}:any) {
 
   }
 
+  function safeParseJson(corruptResponse:any) {
+    // Default response format with empty values
+    const defaultResponse = {
+        "data": {
+            "trend": "",
+            "lvl": {
+                "up": [],
+                "down": []
+            },
+            "vol": "",
+            "reversals": {
+                "upward": [],
+                "downward": []
+            }
+        },
+        "msg": {
+            "short": "",
+            "mid": "",
+            "long": ""
+        }
+    };
 
+    try {
+        // Trim the input to remove leading/trailing non-JSON characters
+        corruptResponse = corruptResponse.trim();
 
+        // Balance unclosed braces and brackets
+        let openBraces = (corruptResponse.match(/{/g) || []).length;
+        let closeBraces = (corruptResponse.match(/}/g) || []).length;
+        let openBrackets = (corruptResponse.match(/\[/g) || []).length;
+        let closeBrackets = (corruptResponse.match(/]/g) || []).length;
+
+        // Adding missing closing braces
+        while (openBraces > closeBraces) {
+            corruptResponse += '}';
+            closeBraces++;
+        }
+
+        // Adding missing closing brackets
+        while (openBrackets > closeBrackets) {
+            corruptResponse += ']';
+            closeBrackets++;
+        }
+
+        // Remove line breaks, tabs, and replace malformed parts if needed
+        corruptResponse = corruptResponse.replace(/[\r\n\t]/g, '');
+
+        // Debugging: Log the cleaned response before parsing
+        console.log("Cleaned Response:", corruptResponse);
+
+        // Try parsing the cleaned JSON string
+        return JSON.parse(corruptResponse);
+    } catch (error) {
+        // Log the error for debugging
+        console.error("Failed to parse JSON:", error);
+
+        // Return default structure if parsing fails
+        return defaultResponse;
+    }
+}
 
 
 
@@ -341,11 +399,44 @@ async function getCompletionFromAPI(prompt: string): Promise<CompletionResponse>
     const promptGuide = AI_BASE + JSON.stringify(thePromptGuide)
     
     // console.log(asdasd)
-    prompt(`Consult ${focusSymbol}`, promptGuide)
+    // prompt(`Consult ${focusSymbol}`, promptGuide)
     const resres = await getCompletionFromAPI(AI_BASE + JSON.stringify(thePromptGuide))
     console.log("resres*******************************")
     console.log(resres)
     console.log("resres*******************************")
+    const firstChoice = resres?.choices?.[0]
+    if (firstChoice?.text) {
+      try {
+        // Parse the JSON data from the response text
+        const responseParsed = safeParseJson(firstChoice.text)
+        const responseData = responseParsed.data
+        const responseMsg = responseParsed.msg
+        console.log("responseData", responseData)
+        console.log("responseMsg", responseMsg)
+        // Create a formatted string from the parsed JSON data
+        const formattedResponse = `
+        Trend: ${responseData?.trend}
+
+        Levels: Top: ${responseData?.lvl?.up}, Floor: ${responseData?.lvl?.down}
+
+        Volatility: ${responseData?.vol}
+
+        Reversals: Upward: ${responseData?.reversals?.upward}, Downward: ${responseData?.reversals?.downward}
+
+        Short-Term: ${responseMsg?.short}
+
+        Mid-Term: ${responseMsg?.mid}
+        
+        Long-Term: ${responseMsg?.long}
+        `;
+        // Show the formatted response in an alert dialog
+        alert(`Response:\n\n${formattedResponse}`);
+      } catch (error) {
+        alert("Error parsing response data");
+      }
+    } else {
+      alert("Unkown error, couldn't reach response")
+    }
   }
   const triggerOpenPack = () => {
 
